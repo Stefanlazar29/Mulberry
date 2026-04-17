@@ -1,4 +1,4 @@
-# Mulberry API + frontend static (același origin ca /health, /auth, …)
+# Mulberry — Streamlit YourCar app
 FROM python:3.11-slim-bookworm
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -14,18 +14,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-
-# Rădăcină proiect (ROOT_DIR = parent(backend))
 COPY . /app
 
-RUN mkdir -p /data/uploads /data/chroma_db
+RUN mkdir -p /data
 
-ENV SQLITE_PATH=/data/mulberry.db \
-    AUTH_AUDIT_PATH=/data/auth_audit.db \
-    CHROMA_PERSIST_PATH=/data/chroma_db \
-    MULBERRY_UPLOAD_DIR=/data/uploads
+ENV SQLITE_PATH=/data/mulberry.db
 
 EXPOSE 8000
 
-# Date persistente sub /data (volum Docker)
-CMD ["sh", "-c", "mkdir -p /data/uploads /data/chroma_db && exec python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000"]
+CMD ["streamlit", "run", "app.py", "--server.port=8000", "--server.address=0.0.0.0"]
