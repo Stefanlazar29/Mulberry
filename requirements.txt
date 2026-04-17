@@ -1,7 +1,1 @@
-fastapi
-uvicorn[standard]
-bcrypt
-python-dotenv
-chromadb
-httpx
-python-multipart
+streamlit
