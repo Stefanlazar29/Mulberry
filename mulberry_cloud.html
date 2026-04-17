@@ -384,7 +384,7 @@
   <script src="js/offline/appDB.js"></script>
   <script>
     (function () {
-      var apiBase = (window.Config && window.Config.apiBaseUrl) || 'http://127.0.0.1:9000';
+      var apiBase = (typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : null) || (window.Config && window.Config.apiBaseUrl) || 'http://localhost:8000';
       apiBase = String(apiBase || '').trim().replace(/\/+$/, '');
       var activeCat = 'all';
 
