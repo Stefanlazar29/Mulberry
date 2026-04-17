@@ -133,15 +133,17 @@
     </div>
     <p class="api-hint">API: setează <code>?api=http://127.0.0.1:9000</code> dacă pagina nu e servită de același host ca backend-ul.</p>
   </div>
+  <script src="js/config.js"></script>
   <script>
 (function() {
   var params = new URLSearchParams(window.location.search);
   var mlbr = (params.get("mlbr") || params.get("m") || "").trim();
   var apiBase = (params.get("api") || "").replace(/\/$/, "");
   if (!apiBase) {
-    apiBase = window.location.origin && window.location.origin !== "null"
-      ? window.location.origin
-      : "http://127.0.0.1:9000";
+    apiBase = (typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : null) ||
+      (window.location.origin && window.location.origin !== "null"
+        ? window.location.origin
+        : "http://localhost:8000");
   }
   var root = document.getElementById("root");
   var statusEl = document.getElementById("status");

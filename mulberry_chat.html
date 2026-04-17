@@ -838,7 +838,7 @@
       var STORAGE_KEY = 'mulberry_conversations';
       var CURRENT_KEY = 'mulberry_current_conversation_id';
       /* API pe apiBase (implicit :9000). Pagina poate fi servită de alt origin (ex. Live Server :5500) — CORS pe backend trebuie să permită acel origin. */
-      var apiBase = (window.Config && window.Config.apiBaseUrl) || 'http://127.0.0.1:9000';
+      var apiBase = (typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : null) || (window.Config && window.Config.apiBaseUrl) || 'http://localhost:8000';
       var pendingChatFiles = [];
       var _ATT_B64_SOFT_MAX = 480000;
 

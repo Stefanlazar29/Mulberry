@@ -233,9 +233,9 @@
       var pdfA = document.getElementById('pz-pdf-link');
       if (pdfA) {
         var api =
+          (typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : null) ||
           (window.Config && window.Config.apiBaseUrl) ||
-          (typeof window.API_BASE_URL !== 'undefined' && window.API_BASE_URL) ||
-          'http://127.0.0.1:9000';
+          'http://localhost:8000';
         pdfA.href = String(api).replace(/\/+$/, '') + '/reports/mulberry-technical-sample.pdf';
       }
     })();

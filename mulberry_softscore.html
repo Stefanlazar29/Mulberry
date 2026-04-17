@@ -287,7 +287,7 @@
   <script src="js/mulberry_softscore_hub.js"></script>
   <script src="js/offline/appDB.js"></script>
   <script>
-    var apiBase = (window.Config && window.Config.apiBaseUrl) || 'http://127.0.0.1:9000';
+    var apiBase = (typeof API_BASE_URL !== 'undefined' ? API_BASE_URL : null) || (window.Config && window.Config.apiBaseUrl) || 'http://localhost:8000';
     var SS_DONUT_R = 40;
     var SS_CIRC = 2 * Math.PI * SS_DONUT_R;
     var SS_PILL_R = 15.5;
