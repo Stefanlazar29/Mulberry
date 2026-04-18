@@ -1,5 +1,5 @@
 # Pornește:  docker compose up -d --build
-# Nginx: HTTPS la 443 (certificat în docker/nginx/ssl/). API intern :8000.
+# Nginx: HTTPS la 443 (certificat în docker/nginx/ssl/). API intern :10000.
 #
 # Obligatoriu: copiază deploy/.env.production.example → .env și setează JWT_SECRET, MLBR_SECRET etc.
 
@@ -22,7 +22,7 @@ services:
     networks:
       - mulberry_net
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:10000/health')"]
       interval: 30s
       timeout: 5s
       retries: 3

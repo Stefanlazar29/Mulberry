@@ -1,4 +1,4 @@
-# Mulberry — Streamlit YourCar app
+# Mulberry — FastAPI (uvicorn)
 FROM python:3.11-slim-bookworm
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -20,6 +20,6 @@ RUN mkdir -p /data
 
 ENV SQLITE_PATH=/data/mulberry.db
 
-EXPOSE 8000
+EXPOSE 10000
 
-CMD ["streamlit", "run", "app.py", "--server.port=8000", "--server.address=0.0.0.0"]
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "10000"]
