@@ -23,5 +23,5 @@ ENV SQLITE_PATH=/data/mulberry.db
 # Render (și altele) injectează PORT la runtime; în dashboard setează Port = același port sau lasă PORT din mediu.
 EXPOSE 10000
 
-# Formă shell: expansiune ${PORT:-10000} la pornire (exec form JSON nu expandează $PORT).
-CMD uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-10000}
+# Formă shell: ${PORT:-10000} la pornire. Folosim `python -m uvicorn` ca să nu depindem de PATH (evită „uvicorn: not found”).
+CMD python -m uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-10000}
