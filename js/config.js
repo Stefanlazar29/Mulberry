@@ -3,16 +3,17 @@
  */
 (function () {
   function resolveMulberryApiBase() {
-    var host =
-      typeof window !== 'undefined' && window.location && window.location.hostname
-        ? String(window.location.hostname).toLowerCase()
-        : '';
+    const host = window.location.hostname;
 
     if (host.includes('mulberry.autos')) {
       return 'https://mulberry-production-d9db.up.railway.app';
     }
 
-    return 'http://127.0.0.1:9000';
+    if (host === 'localhost' || host === '127.0.0.1') {
+      return 'http://127.0.0.1:9000';
+    }
+
+    return window.location.origin;
   }
 
   window.Config = window.Config || {};
