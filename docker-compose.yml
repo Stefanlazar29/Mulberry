@@ -12,6 +12,8 @@ services:
     env_file:
       - .env
     environment:
+      # Aliniat cu healthcheck; pe Render lasă PORT setat de platformă sau setează același număr în Settings → Port.
+      PORT: "10000"
       # Suprascriu doar dacă lipsesc din .env; secretele vin din .env (nu din imagine).
       SQLITE_PATH: /data/mulberry.db
       AUTH_AUDIT_PATH: /data/auth_audit.db
