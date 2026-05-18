@@ -1,5 +1,6 @@
 # Pornește:  docker compose up -d --build
-# Nginx: HTTPS la 443 (certificat în docker/nginx/ssl/). API intern :10000.
+# Nginx: HTTP la 8080 → api:10000. SSL poate fi adăugat ulterior în docker/nginx/ssl/.
+# API intern :10000. Schimbă portul extern din 8080 dacă e necesar.
 #
 # Obligatoriu: copiază deploy/.env.production.example → .env și setează JWT_SECRET, MLBR_SECRET etc.
 
@@ -34,11 +35,9 @@ services:
     image: nginx:1.25-alpine
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./docker/nginx/ssl:/etc/nginx/ssl:ro
     depends_on:
       api:
         condition: service_healthy
