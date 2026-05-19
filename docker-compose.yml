@@ -1,10 +1,8 @@
 # Pornește:  docker compose up -d --build
-# Porturi externe:
-#   8080 → nginx (frontend static + proxy pentru rute necunoscute)
-#   9000 → FastAPI direct (folosit de js/config.js pentru IP-ul Hetzner)
+# Port public: 8080 → nginx → api:10000 (rețea internă Docker, fără port expus pe host)
 # SSL poate fi adăugat ulterior în docker/nginx/ssl/.
 #
-# Obligatoriu: copiază deploy/.env.production.example → .env și setează JWT_SECRET, MLBR_SECRET etc.
+# Obligatoriu: copiați deploy/.env.production.example → .env și setați variabilele secrete.
 
 services:
   api:

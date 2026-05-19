@@ -1,6 +1,8 @@
 """
-Mulberry FastAPI entrypoint. Run: python -m uvicorn backend.main:app --host 0.0.0.0 --port 9000
-StaticFiles is mounted last so all API routes defined above it take priority.
+Mulberry FastAPI entrypoint.
+Docker: accesat intern de nginx pe portul 10000 (PORT env).
+Local:  python -m uvicorn backend.main:app --host 127.0.0.1 --port 9000
+StaticFiles montat ultimul — rutele API definite mai sus au prioritate.
 """
 from pathlib import Path
 
