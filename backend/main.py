@@ -1,7 +1,7 @@
 """
 Mulberry FastAPI entrypoint.
 Docker: accesat intern de nginx pe portul 10000 (PORT env).
-Local:  python -m uvicorn backend.main:app --host 127.0.0.1 --port 9000
+Local:  python -m uvicorn backend.main:app --host 0.0.0.0 --port 8080
 StaticFiles montat ultimul — rutele API definite mai sus au prioritate.
 """
 from pathlib import Path

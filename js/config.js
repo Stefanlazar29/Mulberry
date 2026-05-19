@@ -1,8 +1,7 @@
 /**
  * API base pentru Mulberry.
  * Producție (mulberry.autos) → Railway.
- * Localhost                  → FastAPI local pe portul 9000.
- * Altele (incl. Hetzner)     → același origin → nginx proxiază intern la api:10000.
+ * Orice alt host             → http://46.225.100.151:8080
  */
 (function () {
   function resolveMulberryApiBase() {
@@ -12,11 +11,7 @@
       return 'https://mulberry-production-d9db.up.railway.app';
     }
 
-    if (host === 'localhost' || host === '127.0.0.1') {
-      return 'http://127.0.0.1:9000';
-    }
-
-    return window.location.origin;
+    return 'http://46.225.100.151:8080';
   }
 
   window.Config = window.Config || {};

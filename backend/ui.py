@@ -1,7 +1,7 @@
 """
 Mulberry Desktop — PyQt6 companion UI.
 OLED black / neon yellow (#E1FF00) design, 14 px border radius.
-Connects to the local FastAPI server (default http://127.0.0.1:8000).
+Connects to the Mulberry server (default http://46.225.100.151:8080).
 
 Run:  python -m backend.ui
 """
@@ -37,7 +37,7 @@ DIM      = "#888888"
 GREEN    = "#22C55E"
 RED      = "#FF4444"
 R        = 14          # border-radius px
-API_BASE = "http://127.0.0.1:8000"
+API_BASE = "http://46.225.100.151:8080"
 
 QSS = f"""
 QWidget {{
@@ -383,7 +383,7 @@ class SettingsPage(QWidget):
         card = Card()
         card.add(lbl("API Server URL", dim=True))
         self._url_input = QLineEdit(api_base)
-        self._url_input.setPlaceholderText("http://127.0.0.1:8000")
+        self._url_input.setPlaceholderText("http://46.225.100.151:8080")
         card.add(self._url_input)
 
         btn_row = QHBoxLayout()

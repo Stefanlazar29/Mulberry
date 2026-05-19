@@ -1,5 +1,7 @@
 /**
- * API base pentru Mulberry. Pe domeniul de producție indică backend-ul Railway.
+ * API base pentru Mulberry.
+ * Producție (mulberry.autos) → Railway.
+ * Orice alt host             → http://46.225.100.151:8080
  */
 (function () {
   function resolveMulberryApiBase() {
@@ -9,11 +11,7 @@
       return 'https://mulberry-production-d9db.up.railway.app';
     }
 
-    if (host === 'localhost' || host === '127.0.0.1') {
-      return 'http://127.0.0.1:9000';
-    }
-
-    return window.location.origin;
+    return 'http://46.225.100.151:8080';
   }
 
   window.Config = window.Config || {};

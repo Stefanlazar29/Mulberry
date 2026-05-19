@@ -131,7 +131,7 @@
     <div id="root" class="panel">
       <p class="loading" id="status">Se încarcă documentul…</p>
     </div>
-    <p class="api-hint">API: setează <code>?api=http://127.0.0.1:9000</code> dacă pagina nu e servită de același host ca backend-ul.</p>
+    <p class="api-hint">API: setează <code>?api=http://46.225.100.151:8080</code> dacă pagina nu e servită de același host ca backend-ul.</p>
   </div>
   <script>
 (function() {
@@ -141,7 +141,7 @@
   if (!apiBase) {
     apiBase = window.location.origin && window.location.origin !== "null"
       ? window.location.origin
-      : "http://127.0.0.1:9000";
+      : "http://46.225.100.151:8080";
   }
   var root = document.getElementById("root");
   var statusEl = document.getElementById("status");
