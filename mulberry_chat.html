@@ -1682,7 +1682,7 @@
             errMsg = 'Sesiune expirată. Te reconectezi...';
             setTimeout(function () { window.location.href = 'mulberry.html'; }, 2000);
           } else if (errStr.indexOf('Failed to fetch') !== -1 || errStr.indexOf('NetworkError') !== -1) {
-            errMsg = 'Backend offline. Pornește uvicorn pe portul 9000 (sau verifică Config.apiBaseUrl).';
+            errMsg = 'Backend offline — verifică http://46.225.100.151:8080/health';
           } else if (errStr.indexOf('500') !== -1) {
             errMsg = 'Eroare server. Verifică GROQ_API_KEY în backend/.env';
           } else if (errStr.indexOf('503') !== -1) {
