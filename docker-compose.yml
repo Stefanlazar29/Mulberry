@@ -22,8 +22,6 @@ services:
       AUTH_AUDIT_PATH: /data/auth_audit.db
       CHROMA_PERSIST_PATH: /data/chroma_db
       MULBERRY_UPLOAD_DIR: /data/uploads
-    ports:
-      - "9000:10000"
     volumes:
       - mulberry_data:/data
     networks:
