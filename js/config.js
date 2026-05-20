@@ -8,7 +8,7 @@
     const host = window.location.hostname;
 
     if (host.includes('mulberry.autos')) {
-      return return 'http://46.225.100.151:10000';
+      return 'https://mulberry-production-d9db.up.railway.app';
     }
 
     return 'http://46.225.100.151:8080';
