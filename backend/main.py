@@ -41,7 +41,7 @@ def init_db():
 init_db()
 
 class LoginRequest(BaseModel):
-    email: str
+    identifier: str
     password: str
 
 def hash_password(password: str) -> str:
@@ -66,15 +66,15 @@ def login(req: LoginRequest):
     with get_db() as conn:
         row = conn.execute(
             "SELECT id, email, password_hash FROM users WHERE email = ?",
-            (req.email,)
+            (req.identifier,)
         ).fetchone()
         if not row:
             token = secrets.token_hex(32)
             conn.execute(
                 "INSERT INTO users (email, password_hash, token) VALUES (?, ?, ?)",
-                (req.email, hash_password(req.password), token)
+                (req.identifier, hash_password(req.password), token)
             )
-            return {"token": token, "email": req.email}
+            return {"token": token, "email": req.identifier}
         if row[2] != hash_password(req.password):
             raise HTTPException(status_code=401, detail="Parola incorecta")
         token = secrets.token_hex(32)

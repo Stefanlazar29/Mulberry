@@ -69,7 +69,7 @@
     login: function (email, password) {
       return apiFetch('/auth/login', {
         method: 'POST',
-        body: JSON.stringify({ email: email, password: password })
+        body: JSON.stringify({ identifier: email, password: password })
       });
     },
 
