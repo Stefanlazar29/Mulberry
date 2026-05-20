@@ -2,21 +2,20 @@ from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
-import sqlite3, haslib, secrets, os
+import sqlite3, hashlib, secrets, os
 from contextlib import contextmanager
 
-app = FastAPI(title = "Mulberry API", version = "0.1.0")
-
+app = FastAPI(title="Mulberry API", version="0.1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = ["*"],
-    allow_credentials=False
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-DB_PATH = os.getenv("SQLITE_PATH","/data/mulberry.db" )
+DB_PATH = os.getenv("SQLITE_PATH", "/data/mulberry.db")
 security = HTTPBearer()
 
 @contextmanager
@@ -31,10 +30,10 @@ def get_db():
 def init_db():
     with get_db() as conn:
         conn.execute("""
-            CREATE TABLE IF NOT EXISTS users(
+            CREATE TABLE IF NOT EXISTS users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 email TEXT UNIQUE NOT NULL,
-                password_hash TEXT NOT NULL
+                password_hash TEXT NOT NULL,
                 token TEXT
             )
         """)
@@ -70,7 +69,6 @@ def login(req: LoginRequest):
             (req.email,)
         ).fetchone()
         if not row:
-            # Creează userul dacă nu există
             token = secrets.token_hex(32)
             conn.execute(
                 "INSERT INTO users (email, password_hash, token) VALUES (?, ?, ?)",
@@ -78,7 +76,7 @@ def login(req: LoginRequest):
             )
             return {"token": token, "email": req.email}
         if row[2] != hash_password(req.password):
-            raise HTTPException(status_code=401, detail="Parolă incorectă")
+            raise HTTPException(status_code=401, detail="Parola incorecta")
         token = secrets.token_hex(32)
         conn.execute("UPDATE users SET token = ? WHERE id = ?", (token, row[0]))
         return {"token": token, "email": row[1]}
@@ -86,3 +84,4 @@ def login(req: LoginRequest):
 @app.get("/me")
 def me(user=Depends(get_current_user)):
     return user
+    
