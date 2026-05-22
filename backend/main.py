@@ -1,5 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 import sqlite3, hashlib, secrets, os
@@ -84,4 +86,18 @@ def login(req: LoginRequest):
 @app.get("/me")
 def me(user=Depends(get_current_user)):
     return user
-    
+
+@app.get("/api/stats")
+def stats():
+    with get_db() as conn:
+        drivers  = conn.execute("SELECT COUNT(*) FROM users").fetchone()[0]
+        vehicles = conn.execute("SELECT COUNT(*) FROM cars  WHERE 1").fetchone()[0] if _table_exists(conn, "cars") else 0
+    return {"drivers": drivers, "partners": 1, "vehicles": vehicles, "offers": 0}
+
+def _table_exists(conn, name: str) -> bool:
+    return conn.execute(
+        "SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)
+    ).fetchone() is not None
+
+# ── Static files (trebuie să fie ultimul) ───────────
+app.mount("/", StaticFiles(directory=".", html=True), name="root")
