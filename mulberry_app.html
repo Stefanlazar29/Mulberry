@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Mulberry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --neon: #E1FF00;
+  --neon-bg: rgba(225,255,0,0.12);
+  --black: #080808;
+  --surf: #111111;
+  --surf2: #181818;
+  --surf3: #1f1f1f;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --dim: rgba(255,255,255,0.45);
+  --dim2: rgba(255,255,255,0.22);
+  --red: #ff4d4d;
+  --green: #22c55e;
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --sidebar-w: 260px;
+  --topbar-h: 64px;
+  --bnav-h: 68px;
+  --r: 14px;
+  --r-lg: 22px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:var(--black);color:#fff;font-family:var(--font);overflow:hidden;-webkit-font-smoothing:antialiased}
+.hidden{display:none!important}
+
+/* ── AUTH ─────────────────────────────────────────── */
+#auth-screen{
+  position:fixed;inset:0;background:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  z-index:100;padding:20px;
+}
+.auth-card{
+  background:var(--surf);border:1px solid var(--border2);
+  border-radius:var(--r-lg);padding:40px;
+  width:100%;max-width:400px;
+}
+.auth-logo{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.auth-logo-icon{
+  width:42px;height:42px;background:var(--neon);border-radius:11px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+.auth-logo-icon svg{width:22px;height:22px}
+.auth-logo-txt{font-size:22px;font-weight:800}
+.auth-logo-txt span{color:var(--neon)}
+.auth-tabs{
+  display:flex;gap:4px;background:var(--surf2);
+  border-radius:10px;padding:4px;margin-bottom:28px
+}
+.auth-tab{
+  flex:1;padding:10px 0;border:none;background:transparent;
+  color:var(--dim);font-family:var(--font);font-size:14px;font-weight:600;
+  border-radius:8px;cursor:pointer;transition:all .2s
+}
+.auth-tab.active{background:var(--surf3);color:#fff}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--dim);
+  margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.field input{
+  width:100%;padding:13px 14px;background:var(--surf2);
+  border:1px solid var(--border);border-radius:10px;
+  color:#fff;font-family:var(--font);font-size:15px;outline:none;
+  transition:border-color .2s
+}
+.field input:focus{border-color:rgba(225,255,0,.45)}
+.field input::placeholder{color:var(--dim2)}
+.btn-neon{
+  width:100%;padding:14px;background:var(--neon);color:#000;
+  border:none;border-radius:10px;font-family:var(--font);
+  font-size:15px;font-weight:800;cursor:pointer;
+  transition:opacity .18s;margin-top:8px
+}
+.btn-neon:hover{opacity:.88}
+.btn-neon:active{opacity:.72}
+.btn-neon:disabled{opacity:.4;cursor:not-allowed}
+.auth-err{font-size:13px;color:var(--red);margin-top:10px;text-align:center;min-height:18px}
+
+/* ── APP SHELL ────────────────────────────────────── */
+#app-shell{
+  position:fixed;inset:0;
+  display:grid;
+  grid-template-columns:var(--sidebar-w) 1fr;
+  grid-template-rows:var(--topbar-h) 1fr;
+  background:var(--black);overflow:hidden
+}
+
+/* ── SIDEBAR ──────────────────────────────────────── */
+.sidebar{
+  grid-row:1/-1;grid-column:1;
+  background:var(--surf);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;padding:20px 14px;
+  overflow-y:auto;transition:transform .28s ease;z-index:50
+}
+.s-logo{
+  display:flex;align-items:center;gap:10px;
+  padding:0 8px;margin-bottom:32px
+}
+.s-logo-icon{
+  width:34px;height:34px;background:var(--neon);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+.s-logo-icon svg{width:18px;height:18px}
+.s-logo-name{font-size:17px;font-weight:800}
+.s-logo-sub{font-size:10px;color:var(--dim2);font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;margin-top:1px}
+.s-section{
+  font-size:10px;font-weight:700;color:var(--dim2);
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:0 8px;margin:20px 0 6px
+}
+.nav-item{
+  display:flex;align-items:center;gap:11px;padding:10px 10px;
+  border-radius:10px;cursor:pointer;color:var(--dim);
+  font-size:14px;font-weight:600;transition:all .15s;
+  border:none;background:transparent;width:100%;text-align:left
+}
+.nav-item:hover{background:var(--surf2);color:#fff}
+.nav-item.active{background:var(--neon-bg);color:var(--neon)}
+.nav-icon{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-icon svg{width:17px;height:17px;stroke:currentColor;stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+.s-spacer{flex:1}
+.s-user{
+  border-top:1px solid var(--border);padding-top:14px;
+  display:flex;align-items:center;gap:10px;
+  padding:12px 8px;border-radius:10px;cursor:pointer;
+  transition:background .15s
+}
+.s-user:hover{background:var(--surf2)}
+.u-avatar{
+  width:32px;height:32px;background:var(--neon);color:#000;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:800;flex-shrink:0
+}
+.u-name{font-size:13px;font-weight:700}
+.u-email{font-size:11px;color:var(--dim2)}
+.s-logout{margin-left:auto;color:var(--dim2)}
+.s-logout svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── TOPBAR ───────────────────────────────────────── */
+.topbar{
+  grid-column:2;grid-row:1;
+  background:var(--surf);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 28px;gap:14px
+}
+.topbar-title{font-size:17px;font-weight:800}
+.topbar-sub{font-size:12px;color:var(--dim);margin-top:1px}
+.t-spacer{flex:1}
+.t-health{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--dim)}
+.h-dot{width:7px;height:7px;border-radius:50%;background:var(--dim2);transition:background .3s}
+.h-dot.on{background:var(--green);box-shadow:0 0 7px rgba(34,197,94,.55)}
+.h-dot.off{background:var(--red)}
+.hamburger{
+  display:none;width:36px;height:36px;
+  background:var(--surf2);border:none;border-radius:8px;
+  color:#fff;cursor:pointer;align-items:center;justify-content:center
+}
+.hamburger svg{width:18px;height:18px;stroke:currentColor;stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+.t-avatar-btn{
+  display:none;width:34px;height:34px;
+  background:var(--neon);color:#000;border-radius:50%;border:none;
+  cursor:pointer;font-size:13px;font-weight:800;
+  align-items:center;justify-content:center
+}
+
+/* ── CONTENT ──────────────────────────────────────── */
+.content{
+  grid-column:2;grid-row:2;overflow-y:auto;
+  padding:32px 36px;scroll-behavior:smooth
+}
+.panel{display:none}
+.panel.active{display:block;animation:fadeUp .28s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.panel-hdr{margin-bottom:28px}
+.panel-title{font-size:26px;font-weight:800}
+.panel-sub{font-size:14px;color:var(--dim);margin-top:4px}
+
+/* ── STATS GRID ───────────────────────────────────── */
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:16px;margin-bottom:28px
+}
+.stat-card{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:var(--r);padding:22px;
+  transition:border-color .2s
+}
+.stat-card:hover{border-color:rgba(225,255,0,.25)}
+.stat-lbl{font-size:11px;font-weight:700;color:var(--dim);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.stat-val{font-size:36px;font-weight:800;line-height:1}
+.stat-tag{font-size:12px;color:var(--green);margin-top:6px;font-weight:600}
+
+/* ── DASH GRID ────────────────────────────────────── */
+.dash-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+
+/* ── YELLOWCARD ───────────────────────────────────── */
+.ycard{
+  background:var(--neon);border-radius:var(--r-lg);
+  padding:28px 28px 80px;color:#000;
+  position:relative;overflow:hidden;min-height:220px
+}
+.ycard::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:220px;height:220px;background:rgba(0,0,0,.06);border-radius:50%
+}
+.ycard::after{
+  content:'';position:absolute;bottom:-50px;left:-50px;
+  width:160px;height:160px;background:rgba(0,0,0,.04);border-radius:50%
+}
+.yc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
+.yc-brand{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;opacity:.55}
+.yc-name{font-size:24px;font-weight:800;margin-top:3px}
+.yc-id{font-family:var(--mono);font-size:13px;font-weight:600;opacity:.65;text-align:right}
+.yc-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.yc-fl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.5;margin-bottom:3px}
+.yc-fv{font-size:14px;font-weight:700;font-family:var(--mono)}
+.yc-qr{
+  position:absolute;bottom:22px;right:22px;
+  width:58px;height:58px;background:rgba(0,0,0,.1);
+  border-radius:8px;display:flex;align-items:center;justify-content:center
+}
+.yc-qr svg{width:38px;height:38px}
+.yc-verified{
+  position:absolute;bottom:22px;left:22px;
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:700;opacity:.75
+}
+.yc-verified svg{width:13px;height:13px;stroke:#000;stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── ACTIVITY ─────────────────────────────────────── */
+.act-card{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:var(--r);padding:20px
+}
+.act-title{font-size:13px;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--dim)}
+.act-row{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 0;border-bottom:1px solid var(--border)
+}
+.act-row:last-child{border-bottom:none;padding-bottom:0}
+.act-icon{
+  width:34px;height:34px;border-radius:9px;background:var(--surf2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+.act-icon svg{width:15px;height:15px;stroke:var(--dim);stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+.act-txt{font-size:13px;font-weight:600}
+.act-meta{font-size:11px;color:var(--dim);margin-top:1px}
+.act-time{font-size:11px;color:var(--dim2);margin-left:auto;flex-shrink:0}
+
+/* ── MARKETPLACE ──────────────────────────────────── */
+.mkt-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px
+}
+.offer-card{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:var(--r);padding:22px;cursor:pointer;
+  transition:all .2s
+}
+.offer-card:hover{border-color:rgba(225,255,0,.3);transform:translateY(-2px)}
+.offer-ico{
+  width:44px;height:44px;border-radius:10px;background:var(--surf2);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px
+}
+.offer-ico svg{width:21px;height:21px;stroke:var(--dim);stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+.offer-name{font-size:15px;font-weight:700;margin-bottom:5px}
+.offer-desc{font-size:13px;color:var(--dim);line-height:1.5}
+.offer-badge{
+  display:inline-block;margin-top:12px;
+  background:var(--neon-bg);color:var(--neon);
+  border:1px solid rgba(225,255,0,.22);
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px
+}
+
+/* ── SETTINGS ─────────────────────────────────────── */
+.settings-section{
+  background:var(--surf);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;margin-bottom:16px;
+  max-width:540px
+}
+.s-row{
+  display:flex;align-items:center;gap:14px;
+  padding:15px 18px;border-bottom:1px solid var(--border);
+  cursor:pointer;transition:background .15s
+}
+.s-row:last-child{border-bottom:none}
+.s-row:hover{background:var(--surf2)}
+.s-row-ico{
+  width:36px;height:36px;border-radius:9px;background:var(--surf2);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0
+}
+.s-row-ico svg{width:16px;height:16px;stroke:var(--dim);stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+.s-row-lbl{font-size:14px;font-weight:600}
+.s-row-desc{font-size:11px;color:var(--dim);margin-top:2px}
+.s-row-arr svg{width:15px;height:15px;stroke:var(--dim2);stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+.s-api-box{
+  font-family:var(--mono);font-size:12px;color:var(--neon);
+  background:var(--surf2);border:1px solid rgba(225,255,0,.18);
+  border-radius:8px;padding:8px 12px;margin:0 18px 14px;
+  word-break:break-all
+}
+
+/* ── BOTTOM NAV ───────────────────────────────────── */
+.bnav{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  height:var(--bnav-h);background:var(--surf);
+  border-top:1px solid var(--border);z-index:40
+}
+.bnav-inner{display:flex;height:100%}
+.bn-item{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;
+  border:none;background:transparent;color:var(--dim);
+  font-family:var(--font);font-size:10px;font-weight:600;cursor:pointer;
+  transition:color .15s
+}
+.bn-item.active{color:var(--neon)}
+.bn-item svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;
+  fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── OVERLAY ──────────────────────────────────────── */
+.s-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.65);z-index:45;
+  backdrop-filter:blur(2px)
+}
+.s-overlay.show{display:block}
+
+/* ── TOAST ────────────────────────────────────────── */
+.toast{
+  position:fixed;bottom:84px;left:50%;
+  transform:translateX(-50%) translateY(16px);
+  background:var(--surf2);border:1px solid var(--border2);
+  border-radius:10px;padding:11px 20px;
+  font-size:13px;font-weight:600;pointer-events:none;
+  opacity:0;transition:all .28s;z-index:200;white-space:nowrap
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.ok{border-color:rgba(34,197,94,.4);color:var(--green)}
+.toast.err{border-color:rgba(255,77,77,.4);color:var(--red)}
+
+/* ── SPINNER ──────────────────────────────────────── */
+.spin{
+  width:17px;height:17px;border:2px solid rgba(0,0,0,.18);
+  border-top-color:#000;border-radius:50%;
+  animation:rot .55s linear infinite;display:inline-block
+}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+/* ── BREAKPOINTS ──────────────────────────────────── */
+@media(max-width:1280px){
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .dash-grid{grid-template-columns:1fr}
+  .content{padding:28px}
+}
+@media(max-width:900px){
+  :root{--sidebar-w:240px}
+  .content{padding:20px}
+}
+@media(max-width:768px){
+  #app-shell{
+    grid-template-columns:1fr;
+    grid-template-rows:var(--topbar-h) 1fr
+  }
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;
+    width:280px;transform:translateX(-100%);
+    grid-row:unset;grid-column:unset;z-index:50;
+    box-shadow:none;transition:transform .28s ease,box-shadow .28s ease
+  }
+  .sidebar.open{transform:translateX(0);box-shadow:4px 0 48px rgba(0,0,0,.6)}
+  .topbar{grid-column:1;grid-row:1;padding:0 16px}
+  .hamburger{display:flex}
+  .t-avatar-btn{display:flex}
+  .t-health{display:none}
+  .content{
+    grid-column:1;grid-row:2;
+    padding:16px 16px calc(var(--bnav-h) + 16px)
+  }
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  .panel-title{font-size:22px}
+  .bnav{display:block}
+  .ycard{padding:20px 20px 76px}
+  .yc-name{font-size:20px}
+  .auth-card{padding:28px 22px}
+  .toast{bottom:calc(var(--bnav-h) + 12px)}
+}
+@media(max-width:400px){
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .stat-val{font-size:28px}
+}
+  </style>
+</head>
+<body>
+
+<!-- AUTH ─────────────────────────────────────────── -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
+          <polygon points="12,7 17,10 17,14 12,17 7,14 7,10"/>
+        </svg>
+      </div>
+      <div>
+        <div class="auth-logo-txt">Mul<span>berry</span></div>
+      </div>
+    </div>
+
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Intră în cont</button>
+      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Cont nou</button>
+    </div>
+
+    <div id="form-login">
+      <div class="field">
+        <label>Email sau Telefon</label>
+        <input type="text" id="li-id" placeholder="email@exemplu.com sau +40..." autocomplete="username">
+      </div>
+      <div class="field">
+        <label>Parolă</label>
+        <input type="password" id="li-pass" placeholder="Parola" autocomplete="current-password">
+      </div>
+      <button class="btn-neon" id="btn-login" onclick="doLogin()">Intră în cont</button>
+      <div class="auth-err" id="li-err"></div>
+    </div>
+
+    <div id="form-register" class="hidden">
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="ri-email" placeholder="email@exemplu.com" autocomplete="email">
+      </div>
+      <div class="field">
+        <label>Telefon (opțional)</label>
+        <input type="tel" id="ri-phone" placeholder="+40 7XX XXX XXX">
+      </div>
+      <div class="field">
+        <label>Parolă</label>
+        <input type="password" id="ri-pass" placeholder="Minim 8 caractere" autocomplete="new-password">
+      </div>
+      <button class="btn-neon" id="btn-reg" onclick="doRegister()">Creează cont</button>
+      <div class="auth-err" id="ri-err"></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP SHELL ────────────────────────────────────── -->
+<div id="app-shell" class="hidden">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="s-logo">
+      <div class="s-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
+          <polygon points="12,7 17,10 17,14 12,17 7,14 7,10"/>
+        </svg>
+      </div>
+      <div>
+        <div class="s-logo-name">Mulberry</div>
+        <div class="s-logo-sub">B2B2C · Assurance</div>
+      </div>
+    </div>
+
+    <div class="s-section">Navigare</div>
+    <button class="nav-item active" data-p="dashboard" onclick="goPanel('dashboard')">
+      <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+      Dashboard
+    </button>
+    <button class="nav-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
+      <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></span>
+      YellowCard
+    </button>
+    <button class="nav-item" data-p="marketplace" onclick="goPanel('marketplace')">
+      <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
+      Marketplace
+    </button>
+
+    <div class="s-section">Cont</div>
+    <button class="nav-item" data-p="settings" onclick="goPanel('settings')">
+      <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
+      Setări
+    </button>
+
+    <div class="s-spacer"></div>
+
+    <div class="s-user" onclick="doLogout()">
+      <div class="u-avatar" id="s-avatar">M</div>
+      <div>
+        <div class="u-name" id="s-uname">—</div>
+        <div class="u-email" id="s-uemail">—</div>
+      </div>
+      <div class="s-logout">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="hamburger" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div>
+      <div class="topbar-title" id="t-title">Dashboard</div>
+      <div class="topbar-sub" id="t-sub">Bun venit în Mulberry</div>
+    </div>
+    <div class="t-spacer"></div>
+    <div class="t-health">
+      <div class="h-dot" id="h-dot"></div>
+      <span id="h-lbl">verificare...</span>
+    </div>
+    <button class="t-avatar-btn" id="t-avatar" onclick="goPanel('settings')">M</button>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="panel-hdr">
+        <div class="panel-title">Dashboard</div>
+        <div class="panel-sub" id="dash-greet">Bun venit în Mulberry</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-lbl">Drivers</div>
+          <div class="stat-val" id="st-drivers">—</div>
+          <div class="stat-tag">Înregistrați</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-lbl">Partners</div>
+          <div class="stat-val" id="st-partners">—</div>
+          <div class="stat-tag">Verificați</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-lbl">Vehicles</div>
+          <div class="stat-val" id="st-vehicles">—</div>
+          <div class="stat-tag">Active</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-lbl">Offers</div>
+          <div class="stat-val" id="st-offers">—</div>
+          <div class="stat-tag">Disponibile</div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">YellowCard activ</div>
+          <div class="ycard">
+            <div class="yc-top">
+              <div>
+                <div class="yc-brand">MulberryID · MLBR</div>
+                <div class="yc-name" id="yc-name">YellowCard</div>
+              </div>
+              <div class="yc-id" id="yc-id">—</div>
+            </div>
+            <div class="yc-fields">
+              <div><div class="yc-fl">Plate</div><div class="yc-fv" id="yc-plate">B-12-MLB</div></div>
+              <div><div class="yc-fl">VIN</div><div class="yc-fv" id="yc-vin">WA0ZZ8K9DA1</div></div>
+              <div><div class="yc-fl">Owner</div><div class="yc-fv" id="yc-owner">—</div></div>
+              <div><div class="yc-fl">Status</div><div class="yc-fv">✓ Verified</div></div>
+            </div>
+            <div class="yc-verified">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              100% web visibility
+            </div>
+            <div class="yc-qr">
+              <svg viewBox="0 0 30 30" fill="#000">
+                <rect x="2" y="2" width="10" height="10"/><rect x="3" y="3" width="8" height="8" fill="#E1FF00"/>
+                <rect x="4" y="4" width="6" height="6"/>
+                <rect x="18" y="2" width="10" height="10"/><rect x="19" y="3" width="8" height="8" fill="#E1FF00"/>
+                <rect x="20" y="4" width="6" height="6"/>
+                <rect x="2" y="18" width="10" height="10"/><rect x="3" y="19" width="8" height="8" fill="#E1FF00"/>
+                <rect x="4" y="20" width="6" height="6"/>
+                <rect x="14" y="14" width="3" height="3"/><rect x="19" y="14" width="3" height="3"/>
+                <rect x="14" y="19" width="3" height="3"/><rect x="22" y="19" width="3" height="3"/>
+                <rect x="18" y="22" width="3" height="3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="act-card">
+          <div class="act-title">Activitate recentă</div>
+          <div class="act-row">
+            <div class="act-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 011.72 1h3.09a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.79 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+            <div>
+              <div class="act-txt">Autentificare</div>
+              <div class="act-meta">Sesiune activă</div>
+            </div>
+            <div class="act-time" id="at-login">—</div>
+          </div>
+          <div class="act-row">
+            <div class="act-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div>
+              <div class="act-txt">Backend</div>
+              <div class="act-meta" id="at-api">—</div>
+            </div>
+            <div class="act-time" id="at-health-time" style="color:var(--green)">—</div>
+          </div>
+          <div class="act-row">
+            <div class="act-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
+            <div>
+              <div class="act-txt">YellowCard</div>
+              <div class="act-meta">Identitate digitală</div>
+            </div>
+            <div class="act-time" style="color:var(--neon);font-weight:700">MLBR</div>
+          </div>
+          <div class="act-row">
+            <div class="act-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <div class="act-txt">Token JWT</div>
+              <div class="act-meta">Valid 24h</div>
+            </div>
+            <div class="act-time" id="at-expire">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- YELLOWCARD PANEL -->
+    <div class="panel" id="panel-yellowcard">
+      <div class="panel-hdr">
+        <div class="panel-title">YellowCard</div>
+        <div class="panel-sub">Identitatea digitală a vehiculului tău</div>
+      </div>
+      <div style="max-width:500px;margin:0 auto">
+        <div class="ycard" style="margin-bottom:24px">
+          <div class="yc-top">
+            <div>
+              <div class="yc-brand">MulberryID · MLBR</div>
+              <div class="yc-name" id="ycp-name">YellowCard</div>
+            </div>
+            <div class="yc-id" id="ycp-id">—</div>
+          </div>
+          <div class="yc-fields">
+            <div><div class="yc-fl">Plate</div><div class="yc-fv" id="ycp-plate">B-12-MLB</div></div>
+            <div><div class="yc-fl">VIN</div><div class="yc-fv" id="ycp-vin">WA0ZZ8K9DA1</div></div>
+            <div><div class="yc-fl">Owner</div><div class="yc-fv" id="ycp-owner">—</div></div>
+            <div><div class="yc-fl">Insurance</div><div class="yc-fv">RCA · Activ</div></div>
+          </div>
+          <div class="yc-verified">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            100% web visibility
+          </div>
+          <div class="yc-qr">
+            <svg viewBox="0 0 30 30" fill="#000">
+              <rect x="2" y="2" width="10" height="10"/><rect x="3" y="3" width="8" height="8" fill="#E1FF00"/>
+              <rect x="4" y="4" width="6" height="6"/>
+              <rect x="18" y="2" width="10" height="10"/><rect x="19" y="3" width="8" height="8" fill="#E1FF00"/>
+              <rect x="20" y="4" width="6" height="6"/>
+              <rect x="2" y="18" width="10" height="10"/><rect x="3" y="19" width="8" height="8" fill="#E1FF00"/>
+              <rect x="4" y="20" width="6" height="6"/>
+              <rect x="14" y="14" width="3" height="3"/><rect x="19" y="14" width="3" height="3"/>
+              <rect x="14" y="19" width="3" height="3"/><rect x="22" y="19" width="3" height="3"/>
+              <rect x="18" y="22" width="3" height="3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="act-card">
+          <div class="act-title">Detalii card</div>
+          <div class="act-row">
+            <div class="act-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+            <div><div class="act-txt">Verified History</div><div class="act-meta">Verificabil prin QR public</div></div>
+            <div class="act-time" style="color:var(--green);font-weight:700">✓</div>
+          </div>
+          <div class="act-row">
+            <div class="act-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div><div class="act-txt">Digital Insurance</div><div class="act-meta">RCA integrat în card</div></div>
+            <div class="act-time" style="color:var(--neon);font-weight:700">RCA</div>
+          </div>
+          <div class="act-row">
+            <div class="act-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div><div class="act-txt">MulberryEXO</div><div class="act-meta">Istoric tehnic complet</div></div>
+            <div class="act-time" style="color:var(--dim)">EXO</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARKETPLACE -->
+    <div class="panel" id="panel-marketplace">
+      <div class="panel-hdr">
+        <div class="panel-title">Marketplace</div>
+        <div class="panel-sub">Parteneri verificați Mulberry</div>
+      </div>
+      <div class="mkt-grid">
+        <div class="offer-card">
+          <div class="offer-ico"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 011.72 1h3.09a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L5.79 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+          <div class="offer-name">RCA Rapid</div>
+          <div class="offer-desc">Asigurare RCA online, în 5 minute. Preț direct fără intermediari.</div>
+          <span class="offer-badge">Partner verificat</span>
+        </div>
+        <div class="offer-card">
+          <div class="offer-ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
+          <div class="offer-name">ITP Express</div>
+          <div class="offer-desc">Programare ITP la stațiile partenere. Disponibilitate în timp real.</div>
+          <span class="offer-badge">Disponibil</span>
+        </div>
+        <div class="offer-card">
+          <div class="offer-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+          <div class="offer-name">Service Auto</div>
+          <div class="offer-desc">Rețea de service-uri certificate MulberryEXO. Garanție lucrări.</div>
+          <span class="offer-badge">Nou</span>
+        </div>
+        <div class="offer-card">
+          <div class="offer-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div class="offer-name">Parcare Smart</div>
+          <div class="offer-desc">Abonamente parcare integrat cu YellowCard. Plată automată.</div>
+          <span class="offer-badge">Beta</span>
+        </div>
+        <div class="offer-card">
+          <div class="offer-ico"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <div class="offer-name">Asistență Rutieră</div>
+          <div class="offer-desc">Ajutor rapid prin rețeaua Mulberry. Localizare și intervenție.</div>
+          <span class="offer-badge">24/7</span>
+        </div>
+        <div class="offer-card">
+          <div class="offer-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="offer-name">MulberryAI</div>
+          <div class="offer-desc">Analiză predictivă pentru mașina ta. Alerte înainte de avarie.</div>
+          <span class="offer-badge">AI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="panel-hdr">
+        <div class="panel-title">Setări</div>
+        <div class="panel-sub">Configurare cont și aplicație</div>
+      </div>
+
+      <div class="settings-section">
+        <div class="s-row" style="cursor:default">
+          <div class="s-row-ico"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div>
+            <div class="s-row-lbl" id="set-uname">—</div>
+            <div class="s-row-desc" id="set-uemail">—</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="s-row" style="cursor:default">
+          <div class="s-row-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div class="s-row-lbl" style="flex:1">Backend API</div>
+          <div id="set-health-ico" style="font-size:12px;font-weight:700;color:var(--dim)">—</div>
+        </div>
+        <div class="s-api-box" id="set-api-url">—</div>
+      </div>
+
+      <div class="settings-section">
+        <div class="s-row" onclick="doLogout()">
+          <div class="s-row-ico" style="background:rgba(255,77,77,.1)">
+            <svg viewBox="0 0 24 24" stroke="var(--red)"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </div>
+          <div>
+            <div class="s-row-lbl" style="color:var(--red)">Deconectare</div>
+            <div class="s-row-desc">Ieși din contul curent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="bnav">
+    <div class="bnav-inner">
+      <button class="bn-item active" data-p="dashboard" onclick="goPanel('dashboard')">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Home
+      </button>
+      <button class="bn-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
+        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg>
+        Card
+      </button>
+      <button class="bn-item" data-p="marketplace" onclick="goPanel('marketplace')">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        Market
+      </button>
+      <button class="bn-item" data-p="settings" onclick="goPanel('settings')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Setări
+      </button>
+    </div>
+  </nav>
+
+</div>
+
+<!-- OVERLAY -->
+<div class="s-overlay" id="s-overlay" onclick="closeSidebar()"></div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const API = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.151:8080';
+let currentUser = null;
+
+// ── SESSION ────────────────────────────────────────
+function saveSession(d) { localStorage.setItem('mlbr_s', JSON.stringify(d)); currentUser = d; }
+function loadSession() {
+  try { const r = localStorage.getItem('mlbr_s'); if (r) { currentUser = JSON.parse(r); return currentUser; } } catch(e){}
+  return null;
+}
+function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; }
+
+// ── TOAST ──────────────────────────────────────────
+let _tt;
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.className = 'toast show' + (type ? ' '+type : '');
+  clearTimeout(_tt); _tt = setTimeout(() => el.className = 'toast', 2800);
+}
+
+// ── API ────────────────────────────────────────────
+async function apiPost(path, body) {
+  const r = await fetch(API + path, {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  });
+  const d = await r.json();
+  if (!r.ok) throw new Error(d.detail || 'Eroare server');
+  return d;
+}
+async function apiGet(path) {
+  const headers = currentUser?.token ? {'Authorization': 'Bearer ' + currentUser.token} : {};
+  const r = await fetch(API + path, { headers, signal: AbortSignal.timeout(4000) });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function checkHealth() {
+  const dot = document.getElementById('h-dot');
+  const lbl = document.getElementById('h-lbl');
+  try {
+    await fetch(API + '/health', { signal: AbortSignal.timeout(4000) });
+    dot.className = 'h-dot on'; lbl.textContent = 'online';
+    const t = new Date().toLocaleTimeString('ro-RO', {hour:'2-digit', minute:'2-digit'});
+    const el = document.getElementById('at-health-time');
+    if (el) { el.textContent = t; el.style.color = 'var(--green)'; }
+    document.getElementById('at-api').textContent = API;
+    document.getElementById('set-api-url').textContent = API;
+    document.getElementById('set-health-ico').textContent = '● online';
+    document.getElementById('set-health-ico').style.color = 'var(--green)';
+  } catch(e) {
+    dot.className = 'h-dot off'; lbl.textContent = 'offline';
+    document.getElementById('set-health-ico').textContent = '● offline';
+    document.getElementById('set-health-ico').style.color = 'var(--red)';
+  }
+}
+
+async function loadStats() {
+  try {
+    const s = await apiGet('/api/stats');
+    document.getElementById('st-drivers').textContent  = s.drivers  ?? 1;
+    document.getElementById('st-partners').textContent = s.partners ?? 1;
+    document.getElementById('st-vehicles').textContent = s.vehicles ?? 1;
+    document.getElementById('st-offers').textContent   = s.offers   ?? 0;
+  } catch(e) {
+    document.getElementById('st-drivers').textContent  = '1';
+    document.getElementById('st-partners').textContent = '1';
+    document.getElementById('st-vehicles').textContent = '1';
+    document.getElementById('st-offers').textContent   = '0';
+  }
+}
+
+// ── AUTH ───────────────────────────────────────────
+function switchTab(t) {
+  document.getElementById('form-login').classList.toggle('hidden', t !== 'login');
+  document.getElementById('form-register').classList.toggle('hidden', t !== 'register');
+  document.getElementById('tab-login').classList.toggle('active', t === 'login');
+  document.getElementById('tab-register').classList.toggle('active', t === 'register');
+}
+
+function setBtnLoad(id, loading, label) {
+  const b = document.getElementById(id);
+  if (!b) return;
+  b.disabled = loading;
+  b.innerHTML = loading ? '<span class="spin"></span>' : label;
+}
+
+async function doLogin() {
+  const ident = document.getElementById('li-id').value.trim();
+  const pass  = document.getElementById('li-pass').value;
+  const err   = document.getElementById('li-err');
+  err.textContent = '';
+  if (!ident || !pass) { err.textContent = 'Completează câmpurile.'; return; }
+  setBtnLoad('btn-login', true, 'Intră în cont');
+  try {
+    const isEmail = ident.includes('@');
+    const d = await apiPost('/api/login', {
+      email: isEmail ? ident : null,
+      phone: !isEmail ? ident : null,
+      password: pass
+    });
+    saveSession(d); enterApp();
+  } catch(e) { err.textContent = e.message || 'Credențiale incorecte.'; }
+  finally { setBtnLoad('btn-login', false, 'Intră în cont'); }
+}
+
+async function doRegister() {
+  const email = document.getElementById('ri-email').value.trim();
+  const phone = document.getElementById('ri-phone').value.trim();
+  const pass  = document.getElementById('ri-pass').value;
+  const err   = document.getElementById('ri-err');
+  err.textContent = '';
+  if (!email && !phone) { err.textContent = 'Introdu email sau telefon.'; return; }
+  if (!pass || pass.length < 8) { err.textContent = 'Parola: minim 8 caractere.'; return; }
+  setBtnLoad('btn-reg', true, 'Creează cont');
+  try {
+    const d = await apiPost('/api/register', {
+      email: email || null, phone: phone || null, password: pass
+    });
+    saveSession(d); toast('Cont creat!', 'ok'); enterApp();
+  } catch(e) { err.textContent = e.message || 'Eroare la înregistrare.'; }
+  finally { setBtnLoad('btn-reg', false, 'Creează cont'); }
+}
+
+function doLogout() {
+  clearSession();
+  document.getElementById('app-shell').classList.add('hidden');
+  document.getElementById('auth-screen').classList.remove('hidden');
+  toast('Deconectat', '');
+}
+
+// ── APP ────────────────────────────────────────────
+function greeting() {
+  const h = new Date().getHours();
+  return h < 6 ? 'Noapte bună' : h < 12 ? 'Bună dimineața' : h < 18 ? 'Bună ziua' : 'Bună seara';
+}
+
+function syncUser() {
+  if (!currentUser) return;
+  const name  = currentUser.email ? currentUser.email.split('@')[0] : (currentUser.phone || 'User');
+  const email = currentUser.email || currentUser.phone || '—';
+  const init  = name[0].toUpperCase();
+  const uid   = currentUser.user_id || 1;
+  const cardId = 'A' + uid + 'K2-9F3X';
+
+  [['s-avatar', init], ['t-avatar', init],
+   ['s-uname', name], ['s-uemail', email],
+   ['set-uname', name], ['set-uemail', email]].forEach(([id, v]) => {
+    const el = document.getElementById(id); if (el) el.textContent = v;
+  });
+
+  ['yc-owner','ycp-owner'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = name;
+  });
+  ['yc-name','ycp-name'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = name + "'s Card";
+  });
+  ['yc-id','ycp-id'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = cardId;
+  });
+}
+
+function enterApp() {
+  document.getElementById('auth-screen').classList.add('hidden');
+  document.getElementById('app-shell').classList.remove('hidden');
+  syncUser();
+  checkHealth();
+  loadStats();
+  const now = new Date();
+  const t = now.toLocaleTimeString('ro-RO', {hour:'2-digit', minute:'2-digit'});
+  const el = document.getElementById('at-login'); if (el) el.textContent = t;
+  const ex = document.getElementById('at-expire');
+  if (ex) {
+    const exp = new Date(now.getTime() + 86400000);
+    ex.textContent = exp.toLocaleDateString('ro-RO', {day:'2-digit', month:'2-digit'});
+  }
+  document.getElementById('dash-greet').textContent =
+    greeting() + (currentUser?.email ? ', ' + currentUser.email.split('@')[0] : '');
+}
+
+// ── NAVIGATION ─────────────────────────────────────
+const PANEL_META = {
+  dashboard:   ['Dashboard',   () => greeting()],
+  yellowcard:  ['YellowCard',  () => 'Identitatea digitală a vehiculului tău'],
+  marketplace: ['Marketplace', () => 'Oferte și parteneri verificați'],
+  settings:    ['Setări',      () => 'Configurare cont și aplicație']
+};
+
+function goPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name)?.classList.add('active');
+  document.querySelectorAll('[data-p]').forEach(n =>
+    n.classList.toggle('active', n.dataset.p === name)
+  );
+  const [title, sub] = PANEL_META[name] || [name, () => ''];
+  document.getElementById('t-title').textContent = title;
+  document.getElementById('t-sub').textContent = sub();
+  closeSidebar();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('s-overlay').classList.toggle('show');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('s-overlay').classList.remove('show');
+}
+
+// Enter key on auth forms
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const regHidden = document.getElementById('form-register').classList.contains('hidden');
+  regHidden ? doLogin() : doRegister();
+});
+
+// ── BOOT ───────────────────────────────────────────
+(function() {
+  const s = loadSession();
+  if (s && s.token) enterApp();
+})();
+</script>
+</body>
+</html>
