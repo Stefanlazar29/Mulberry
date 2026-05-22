@@ -14,7 +14,7 @@ jobs:
           host: 46.225.100.151
           username: stefan
           key: ${{ secrets.HETZNER_SSH_KEY }}
-          port: 22
+          port: 443
           script: |
             /home/stefan/mulberry/deploy.sh
             echo "Deploy OK - $(date)"
