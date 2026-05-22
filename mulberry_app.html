@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mulberry</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -365,15 +365,45 @@ html,body{height:100%;background:var(--black);color:#fff;font-family:var(--font)
 @keyframes rot{to{transform:rotate(360deg)}}
 
 /* ── BREAKPOINTS ──────────────────────────────────── */
-@media(max-width:1280px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
+
+/* Ultrawide 1920px+ */
+@media(min-width:1920px){
+  :root{--sidebar-w:280px}
+  .content{padding:40px 52px}
+  .stats-grid{gap:20px}
+  .stat-val{font-size:40px}
+  .panel-title{font-size:30px}
+  .dash-grid{grid-template-columns:1fr 400px}
+}
+
+/* Desktop 1440px – 1919px: layout complet, 4 coloane */
+@media(max-width:1919px) and (min-width:1440px){
+  .stats-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+  .dash-grid{grid-template-columns:1fr 360px}
+  .content{padding:36px 40px}
+}
+
+/* Laptop 1024px – 1439px: sidebar + 4 coloane stats */
+@media(max-width:1439px) and (min-width:1025px){
+  :root{--sidebar-w:230px}
+  .stats-grid{grid-template-columns:repeat(4,1fr);gap:12px}
+  .dash-grid{grid-template-columns:1fr 300px}
+  .content{padding:28px 28px}
+  .stat-val{font-size:30px}
+  .panel-title{font-size:24px}
+}
+
+/* Tabletă 768px – 1024px: sidebar îngust, 2 coloane stats */
+@media(max-width:1024px) and (min-width:769px){
+  :root{--sidebar-w:200px}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .dash-grid{grid-template-columns:1fr}
-  .content{padding:28px}
-}
-@media(max-width:900px){
-  :root{--sidebar-w:240px}
   .content{padding:20px}
+  .s-logo-sub{display:none}
+  .nav-item{font-size:13px;padding:9px 8px}
 }
+
+/* Mobil Android / iPhone ≤768px */
 @media(max-width:768px){
   #app-shell{
     grid-template-columns:1fr;
@@ -401,10 +431,17 @@ html,body{height:100%;background:var(--black);color:#fff;font-family:var(--font)
   .yc-name{font-size:20px}
   .auth-card{padding:28px 22px}
   .toast{bottom:calc(var(--bnav-h) + 12px)}
+  .dash-grid{grid-template-columns:1fr}
+  .mkt-grid{grid-template-columns:1fr}
 }
+
+/* Telefon mic ≤400px */
 @media(max-width:400px){
   .stats-grid{grid-template-columns:1fr 1fr}
-  .stat-val{font-size:28px}
+  .stat-val{font-size:26px}
+  .panel-title{font-size:20px}
+  .yc-name{font-size:17px}
+  .content{padding:12px 12px calc(var(--bnav-h) + 12px)}
 }
   </style>
 </head>
