@@ -1,79 +1,61 @@
+"""
+SQLite helpers for the Streamlit YourCar app (`app.py`).
+Path: SQLITE_PATH env (Docker /data/mulberry.db) or backend/dev.db locally.
+"""
+from __future__ import annotations
+
+import os
 import sqlite3
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 
-class DatabaseConnection:
-    def __init__(self, db_path: str = None):
-        if db_path is None:
-            db_path = str(Path(__file__).parent / "dev.db")
-        self.db_path = db_path
-        self.connection = None
+def _db_path() -> Path:
+    raw = os.environ.get("SQLITE_PATH")
+    if raw:
+        return Path(raw)
+    return Path(__file__).resolve().parent / "dev.db"
 
-    def __enter__(self):
-        self.connection = sqlite3.connect(self.db_path)
-        self.connection.row_factory = sqlite3.Row
-        return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        if self.connection:
-            self.connection.close()
+@dataclass
+class Car:
+    ycr_id: Optional[str]
+    rca_expiry: Optional[str]
+    ycs_score: Optional[float]
 
-    def init_db(self):
-        """Initialize database and create users table if it doesn't exist."""
-        with self as db:
-            cursor = db.connection.cursor()
-            cursor.execute("PRAGMA foreign_keys=ON")
-            cursor.execute("PRAGMA journal_mode=WAL")
 
-            cursor.execute("""
-                CREATE TABLE IF NOT EXISTS users (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    email TEXT UNIQUE,
-                    phone TEXT UNIQUE,
-                    password_hash TEXT NOT NULL,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                )
-            """)
-            db.connection.commit()
+def _conn() -> sqlite3.Connection:
+    path = _db_path()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    return sqlite3.connect(str(path))
 
-    def get_user_by_email(self, email: str) -> Optional[dict]:
-        """Get user by email."""
-        with self as db:
-            cursor = db.connection.cursor()
-            cursor.execute("SELECT * FROM users WHERE email = ?", (email,))
-            row = cursor.fetchone()
-            return dict(row) if row else None
 
-    def get_user_by_phone(self, phone: str) -> Optional[dict]:
-        """Get user by phone."""
-        with self as db:
-            cursor = db.connection.cursor()
-            cursor.execute("SELECT * FROM users WHERE phone = ?", (phone,))
-            row = cursor.fetchone()
-            return dict(row) if row else None
-
-    def create_user(self, email: Optional[str], phone: Optional[str], password_hash: str) -> dict:
-        """Create a new user."""
-        with self as db:
-            cursor = db.connection.cursor()
-            cursor.execute(
-                "INSERT INTO users (email, phone, password_hash) VALUES (?, ?, ?)",
-                (email, phone, password_hash)
+def init_db() -> None:
+    with _conn() as c:
+        c.execute(
+            """
+            CREATE TABLE IF NOT EXISTS cars (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                ycr_id TEXT,
+                rca_expiry TEXT,
+                ycs_score REAL
             )
-            db.connection.commit()
-            user_id = cursor.lastrowid
-            return {
-                "id": user_id,
-                "email": email,
-                "phone": phone,
-                "password_hash": password_hash
-            }
+            """
+        )
 
-    def get_user_by_id(self, user_id: int) -> Optional[dict]:
-        """Get user by ID."""
-        with self as db:
-            cursor = db.connection.cursor()
-            cursor.execute("SELECT * FROM users WHERE id = ?", (user_id,))
-            row = cursor.fetchone()
-            return dict(row) if row else None
+
+def get_first_car() -> Optional[Car]:
+    init_db()
+    with _conn() as c:
+        row = c.execute(
+            "SELECT ycr_id, rca_expiry, ycs_score FROM cars ORDER BY id LIMIT 1"
+        ).fetchone()
+    if not row:
+        return None
+    ycr_id, rca_expiry, ycs_score = row
+    return Car(
+        ycr_id=ycr_id,
+        rca_expiry=rca_expiry if rca_expiry else None,
+        ycs_score=float(ycs_score) if ycs_score is not None else None,
+    )

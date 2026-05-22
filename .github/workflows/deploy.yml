@@ -1,0 +1,23 @@
+name: Deploy to Hetzner
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 46.225.100.151
+          username: stefan
+          key: ${{ secrets.HETZNER_SSH_KEY }}
+          port: 443
+          script: |
+            cd ~/mulberry
+            git pull origin main
+            docker compose up -d --build
+            docker compose ps
+            echo "Deploy OK - $(date)"

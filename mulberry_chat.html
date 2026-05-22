@@ -837,8 +837,8 @@
     (function() {
       var STORAGE_KEY = 'mulberry_conversations';
       var CURRENT_KEY = 'mulberry_current_conversation_id';
-      /* API pe apiBase (implicit :9000). Pagina poate fi servită de alt origin (ex. Live Server :5500) — CORS pe backend trebuie să permită acel origin. */
-      var apiBase = (window.Config && window.Config.apiBaseUrl) || 'http://127.0.0.1:9000';
+      /* API pe apiBase → http://46.225.100.151:8080 via nginx. */
+      var apiBase = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.151:8080';
       var pendingChatFiles = [];
       var _ATT_B64_SOFT_MAX = 480000;
 
@@ -1682,7 +1682,7 @@
             errMsg = 'Sesiune expirată. Te reconectezi...';
             setTimeout(function () { window.location.href = 'mulberry.html'; }, 2000);
           } else if (errStr.indexOf('Failed to fetch') !== -1 || errStr.indexOf('NetworkError') !== -1) {
-            errMsg = 'Backend offline. Pornește uvicorn pe portul 9000 (sau verifică Config.apiBaseUrl).';
+            errMsg = 'Backend offline — verifică http://46.225.100.151:8080/health';
           } else if (errStr.indexOf('500') !== -1) {
             errMsg = 'Eroare server. Verifică GROQ_API_KEY în backend/.env';
           } else if (errStr.indexOf('503') !== -1) {

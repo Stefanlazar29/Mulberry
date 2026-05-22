@@ -1,4 +1,4 @@
-# Mulberry — Streamlit YourCar app
+# Mulberry — FastAPI (uvicorn)
 FROM python:3.11-slim-bookworm
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -20,6 +20,8 @@ RUN mkdir -p /data
 
 ENV SQLITE_PATH=/data/mulberry.db
 
-EXPOSE 8000
+# Render (și altele) injectează PORT la runtime; în dashboard setează Port = același port sau lasă PORT din mediu.
+EXPOSE 10000
 
-CMD ["streamlit", "run", "app.py", "--server.port=8000", "--server.address=0.0.0.0"]
+# Formă shell: ${PORT:-10000} la pornire. Folosim `python -m uvicorn` ca să nu depindem de PATH (evită „uvicorn: not found”).
+CMD python -m uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-10000}

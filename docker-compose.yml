@@ -1,7 +1,8 @@
 # Pornește:  docker compose up -d --build
-# Nginx: HTTPS la 443 (certificat în docker/nginx/ssl/). API intern :8000.
+# Port public: 8080 → nginx → api:10000 (rețea internă Docker, fără port expus pe host)
+# SSL poate fi adăugat ulterior în docker/nginx/ssl/.
 #
-# Obligatoriu: copiază deploy/.env.production.example → .env și setează JWT_SECRET, MLBR_SECRET etc.
+# Obligatoriu: copiați deploy/.env.production.example → .env și setați variabilele secrete.
 
 services:
   api:
@@ -12,6 +13,8 @@ services:
     env_file:
       - .env
     environment:
+      # Aliniat cu healthcheck; pe Render lasă PORT setat de platformă sau setează același număr în Settings → Port.
+      PORT: "10000"
       # Suprascriu doar dacă lipsesc din .env; secretele vin din .env (nu din imagine).
       SQLITE_PATH: /data/mulberry.db
       AUTH_AUDIT_PATH: /data/auth_audit.db
@@ -22,7 +25,7 @@ services:
     networks:
       - mulberry_net
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:10000/health')"]
       interval: 30s
       timeout: 5s
       retries: 3
@@ -32,11 +35,10 @@ services:
     image: nginx:1.25-alpine
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:80"
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./docker/nginx/ssl:/etc/nginx/ssl:ro
+      - .:/usr/share/nginx/html:ro
     depends_on:
       api:
         condition: service_healthy
