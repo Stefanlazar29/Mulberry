@@ -452,9 +452,10 @@ html,body{height:100%;background:var(--black);color:#fff;font-family:var(--font)
   <div class="auth-card">
     <div class="auth-logo">
       <div class="auth-logo-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
-          <polygon points="12,7 17,10 17,14 12,17 7,14 7,10"/>
+        <svg viewBox="0 0 40 40" fill="none" style="width:42px;height:42px;border-radius:11px">
+          <rect width="40" height="40" rx="8" fill="#E1FF00"/>
+          <path d="M8 26 A12 12 0 0 1 32 26 Z" fill="#0A0A0A"/>
+          <rect x="10" y="28" width="20" height="5" rx="2.5" fill="#0A0A0A"/>
         </svg>
       </div>
       <div>
@@ -506,9 +507,10 @@ html,body{height:100%;background:var(--black);color:#fff;font-family:var(--font)
   <aside class="sidebar" id="sidebar">
     <div class="s-logo">
       <div class="s-logo-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5"/>
-          <polygon points="12,7 17,10 17,14 12,17 7,14 7,10"/>
+        <svg viewBox="0 0 40 40" fill="none" style="width:34px;height:34px;border-radius:9px">
+          <rect width="40" height="40" rx="8" fill="#E1FF00"/>
+          <path d="M8 26 A12 12 0 0 1 32 26 Z" fill="#0A0A0A"/>
+          <rect x="10" y="28" width="20" height="5" rx="2.5" fill="#0A0A0A"/>
         </svg>
       </div>
       <div>
@@ -948,12 +950,7 @@ async function doLogin() {
   if (!ident || !pass) { err.textContent = 'Completează câmpurile.'; return; }
   setBtnLoad('btn-login', true, 'Intră în cont');
   try {
-    const isEmail = ident.includes('@');
-    const d = await apiPost('/api/login', {
-      email: isEmail ? ident : null,
-      phone: !isEmail ? ident : null,
-      password: pass
-    });
+    const d = await apiPost('/auth/login', { identifier: ident, password: pass });
     saveSession(d); enterApp();
   } catch(e) { err.textContent = e.message || 'Credențiale incorecte.'; }
   finally { setBtnLoad('btn-login', false, 'Intră în cont'); }
@@ -965,13 +962,12 @@ async function doRegister() {
   const pass  = document.getElementById('ri-pass').value;
   const err   = document.getElementById('ri-err');
   err.textContent = '';
-  if (!email && !phone) { err.textContent = 'Introdu email sau telefon.'; return; }
+  const ident = email || phone;
+  if (!ident) { err.textContent = 'Introdu email sau telefon.'; return; }
   if (!pass || pass.length < 8) { err.textContent = 'Parola: minim 8 caractere.'; return; }
   setBtnLoad('btn-reg', true, 'Creează cont');
   try {
-    const d = await apiPost('/api/register', {
-      email: email || null, phone: phone || null, password: pass
-    });
+    const d = await apiPost('/auth/login', { identifier: ident, password: pass });
     saveSession(d); toast('Cont creat!', 'ok'); enterApp();
   } catch(e) { err.textContent = e.message || 'Eroare la înregistrare.'; }
   finally { setBtnLoad('btn-reg', false, 'Creează cont'); }
@@ -985,6 +981,12 @@ function doLogout() {
 }
 
 // ── APP ────────────────────────────────────────────
+function hashStr(s) {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = Math.imul(31, h) + s.charCodeAt(i) | 0;
+  return h;
+}
+
 function greeting() {
   const h = new Date().getHours();
   return h < 6 ? 'Noapte bună' : h < 12 ? 'Bună dimineața' : h < 18 ? 'Bună ziua' : 'Bună seara';
@@ -992,11 +994,11 @@ function greeting() {
 
 function syncUser() {
   if (!currentUser) return;
-  const name  = currentUser.email ? currentUser.email.split('@')[0] : (currentUser.phone || 'User');
-  const email = currentUser.email || currentUser.phone || '—';
+  const raw   = currentUser.email || currentUser.identifier || 'User';
+  const name  = raw.includes('@') ? raw.split('@')[0] : raw;
+  const email = raw;
   const init  = name[0].toUpperCase();
-  const uid   = currentUser.user_id || 1;
-  const cardId = 'A' + uid + 'K2-9F3X';
+  const cardId = 'MLB-' + name.slice(0,4).toUpperCase() + '-' + Math.abs(hashStr(raw) % 9000 + 1000);
 
   [['s-avatar', init], ['t-avatar', init],
    ['s-uname', name], ['s-uemail', email],
