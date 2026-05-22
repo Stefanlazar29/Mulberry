@@ -6,6 +6,13 @@ from backend.auth import PasswordManager, TokenManager
 router = APIRouter(prefix="/api", tags=["auth"])
 
 
+@router.get("/stats")
+async def get_stats():
+    db = DatabaseConnection()
+    db.init_db()
+    return db.get_stats()
+
+
 @router.post("/register", response_model=TokenResponse)
 async def register(user: UserRegister):
     """Register a new user."""

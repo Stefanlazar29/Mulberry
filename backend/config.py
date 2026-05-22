@@ -5,16 +5,14 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     jwt_secret: str
-    database_url: str = "sqlite:///backend/dev.db"
-    db_path: str = str(Path(__file__).parent / "dev.db")
+    database_url: str = "postgresql://mulberry_user:mulberry_pass@localhost/mulberry"
     jwt_expiry_hours: int = 24
     cors_origins: list[str] = [
         "http://localhost:8000",
         "http://localhost:5000",
         "http://localhost:5500",
         "http://127.0.0.1:5500",
-        "localhost",
-        "http://46.225.100.8:8080",
+        "http://46.225.100.151:8080",
         "null",
     ]
 
