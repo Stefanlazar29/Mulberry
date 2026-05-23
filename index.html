@@ -11,18 +11,20 @@
 /* ── RESET & VARS ───────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --yellow: #ECFF54;
-  --wine:   #2C0E12;
-  --white:  #FFFFFF;
-  --black:  #0A0A0A;
-  --gray:   #F5F5F3;
-  --muted:  #6B6B6B;
-  --border: #E2E2E0;
-  --font: 'TT Firs Neue', 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-head: 'Manrope', 'TT Firs Neue', sans-serif;
-  --max: 1200px;
-  --orange: #FF5F1F;
-  --orange-glow: rgba(255,95,31,.38);
+  --yellow:     #ECFF54;
+  --wine:       #2C0E12;
+  --white:      #FFFFFF;
+  --black:      #0A0A0A;
+  --gray:       #F5F5F3;
+  --muted:      #6B6B6B;
+  --border:     #E2E2E0;
+  --navy:       #050D1A;
+  --navy-mid:   #0C1C38;
+  --font:       'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-head:  'Manrope', 'Plus Jakarta Sans', sans-serif;
+  --max:        1200px;
+  --orange:     #FF5F1F;
+  --orange-glow:rgba(255,95,31,.38);
 }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
@@ -31,7 +33,8 @@ a { text-decoration: none; color: inherit; }
 /* ── NAV ────────────────────────────────────────── */
 nav {
   position: sticky; top: 0; z-index: 100;
-  background: var(--white);
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   height: 64px; display: flex; align-items: center;
 }
@@ -47,48 +50,58 @@ nav {
 }
 .nav-logo-info { display: flex; flex-direction: column; line-height: 1; }
 .nav-logo-name { font-family: var(--font-head); font-size: 17px; font-weight: 800; letter-spacing: -.2px; }
-.nav-logo-sub  { font-size: 9px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; margin-top: 2px; }
+.nav-logo-sub  { font-size: 9px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; margin-top: 2px; }
 .nav-links { display: flex; gap: 32px; flex: 1; }
-.nav-links a { font-size: 14px; font-weight: 600; color: var(--black); opacity: .75; transition: opacity .15s; }
+.nav-links a { font-size: 14px; font-weight: 500; color: var(--black); opacity: .65; transition: opacity .15s; }
 .nav-links a:hover { opacity: 1; }
 .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
-.nav-lang { font-size: 13px; font-weight: 600; color: var(--muted); margin-right: 10px; }
-.nav-signin { font-size: 14px; font-weight: 600; padding: 9px 18px; border-radius: 8px; transition: background .15s; }
+.nav-lang { font-size: 13px; font-weight: 500; color: var(--muted); margin-right: 10px; }
+.nav-signin { font-size: 14px; font-weight: 500; padding: 9px 18px; border-radius: 8px; transition: background .15s; }
 .nav-signin:hover { background: var(--gray); }
 .nav-signup {
   font-size: 14px; font-weight: 700;
-  background: var(--wine); color: var(--white);
+  background: var(--navy); color: var(--white);
   padding: 9px 20px; border-radius: 8px;
   display: flex; align-items: center; gap: 6px;
   transition: opacity .15s;
 }
-.nav-signup:hover { opacity: .88; }
+.nav-signup:hover { opacity: .84; }
 
 /* ── TICKER ─────────────────────────────────────── */
-.ticker { background: var(--wine); overflow: hidden; padding: 11px 0; }
+.ticker { background: var(--navy); overflow: hidden; padding: 10px 0; }
 .ticker-track {
   display: flex; gap: 0;
-  animation: ticker-scroll 30s linear infinite;
+  animation: ticker-scroll 32s linear infinite;
   width: max-content;
 }
 .ticker-track span {
-  font-size: 11px; font-weight: 700; letter-spacing: .14em;
-  text-transform: uppercase; color: rgba(255,255,255,.75);
-  white-space: nowrap; padding: 0 28px;
+  font-size: 10px; font-weight: 600; letter-spacing: .15em;
+  text-transform: uppercase; color: rgba(255,255,255,.5);
+  white-space: nowrap; padding: 0 26px;
 }
-.ticker-track span.dot { color: var(--yellow); padding: 0 4px; }
+.ticker-track span.dot { color: var(--yellow); padding: 0 4px; opacity: .7; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ── HERO (dark — DataCamp style) ───────────────── */
+/* ── HERO (dark navy — glassmorphism) ───────────── */
 .hero {
-  background: linear-gradient(140deg, #1a0810 0%, var(--wine) 40%, #120609 100%);
+  background: linear-gradient(140deg, #020810 0%, var(--navy-mid) 45%, #040A18 100%);
   padding: 72px 32px 0;
   position: relative; overflow: hidden;
 }
+/* Yellow flash — top left */
 .hero::before {
-  content: ''; position: absolute; top: -120px; left: 25%;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(236,255,84,.05) 0%, transparent 65%);
+  content: ''; position: absolute;
+  top: -120px; left: -80px;
+  width: 680px; height: 560px;
+  background: radial-gradient(ellipse at center, rgba(236,255,84,.07) 0%, transparent 56%);
+  pointer-events: none;
+}
+/* Yellow flash — bottom right */
+.hero::after {
+  content: ''; position: absolute;
+  bottom: 20px; right: -40px;
+  width: 500px; height: 420px;
+  background: radial-gradient(ellipse at center, rgba(236,255,84,.045) 0%, transparent 60%);
   pointer-events: none;
 }
 .hero-inner {
@@ -96,58 +109,60 @@ nav {
   display: grid; grid-template-columns: 1fr 360px 240px;
   gap: 48px; align-items: start;
   padding-bottom: 100px;
+  position: relative; z-index: 1;
 }
 /* Left col */
 .hero-text { padding-top: 12px; }
 .hero-tag {
-  font-size: 11px; font-weight: 700; letter-spacing: .16em;
+  font-size: 10px; font-weight: 600; letter-spacing: .18em;
   text-transform: uppercase; color: var(--yellow);
-  opacity: .8; margin-bottom: 20px;
+  opacity: .75; margin-bottom: 20px;
 }
 .hero-h1 {
   font-family: var(--font-head);
-  font-size: clamp(36px, 4.2vw, 58px);
-  font-weight: 800; line-height: 1.06;
-  letter-spacing: -.5px; color: var(--white);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 700; line-height: 1.07;
+  letter-spacing: -.4px; color: var(--white);
   margin-bottom: 20px;
 }
 .hero-h1 .accent { color: var(--yellow); }
 .hero-desc {
-  font-size: 16px; color: rgba(255,255,255,.58);
-  line-height: 1.7; max-width: 400px; margin-bottom: 32px;
+  font-size: 15px; font-weight: 300;
+  color: rgba(255,255,255,.52);
+  line-height: 1.75; max-width: 380px; margin-bottom: 32px;
 }
 .hero-social {
   display: flex; align-items: center; gap: 10px;
 }
-.hero-stars { color: var(--yellow); font-size: 15px; letter-spacing: 2px; }
-.hero-social-txt { font-size: 13px; color: rgba(255,255,255,.45); }
+.hero-stars { color: var(--yellow); font-size: 14px; letter-spacing: 2px; opacity: .85; }
+.hero-social-txt { font-size: 12px; font-weight: 400; color: rgba(255,255,255,.38); }
 
-/* Center col — signup card */
+/* Center col — signup card (glassmorphism) */
 .hero-card {
-  background: var(--white);
-  border-radius: 16px;
+  background: rgba(255,255,255,.97);
+  border-radius: 18px;
   padding: 30px 26px 28px;
-  box-shadow: 0 24px 64px rgba(0,0,0,.4);
+  box-shadow: 0 28px 72px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08);
 }
 .hero-card-ttl {
   font-family: var(--font-head);
-  font-size: 17px; font-weight: 700; color: var(--black);
-  text-align: center; margin-bottom: 5px;
+  font-size: 16px; font-weight: 700; color: var(--black);
+  text-align: center; margin-bottom: 4px;
 }
 .hero-card-sub {
-  font-size: 12px; color: var(--muted);
+  font-size: 11.5px; font-weight: 400; color: var(--muted);
   text-align: center; margin-bottom: 20px;
 }
 .hero-card-cta {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%; background: var(--yellow); color: var(--black);
-  font-size: 14px; font-weight: 800;
+  font-size: 14px; font-weight: 700;
   padding: 13px 16px; border-radius: 10px;
   margin-bottom: 10px; transition: opacity .15s;
 }
 .hero-card-cta:hover { opacity: .88; }
 .hero-card-or {
-  text-align: center; font-size: 11px; color: var(--muted);
+  text-align: center; font-size: 11px; font-weight: 400; color: var(--muted);
   position: relative; margin: 14px 0;
 }
 .hero-card-or::before, .hero-card-or::after {
@@ -159,34 +174,39 @@ nav {
 .hero-card-email {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
-  padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--black);
+  padding: 12px 16px; font-size: 13px; font-weight: 500; color: var(--black);
   transition: border-color .15s;
 }
 .hero-card-email:hover { border-color: #aaa; }
 .hero-card-email svg { flex-shrink: 0; }
 .hero-card-terms {
-  font-size: 11px; color: var(--muted); text-align: center;
-  margin-top: 16px; line-height: 1.65;
+  font-size: 10.5px; font-weight: 400; color: var(--muted);
+  text-align: center; margin-top: 16px; line-height: 1.65;
 }
-.hero-card-terms a { color: var(--wine); font-weight: 600; }
+.hero-card-terms a { color: var(--navy-mid); font-weight: 600; }
 
-/* Right col — trust panel */
+/* Right col — trust panel (glassmorphism on navy) */
 .hero-trust {
-  padding-top: 8px;
+  padding: 18px 16px 16px;
+  background: rgba(12,28,56,.65);
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  border: 1px solid rgba(236,255,84,.1);
+  border-radius: 14px;
+  margin-top: 4px;
 }
 .htp-ttl {
-  font-size: 10px; font-weight: 700; color: rgba(255,255,255,.35);
-  text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px;
+  font-size: 9px; font-weight: 600; color: rgba(255,255,255,.3);
+  text-transform: uppercase; letter-spacing: .14em; margin-bottom: 14px;
 }
 .htp-row {
   display: flex; align-items: center; gap: 10px;
-  padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.07);
-  font-size: 13px; font-weight: 500; color: rgba(255,255,255,.6);
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+  font-size: 12.5px; font-weight: 400; color: rgba(255,255,255,.55);
 }
 .htp-row:last-child { border-bottom: none; }
 .htp-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--yellow); flex-shrink: 0; opacity: .7;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--yellow); flex-shrink: 0; opacity: .65;
 }
 
 /* ── FEATURE CARDS (float up over hero bottom) ──── */
@@ -207,42 +227,74 @@ nav {
   border-radius: 14px;
   padding: 22px 20px;
   display: flex; align-items: flex-start; gap: 16px;
-  box-shadow: 0 4px 24px rgba(0,0,0,.07);
+  box-shadow: 0 4px 28px rgba(0,0,0,.09);
   transition: box-shadow .2s, border-color .2s, transform .2s;
 }
 .feat-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  box-shadow: 0 8px 36px rgba(0,0,0,.13);
   border-color: #ccc;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 .feat-ico {
-  width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
+  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
   background: var(--gray);
   display: flex; align-items: center; justify-content: center;
 }
-.feat-ico svg { width: 20px; height: 20px; stroke: var(--wine); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.feat-ico svg { width: 19px; height: 19px; stroke: var(--navy-mid); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .feat-title {
   font-family: var(--font-head);
-  font-size: 14px; font-weight: 700; color: var(--black);
+  font-size: 13.5px; font-weight: 600; color: var(--black);
   display: flex; align-items: center; gap: 5px; margin-bottom: 5px;
 }
-.feat-arrow { color: var(--muted); }
-.feat-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+.feat-arrow { color: var(--muted); font-weight: 400; }
+.feat-desc { font-size: 12px; font-weight: 400; color: var(--muted); line-height: 1.58; }
+
+/* ── BENEFITS DIVIDER ───────────────────────────── */
+.benefits-sep {
+  background: var(--white);
+  padding: 0 32px 56px;
+  border-bottom: 1px solid var(--border);
+}
+.benefits-sep-inner {
+  max-width: var(--max); margin: 0 auto;
+}
+.bsep-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 32px;
+}
+.bsep-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+.bsep-item {
+  padding-left: 14px;
+  border-left: 2px solid var(--yellow);
+}
+.bsep-num {
+  font-size: 10px; font-weight: 600; color: var(--muted);
+  letter-spacing: .1em; margin-bottom: 6px;
+}
+.bsep-text {
+  font-family: var(--font-head);
+  font-size: 13.5px; font-weight: 600; color: var(--black);
+  line-height: 1.42;
+}
 
 /* ── YELLOWCARD COMPONENT ────────────────────────── */
 .ycard-wrap { position: relative; }
 .ycard {
   background: var(--yellow); border-radius: 20px;
   padding: 28px 28px 80px; position: relative;
-  box-shadow: 0 20px 60px rgba(0,0,0,.12);
+  box-shadow: 0 20px 60px rgba(0,0,0,.16);
 }
 .yc-toprow { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
-.yc-brand-label { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(0,0,0,.5); }
-.yc-title { font-size: 26px; font-weight: 900; letter-spacing: -.3px; margin-top: 3px; color: var(--black); }
-.yc-code { font-size: 13px; font-weight: 700; color: rgba(0,0,0,.6); text-align: right; font-variant-numeric: tabular-nums; }
+.yc-brand-label { font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(0,0,0,.45); }
+.yc-title { font-family: var(--font-head); font-size: 25px; font-weight: 800; letter-spacing: -.3px; margin-top: 3px; color: var(--black); }
+.yc-code { font-size: 13px; font-weight: 700; color: rgba(0,0,0,.55); text-align: right; font-variant-numeric: tabular-nums; }
 .yc-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.yc-fl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.45); margin-bottom: 4px; }
-.yc-fv { font-size: 14px; font-weight: 800; color: var(--black); letter-spacing: -.1px; }
+.yc-fl { font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.4); margin-bottom: 4px; }
+.yc-fv { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--black); letter-spacing: -.1px; }
 .yc-qr {
   position: absolute; bottom: 20px; right: 20px;
   width: 72px; height: 72px; background: var(--white);
@@ -255,53 +307,75 @@ nav {
   padding: 10px 14px; display: flex; align-items: center; gap: 8px;
   box-shadow: 0 4px 20px rgba(0,0,0,.1);
 }
-.yc-badge-icon svg { width: 16px; height: 16px; stroke: var(--wine); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.yc-badge-txt { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-.yc-badge-sub { font-size: 10px; color: var(--muted); font-weight: 600; }
+.yc-badge-icon svg { width: 16px; height: 16px; stroke: var(--navy-mid); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.yc-badge-txt { font-family: var(--font-head); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+.yc-badge-sub { font-size: 10px; color: var(--muted); font-weight: 400; }
 
 /* ── MULBERRYID SECTION ──────────────────────────── */
-.mid-section { background: var(--wine); padding: 80px 32px; }
+.mid-section {
+  background: linear-gradient(155deg, #030C1C 0%, #0A1930 55%, #030C1C 100%);
+  padding: 96px 32px;
+  position: relative; overflow: hidden;
+}
+/* Yellow flash — top right */
+.mid-section::before {
+  content: ''; position: absolute;
+  top: -80px; right: -60px;
+  width: 580px; height: 480px;
+  background: radial-gradient(ellipse at center, rgba(236,255,84,.055) 0%, transparent 56%);
+  pointer-events: none;
+}
+/* Yellow flash — bottom left */
+.mid-section::after {
+  content: ''; position: absolute;
+  bottom: -60px; left: -40px;
+  width: 420px; height: 360px;
+  background: radial-gradient(ellipse at center, rgba(236,255,84,.035) 0%, transparent 60%);
+  pointer-events: none;
+}
 .mid-inner {
   max-width: var(--max); margin: 0 auto;
   display: grid; grid-template-columns: 1fr 480px;
   gap: 80px; align-items: center;
+  position: relative; z-index: 1;
 }
 .mid-label {
-  font-size: 11px; font-weight: 800; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--yellow); margin-bottom: 18px;
+  font-size: 10px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--yellow); opacity: .8; margin-bottom: 18px;
 }
 .mid-h2 {
   font-family: var(--font-head);
-  font-size: clamp(30px, 3.5vw, 48px);
-  font-weight: 800; line-height: 1.08;
-  letter-spacing: -.4px; color: var(--white); margin-bottom: 18px;
+  font-size: clamp(28px, 3.2vw, 46px);
+  font-weight: 700; line-height: 1.09;
+  letter-spacing: -.35px; color: var(--white); margin-bottom: 18px;
 }
-.mid-desc { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.65; margin-bottom: 30px; }
+.mid-desc { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.58); line-height: 1.75; margin-bottom: 30px; }
 .mid-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
 .mid-features li {
   display: flex; align-items: flex-start; gap: 11px;
-  font-size: 14px; color: rgba(255,255,255,.8); font-weight: 500;
+  font-size: 13.5px; font-weight: 400; color: rgba(255,255,255,.72);
 }
-.mid-features li::before { content: '→'; color: var(--yellow); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.mid-features li::before { content: '→'; color: var(--yellow); font-weight: 600; flex-shrink: 0; margin-top: 1px; opacity: .8; }
 .btn-yellow {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--yellow); color: var(--black);
-  font-size: 15px; font-weight: 800;
-  padding: 13px 24px; border-radius: 10px; transition: opacity .15s;
+  font-size: 14px; font-weight: 700;
+  padding: 12px 22px; border-radius: 10px; transition: opacity .15s;
 }
 .btn-yellow:hover { opacity: .88; }
-.btn-wine {
+.btn-navy {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--wine); color: var(--white);
-  font-size: 15px; font-weight: 700;
-  padding: 13px 24px; border-radius: 10px; transition: opacity .15s;
+  background: var(--navy-mid); color: var(--white);
+  font-size: 14px; font-weight: 600;
+  padding: 12px 22px; border-radius: 10px; border: 1px solid rgba(255,255,255,.12);
+  transition: opacity .15s;
 }
-.btn-wine:hover { opacity: .88; }
+.btn-navy:hover { opacity: .84; }
 
 /* ── PRODUCTS SECTION ────────────────────────────── */
 .products {
-  background: linear-gradient(155deg, #090107 0%, #170910 50%, #080206 100%);
-  padding: 80px 32px; position: relative; overflow: hidden;
+  background: linear-gradient(155deg, #060106 0%, #130810 50%, #060106 100%);
+  padding: 88px 32px; position: relative; overflow: hidden;
 }
 .products::before {
   content: ''; position: absolute; top: -100px; right: 8%;
@@ -310,87 +384,88 @@ nav {
   pointer-events: none;
 }
 .products::after {
-  content: ''; position: absolute; bottom: -80px; left: 12%;
-  width: 360px; height: 360px;
-  background: radial-gradient(circle, rgba(44,14,18,.7) 0%, transparent 70%);
+  content: ''; position: absolute; bottom: -60px; left: 10%;
+  width: 360px; height: 320px;
+  background: radial-gradient(circle, rgba(236,255,84,.04) 0%, transparent 66%);
   pointer-events: none;
 }
-.products-inner { max-width: var(--max); margin: 0 auto; position: relative; }
+.products-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 1; }
 .products-hdr { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
 .products-h2 {
   font-family: var(--font-head);
-  font-size: clamp(28px, 3vw, 44px);
-  font-weight: 800; line-height: 1.1; letter-spacing: -.4px; color: var(--white);
+  font-size: clamp(26px, 2.8vw, 42px);
+  font-weight: 700; line-height: 1.1; letter-spacing: -.35px; color: var(--white);
 }
-.products-sub { font-size: 15px; color: rgba(255,255,255,.5); line-height: 1.65; }
-.products-sub a { color: var(--orange); font-weight: 600; border-bottom: 1px solid transparent; transition: border-color .15s; }
+.products-sub { font-size: 14px; font-weight: 300; color: rgba(255,255,255,.44); line-height: 1.7; }
+.products-sub a { color: var(--orange); font-weight: 500; border-bottom: 1px solid transparent; transition: border-color .15s; }
 .products-sub a:hover { border-color: var(--orange); }
 .products-grid {
-  border: 1px solid rgba(255,95,31,.28); border-radius: 16px;
+  border: 1px solid rgba(255,95,31,.24); border-radius: 16px;
   display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
-  box-shadow: 0 0 60px rgba(255,95,31,.12);
+  box-shadow: 0 0 60px rgba(255,95,31,.1);
 }
 .product-card {
-  padding: 32px 28px; border-right: 1px solid rgba(255,95,31,.18); position: relative;
-  background: rgba(255,95,31,.08);
+  padding: 32px 28px; border-right: 1px solid rgba(255,95,31,.15); position: relative;
+  background: rgba(255,95,31,.07);
   backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-  box-shadow: inset 0 0 0 1px rgba(255,95,31,.06);
+  box-shadow: inset 0 0 0 1px rgba(255,95,31,.05);
   transition: background .2s, box-shadow .2s;
 }
 .product-card:last-child { border-right: none; }
 .product-card:hover {
-  background: rgba(255,95,31,.15);
-  box-shadow: inset 0 0 0 1px rgba(255,95,31,.5), 0 0 70px rgba(255,95,31,.2);
+  background: rgba(255,95,31,.14);
+  box-shadow: inset 0 0 0 1px rgba(255,95,31,.44), 0 0 60px rgba(255,95,31,.18);
 }
-.pc-num { position: absolute; top: 28px; right: 28px; font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: .08em; }
+.pc-num { position: absolute; top: 28px; right: 28px; font-size: 11px; font-weight: 600; color: var(--orange); letter-spacing: .08em; opacity: .7; }
 .pc-icon {
-  width: 48px; height: 48px; border-radius: 10px; background: var(--orange);
+  width: 46px; height: 46px; border-radius: 10px; background: var(--orange);
   box-shadow: 0 4px 24px var(--orange-glow);
   display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
 }
-.pc-icon-yellow { background: var(--yellow); box-shadow: 0 4px 24px rgba(236,255,84,.3); }
-.pc-icon svg { width: 22px; height: 22px; stroke: var(--white); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.pc-icon-yellow { background: var(--yellow); box-shadow: 0 4px 24px rgba(236,255,84,.28); }
+.pc-icon svg { width: 21px; height: 21px; stroke: var(--white); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .pc-icon-yellow svg { stroke: var(--black); }
-.pc-name { font-family: var(--font-head); font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: -.2px; color: var(--white); }
-.pc-desc { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.6; }
+.pc-name { font-family: var(--font-head); font-size: 17px; font-weight: 600; margin-bottom: 10px; letter-spacing: -.2px; color: var(--white); }
+.pc-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.65; }
 
 /* ── PARTNERS CTA ────────────────────────────────── */
 .partners { background: var(--gray); padding: 80px 32px; }
 .partners-inner { max-width: var(--max); margin: 0 auto; }
 .partners-card {
-  background: rgba(255,255,255,.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,.85); border-radius: 16px;
+  background: rgba(255,255,255,.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,.88); border-radius: 16px;
   padding: 48px 52px; display: flex; align-items: center; justify-content: space-between; gap: 40px;
-  box-shadow: 0 8px 40px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.9);
+  box-shadow: 0 8px 40px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.9);
 }
-.pc-ttl { font-family: var(--font-head); font-size: 22px; font-weight: 800; letter-spacing: -.2px; margin-bottom: 8px; }
-.pc-sub { font-size: 15px; color: var(--muted); max-width: 440px; line-height: 1.55; }
+.pc-ttl { font-family: var(--font-head); font-size: 20px; font-weight: 700; letter-spacing: -.2px; margin-bottom: 8px; }
+.pc-sub { font-size: 14px; font-weight: 400; color: var(--muted); max-width: 440px; line-height: 1.6; }
 
 /* ── FOOTER ──────────────────────────────────────── */
-footer { background: var(--black); color: var(--white); padding: 64px 32px 40px; }
+footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; }
 .footer-inner { max-width: var(--max); margin: 0 auto; }
 .footer-top { display: grid; grid-template-columns: 200px 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
 .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
 .footer-logo-img { height: 26px; width: auto; }
-.footer-logo-name { font-family: var(--font-head); font-size: 16px; font-weight: 800; }
-.footer-tagline { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; }
-.footer-col-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.4); margin-bottom: 16px; }
-.footer-col a { display: block; font-size: 13.5px; color: rgba(255,255,255,.65); margin-bottom: 10px; transition: color .15s; }
+.footer-logo-name { font-family: var(--font-head); font-size: 16px; font-weight: 700; }
+.footer-tagline { font-size: 12.5px; font-weight: 300; color: rgba(255,255,255,.38); line-height: 1.7; }
+.footer-col-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+.footer-col a { display: block; font-size: 13px; font-weight: 400; color: rgba(255,255,255,.55); margin-bottom: 10px; transition: color .15s; }
 .footer-col a:hover { color: var(--white); }
-.footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
-.footer-copy { font-size: 12px; color: rgba(255,255,255,.35); }
-.footer-badge { font-size: 11px; font-weight: 700; padding: 4px 12px; border: 1px solid rgba(255,255,255,.15); border-radius: 20px; color: rgba(255,255,255,.45); letter-spacing: .06em; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 11.5px; font-weight: 400; color: rgba(255,255,255,.3); }
+.footer-badge { font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 20px; color: rgba(255,255,255,.38); letter-spacing: .08em; }
 
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr 340px; gap: 36px; }
   .hero-trust { display: none; }
   .features-inner { grid-template-columns: 1fr; }
+  .bsep-grid { grid-template-columns: repeat(2, 1fr); }
   .mid-inner { grid-template-columns: 1fr; gap: 48px; }
   .mid-inner .ycard-wrap { max-width: 440px; margin: 0 auto; width: 100%; }
   .products-hdr { grid-template-columns: 1fr; gap: 16px; }
   .products-grid { grid-template-columns: 1fr; }
-  .product-card { border-right: none; border-bottom: 1px solid rgba(255,95,31,.18); }
+  .product-card { border-right: none; border-bottom: 1px solid rgba(255,95,31,.15); }
   .product-card:last-child { border-bottom: none; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
@@ -399,11 +474,13 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
   .nav-inner { padding: 0 20px; }
   .hero { padding: 52px 20px 0; }
   .hero-inner { grid-template-columns: 1fr; gap: 32px; padding-bottom: 80px; }
-  .hero-h1 { font-size: 34px; }
+  .hero-h1 { font-size: 32px; }
   .features { padding: 0 20px; }
   .features-inner { transform: translateY(-40px); gap: 12px; }
+  .benefits-sep { padding: 0 20px 48px; }
+  .bsep-grid { grid-template-columns: 1fr; gap: 20px; }
   .mid-section, .products, .partners { padding: 56px 20px; }
-  .mid-h2 { font-size: 28px; }
+  .mid-h2 { font-size: 26px; }
   .partners-card { flex-direction: column; padding: 32px 28px; }
   .footer-top { grid-template-columns: 1fr; }
 }
@@ -418,7 +495,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
       <div class="logo-mark-sm"><img src="/logo.svg" alt="Mulberry" class="nav-logo-img"></div>
       <div class="nav-logo-info">
         <span class="nav-logo-name">Mulberry</span>
-        <span class="nav-logo-sub">B2B2C · Assurance</span>
+        <span class="nav-logo-sub">Car Insurance · Romania</span>
       </div>
     </a>
     <div class="nav-links">
@@ -441,7 +518,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
     <span>MULBERRY-EXO</span><span class="dot">·</span>
     <span>YELLOWCARD</span><span class="dot">·</span>
     <span>VERIFIED HISTORY</span><span class="dot">·</span>
-    <span>B2B2C</span><span class="dot">·</span>
+    <span>VERIFIED DATA</span><span class="dot">·</span>
     <span>MULBERRY-AI</span><span class="dot">·</span>
     <span>INSURANCE</span><span class="dot">·</span>
     <span>DIGITAL IDENTITY</span><span class="dot">·</span>
@@ -449,7 +526,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
     <span>MULBERRY-EXO</span><span class="dot">·</span>
     <span>YELLOWCARD</span><span class="dot">·</span>
     <span>VERIFIED HISTORY</span><span class="dot">·</span>
-    <span>B2B2C</span><span class="dot">·</span>
+    <span>VERIFIED DATA</span><span class="dot">·</span>
     <span>MULBERRY-AI</span><span class="dot">·</span>
     <span>INSURANCE</span><span class="dot">·</span>
     <span>DIGITAL IDENTITY</span><span class="dot">·</span>
@@ -464,7 +541,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
     <div class="hero-text">
       <div class="hero-tag">Insurance · Verification · Trust</div>
       <h1 class="hero-h1">Your car insurance,<br>in one <span class="accent">YellowCard.</span></h1>
-      <p class="hero-desc">Mulberry connects drivers and verified partners in a minimalist B2B2C platform. MulberryID, MulberryAI and MulberryEXO deliver a 100% verifiable digital history.</p>
+      <p class="hero-desc">Every road you've driven. Every service. Every policy.<br>Mulberry holds it all — intact, verified, and yours to share with one scan.</p>
       <div class="hero-social">
         <span class="hero-stars">★★★★★</span>
         <span class="hero-social-txt">Trusted by drivers across Romania</span>
@@ -476,7 +553,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
       <div class="hero-card-ttl">Get your free YellowCard</div>
       <div class="hero-card-sub">Free for drivers · No credit card required</div>
       <a class="hero-card-cta" href="/mulberry_app.html">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         Sign up — it's free
       </a>
       <div class="hero-card-or">or</div>
@@ -489,7 +566,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
       </p>
     </div>
 
-    <!-- RIGHT: trusted partners -->
+    <!-- RIGHT: trust panel -->
     <div class="hero-trust">
       <div class="htp-ttl">Trusted by insurers</div>
       <div class="htp-row"><span class="htp-dot"></span>Allianz Țiriac</div>
@@ -535,17 +612,42 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
   </div>
 </section>
 
+<!-- ── BENEFITS DIVIDER ───────────────────────────── -->
+<section class="benefits-sep">
+  <div class="benefits-sep-inner">
+    <div class="bsep-eyebrow">What makes Mulberry different</div>
+    <div class="bsep-grid">
+      <div class="bsep-item">
+        <div class="bsep-num">01</div>
+        <div class="bsep-text">Your history, complete and tamper-proof</div>
+      </div>
+      <div class="bsep-item">
+        <div class="bsep-num">02</div>
+        <div class="bsep-text">One QR. Every insurer. Instant trust.</div>
+      </div>
+      <div class="bsep-item">
+        <div class="bsep-num">03</div>
+        <div class="bsep-text">AI that reads your car, not just a form</div>
+      </div>
+      <div class="bsep-item">
+        <div class="bsep-num">04</div>
+        <div class="bsep-text">Reminders before the deadline, not after</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── MULBERRYID SECTION ──────────────────────────── -->
 <section class="mid-section">
   <div class="mid-inner">
     <div>
       <div class="mid-label">MulberryID</div>
-      <h2 class="mid-h2">A yellow card that the entire web can verify.</h2>
-      <p class="mid-desc">Each YellowCard has a unique MLRB code (XXXX-XXXX) deterministically derived from the VIN, plus the registered plate, owner name and a corner QR. Strangers scan it. Insurers trust it. You keep the keys.</p>
+      <h2 class="mid-h2">Your data has always been yours.<br>Now the world can read it.</h2>
+      <p class="mid-desc">The YellowCard carries your car's full biography. Every RCA, every service, every ITP — tied to your name with an MLRB code that no one can alter. Insurers believe it on sight. Buyers scan it in seconds. You own every bit of it.</p>
       <ul class="mid-features">
-        <li>Public QR — anyone can verify validity instantly</li>
-        <li>Digital history of RCA, ITP, services</li>
-        <li>Multi-vehicle per driver, multi-cards per partner</li>
+        <li>Your data stays yours — you decide what's visible</li>
+        <li>RCA, ITP, service records all in one place</li>
+        <li>Three seconds from scan to full verification</li>
       </ul>
       <a class="btn-yellow" href="/mulberry_app.html">Claim your YellowCard →</a>
     </div>
@@ -589,7 +691,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
   <div class="products-inner">
     <div class="products-hdr">
       <h2 class="products-h2">Three products, one digital identity</h2>
-      <p class="products-sub">A minimalist suite. Honest tools for a paperwork-heavy industry. Search <a href="#">Mulberry</a> — and find clarity.</p>
+      <p class="products-sub">Built for a paperwork-heavy industry that deserved better. Quietly doing the work that used to take days. Search <a href="#">Mulberry</a>.</p>
     </div>
     <div class="products-grid">
       <div class="product-card">
@@ -598,7 +700,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
           <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
         </div>
         <div class="pc-name">MulberryAI</div>
-        <p class="pc-desc">AI assistant powered by Claude Sonnet 4.5. Attach a photo of your car — it reads the plate, VIN and proposes the right RCA/CASCO offers.</p>
+        <p class="pc-desc">Attach a photo of your car. It reads the plate, finds the VIN, and proposes the right RCA and CASCO offers — in under a minute.</p>
       </div>
       <div class="product-card">
         <div class="pc-num">02</div>
@@ -606,7 +708,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         </div>
         <div class="pc-name">MulberryID YellowCard</div>
-        <p class="pc-desc">Digital yellow card with MLRB code XXXX-XXXX derived from VIN, plate, owner name and a corner QR for 100% public verification.</p>
+        <p class="pc-desc">A unique MLRB code derived from your VIN, plate and name. One QR in the corner. The whole web can verify it.</p>
       </div>
       <div class="product-card">
         <div class="pc-num">03</div>
@@ -614,7 +716,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
           <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
         </div>
         <div class="pc-name">MulberryEXO</div>
-        <p class="pc-desc">Email reminders when your RCA or ITP is about to expire. Never miss a deadline again.</p>
+        <p class="pc-desc">Email reminders before your RCA or ITP expires. Never miss a deadline because the paper got buried in a drawer.</p>
       </div>
     </div>
   </div>
@@ -625,10 +727,10 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
   <div class="partners-inner">
     <div class="partners-card">
       <div>
-        <div class="pc-ttl">Are you an insurer or service provider?</div>
-        <p class="pc-sub">Join the Mulberry partner network. Connect your services directly to verified drivers through the YellowCard ecosystem.</p>
+        <div class="pc-ttl">Are you an insurer or workshop?</div>
+        <p class="pc-sub">Your clients are already on Mulberry. Connect to verified drivers and let accurate data do the selling — no cold calls, no paperwork.</p>
       </div>
-      <a class="btn-wine" href="/mulberry_app.html" style="flex-shrink:0">Become a partner →</a>
+      <a class="btn-navy" href="/mulberry_app.html" style="flex-shrink:0">Become a partner →</a>
     </div>
   </div>
 </section>
@@ -642,7 +744,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
           <div class="logo-mark-sm"><img src="/logo.svg" alt="Mulberry" class="footer-logo-img"></div>
           <span class="footer-logo-name">Mulberry</span>
         </div>
-        <p class="footer-tagline">B2B2C car insurance and verification platform for drivers, insurers and service partners.</p>
+        <p class="footer-tagline">Car insurance rebuilt for drivers who trust data over paper.</p>
       </div>
       <div class="footer-col">
         <div class="footer-col-title">Products</div>
@@ -668,7 +770,7 @@ footer { background: var(--black); color: var(--white); padding: 64px 32px 40px;
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2025 Mulberry Technologies SRL. All rights reserved.</span>
-      <span class="footer-badge">B2B2C · ASSURANCE</span>
+      <span class="footer-badge">SMART ASSURANCE</span>
     </div>
   </div>
 </footer>
