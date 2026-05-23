@@ -34,10 +34,24 @@ a{color:inherit;text-decoration:none}
 .hidden{display:none!important}
 
 /* ══ AUTH ══════════════════════════════════════════ */
-#auth-screen{position:fixed;inset:0;display:flex;background:var(--white);z-index:200}
+#auth-screen{
+  position:fixed;inset:0;display:flex;z-index:200;
+  background:
+    radial-gradient(ellipse 20% 88% at -4% 72%, rgba(18,55,255,1) 0%, rgba(10,35,210,.72) 32%, transparent 62%),
+    radial-gradient(ellipse 17% 80% at 22% 66%, rgba(255,148,8,.98) 0%, rgba(215,95,5,.62) 36%, transparent 63%),
+    radial-gradient(ellipse 5% 76% at 43% 62%, rgba(28,195,155,.92) 0%, rgba(14,145,112,.52) 46%, transparent 68%),
+    radial-gradient(ellipse 5% 76% at 57% 62%, rgba(28,195,155,.88) 0%, rgba(14,145,112,.48) 46%, transparent 68%),
+    radial-gradient(ellipse 17% 80% at 78% 66%, rgba(255,148,8,.95) 0%, rgba(215,95,5,.58) 36%, transparent 63%),
+    radial-gradient(ellipse 20% 88% at 104% 72%, rgba(18,55,255,.96) 0%, rgba(10,35,210,.66) 32%, transparent 62%),
+    radial-gradient(ellipse 100% 18% at 50% 100%, rgba(15,35,110,.38) 0%, transparent 70%),
+    #000;
+}
 
 .auth-left{
-  flex:1;background:var(--wine);
+  flex:1;
+  background:rgba(0,0,0,.45);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
   display:flex;flex-direction:column;padding:48px;
   position:relative;overflow:hidden;
 }
