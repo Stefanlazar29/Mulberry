@@ -6,7 +6,7 @@
   <title>Mulberry — App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
@@ -25,6 +25,7 @@
   --red:#dc2626;
   --green:#16a34a;
   --font:'TT Firs Neue','Plus Jakarta Sans',system-ui,sans-serif;
+  --font-head:'Manrope','TT Firs Neue',sans-serif;
   --mono:'JetBrains Mono',monospace;
   --sw:268px;--th:62px;--bh:66px;--r:12px;--rl:20px;
 }
@@ -48,6 +49,8 @@ a{color:inherit;text-decoration:none}
 .al-hero{padding:60px 0 40px;position:relative;z-index:1}
 .al-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(236,255,84,.12);border:1px solid rgba(236,255,84,.22);color:var(--yellow);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:22px;text-transform:uppercase;letter-spacing:.08em}
 .al-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
+/* ── HEADING FONT ── */
+.al-h1,.al-name,.af-title,.af-logo-name,.sb-logo-name,.tb-title,.ph-title,.sc-val,.yc-name,.oc-name{font-family:var(--font-head)}
 .al-h1{font-size:clamp(28px,3.5vw,42px);font-weight:900;line-height:1.12;letter-spacing:-.5px;margin-bottom:16px;color:#fff}
 .al-h1 em{color:var(--yellow);font-style:normal}
 .al-sub{font-size:15px;color:rgba(255,255,255,.6);line-height:1.6;max-width:380px}
