@@ -65,10 +65,7 @@ nav {
 .nav-signup:hover { opacity: .88; }
 
 /* ── TICKER ─────────────────────────────────────── */
-.ticker {
-  background: var(--wine); overflow: hidden;
-  padding: 11px 0;
-}
+.ticker { background: var(--wine); overflow: hidden; padding: 11px 0; }
 .ticker-track {
   display: flex; gap: 0;
   animation: ticker-scroll 30s linear infinite;
@@ -82,116 +79,188 @@ nav {
 .ticker-track span.dot { color: var(--yellow); padding: 0 4px; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ── HERO ────────────────────────────────────────── */
+/* ── HERO (dark — DataCamp style) ───────────────── */
 .hero {
-  background: var(--white);
-  padding: 80px 32px 60px;
+  background: linear-gradient(140deg, #1a0810 0%, var(--wine) 40%, #120609 100%);
+  padding: 72px 32px 0;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -120px; left: 25%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(236,255,84,.05) 0%, transparent 65%);
+  pointer-events: none;
 }
 .hero-inner {
   max-width: var(--max); margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 480px;
-  gap: 60px; align-items: center;
+  display: grid; grid-template-columns: 1fr 360px 240px;
+  gap: 48px; align-items: start;
+  padding-bottom: 100px;
 }
+/* Left col */
+.hero-text { padding-top: 12px; }
 .hero-tag {
   font-size: 11px; font-weight: 700; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 22px;
+  text-transform: uppercase; color: var(--yellow);
+  opacity: .8; margin-bottom: 20px;
 }
 .hero-h1 {
   font-family: var(--font-head);
-  font-size: clamp(38px, 5vw, 64px);
-  font-weight: 800; line-height: 1.05;
-  letter-spacing: -.5px;
+  font-size: clamp(36px, 4.2vw, 58px);
+  font-weight: 800; line-height: 1.06;
+  letter-spacing: -.5px; color: var(--white);
   margin-bottom: 20px;
 }
+.hero-h1 .accent { color: var(--yellow); }
 .hero-desc {
-  font-size: 16px; color: var(--muted);
-  line-height: 1.65; max-width: 420px;
-  margin-bottom: 36px;
+  font-size: 16px; color: rgba(255,255,255,.58);
+  line-height: 1.7; max-width: 400px; margin-bottom: 32px;
 }
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-.btn-wine {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--wine); color: var(--white);
-  font-size: 15px; font-weight: 700;
-  padding: 13px 24px; border-radius: 10px;
-  transition: opacity .15s;
+.hero-social {
+  display: flex; align-items: center; gap: 10px;
 }
-.btn-wine:hover { opacity: .88; }
-.btn-outline {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: transparent; color: var(--black);
-  font-size: 15px; font-weight: 700;
-  padding: 12px 24px; border-radius: 10px;
-  border: 1.5px solid var(--border);
+.hero-stars { color: var(--yellow); font-size: 15px; letter-spacing: 2px; }
+.hero-social-txt { font-size: 13px; color: rgba(255,255,255,.45); }
+
+/* Center col — signup card */
+.hero-card {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 30px 26px 28px;
+  box-shadow: 0 24px 64px rgba(0,0,0,.4);
+}
+.hero-card-ttl {
+  font-family: var(--font-head);
+  font-size: 17px; font-weight: 700; color: var(--black);
+  text-align: center; margin-bottom: 5px;
+}
+.hero-card-sub {
+  font-size: 12px; color: var(--muted);
+  text-align: center; margin-bottom: 20px;
+}
+.hero-card-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; background: var(--yellow); color: var(--black);
+  font-size: 14px; font-weight: 800;
+  padding: 13px 16px; border-radius: 10px;
+  margin-bottom: 10px; transition: opacity .15s;
+}
+.hero-card-cta:hover { opacity: .88; }
+.hero-card-or {
+  text-align: center; font-size: 11px; color: var(--muted);
+  position: relative; margin: 14px 0;
+}
+.hero-card-or::before, .hero-card-or::after {
+  content: ''; position: absolute; top: 50%; width: 38%;
+  height: 1px; background: var(--border);
+}
+.hero-card-or::before { left: 0; }
+.hero-card-or::after { right: 0; }
+.hero-card-email {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
+  padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--black);
   transition: border-color .15s;
 }
-.btn-outline:hover { border-color: var(--black); }
+.hero-card-email:hover { border-color: #aaa; }
+.hero-card-email svg { flex-shrink: 0; }
+.hero-card-terms {
+  font-size: 11px; color: var(--muted); text-align: center;
+  margin-top: 16px; line-height: 1.65;
+}
+.hero-card-terms a { color: var(--wine); font-weight: 600; }
+
+/* Right col — trust panel */
+.hero-trust {
+  padding-top: 8px;
+}
+.htp-ttl {
+  font-size: 10px; font-weight: 700; color: rgba(255,255,255,.35);
+  text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px;
+}
+.htp-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.07);
+  font-size: 13px; font-weight: 500; color: rgba(255,255,255,.6);
+}
+.htp-row:last-child { border-bottom: none; }
+.htp-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--yellow); flex-shrink: 0; opacity: .7;
+}
+
+/* ── FEATURE CARDS (float up over hero bottom) ──── */
+.features {
+  background: transparent;
+  padding: 0 32px;
+  position: relative; z-index: 2;
+}
+.features-inner {
+  max-width: var(--max); margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  transform: translateY(-52px);
+}
+.feat-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 20px;
+  display: flex; align-items: flex-start; gap: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.07);
+  transition: box-shadow .2s, border-color .2s, transform .2s;
+}
+.feat-card:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,.12);
+  border-color: #ccc;
+  transform: translateY(-2px);
+}
+.feat-ico {
+  width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
+  background: var(--gray);
+  display: flex; align-items: center; justify-content: center;
+}
+.feat-ico svg { width: 20px; height: 20px; stroke: var(--wine); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.feat-title {
+  font-family: var(--font-head);
+  font-size: 14px; font-weight: 700; color: var(--black);
+  display: flex; align-items: center; gap: 5px; margin-bottom: 5px;
+}
+.feat-arrow { color: var(--muted); }
+.feat-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
 /* ── YELLOWCARD COMPONENT ────────────────────────── */
 .ycard-wrap { position: relative; }
 .ycard {
-  background: var(--yellow);
-  border-radius: 20px;
-  padding: 28px 28px 80px;
-  position: relative;
+  background: var(--yellow); border-radius: 20px;
+  padding: 28px 28px 80px; position: relative;
   box-shadow: 0 20px 60px rgba(0,0,0,.12);
 }
-.yc-toprow {
-  display: flex; justify-content: space-between;
-  align-items: flex-start; margin-bottom: 18px;
-}
+.yc-toprow { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
 .yc-brand-label { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(0,0,0,.5); }
 .yc-title { font-size: 26px; font-weight: 900; letter-spacing: -.3px; margin-top: 3px; color: var(--black); }
 .yc-code { font-size: 13px; font-weight: 700; color: rgba(0,0,0,.6); text-align: right; font-variant-numeric: tabular-nums; }
-.yc-fields {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
+.yc-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .yc-fl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(0,0,0,.45); margin-bottom: 4px; }
 .yc-fv { font-size: 14px; font-weight: 800; color: var(--black); letter-spacing: -.1px; }
 .yc-qr {
   position: absolute; bottom: 20px; right: 20px;
-  width: 72px; height: 72px;
-  background: var(--white);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
+  width: 72px; height: 72px; background: var(--white);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
   box-shadow: 0 2px 8px rgba(0,0,0,.1);
 }
-.yc-qr svg { width: 50px; height: 50px; }
 .yc-badge {
   position: absolute; bottom: -20px; left: 20px;
-  background: var(--white);
-  border-radius: 10px;
-  padding: 10px 14px;
-  display: flex; align-items: center; gap: 8px;
+  background: var(--white); border-radius: 10px;
+  padding: 10px 14px; display: flex; align-items: center; gap: 8px;
   box-shadow: 0 4px 20px rgba(0,0,0,.1);
 }
 .yc-badge-icon svg { width: 16px; height: 16px; stroke: var(--wine); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .yc-badge-txt { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
 .yc-badge-sub { font-size: 10px; color: var(--muted); font-weight: 600; }
 
-/* ── STATS ───────────────────────────────────────── */
-.stats-bar {
-  max-width: var(--max); margin: 0 auto;
-  padding: 40px 32px 60px;
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 0; border-top: 1px solid var(--border);
-}
-.stat-item { padding: 0 24px; border-right: 1px solid var(--border); }
-.stat-item:first-child { padding-left: 0; }
-.stat-item:last-child { border-right: none; }
-.stat-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin-bottom: 8px; }
-.stat-val {
-  font-size: 38px; font-weight: 900; letter-spacing: -.5px;
-  color: var(--orange);
-  text-shadow: 0 0 28px var(--orange-glow);
-}
-
 /* ── MULBERRYID SECTION ──────────────────────────── */
-.mid-section {
-  background: var(--wine); padding: 80px 32px;
-}
+.mid-section { background: var(--wine); padding: 80px 32px; }
 .mid-inner {
   max-width: var(--max); margin: 0 auto;
   display: grid; grid-template-columns: 1fr 480px;
@@ -199,37 +268,35 @@ nav {
 }
 .mid-label {
   font-size: 11px; font-weight: 800; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--yellow);
-  margin-bottom: 18px;
+  text-transform: uppercase; color: var(--yellow); margin-bottom: 18px;
 }
 .mid-h2 {
   font-family: var(--font-head);
   font-size: clamp(30px, 3.5vw, 48px);
   font-weight: 800; line-height: 1.08;
-  letter-spacing: -.4px; color: var(--white);
-  margin-bottom: 18px;
+  letter-spacing: -.4px; color: var(--white); margin-bottom: 18px;
 }
-.mid-desc {
-  font-size: 15px; color: rgba(255,255,255,.65);
-  line-height: 1.65; margin-bottom: 30px;
-}
+.mid-desc { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.65; margin-bottom: 30px; }
 .mid-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
 .mid-features li {
   display: flex; align-items: flex-start; gap: 11px;
   font-size: 14px; color: rgba(255,255,255,.8); font-weight: 500;
 }
-.mid-features li::before {
-  content: '→'; color: var(--yellow);
-  font-weight: 700; flex-shrink: 0; margin-top: 1px;
-}
+.mid-features li::before { content: '→'; color: var(--yellow); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 .btn-yellow {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--yellow); color: var(--black);
   font-size: 15px; font-weight: 800;
-  padding: 13px 24px; border-radius: 10px;
-  transition: opacity .15s;
+  padding: 13px 24px; border-radius: 10px; transition: opacity .15s;
 }
 .btn-yellow:hover { opacity: .88; }
+.btn-wine {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--wine); color: var(--white);
+  font-size: 15px; font-weight: 700;
+  padding: 13px 24px; border-radius: 10px; transition: opacity .15s;
+}
+.btn-wine:hover { opacity: .88; }
 
 /* ── PRODUCTS SECTION ────────────────────────────── */
 .products {
@@ -249,34 +316,24 @@ nav {
   pointer-events: none;
 }
 .products-inner { max-width: var(--max); margin: 0 auto; position: relative; }
-.products-hdr {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 40px; align-items: end; margin-bottom: 48px;
-}
+.products-hdr { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 48px; }
 .products-h2 {
   font-family: var(--font-head);
   font-size: clamp(28px, 3vw, 44px);
-  font-weight: 800; line-height: 1.1;
-  letter-spacing: -.4px; color: var(--white);
+  font-weight: 800; line-height: 1.1; letter-spacing: -.4px; color: var(--white);
 }
 .products-sub { font-size: 15px; color: rgba(255,255,255,.5); line-height: 1.65; }
 .products-sub a { color: var(--orange); font-weight: 600; border-bottom: 1px solid transparent; transition: border-color .15s; }
 .products-sub a:hover { border-color: var(--orange); }
-
 .products-grid {
-  border: 1px solid rgba(255,95,31,.28);
-  border-radius: 16px;
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  overflow: hidden;
+  border: 1px solid rgba(255,95,31,.28); border-radius: 16px;
+  display: grid; grid-template-columns: repeat(3, 1fr); overflow: hidden;
   box-shadow: 0 0 60px rgba(255,95,31,.12);
 }
 .product-card {
-  padding: 32px 28px;
-  border-right: 1px solid rgba(255,95,31,.18);
-  position: relative;
+  padding: 32px 28px; border-right: 1px solid rgba(255,95,31,.18); position: relative;
   background: rgba(255,95,31,.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   box-shadow: inset 0 0 0 1px rgba(255,95,31,.06);
   transition: background .2s, box-shadow .2s;
 }
@@ -285,22 +342,13 @@ nav {
   background: rgba(255,95,31,.15);
   box-shadow: inset 0 0 0 1px rgba(255,95,31,.5), 0 0 70px rgba(255,95,31,.2);
 }
-.pc-num {
-  position: absolute; top: 28px; right: 28px;
-  font-size: 12px; font-weight: 700; color: var(--orange);
-  letter-spacing: .08em;
-}
+.pc-num { position: absolute; top: 28px; right: 28px; font-size: 12px; font-weight: 700; color: var(--orange); letter-spacing: .08em; }
 .pc-icon {
-  width: 48px; height: 48px; border-radius: 10px;
-  background: var(--orange);
+  width: 48px; height: 48px; border-radius: 10px; background: var(--orange);
   box-shadow: 0 4px 24px var(--orange-glow);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
 }
-.pc-icon-yellow {
-  background: var(--yellow);
-  box-shadow: 0 4px 24px rgba(236,255,84,.3);
-}
+.pc-icon-yellow { background: var(--yellow); box-shadow: 0 4px 24px rgba(236,255,84,.3); }
 .pc-icon svg { width: 22px; height: 22px; stroke: var(--white); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .pc-icon-yellow svg { stroke: var(--black); }
 .pc-name { font-family: var(--font-head); font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: -.2px; color: var(--white); }
@@ -310,28 +358,18 @@ nav {
 .partners { background: var(--gray); padding: 80px 32px; }
 .partners-inner { max-width: var(--max); margin: 0 auto; }
 .partners-card {
-  background: rgba(255,255,255,.72);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,.85);
-  border-radius: 16px;
-  padding: 48px 52px;
-  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  background: rgba(255,255,255,.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,.85); border-radius: 16px;
+  padding: 48px 52px; display: flex; align-items: center; justify-content: space-between; gap: 40px;
   box-shadow: 0 8px 40px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.9);
 }
 .pc-ttl { font-family: var(--font-head); font-size: 22px; font-weight: 800; letter-spacing: -.2px; margin-bottom: 8px; }
 .pc-sub { font-size: 15px; color: var(--muted); max-width: 440px; line-height: 1.55; }
 
 /* ── FOOTER ──────────────────────────────────────── */
-footer {
-  background: var(--black); color: var(--white);
-  padding: 64px 32px 40px;
-}
+footer { background: var(--black); color: var(--white); padding: 64px 32px 40px; }
 .footer-inner { max-width: var(--max); margin: 0 auto; }
-.footer-top {
-  display: grid; grid-template-columns: 200px 1fr 1fr 1fr;
-  gap: 48px; margin-bottom: 56px;
-}
+.footer-top { display: grid; grid-template-columns: 200px 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
 .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
 .footer-logo-img { height: 26px; width: auto; }
 .footer-logo-name { font-family: var(--font-head); font-size: 16px; font-weight: 800; }
@@ -341,34 +379,32 @@ footer {
 .footer-col a:hover { color: var(--white); }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
 .footer-copy { font-size: 12px; color: rgba(255,255,255,.35); }
-.footer-badge {
-  font-size: 11px; font-weight: 700; padding: 4px 12px;
-  border: 1px solid rgba(255,255,255,.15); border-radius: 20px;
-  color: rgba(255,255,255,.45); letter-spacing: .06em;
-}
+.footer-badge { font-size: 11px; font-weight: 700; padding: 4px 12px; border: 1px solid rgba(255,255,255,.15); border-radius: 20px; color: rgba(255,255,255,.45); letter-spacing: .06em; }
 
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 1024px) {
-  .hero-inner, .mid-inner { grid-template-columns: 1fr; gap: 48px; }
-  .hero-inner .ycard-wrap { max-width: 440px; margin: 0 auto; width: 100%; }
+  .hero-inner { grid-template-columns: 1fr 340px; gap: 36px; }
+  .hero-trust { display: none; }
+  .features-inner { grid-template-columns: 1fr; }
+  .mid-inner { grid-template-columns: 1fr; gap: 48px; }
   .mid-inner .ycard-wrap { max-width: 440px; margin: 0 auto; width: 100%; }
   .products-hdr { grid-template-columns: 1fr; gap: 16px; }
   .products-grid { grid-template-columns: 1fr; }
-  .product-card { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .product-card { border-right: none; border-bottom: 1px solid rgba(255,95,31,.18); }
   .product-card:last-child { border-bottom: none; }
-  .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .stat-item { border-right: none; padding-left: 0; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 @media (max-width: 768px) {
   .nav-links, .nav-lang { display: none; }
   .nav-inner { padding: 0 20px; }
-  .hero, .mid-section, .products, .partners { padding: 56px 20px; }
-  .hero-inner { gap: 32px; }
-  .hero-h1 { font-size: 36px; }
+  .hero { padding: 52px 20px 0; }
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; padding-bottom: 80px; }
+  .hero-h1 { font-size: 34px; }
+  .features { padding: 0 20px; }
+  .features-inner { transform: translateY(-40px); gap: 12px; }
+  .mid-section, .products, .partners { padding: 56px 20px; }
   .mid-h2 { font-size: 28px; }
   .partners-card { flex-direction: column; padding: 32px 28px; }
-  .stats-bar { padding: 32px 20px; grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr; }
 }
   </style>
@@ -388,11 +424,12 @@ footer {
     <div class="nav-links">
       <a href="#">About</a>
       <a href="#">Marketplace</a>
+      <a href="#">Partners</a>
     </div>
     <div class="nav-actions">
       <span class="nav-lang">EN → RO</span>
-      <a class="nav-signin" href="/mulberry_app.html">Sign in</a>
-      <a class="nav-signup" href="/mulberry_app.html">Sign up <span>→</span></a>
+      <a class="nav-signin" href="/mulberry_app.html">Log in</a>
+      <a class="nav-signup" href="/mulberry_app.html">Get started →</a>
     </div>
   </div>
 </nav>
@@ -408,7 +445,6 @@ footer {
     <span>MULBERRY-AI</span><span class="dot">·</span>
     <span>INSURANCE</span><span class="dot">·</span>
     <span>DIGITAL IDENTITY</span><span class="dot">·</span>
-    <!-- duplicate for seamless loop -->
     <span>MULBERRY-ID</span><span class="dot">·</span>
     <span>MULBERRY-EXO</span><span class="dot">·</span>
     <span>YELLOWCARD</span><span class="dot">·</span>
@@ -423,68 +459,79 @@ footer {
 <!-- ── HERO ───────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-inner">
-    <div>
+
+    <!-- LEFT: headline -->
+    <div class="hero-text">
       <div class="hero-tag">Insurance · Verification · Trust</div>
-      <h1 class="hero-h1">Your car insurance,<br>in one yellow card.</h1>
+      <h1 class="hero-h1">Your car insurance,<br>in one <span class="accent">YellowCard.</span></h1>
       <p class="hero-desc">Mulberry connects drivers and verified partners in a minimalist B2B2C platform. MulberryID, MulberryAI and MulberryEXO deliver a 100% verifiable digital history.</p>
-      <div class="hero-btns">
-        <a class="btn-wine" href="/mulberry_app.html">Get started →</a>
-        <a class="btn-outline" href="/mulberry_app.html">See YellowCard</a>
+      <div class="hero-social">
+        <span class="hero-stars">★★★★★</span>
+        <span class="hero-social-txt">Trusted by drivers across Romania</span>
       </div>
     </div>
 
-    <div class="ycard-wrap">
-      <div class="ycard">
-        <div class="yc-toprow">
-          <div>
-            <div class="yc-brand-label">MulberryID</div>
-            <div class="yc-title">YellowCard</div>
-          </div>
-          <div>
-            <div class="yc-brand-label" style="text-align:right">MLRB</div>
-            <div class="yc-code">A7K2-9F3X</div>
-          </div>
-        </div>
-        <div class="yc-fields">
-          <div>
-            <div class="yc-fl">Plate</div>
-            <div class="yc-fv">B-12-MLB</div>
-          </div>
-          <div>
-            <div class="yc-fl">VIN</div>
-            <div class="yc-fv" style="font-size:12px">WAUZZZ8K9DA123456</div>
-          </div>
-          <div>
-            <div class="yc-fl">Owner</div>
-            <div class="yc-fv">Andrei Popescu</div>
-          </div>
-          <div>
-            <div class="yc-fl">Vehicle</div>
-            <div class="yc-fv">Audi · A4 · 2018</div>
-          </div>
-        </div>
-        <div class="yc-qr">
-          <img src="/qr.png" alt="QR" style="width:64px;height:64px;display:block;border-radius:6px">
-        </div>
-        <div class="yc-badge">
-          <div class="yc-badge-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <div>
-            <div class="yc-badge-txt">Verified</div>
-            <div class="yc-badge-sub">100% web visibility</div>
-          </div>
-        </div>
-      </div>
+    <!-- CENTER: signup card -->
+    <div class="hero-card">
+      <div class="hero-card-ttl">Get your free YellowCard</div>
+      <div class="hero-card-sub">Free for drivers · No credit card required</div>
+      <a class="hero-card-cta" href="/mulberry_app.html">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Sign up — it's free
+      </a>
+      <div class="hero-card-or">or</div>
+      <a class="hero-card-email" href="/mulberry_app.html">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
+        Continue with email
+      </a>
+      <p class="hero-card-terms">
+        By continuing, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>. Data stored in Romania.
+      </p>
     </div>
+
+    <!-- RIGHT: trusted partners -->
+    <div class="hero-trust">
+      <div class="htp-ttl">Trusted by insurers</div>
+      <div class="htp-row"><span class="htp-dot"></span>Allianz Țiriac</div>
+      <div class="htp-row"><span class="htp-dot"></span>Generali România</div>
+      <div class="htp-row"><span class="htp-dot"></span>OMNIASIG</div>
+      <div class="htp-row"><span class="htp-dot"></span>ASIROM Vienna</div>
+      <div class="htp-row"><span class="htp-dot"></span>Groupama</div>
+    </div>
+
   </div>
+</section>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-item"><div class="stat-lbl">Drivers</div></div>
-    <div class="stat-item"><div class="stat-lbl">Partners</div></div>
-    <div class="stat-item"><div class="stat-lbl">Vehicles</div></div>
-    <div class="stat-item"><div class="stat-lbl">Offers</div></div>
+<!-- ── FEATURE CARDS (float up) ───────────────────── -->
+<section class="features">
+  <div class="features-inner">
+    <a class="feat-card" href="/mulberry_app.html">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      </div>
+      <div>
+        <div class="feat-title">Register your vehicle <span class="feat-arrow">›</span></div>
+        <p class="feat-desc">Plate, VIN and owner — get your YellowCard in under 2 minutes, free.</p>
+      </div>
+    </a>
+    <a class="feat-card" href="/mulberry_app.html">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div>
+        <div class="feat-title">Get AI insurance offers <span class="feat-arrow">›</span></div>
+        <p class="feat-desc">MulberryAI reads your plate and proposes the best RCA and CASCO deals.</p>
+      </div>
+    </a>
+    <a class="feat-card" href="/mulberry_app.html">
+      <div class="feat-ico">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </div>
+      <div>
+        <div class="feat-title">Share your history <span class="feat-arrow">›</span></div>
+        <p class="feat-desc">Public QR code — anyone can verify your insurance and service history instantly.</p>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -502,7 +549,6 @@ footer {
       </ul>
       <a class="btn-yellow" href="/mulberry_app.html">Claim your YellowCard →</a>
     </div>
-
     <div class="ycard-wrap">
       <div class="ycard">
         <div class="yc-toprow">
@@ -516,22 +562,10 @@ footer {
           </div>
         </div>
         <div class="yc-fields">
-          <div>
-            <div class="yc-fl">Plate</div>
-            <div class="yc-fv">B-12-MLB</div>
-          </div>
-          <div>
-            <div class="yc-fl">VIN</div>
-            <div class="yc-fv" style="font-size:12px">WAUZZZ8K9DA123456</div>
-          </div>
-          <div>
-            <div class="yc-fl">Owner</div>
-            <div class="yc-fv">Andrei Popescu</div>
-          </div>
-          <div>
-            <div class="yc-fl">Vehicle</div>
-            <div class="yc-fv">Audi · A4 · 2018</div>
-          </div>
+          <div><div class="yc-fl">Plate</div><div class="yc-fv">B-12-MLB</div></div>
+          <div><div class="yc-fl">VIN</div><div class="yc-fv" style="font-size:12px">WAUZZZ8K9DA123456</div></div>
+          <div><div class="yc-fl">Owner</div><div class="yc-fv">Andrei Popescu</div></div>
+          <div><div class="yc-fl">Vehicle</div><div class="yc-fv">Audi · A4 · 2018</div></div>
         </div>
         <div class="yc-qr">
           <img src="/qr.png" alt="QR" style="width:64px;height:64px;display:block;border-radius:6px">
@@ -643,13 +677,7 @@ footer {
 const API = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.151:8080';
 fetch(API + '/api/stats', { signal: AbortSignal.timeout(5000) })
   .then(r => r.json())
-  .then(s => {
-    const set = (id, v) => { const el = document.getElementById(id); if (el && v != null) el.textContent = v; };
-    set('st-drivers',  s.drivers);
-    set('st-partners', s.partners);
-    set('st-vehicles', s.vehicles);
-    set('st-offers',   s.offers);
-  })
+  .then(s => {})
   .catch(() => {});
 </script>
 </body>
