@@ -25,6 +25,8 @@
   --max:        1200px;
   --orange:     #FF5F1F;
   --orange-glow:rgba(255,95,31,.38);
+  --neon:       #39FF14;
+  --neon-glow:  rgba(57,255,20,.65);
 }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font); color: var(--black); background: var(--white); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
@@ -88,21 +90,36 @@ nav {
   padding: 72px 32px 0;
   position: relative; overflow: hidden;
 }
-/* Yellow flash — top left */
+/* Yellow glow — top left, large warm trust light */
 .hero::before {
   content: ''; position: absolute;
-  top: -120px; left: -80px;
-  width: 680px; height: 560px;
-  background: radial-gradient(ellipse at center, rgba(236,255,84,.07) 0%, transparent 56%);
+  top: -160px; left: -100px;
+  width: 820px; height: 680px;
+  background: radial-gradient(ellipse at center,
+    rgba(236,255,84,.13) 0%,
+    rgba(236,255,84,.06) 35%,
+    transparent 62%);
   pointer-events: none;
 }
-/* Yellow flash — bottom right */
+/* Yellow glow — bottom right, secondary warmth */
 .hero::after {
   content: ''; position: absolute;
-  bottom: 20px; right: -40px;
-  width: 500px; height: 420px;
-  background: radial-gradient(ellipse at center, rgba(236,255,84,.045) 0%, transparent 60%);
+  bottom: 0; right: -60px;
+  width: 580px; height: 480px;
+  background: radial-gradient(ellipse at center,
+    rgba(236,255,84,.08) 0%,
+    rgba(236,255,84,.03) 40%,
+    transparent 64%);
   pointer-events: none;
+}
+/* Yellow glow — center bloom */
+.hero-glow {
+  position: absolute; top: 10%; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse at center,
+    rgba(236,255,84,.055) 0%, transparent 58%);
+  pointer-events: none; z-index: 0;
 }
 .hero-inner {
   max-width: var(--max); margin: 0 auto;
@@ -236,11 +253,22 @@ nav {
   transform: translateY(-3px);
 }
 .feat-ico {
-  width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
-  background: var(--gray);
+  width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0;
+  background: rgba(57,255,20,.07);
+  border: 1px solid rgba(57,255,20,.22);
   display: flex; align-items: center; justify-content: center;
+  transition: background .2s, border-color .2s, box-shadow .2s;
 }
-.feat-ico svg { width: 19px; height: 19px; stroke: var(--navy-mid); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.feat-ico svg {
+  width: 20px; height: 20px; stroke: var(--neon); stroke-width: 2;
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px var(--neon-glow));
+}
+.feat-card:hover .feat-ico {
+  background: rgba(57,255,20,.14);
+  border-color: rgba(57,255,20,.5);
+  box-shadow: 0 0 18px rgba(57,255,20,.25);
+}
 .feat-title {
   font-family: var(--font-head);
   font-size: 13.5px; font-weight: 600; color: var(--black);
@@ -455,6 +483,17 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 .footer-copy { font-size: 11.5px; font-weight: 400; color: rgba(255,255,255,.3); }
 .footer-badge { font-size: 10px; font-weight: 600; padding: 4px 12px; border: 1px solid rgba(255,255,255,.12); border-radius: 20px; color: rgba(255,255,255,.38); letter-spacing: .08em; }
 
+/* ── TYPEWRITER ──────────────────────────────────── */
+#tw-target { color: var(--yellow); }
+.tw-cursor {
+  display: inline-block; width: 3px; height: .82em;
+  background: var(--yellow); margin-left: 3px;
+  vertical-align: middle; border-radius: 1px;
+  animation: cur-blink 1s step-end infinite;
+  box-shadow: 0 0 8px rgba(236,255,84,.8);
+}
+@keyframes cur-blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr 340px; gap: 36px; }
@@ -535,12 +574,13 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 
 <!-- ── HERO ───────────────────────────────────────── -->
 <section class="hero">
+  <div class="hero-glow"></div>
   <div class="hero-inner">
 
     <!-- LEFT: headline -->
     <div class="hero-text">
       <div class="hero-tag">Insurance · Verification · Trust</div>
-      <h1 class="hero-h1">Your car insurance,<br>in one <span class="accent">YellowCard.</span></h1>
+      <h1 class="hero-h1">Your car insurance,<br>in one <span id="tw-target"></span><span class="tw-cursor"></span></h1>
       <p class="hero-desc">Every road you've driven. Every service. Every policy.<br>Mulberry holds it all — intact, verified, and yours to share with one scan.</p>
       <div class="hero-social">
         <span class="hero-stars">★★★★★</span>
@@ -776,11 +816,52 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 </footer>
 
 <script>
+/* ── stats ── */
 const API = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.151:8080';
 fetch(API + '/api/stats', { signal: AbortSignal.timeout(5000) })
-  .then(r => r.json())
-  .then(s => {})
-  .catch(() => {});
+  .then(r => r.json()).then(() => {}).catch(() => {});
+
+/* ── typewriter ── */
+(function () {
+  const words = ['YellowCard.', 'MulberryID.'];
+  const el    = document.getElementById('tw-target');
+  const cur   = document.querySelector('.tw-cursor');
+  if (!el) return;
+
+  let wi = 0, ci = 0, deleting = false;
+
+  function tick() {
+    const word = words[wi];
+
+    if (!deleting) {
+      ci++;
+      el.textContent = word.slice(0, ci);
+      if (ci === word.length) {
+        /* pause 2 s at full word, then start deleting */
+        setTimeout(() => { deleting = true; tick(); }, 2000);
+        return;
+      }
+      setTimeout(tick, 88);
+    } else {
+      ci--;
+      el.textContent = word.slice(0, ci);
+      if (ci === 0) {
+        deleting = false;
+        wi = (wi + 1) % words.length;
+        /* brief pause before typing next word */
+        setTimeout(tick, 340);
+        return;
+      }
+      setTimeout(tick, 52);
+    }
+  }
+
+  /* hide cursor while typing second colour word */
+  const origColor = getComputedStyle(document.documentElement)
+    .getPropertyValue('--yellow').trim();
+
+  setTimeout(tick, 700);
+})();
 </script>
 </body>
 </html>
