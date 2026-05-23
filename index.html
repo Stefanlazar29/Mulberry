@@ -91,6 +91,75 @@ nav {
 }
 .nav-signup:hover { opacity: .88; }
 
+/* ── NAV — FOR BUSINESS BUTTON ──────────────────── */
+.nav-biz-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 600; color: rgba(255,255,255,.72);
+  background: rgba(255,255,255,.09); border: none;
+  padding: 7px 13px; border-radius: 8px;
+  cursor: pointer; font-family: var(--font);
+  transition: background .15s, color .15s;
+  margin-right: 4px;
+}
+.nav-biz-btn:hover { background: rgba(255,255,255,.16); color: var(--white); }
+.nav-biz-btn.open { background: var(--white); color: var(--black); }
+.nav-biz-btn .nbz-chevron { transition: transform .22s; flex-shrink: 0; }
+.nav-biz-btn.open .nbz-chevron { transform: rotate(180deg); }
+
+/* ── BUSINESS PANEL (mega-menu below nav) ────────── */
+.biz-panel {
+  position: sticky; top: 66px; z-index: 98;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  max-height: 0; overflow: hidden;
+  transition: max-height .32s cubic-bezier(.4,0,.2,1);
+  box-shadow: 0 12px 48px rgba(0,0,0,.12);
+}
+.biz-panel.open { max-height: 480px; }
+.biz-panel-inner {
+  max-width: var(--max); margin: 0 auto; padding: 40px 32px 44px;
+}
+.biz-panel-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 40px; margin-bottom: 36px;
+}
+.biz-panel-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: #00B86A; margin-bottom: 10px;
+}
+.biz-panel-h2 {
+  font-family: var(--font-head);
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 700; line-height: 1.12; letter-spacing: -.3px;
+  color: var(--black); max-width: 340px;
+}
+.biz-panel-h2 span { color: #00B86A; }
+.biz-panel-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--black); color: var(--white);
+  font-family: var(--font-head); font-size: 14px; font-weight: 700;
+  padding: 12px 22px; border-radius: 10px;
+  white-space: nowrap; flex-shrink: 0;
+  transition: opacity .15s;
+}
+.biz-panel-cta:hover { opacity: .82; }
+.biz-panel-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.biz-card {
+  padding: 20px; border: 1px solid var(--border);
+  border-radius: 12px; transition: border-color .15s, box-shadow .15s;
+}
+.biz-card:hover { border-color: #00B86A; box-shadow: 0 4px 20px rgba(0,184,106,.1); }
+.biz-card-ico {
+  width: 38px; height: 38px; border-radius: 9px;
+  background: #F0FFF6; border: 1px solid #C6F0D8;
+  display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.biz-card-ico svg { width: 18px; height: 18px; stroke: #00B86A; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.biz-card-title { font-family: var(--font-head); font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 6px; }
+.biz-card-desc { font-size: 12.5px; font-weight: 400; color: var(--muted); line-height: 1.55; }
+
 /* ── TICKER ─────────────────────────────────────── */
 .ticker { background: var(--navy); overflow: hidden; padding: 10px 0; }
 .ticker-track {
@@ -132,7 +201,7 @@ nav {
 .hero-bg-mark svg { width: 100%; height: auto; display: block; }
 .hero-inner {
   max-width: var(--max); margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 320px 268px;
+  display: grid; grid-template-columns: 1fr 340px;
   gap: 36px; align-items: start;
   padding-bottom: 100px;
   position: relative; z-index: 1;
@@ -161,59 +230,6 @@ nav {
 .hero-stars { color: var(--yellow); font-size: 13px; letter-spacing: 2px; opacity: .8; }
 .hero-social-txt { font-size: 11.5px; font-weight: 400; color: rgba(255,255,255,.35); }
 
-/* Right col — DataCamp-style white business panel */
-.hero-biz-card {
-  background: var(--white);
-  border-radius: 18px; padding: 30px 24px 26px;
-  box-shadow: 0 32px 80px rgba(0,0,0,.45);
-  display: flex; flex-direction: column;
-  align-self: stretch;
-}
-.hbc-overtitle {
-  font-size: 10px; font-weight: 700; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
-}
-.hbc-headline {
-  font-family: var(--font-head);
-  font-size: 19px; font-weight: 700; line-height: 1.3;
-  color: var(--black); margin-bottom: 18px;
-}
-.hbc-accent { color: #00B86A; }
-.hbc-btn {
-  display: flex; align-items: center; justify-content: center;
-  background: var(--black); color: var(--white);
-  font-family: var(--font-head); font-size: 14px; font-weight: 700;
-  padding: 12px 18px; border-radius: 10px; transition: opacity .15s;
-}
-.hbc-btn:hover { opacity: .82; }
-.hbc-divider { height: 1px; background: var(--border); margin: 20px 0; }
-.hbc-logos-ttl {
-  font-size: 9px; font-weight: 700; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
-}
-.hbc-logo-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 9px 0; border-bottom: 1px solid var(--border);
-  font-size: 13px; font-weight: 600; color: var(--black);
-}
-.hbc-logo-row:last-child { border-bottom: none; }
-.hbc-logo-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: #00B86A; flex-shrink: 0;
-}
-.hbc-visual { margin-top: auto; padding-top: 18px; }
-.hbc-visual-pill {
-  background: #F0FFF6; border: 1px solid #C6F0D8;
-  border-radius: 12px; padding: 13px 14px;
-  display: flex; align-items: center; gap: 10px;
-}
-.hbc-visual-ico {
-  width: 30px; height: 30px; background: #00B86A;
-  border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.hbc-visual-ico svg { width: 15px; height: 15px; stroke: var(--white); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-.hbc-visual-txt { font-family: var(--font-head); font-size: 12px; font-weight: 700; color: var(--black); }
-.hbc-visual-sub { font-size: 10.5px; font-weight: 400; color: var(--muted); }
 
 /* Center col — signup card (glassmorphism) */
 .hero-card {
@@ -558,8 +574,8 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr 300px; gap: 28px; }
-  .hero-biz-card { display: none; }
   .hero-bg-mark { width: 72%; right: -12%; }
+  .biz-panel-grid { grid-template-columns: repeat(2, 1fr); }
   .features-inner { grid-template-columns: 1fr; }
   .bsep-grid { grid-template-columns: repeat(2, 1fr); }
   .mid-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -602,6 +618,11 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
       <a href="#" data-i18n="nav_partners">Partners</a>
     </div>
     <div class="nav-actions">
+      <button class="nav-biz-btn" id="biz-toggle" aria-expanded="false">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        For Business
+        <svg class="nbz-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
       <div class="nav-lang">
         <button class="nav-lang-btn active" data-lang="en">EN</button>
         <button class="nav-lang-btn" data-lang="ro">RO</button>
@@ -611,6 +632,51 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
     </div>
   </div>
 </nav>
+
+<!-- ── BUSINESS PANEL ─────────────────────────────── -->
+<div class="biz-panel" id="biz-panel" aria-hidden="true">
+  <div class="biz-panel-inner">
+    <div class="biz-panel-top">
+      <div>
+        <div class="biz-panel-label">Mulberry for Business</div>
+        <h2 class="biz-panel-h2">Your drivers, verified.<br><span>Your data, protected.</span></h2>
+      </div>
+      <a class="biz-panel-cta" href="/mulberry_app.html">
+        Get started for Business →
+      </a>
+    </div>
+    <div class="biz-panel-grid">
+      <div class="biz-card">
+        <div class="biz-card-ico">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div class="biz-card-title">Verified Drivers</div>
+        <p class="biz-card-desc">Every driver on Mulberry has a verified insurance and service history. One scan. Every answer.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-ico">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <div class="biz-card-title">Instant Verification</div>
+        <p class="biz-card-desc">Scan any YellowCard in under 3 seconds. No calls, no paperwork, no delays.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-ico">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
+        <div class="biz-card-title">Automated Alerts</div>
+        <p class="biz-card-desc">MulberryEXO notifies your team before any RCA or ITP expires across your entire network.</p>
+      </div>
+      <div class="biz-card">
+        <div class="biz-card-ico">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="biz-card-title">Partner Network</div>
+        <p class="biz-card-desc">Connect directly to drivers. Allianz, Generali, OMNIASIG and more already trust Mulberry data.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ── TICKER ─────────────────────────────────────── -->
 <div class="ticker">
@@ -676,33 +742,6 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
       </p>
     </div>
 
-    <!-- RIGHT: DataCamp-style white business panel -->
-    <div class="hero-biz-card">
-      <div class="hbc-overtitle">For Insurers &amp; Partners</div>
-      <div class="hbc-headline">
-        Mulberry verifies your drivers.<br>
-        <span class="hbc-accent">We protect their data.</span>
-      </div>
-      <a class="hbc-btn" href="/mulberry_app.html">Mulberry for Business</a>
-      <div class="hbc-divider"></div>
-      <div class="hbc-logos-ttl">Trusted by</div>
-      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>Allianz Țiriac</div>
-      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>Generali România</div>
-      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>OMNIASIG</div>
-      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>ASIROM Vienna</div>
-      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>Groupama</div>
-      <div class="hbc-visual">
-        <div class="hbc-visual-pill">
-          <div class="hbc-visual-ico">
-            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          </div>
-          <div>
-            <div class="hbc-visual-txt">YellowCard · Verified</div>
-            <div class="hbc-visual-sub">Scan to verify in 3 seconds</div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -904,6 +943,38 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 </footer>
 
 <script>
+/* ── business panel toggle ── */
+(function () {
+  var btn   = document.getElementById('biz-toggle');
+  var panel = document.getElementById('biz-panel');
+  if (!btn || !panel) return;
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var isOpen = panel.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen);
+    panel.setAttribute('aria-hidden', !isOpen);
+  });
+
+  document.addEventListener('click', function (e) {
+    if (!panel.contains(e.target) && !btn.contains(e.target)) {
+      panel.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      panel.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+})();
+
 /* ── stats ── */
 const API = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.151:8080';
 fetch(API + '/api/stats', { signal: AbortSignal.timeout(5000) })
