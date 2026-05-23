@@ -942,7 +942,7 @@ function afSwitchTab(btn) {
 async function afSignInWithGoogle() {
   const { error } = await sb.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: window.location.origin + '/mulberry_app.html' }
+    options: { redirectTo: 'https://mulberry.autos/mulberry_app.html' }
   });
   if (error) afShowAlert('af-alert-1', error.message);
 }
@@ -1063,6 +1063,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// Curăță URL-ul după auth
+if (window.location.hash.includes('access_token')) {
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
 
 // Supabase OAuth redirect
 sb.auth.onAuthStateChange((event, session) => {
