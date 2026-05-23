@@ -6,7 +6,8 @@
   <title>Mulberry — App</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
@@ -75,32 +76,75 @@ a{color:inherit;text-decoration:none}
 .al-foot{margin-top:auto;font-size:11px;color:rgba(255,255,255,.28)}
 
 .auth-right{
-  width:440px;flex-shrink:0;background:var(--white);
-  border-left:1px solid var(--b1);
+  width:480px;flex-shrink:0;
+  background:rgba(8,8,8,0.82);
+  backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);
+  border-left:1px solid rgba(255,255,255,0.08);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:48px 44px;overflow-y:auto;
 }
-.af-logo{display:flex;align-items:center;gap:10px;margin-bottom:36px;align-self:flex-start}
-.af-logo-mark{width:36px;height:36px;border-radius:9px;overflow:hidden;flex-shrink:0;box-shadow:0 1px 6px rgba(0,0,0,.12)}
-.af-logo-name{font-size:18px;font-weight:800;color:var(--black)}
-.af-title{font-size:26px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;align-self:flex-start;color:var(--black)}
-.af-sub{font-size:14px;color:var(--dim2);margin-bottom:30px;align-self:flex-start}
-
-.af-tabs{display:flex;width:100%;margin-bottom:26px;background:var(--gray);border:1px solid var(--b1);border-radius:10px;padding:4px}
-.af-tab{flex:1;padding:9px 0;border:none;background:transparent;color:var(--dim2);font-family:var(--font);font-size:13px;font-weight:700;border-radius:7px;cursor:pointer;transition:all .2s;letter-spacing:.02em}
-.af-tab.active{background:var(--white);color:var(--black);box-shadow:0 1px 3px rgba(0,0,0,.1)}
-
+/* ── AUTH FORM ELEMENTS ── */
+.auth-form-panel{width:100%;max-width:380px}
+.af-step{display:none}.af-step.active{display:block}
+.af-step-indicator{display:flex;align-items:center;gap:6px;margin-bottom:2rem}
+.af-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all .2s}
+.af-dot.active{background:var(--yellow);width:18px;border-radius:3px}
+.af-dot.done{background:rgba(34,197,94,0.6)}
+.af-title{font-size:1.5rem;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;color:#fff;font-family:var(--font-head)}
+.af-sub{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:1.75rem;line-height:1.6}
+.af-sub strong{color:rgba(255,255,255,0.7)}
+.af-tabs{display:flex;width:100%;margin-bottom:1.5rem;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:4px}
+.af-tab{flex:1;padding:9px 0;border:none;background:transparent;color:rgba(255,255,255,0.45);font-family:var(--font);font-size:13px;font-weight:600;border-radius:7px;cursor:pointer;transition:all .2s}
+.af-tab.active{background:rgba(255,255,255,0.1);color:#fff}
+.btn-google{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px;background:#fff;color:#1a1a1a;border:none;border-radius:10px;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;margin-bottom:1.25rem}
+.btn-google:hover{opacity:.92}
+.btn-google svg{width:18px;height:18px;flex-shrink:0}
+.af-divider{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}
+.af-divider-line{flex:1;height:1px;background:rgba(255,255,255,0.08)}
+.af-divider-text{font-size:12px;color:rgba(255,255,255,0.35)}
 .field{margin-bottom:14px;width:100%}
-.field label{display:block;font-size:11px;font-weight:700;color:var(--dim2);margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em}
-.field input{width:100%;padding:13px 16px;background:var(--gray);border:1.5px solid var(--b1);border-radius:10px;color:var(--black);font-family:var(--font);font-size:15px;outline:none;transition:border-color .2s,box-shadow .2s}
-.field input:focus{border-color:rgba(44,14,18,.25);box-shadow:0 0 0 3px rgba(44,14,18,.06)}
-.field input::placeholder{color:var(--dim3)}
-
-.btn-primary{width:100%;padding:14px;background:var(--wine);color:#fff;border:none;border-radius:10px;font-family:var(--font);font-size:15px;font-weight:800;cursor:pointer;transition:all .2s;margin-top:6px;letter-spacing:.01em}
-.btn-primary:hover{background:#3d1219;box-shadow:0 4px 20px rgba(44,14,18,.28)}
-.btn-primary:active{transform:scale(.98)}
-.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-
+.field label{display:block;font-size:11px;font-weight:700;color:rgba(255,255,255,0.45);margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em}
+.field input{width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;font-family:var(--font);font-size:15px;outline:none;transition:border-color .2s}
+.field input:focus{border-color:rgba(236,255,84,0.4)}
+.field input::placeholder{color:rgba(255,255,255,0.3)}
+.btn-primary{width:100%;padding:13px;background:var(--yellow);color:var(--wine);border:none;border-radius:10px;font-family:var(--font);font-size:14px;font-weight:800;cursor:pointer;transition:opacity .15s;margin-bottom:1rem;letter-spacing:.01em}
+.btn-primary:hover{opacity:.9}
+.btn-primary:disabled{opacity:.45;cursor:not-allowed}
+.btn-ghost{width:100%;padding:12px;background:transparent;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.1);border-radius:10px;font-family:var(--font);font-size:13.5px;font-weight:500;cursor:pointer;transition:all .15s}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.25);color:#fff}
+.otp-inputs{display:flex;gap:8px;margin-bottom:1.5rem}
+.otp-digit{flex:1;height:56px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:10px;font-family:'DM Mono','JetBrains Mono',monospace;font-size:1.4rem;font-weight:500;color:#fff;text-align:center;outline:none;transition:border-color .2s}
+.otp-digit:focus{border-color:rgba(236,255,84,0.4)}
+.af-resend{text-align:center;margin-top:1rem;font-size:13px;color:rgba(255,255,255,0.45)}
+.af-resend-btn{background:none;border:none;color:var(--yellow);font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;padding:0}
+.af-resend-btn:disabled{color:rgba(255,255,255,0.35);cursor:not-allowed}
+.upload-zone{width:100%;border:2px dashed rgba(255,255,255,0.12);border-radius:10px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:1.25rem;position:relative}
+.upload-zone:hover,.upload-zone.drag-over{border-color:rgba(236,255,84,0.4);background:rgba(236,255,84,0.04)}
+.upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-icon{font-size:2rem;margin-bottom:.75rem}
+.upload-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:.4rem}
+.upload-sub{font-size:12px;color:rgba(255,255,255,0.4);line-height:1.5}
+.af-processing{display:none;text-align:center;padding:2rem 0}
+.af-processing.active{display:block}
+.af-spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,0.1);border-top-color:var(--yellow);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.af-processing-text{font-size:14px;color:rgba(255,255,255,0.5)}
+.af-extracted{display:none}.af-extracted.active{display:block}
+.af-data-table{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;overflow:hidden;margin-bottom:1.25rem}
+.af-data-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.af-data-row:last-child{border-bottom:none}
+.af-data-key{font-size:11px;font-weight:700;color:rgba(255,255,255,0.4);letter-spacing:.08em;width:110px;flex-shrink:0}
+.af-data-val{font-family:'DM Mono','JetBrains Mono',monospace;font-size:13px;color:#fff;font-weight:500}
+.af-check-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:1.25rem}
+.af-check-row input[type="checkbox"]{width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--yellow);cursor:pointer}
+.af-check-label{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5;cursor:pointer}
+.af-alert{padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:1rem;display:none}
+.af-alert.active{display:block}
+.af-alert.error{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:#FCA5A5}
+.af-alert.success{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);color:#86EFAC}
+.af-foot{margin-top:1.5rem;text-align:center;font-size:12px;color:rgba(255,255,255,0.3)}
+.af-foot a{color:rgba(255,255,255,0.35);text-decoration:none}
+.af-foot a:hover{color:rgba(255,255,255,0.6)}
 .af-err{font-size:13px;color:var(--red);margin-top:10px;min-height:18px;text-align:center}
 
 @media(max-width:768px){
@@ -329,39 +373,111 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <div class="auth-right">
-    <div class="af-title" id="af-title">Bun venit înapoi</div>
-    <div class="af-sub" id="af-sub">Intră în contul tău Mulberry</div>
-    <div class="af-tabs">
-      <button class="af-tab active" id="tab-login" onclick="switchTab('login')">Intră în cont</button>
-      <button class="af-tab" id="tab-register" onclick="switchTab('register')">Cont nou</button>
-    </div>
-    <div id="form-login" style="width:100%">
-      <div class="field">
-        <label>Email sau Telefon</label>
-        <input type="text" id="li-id" placeholder="email@exemplu.com" autocomplete="username">
+    <div class="auth-form-panel">
+
+      <!-- Step indicator -->
+      <div class="af-step-indicator">
+        <div class="af-dot active" id="af-dot-1"></div>
+        <div class="af-dot" id="af-dot-2"></div>
+        <div class="af-dot" id="af-dot-3"></div>
       </div>
-      <div class="field">
-        <label>Parolă</label>
-        <input type="password" id="li-pass" placeholder="Parola ta" autocomplete="current-password">
+
+      <!-- STEP 1: Login -->
+      <div class="af-step active" id="af-step-1">
+        <div class="af-title">Bun venit înapoi</div>
+        <div class="af-sub">Intră în contul tău Mulberry</div>
+
+        <div class="af-tabs">
+          <button class="af-tab active" onclick="afSwitchTab(this)">Intră în cont</button>
+          <button class="af-tab" onclick="afSwitchTab(this)">Cont nou</button>
+        </div>
+
+        <div id="af-alert-1" class="af-alert error"></div>
+
+        <button class="btn-google" onclick="afSignInWithGoogle()">
+          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continuă cu Google
+        </button>
+
+        <div class="af-divider">
+          <div class="af-divider-line"></div>
+          <span class="af-divider-text">sau cu email</span>
+          <div class="af-divider-line"></div>
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input type="email" id="af-email" placeholder="email@exemplu.com" autocomplete="email">
+        </div>
+
+        <button class="btn-primary" onclick="afSendOTP()">Trimite cod de verificare →</button>
+
+        <div class="af-foot">
+          Continuând, ești de acord cu <a href="#">Termenii</a> și <a href="#">Politica de Confidențialitate</a>.
+        </div>
       </div>
-      <button class="btn-primary" id="btn-login" onclick="doLogin()">Intră în cont</button>
-      <div class="af-err" id="li-err"></div>
-    </div>
-    <div id="form-register" class="hidden" style="width:100%">
-      <div class="field">
-        <label>Email</label>
-        <input type="email" id="ri-email" placeholder="email@exemplu.com" autocomplete="email">
+
+      <!-- STEP 2: OTP -->
+      <div class="af-step" id="af-step-2">
+        <div class="af-title">Verifică emailul</div>
+        <div class="af-sub">Am trimis un cod de 6 cifre la <strong id="af-email-display"></strong></div>
+
+        <div id="af-alert-2" class="af-alert error"></div>
+
+        <div class="otp-inputs">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-0" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-1" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-2" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-3" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-4" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="af-otp-5" inputmode="numeric">
+        </div>
+
+        <button class="btn-primary" onclick="afVerifyOTP()">Verifică codul →</button>
+
+        <div class="af-resend">
+          Nu ai primit codul?
+          <button class="af-resend-btn" id="af-resend-btn" onclick="afResendOTP()">Retrimite</button>
+          <span id="af-resend-timer"></span>
+        </div>
+
+        <div style="margin-top:1rem">
+          <button class="btn-ghost" onclick="afGoToStep(1)">← Înapoi</button>
+        </div>
       </div>
-      <div class="field">
-        <label>Telefon (opțional)</label>
-        <input type="tel" id="ri-phone" placeholder="+40 7XX XXX XXX">
+
+      <!-- STEP 3: Talon upload -->
+      <div class="af-step" id="af-step-3">
+        <div class="af-title">Scanează talonul</div>
+        <div class="af-sub">Încarcă o fotografie clară a certificatului de înmatriculare.</div>
+
+        <div id="af-alert-3" class="af-alert error"></div>
+
+        <div class="upload-zone" id="af-upload-zone">
+          <input type="file" accept="image/*" capture="environment" id="af-talon-input" onchange="afHandleUpload(event)">
+          <div class="upload-icon">📷</div>
+          <div class="upload-title">Fotografiază sau încarcă talonul</div>
+          <div class="upload-sub">VIN + număr înmatriculare lizibile • JPG, PNG • Max 10MB</div>
+        </div>
+
+        <div class="af-processing" id="af-processing">
+          <div class="af-spinner"></div>
+          <div class="af-processing-text" id="af-processing-text">Analizăm documentul...</div>
+        </div>
+
+        <div class="af-extracted" id="af-extracted">
+          <div class="af-data-table" id="af-data-table"></div>
+          <div class="af-check-row">
+            <input type="checkbox" id="af-confirm-check">
+            <label class="af-check-label" for="af-confirm-check">Certific că documentul încărcat este original și aparține vehiculului înregistrat pe numele meu.</label>
+          </div>
+          <button class="btn-primary" id="af-gen-btn" onclick="afGenerateCard()">Generează MulberryID →</button>
+          <button class="btn-ghost" onclick="afResetUpload()">Încearcă altă poză</button>
+        </div>
+
+        <div class="af-foot" style="margin-top:1.5rem">🔒 Nu stocăm poza. Extragem doar datele necesare.</div>
       </div>
-      <div class="field">
-        <label>Parolă</label>
-        <input type="password" id="ri-pass" placeholder="Minim 8 caractere" autocomplete="new-password">
-      </div>
-      <button class="btn-primary" id="btn-reg" onclick="doRegister()">Creează cont gratuit</button>
-      <div class="af-err" id="ri-err"></div>
+
     </div>
   </div>
 </div>
@@ -800,51 +916,168 @@ async function loadStats() {
   } catch(e) {}
 }
 
-function switchTab(t) {
-  const isLogin = t === 'login';
-  document.getElementById('form-login').classList.toggle('hidden', !isLogin);
-  document.getElementById('form-register').classList.toggle('hidden', isLogin);
-  document.getElementById('tab-login').classList.toggle('active', isLogin);
-  document.getElementById('tab-register').classList.toggle('active', !isLogin);
-  document.getElementById('af-title').textContent  = isLogin ? 'Bun venit înapoi' : 'Creează cont gratuit';
-  document.getElementById('af-sub').textContent    = isLogin ? 'Intră în contul tău Mulberry' : 'Completează câmpurile de mai jos';
+// ─── SUPABASE AUTH ────────────────────────────────────────────
+const SB_URL  = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
+const sb = supabase.createClient(SB_URL, SB_ANON);
+
+let afCurrentEmail = '';
+let afResendInterval = null;
+
+function afGoToStep(n) {
+  document.querySelectorAll('.af-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`af-step-${n}`).classList.add('active');
+  document.querySelectorAll('.af-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i + 1 < n) d.classList.add('done');
+    else if (i + 1 === n) d.classList.add('active');
+  });
 }
+
+function afSwitchTab(btn) {
+  document.querySelectorAll('.af-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+async function afSignInWithGoogle() {
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.origin + '/mulberry_app.html' }
+  });
+  if (error) afShowAlert('af-alert-1', error.message);
+}
+
+async function afSendOTP() {
+  const email = (document.getElementById('af-email').value || '').trim();
+  if (!email || !email.includes('@')) return afShowAlert('af-alert-1', 'Introdu un email valid.');
+  afCurrentEmail = email;
+  const { error } = await sb.auth.signInWithOtp({ email });
+  if (error) return afShowAlert('af-alert-1', error.message);
+  document.getElementById('af-email-display').textContent = email;
+  afGoToStep(2);
+  afSetupOTP();
+  afStartResendTimer();
+}
+
+async function afVerifyOTP() {
+  const token = Array.from({length:6}, (_, i) => document.getElementById(`af-otp-${i}`).value).join('');
+  if (token.length !== 6) return afShowAlert('af-alert-2', 'Introdu toate cele 6 cifre.');
+  const { data, error } = await sb.auth.verifyOtp({ email: afCurrentEmail, token, type: 'email' });
+  if (error) return afShowAlert('af-alert-2', 'Cod incorect sau expirat. Încearcă din nou.');
+  if (data?.session) { currentUser = { email: afCurrentEmail }; enterApp(); } else { afGoToStep(3); }
+}
+
+async function afResendOTP() {
+  await sb.auth.signInWithOtp({ email: afCurrentEmail });
+  afStartResendTimer();
+}
+
+function afStartResendTimer() {
+  let s = 60;
+  const btn = document.getElementById('af-resend-btn');
+  const timer = document.getElementById('af-resend-timer');
+  btn.disabled = true;
+  if (afResendInterval) clearInterval(afResendInterval);
+  afResendInterval = setInterval(() => {
+    s--;
+    timer.textContent = ` (${s}s)`;
+    if (s <= 0) { clearInterval(afResendInterval); btn.disabled = false; timer.textContent = ''; }
+  }, 1000);
+}
+
+function afSetupOTP() {
+  for (let i = 0; i < 6; i++) {
+    const inp = document.getElementById(`af-otp-${i}`);
+    inp.value = '';
+    inp.oninput = e => {
+      if (e.target.value.length > 1) e.target.value = e.target.value.slice(-1);
+      if (e.target.value && i < 5) document.getElementById(`af-otp-${i+1}`).focus();
+    };
+    inp.onkeydown = e => { if (e.key === 'Backspace' && !e.target.value && i > 0) document.getElementById(`af-otp-${i-1}`).focus(); };
+  }
+  document.getElementById('af-otp-0').focus();
+}
+
+async function afHandleUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) return afShowAlert('af-alert-3', 'Fișier prea mare. Max 10MB.');
+  document.getElementById('af-upload-zone').style.display = 'none';
+  document.getElementById('af-processing').classList.add('active');
+  document.getElementById('af-processing-text').textContent = 'Analizăm documentul...';
+  try {
+    const base64 = await afFileToBase64(file);
+    setTimeout(() => { document.getElementById('af-processing-text').textContent = 'Verificăm calitatea imaginii...'; }, 1000);
+    setTimeout(() => { document.getElementById('af-processing-text').textContent = 'Extragem datele cu AI...'; }, 2500);
+    const res  = await fetch('/api/scan-talon', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ image: base64, mime_type: file.type }) });
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'Nu am putut extrage datele. Încearcă o poză mai clară.');
+    document.getElementById('af-processing').classList.remove('active');
+    afShowExtracted(data);
+  } catch(err) {
+    document.getElementById('af-processing').classList.remove('active');
+    document.getElementById('af-upload-zone').style.display = 'block';
+    afShowAlert('af-alert-3', err.message || 'Eroare. Încearcă o poză mai clară.');
+  }
+}
+
+function afShowExtracted(data) {
+  const fields = [{k:'VIN',v:data.vin},{k:'NUMĂR',v:data.plate},{k:'PROPRIETAR',v:data.owner},{k:'MARCĂ',v:data.brand},{k:'MODEL',v:data.model},{k:'AN',v:data.year}];
+  document.getElementById('af-data-table').innerHTML = fields.filter(f=>f.v).map(f=>`<div class="af-data-row"><span class="af-data-key">${f.k}</span><span class="af-data-val">${f.v}</span></div>`).join('');
+  document.getElementById('af-extracted').classList.add('active');
+}
+
+async function afGenerateCard() {
+  if (!document.getElementById('af-confirm-check').checked) return afShowAlert('af-alert-3', 'Confirmă că documentul este original.');
+  const btn = document.getElementById('af-gen-btn');
+  btn.textContent = 'Se generează...'; btn.disabled = true;
+  setTimeout(() => { enterApp(); }, 1500);
+}
+
+function afResetUpload() {
+  document.getElementById('af-upload-zone').style.display = 'block';
+  document.getElementById('af-extracted').classList.remove('active');
+  document.getElementById('af-talon-input').value = '';
+}
+
+function afFileToBase64(file) {
+  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(file); });
+}
+
+function afShowAlert(id, msg) {
+  const el = document.getElementById(id);
+  el.textContent = msg; el.classList.add('active');
+  setTimeout(() => el.classList.remove('active'), 5000);
+}
+
+// Drag & drop on upload zone
+document.addEventListener('DOMContentLoaded', () => {
+  const zone = document.getElementById('af-upload-zone');
+  if (zone) {
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault(); zone.classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file) afHandleUpload({ target: { files: [file] } });
+    });
+  }
+});
+
+// Supabase OAuth redirect
+sb.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_IN' && session) {
+    currentUser = { email: session.user.email };
+    enterApp();
+  }
+});
+
+function switchTab(t) {} // legacy stub
 
 function setBtnLoad(id, loading, label) {
   const b = document.getElementById(id); if(!b) return;
   b.disabled = loading;
   b.innerHTML = loading ? '<span class="spin"></span>' : label;
-}
-
-async function doLogin() {
-  const ident = document.getElementById('li-id').value.trim();
-  const pass  = document.getElementById('li-pass').value;
-  const err   = document.getElementById('li-err');
-  err.textContent = '';
-  if (!ident || !pass) { err.textContent = 'Completează ambele câmpuri.'; return; }
-  setBtnLoad('btn-login', true, 'Intră în cont');
-  try {
-    const d = await apiPost('/auth/login', { identifier: ident, password: pass });
-    saveSession(d); enterApp();
-  } catch(e) { err.textContent = e.message || 'Credențiale incorecte.'; }
-  finally { setBtnLoad('btn-login', false, 'Intră în cont'); }
-}
-
-async function doRegister() {
-  const email = document.getElementById('ri-email').value.trim();
-  const phone = document.getElementById('ri-phone').value.trim();
-  const pass  = document.getElementById('ri-pass').value;
-  const err   = document.getElementById('ri-err');
-  err.textContent = '';
-  const ident = email || phone;
-  if (!ident) { err.textContent = 'Introdu email sau număr de telefon.'; return; }
-  if (!pass || pass.length < 8) { err.textContent = 'Parola trebuie să aibă minim 8 caractere.'; return; }
-  setBtnLoad('btn-reg', true, 'Creează cont gratuit');
-  try {
-    const d = await apiPost('/auth/login', { identifier: ident, password: pass });
-    saveSession(d); toast('Cont creat cu succes!', 'ok'); enterApp();
-  } catch(e) { err.textContent = e.message || 'Eroare la înregistrare.'; }
-  finally { setBtnLoad('btn-reg', false, 'Creează cont gratuit'); }
 }
 
 function doLogout() {
