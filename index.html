@@ -106,75 +106,105 @@ nav {
 .ticker-track span.dot { color: var(--yellow); padding: 0 4px; opacity: .7; }
 @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-/* ── HERO (dark navy — glassmorphism) ───────────── */
+/* ── HERO (black → emerald green gradient) ──────── */
 .hero {
-  background: linear-gradient(140deg, #020810 0%, var(--navy-mid) 45%, #040A18 100%);
+  background: linear-gradient(125deg,
+    #000000 0%, #000A04 26%, #004832 58%, #00B86A 84%, #10D878 100%);
   padding: 72px 32px 0;
   position: relative; overflow: hidden;
 }
-/* Yellow glow — top left, large warm trust light */
+/* Subtle yellow warmth — left text area only */
 .hero::before {
   content: ''; position: absolute;
-  top: -160px; left: -100px;
-  width: 820px; height: 680px;
+  top: -120px; left: -80px;
+  width: 640px; height: 520px;
   background: radial-gradient(ellipse at center,
-    rgba(236,255,84,.13) 0%,
-    rgba(236,255,84,.06) 35%,
-    transparent 62%);
+    rgba(236,255,84,.09) 0%, transparent 55%);
   pointer-events: none;
 }
-/* Yellow glow — bottom right, secondary warmth */
-.hero::after {
-  content: ''; position: absolute;
-  bottom: 0; right: -60px;
-  width: 580px; height: 480px;
-  background: radial-gradient(ellipse at center,
-    rgba(236,255,84,.08) 0%,
-    rgba(236,255,84,.03) 40%,
-    transparent 64%);
-  pointer-events: none;
+.hero::after { content: none; }
+/* Large white Mulberry mark — background right */
+.hero-bg-mark {
+  position: absolute; right: -4%; top: 50%;
+  transform: translateY(-50%);
+  width: 55%; pointer-events: none; z-index: 0;
 }
-/* Yellow glow — center bloom */
-.hero-glow {
-  position: absolute; top: 10%; left: 50%;
-  transform: translateX(-50%);
-  width: 600px; height: 300px;
-  background: radial-gradient(ellipse at center,
-    rgba(236,255,84,.055) 0%, transparent 58%);
-  pointer-events: none; z-index: 0;
-}
+.hero-bg-mark svg { width: 100%; height: auto; display: block; }
 .hero-inner {
   max-width: var(--max); margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 360px;
-  gap: 48px; align-items: start;
+  display: grid; grid-template-columns: 1fr 320px 268px;
+  gap: 36px; align-items: start;
   padding-bottom: 100px;
   position: relative; z-index: 1;
 }
-/* Left col */
-.hero-text { padding-top: 12px; }
+/* Left col — smaller text */
+.hero-text { padding-top: 14px; }
 .hero-tag {
   font-size: 10px; font-weight: 600; letter-spacing: .18em;
   text-transform: uppercase; color: var(--yellow);
-  opacity: .75; margin-bottom: 20px;
+  opacity: .75; margin-bottom: 16px;
 }
 .hero-h1 {
   font-family: var(--font-head);
-  font-size: clamp(34px, 4vw, 56px);
-  font-weight: 700; line-height: 1.07;
-  letter-spacing: -.4px; color: var(--white);
-  margin-bottom: 20px;
+  font-size: clamp(24px, 2.6vw, 38px);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -.3px; color: var(--white);
+  margin-bottom: 14px;
 }
 .hero-h1 .accent { color: var(--yellow); }
 .hero-desc {
-  font-size: 15px; font-weight: 300;
-  color: rgba(255,255,255,.52);
-  line-height: 1.75; max-width: 380px; margin-bottom: 32px;
+  font-size: 13px; font-weight: 300;
+  color: rgba(255,255,255,.5);
+  line-height: 1.72; max-width: 320px; margin-bottom: 24px;
 }
-.hero-social {
-  display: flex; align-items: center; gap: 10px;
+.hero-social { display: flex; align-items: center; gap: 10px; }
+.hero-stars { color: var(--yellow); font-size: 13px; letter-spacing: 2px; opacity: .8; }
+.hero-social-txt { font-size: 11.5px; font-weight: 400; color: rgba(255,255,255,.35); }
+
+/* Right col — business card (dark glass on green) */
+.hero-biz-card {
+  background: rgba(0,0,0,.54);
+  backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 18px; padding: 30px 26px 28px;
+  box-shadow: 0 28px 64px rgba(0,0,0,.5);
+  display: flex; flex-direction: column; gap: 0;
 }
-.hero-stars { color: var(--yellow); font-size: 14px; letter-spacing: 2px; opacity: .85; }
-.hero-social-txt { font-size: 12px; font-weight: 400; color: rgba(255,255,255,.38); }
+.hbc-eyebrow {
+  font-size: 9px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(255,255,255,.35);
+  margin-bottom: 14px;
+}
+.hbc-h {
+  font-family: var(--font-head);
+  font-size: 34px; font-weight: 800; line-height: 1.04;
+  letter-spacing: -.4px; color: var(--white);
+  margin-bottom: 10px;
+}
+.hbc-h .hbc-accent { color: var(--yellow); }
+.hbc-sub {
+  font-size: 13px; font-weight: 300;
+  color: rgba(255,255,255,.48); margin-bottom: 28px;
+  letter-spacing: .02em;
+}
+.hbc-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--yellow); color: var(--black);
+  font-family: var(--font-head); font-size: 14px; font-weight: 800;
+  padding: 13px 18px; border-radius: 10px;
+  transition: opacity .15s; letter-spacing: -.1px;
+}
+.hbc-btn:hover { opacity: .88; }
+.hbc-divider {
+  height: 1px; background: rgba(255,255,255,.1);
+  margin: 20px 0;
+}
+.hbc-stat { display: flex; justify-content: space-between; align-items: center; }
+.hbc-stat-val {
+  font-family: var(--font-head); font-size: 22px; font-weight: 800;
+  color: var(--white); letter-spacing: -.3px;
+}
+.hbc-stat-lbl { font-size: 11px; font-weight: 400; color: rgba(255,255,255,.38); }
 
 /* Center col — signup card (glassmorphism) */
 .hero-card {
@@ -518,8 +548,9 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 
 /* ── RESPONSIVE ──────────────────────────────────── */
 @media (max-width: 1024px) {
-  .hero-inner { grid-template-columns: 1fr 340px; gap: 36px; }
-  .hero-trust { display: none; }
+  .hero-inner { grid-template-columns: 1fr 300px; gap: 28px; }
+  .hero-biz-card { display: none; }
+  .hero-bg-mark { width: 72%; right: -12%; }
   .features-inner { grid-template-columns: 1fr; }
   .bsep-grid { grid-template-columns: repeat(2, 1fr); }
   .mid-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -596,10 +627,18 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 
 <!-- ── HERO ───────────────────────────────────────── -->
 <section class="hero">
-  <div class="hero-glow"></div>
+
+  <!-- Large white logo mark in background -->
+  <div class="hero-bg-mark" aria-hidden="true">
+    <svg viewBox="0 0 262 218" xmlns="http://www.w3.org/2000/svg">
+      <path fill="white" d="M96.861572,118.084030 C97.029518,120.882790 96.421371,122.099976 93.577713,122.066284 C80.934906,121.916496 68.289314,122.001328 55.668179,122.001328 C52.690945,93.419327 78.224258,51.846504 123.023270,47.175724 C165.442413,42.753059 204.047531,77.584503 204.885315,121.617363 C191.185471,121.617363 177.484940,121.617363 163.402390,121.617363 C162.654221,110.776733 158.437820,101.565544 149.385803,94.948090 C143.248291,90.461281 136.361481,88.336647 128.801987,88.683388 C112.131081,89.448067 99.432487,101.043526 96.861572,118.084030z"/>
+      <path fill="white" d="M157.999786,138.830322 C164.162888,138.832779 169.827957,138.923935 175.488495,138.803558 C178.753693,138.734116 181.614380,139.966537 181.718506,143.108810 C181.796234,145.455154 180.415695,148.918320 178.556488,150.082153 C168.557007,156.341690 158.388382,162.390366 147.926956,167.837357 C135.168152,174.480591 122.200729,173.649734 109.718468,166.750534 C100.405632,161.603149 91.313904,156.057098 82.076164,150.771667 C78.995720,149.009171 77.178337,146.646027 78.089699,143.043259 C79.061211,139.202698 82.118904,138.789703 85.544411,138.798706 C109.529427,138.861725 133.514679,138.831039 157.999786,138.830322z"/>
+    </svg>
+  </div>
+
   <div class="hero-inner">
 
-    <!-- LEFT: headline -->
+    <!-- LEFT: headline (smaller) -->
     <div class="hero-text">
       <div class="hero-tag" data-i18n="hero_tag">Insurance · Verification · Trust</div>
       <h1 class="hero-h1"><span data-i18n="hero_h1_pre">Your car insurance,<br>in one </span><span id="tw-target"></span><span class="tw-cursor"></span></h1>
@@ -628,6 +667,27 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
       </p>
     </div>
 
+    <!-- RIGHT: business card -->
+    <div class="hero-biz-card">
+      <div class="hbc-eyebrow">For Partners &amp; Insurers</div>
+      <div class="hbc-h">Trust.<br><span class="hbc-accent">Verified.</span></div>
+      <div class="hbc-sub">Driven for Data</div>
+      <a class="hbc-btn" href="/mulberry_app.html">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Mulberry for Business
+      </a>
+      <div class="hbc-divider"></div>
+      <div class="hbc-stat">
+        <div>
+          <div class="hbc-stat-val">100%</div>
+          <div class="hbc-stat-lbl">Verified data</div>
+        </div>
+        <div style="text-align:right">
+          <div class="hbc-stat-val">3s</div>
+          <div class="hbc-stat-lbl">Scan to verify</div>
+        </div>
+      </div>
+    </div>
 
   </div>
 </section>
