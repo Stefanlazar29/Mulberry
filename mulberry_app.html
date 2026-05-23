@@ -58,8 +58,8 @@ a{color:inherit;text-decoration:none}
 .auth-left::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;background:radial-gradient(circle,rgba(236,255,84,.07) 0%,transparent 70%);pointer-events:none}
 .auth-left::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(236,255,84,.04) 0%,transparent 70%);pointer-events:none}
 .al-logo{display:flex;align-items:center;gap:11px;margin-bottom:auto}
-.al-mark{width:40px;height:40px;flex-shrink:0;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-.al-name{font-size:20px;font-weight:800;letter-spacing:-.3px;color:#fff}
+.al-wordmark{height:36px;width:auto;display:block}
+.sb-wordmark{height:28px;width:auto;display:block}
 .al-hero{padding:60px 0 40px;position:relative;z-index:1}
 .al-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(236,255,84,.12);border:1px solid rgba(236,255,84,.22);color:var(--yellow);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:22px;text-transform:uppercase;letter-spacing:.08em}
 .al-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
@@ -305,10 +305,7 @@ a{color:inherit;text-decoration:none}
 
   <div class="auth-left">
     <div class="al-logo">
-      <div class="al-mark">
-        <img src="/logo.svg" alt="Mulberry" style="width:40px;height:34px;display:block">
-      </div>
-      <span class="al-name">Mulberry</span>
+      <img src="/mulberry-wordmark.svg" alt="Mulberry" class="al-wordmark">
     </div>
     <div class="al-hero">
       <div class="al-tag"><span class="al-tag-dot"></span>B2B2C Insurance Platform</div>
@@ -381,11 +378,8 @@ a{color:inherit;text-decoration:none}
 
   <aside class="sidebar" id="sidebar">
     <div class="sb-logo">
-      <div class="sb-logo-mark">
-        <img src="/logo.svg" alt="Mulberry" style="width:32px;height:27px;display:block">
-      </div>
-      <div>
-        <div class="sb-logo-name">Mulberry</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <img src="/mulberry-wordmark.svg" alt="Mulberry" class="sb-wordmark">
         <div class="sb-logo-ver">B2B2C · Assurance</div>
       </div>
     </div>
