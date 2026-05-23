@@ -161,50 +161,59 @@ nav {
 .hero-stars { color: var(--yellow); font-size: 13px; letter-spacing: 2px; opacity: .8; }
 .hero-social-txt { font-size: 11.5px; font-weight: 400; color: rgba(255,255,255,.35); }
 
-/* Right col — business card (dark glass on green) */
+/* Right col — DataCamp-style white business panel */
 .hero-biz-card {
-  background: rgba(0,0,0,.54);
-  backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255,255,255,.13);
-  border-radius: 18px; padding: 30px 26px 28px;
-  box-shadow: 0 28px 64px rgba(0,0,0,.5);
-  display: flex; flex-direction: column; gap: 0;
+  background: var(--white);
+  border-radius: 18px; padding: 30px 24px 26px;
+  box-shadow: 0 32px 80px rgba(0,0,0,.45);
+  display: flex; flex-direction: column;
+  align-self: stretch;
 }
-.hbc-eyebrow {
-  font-size: 9px; font-weight: 700; letter-spacing: .2em;
-  text-transform: uppercase; color: rgba(255,255,255,.35);
-  margin-bottom: 14px;
+.hbc-overtitle {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 14px;
 }
-.hbc-h {
+.hbc-headline {
   font-family: var(--font-head);
-  font-size: 34px; font-weight: 800; line-height: 1.04;
-  letter-spacing: -.4px; color: var(--white);
-  margin-bottom: 10px;
+  font-size: 19px; font-weight: 700; line-height: 1.3;
+  color: var(--black); margin-bottom: 18px;
 }
-.hbc-h .hbc-accent { color: var(--yellow); }
-.hbc-sub {
-  font-size: 13px; font-weight: 300;
-  color: rgba(255,255,255,.48); margin-bottom: 28px;
-  letter-spacing: .02em;
-}
+.hbc-accent { color: #00B86A; }
 .hbc-btn {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  background: var(--yellow); color: var(--black);
-  font-family: var(--font-head); font-size: 14px; font-weight: 800;
-  padding: 13px 18px; border-radius: 10px;
-  transition: opacity .15s; letter-spacing: -.1px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--black); color: var(--white);
+  font-family: var(--font-head); font-size: 14px; font-weight: 700;
+  padding: 12px 18px; border-radius: 10px; transition: opacity .15s;
 }
-.hbc-btn:hover { opacity: .88; }
-.hbc-divider {
-  height: 1px; background: rgba(255,255,255,.1);
-  margin: 20px 0;
+.hbc-btn:hover { opacity: .82; }
+.hbc-divider { height: 1px; background: var(--border); margin: 20px 0; }
+.hbc-logos-ttl {
+  font-size: 9px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
 }
-.hbc-stat { display: flex; justify-content: space-between; align-items: center; }
-.hbc-stat-val {
-  font-family: var(--font-head); font-size: 22px; font-weight: 800;
-  color: var(--white); letter-spacing: -.3px;
+.hbc-logo-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px; font-weight: 600; color: var(--black);
 }
-.hbc-stat-lbl { font-size: 11px; font-weight: 400; color: rgba(255,255,255,.38); }
+.hbc-logo-row:last-child { border-bottom: none; }
+.hbc-logo-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: #00B86A; flex-shrink: 0;
+}
+.hbc-visual { margin-top: auto; padding-top: 18px; }
+.hbc-visual-pill {
+  background: #F0FFF6; border: 1px solid #C6F0D8;
+  border-radius: 12px; padding: 13px 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.hbc-visual-ico {
+  width: 30px; height: 30px; background: #00B86A;
+  border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.hbc-visual-ico svg { width: 15px; height: 15px; stroke: var(--white); stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.hbc-visual-txt { font-family: var(--font-head); font-size: 12px; font-weight: 700; color: var(--black); }
+.hbc-visual-sub { font-size: 10.5px; font-weight: 400; color: var(--muted); }
 
 /* Center col — signup card (glassmorphism) */
 .hero-card {
@@ -667,24 +676,30 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
       </p>
     </div>
 
-    <!-- RIGHT: business card -->
+    <!-- RIGHT: DataCamp-style white business panel -->
     <div class="hero-biz-card">
-      <div class="hbc-eyebrow">For Partners &amp; Insurers</div>
-      <div class="hbc-h">Trust.<br><span class="hbc-accent">Verified.</span></div>
-      <div class="hbc-sub">Driven for Data</div>
-      <a class="hbc-btn" href="/mulberry_app.html">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Mulberry for Business
-      </a>
+      <div class="hbc-overtitle">For Insurers &amp; Partners</div>
+      <div class="hbc-headline">
+        Mulberry verifies your drivers.<br>
+        <span class="hbc-accent">We protect their data.</span>
+      </div>
+      <a class="hbc-btn" href="/mulberry_app.html">Mulberry for Business</a>
       <div class="hbc-divider"></div>
-      <div class="hbc-stat">
-        <div>
-          <div class="hbc-stat-val">100%</div>
-          <div class="hbc-stat-lbl">Verified data</div>
-        </div>
-        <div style="text-align:right">
-          <div class="hbc-stat-val">3s</div>
-          <div class="hbc-stat-lbl">Scan to verify</div>
+      <div class="hbc-logos-ttl">Trusted by</div>
+      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>Allianz Țiriac</div>
+      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>Generali România</div>
+      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>OMNIASIG</div>
+      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>ASIROM Vienna</div>
+      <div class="hbc-logo-row"><span class="hbc-logo-dot"></span>Groupama</div>
+      <div class="hbc-visual">
+        <div class="hbc-visual-pill">
+          <div class="hbc-visual-ico">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          </div>
+          <div>
+            <div class="hbc-visual-txt">YellowCard · Verified</div>
+            <div class="hbc-visual-sub">Scan to verify in 3 seconds</div>
+          </div>
         </div>
       </div>
     </div>
