@@ -35,39 +35,61 @@ a { text-decoration: none; color: inherit; }
 /* ── NAV ────────────────────────────────────────── */
 nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(255,255,255,.92);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  height: 64px; display: flex; align-items: center;
+  background: #000;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  height: 66px; display: flex; align-items: center;
 }
 .nav-inner {
   max-width: var(--max); margin: 0 auto; padding: 0 32px;
-  width: 100%; display: flex; align-items: center; gap: 40px;
+  width: 100%; display: flex; align-items: center; gap: 36px;
 }
-.nav-logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.nav-logo-img { height: 28px; width: auto; display: block; }
+.nav-logo { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
+.nav-logo-img { height: 32px; width: auto; display: block; }
 .logo-mark-sm {
   border-radius: 9px; overflow: hidden; flex-shrink: 0;
-  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  box-shadow: 0 0 14px rgba(236,255,84,.22);
 }
-.nav-logo-info { display: flex; flex-direction: column; line-height: 1; }
-.nav-logo-name { font-family: var(--font-head); font-size: 17px; font-weight: 800; letter-spacing: -.2px; }
-.nav-logo-sub  { font-size: 9px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; margin-top: 2px; }
-.nav-links { display: flex; gap: 32px; flex: 1; }
-.nav-links a { font-size: 14px; font-weight: 500; color: var(--black); opacity: .65; transition: opacity .15s; }
-.nav-links a:hover { opacity: 1; }
+.nav-logo-name { font-family: var(--font-head); font-size: 20px; font-weight: 800; letter-spacing: -.3px; color: var(--white); }
+.nav-logo-sub  { display: none; }
+.nav-links { display: flex; gap: 4px; flex: 1; }
+.nav-links a {
+  font-size: 14px; font-weight: 500; color: rgba(255,255,255,.62);
+  padding: 7px 13px; border-radius: 7px;
+  transition: background .15s, color .15s;
+}
+.nav-links a:hover, .nav-links a.nav-active {
+  background: var(--white); color: var(--black);
+}
 .nav-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
-.nav-lang { font-size: 13px; font-weight: 500; color: var(--muted); margin-right: 10px; }
-.nav-signin { font-size: 14px; font-weight: 500; padding: 9px 18px; border-radius: 8px; transition: background .15s; }
-.nav-signin:hover { background: var(--gray); }
+/* Language toggle pill */
+.nav-lang {
+  display: flex; align-items: center;
+  background: rgba(255,255,255,.09);
+  border-radius: 8px; overflow: hidden;
+  margin-right: 6px;
+}
+.nav-lang-btn {
+  font-size: 12px; font-weight: 700; letter-spacing: .04em;
+  padding: 6px 12px; color: rgba(255,255,255,.45);
+  cursor: pointer; border: none; background: transparent;
+  font-family: var(--font); transition: background .14s, color .14s;
+}
+.nav-lang-btn.active {
+  background: var(--white); color: var(--black); border-radius: 7px;
+}
+.nav-signin {
+  font-size: 14px; font-weight: 500; padding: 9px 16px; border-radius: 8px;
+  color: rgba(255,255,255,.65); transition: background .15s, color .15s;
+}
+.nav-signin:hover { background: rgba(255,255,255,.1); color: var(--white); }
 .nav-signup {
   font-size: 14px; font-weight: 700;
-  background: var(--navy); color: var(--white);
+  background: var(--yellow); color: var(--black);
   padding: 9px 20px; border-radius: 8px;
   display: flex; align-items: center; gap: 6px;
   transition: opacity .15s;
 }
-.nav-signup:hover { opacity: .84; }
+.nav-signup:hover { opacity: .88; }
 
 /* ── TICKER ─────────────────────────────────────── */
 .ticker { background: var(--navy); overflow: hidden; padding: 10px 0; }
@@ -532,20 +554,20 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
   <div class="nav-inner">
     <a class="nav-logo" href="/">
       <div class="logo-mark-sm"><img src="/logo.svg" alt="Mulberry" class="nav-logo-img"></div>
-      <div class="nav-logo-info">
-        <span class="nav-logo-name">Mulberry</span>
-        <span class="nav-logo-sub">Car Insurance · Romania</span>
-      </div>
+      <span class="nav-logo-name">Mulberry</span>
     </a>
     <div class="nav-links">
-      <a href="#">About</a>
-      <a href="#">Marketplace</a>
-      <a href="#">Partners</a>
+      <a href="#" data-i18n="nav_about">About</a>
+      <a href="#" data-i18n="nav_marketplace">Marketplace</a>
+      <a href="#" data-i18n="nav_partners">Partners</a>
     </div>
     <div class="nav-actions">
-      <span class="nav-lang">EN → RO</span>
-      <a class="nav-signin" href="/mulberry_app.html">Log in</a>
-      <a class="nav-signup" href="/mulberry_app.html">Get started →</a>
+      <div class="nav-lang">
+        <button class="nav-lang-btn active" data-lang="en">EN</button>
+        <button class="nav-lang-btn" data-lang="ro">RO</button>
+      </div>
+      <a class="nav-signin" href="/mulberry_app.html" data-i18n="nav_login">Log in</a>
+      <a class="nav-signup" href="/mulberry_app.html" data-i18n="nav_cta">Get started →</a>
     </div>
   </div>
 </nav>
@@ -579,9 +601,9 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 
     <!-- LEFT: headline -->
     <div class="hero-text">
-      <div class="hero-tag">Insurance · Verification · Trust</div>
-      <h1 class="hero-h1">Your car insurance,<br>in one <span id="tw-target"></span><span class="tw-cursor"></span></h1>
-      <p class="hero-desc">Every road you've driven. Every service. Every policy.<br>Mulberry holds it all — intact, verified, and yours to share with one scan.</p>
+      <div class="hero-tag" data-i18n="hero_tag">Insurance · Verification · Trust</div>
+      <h1 class="hero-h1"><span data-i18n="hero_h1_pre">Your car insurance,<br>in one </span><span id="tw-target"></span><span class="tw-cursor"></span></h1>
+      <p class="hero-desc" data-i18n="hero_desc">Every road you've driven. Every service. Every policy.<br>Mulberry holds it all — intact, verified, and yours to share with one scan.</p>
       <div class="hero-social">
         <span class="hero-stars">★★★★★</span>
         <span class="hero-social-txt">Trusted by drivers across Romania</span>
@@ -590,16 +612,16 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 
     <!-- CENTER: signup card -->
     <div class="hero-card">
-      <div class="hero-card-ttl">Get your free YellowCard</div>
-      <div class="hero-card-sub">Free for drivers · No credit card required</div>
+      <div class="hero-card-ttl" data-i18n="card_ttl">Get your free YellowCard</div>
+      <div class="hero-card-sub" data-i18n="card_sub">Free for drivers · No credit card required</div>
       <a class="hero-card-cta" href="/mulberry_app.html">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Sign up — it's free
+        <span data-i18n="card_cta">Sign up — it's free</span>
       </a>
-      <div class="hero-card-or">or</div>
+      <div class="hero-card-or" data-i18n="card_or">or</div>
       <a class="hero-card-email" href="/mulberry_app.html">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/></svg>
-        Continue with email
+        <span data-i18n="card_email">Continue with email</span>
       </a>
       <p class="hero-card-terms">
         By continuing, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>. Data stored in Romania.
@@ -618,8 +640,8 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
         <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       </div>
       <div>
-        <div class="feat-title">Register your vehicle <span class="feat-arrow">›</span></div>
-        <p class="feat-desc">Plate, VIN and owner — get your YellowCard in under 2 minutes, free.</p>
+        <div class="feat-title"><span data-i18n="feat1_title">Register your vehicle</span> <span class="feat-arrow">›</span></div>
+        <p class="feat-desc" data-i18n="feat1_desc">Plate, VIN and owner — get your YellowCard in under 2 minutes, free.</p>
       </div>
     </a>
     <a class="feat-card" href="/mulberry_app.html">
@@ -627,8 +649,8 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
         <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
       </div>
       <div>
-        <div class="feat-title">Get AI insurance offers <span class="feat-arrow">›</span></div>
-        <p class="feat-desc">MulberryAI reads your plate and proposes the best RCA and CASCO deals.</p>
+        <div class="feat-title"><span data-i18n="feat2_title">Get AI insurance offers</span> <span class="feat-arrow">›</span></div>
+        <p class="feat-desc" data-i18n="feat2_desc">MulberryAI reads your plate and proposes the best RCA and CASCO deals.</p>
       </div>
     </a>
     <a class="feat-card" href="/mulberry_app.html">
@@ -636,8 +658,8 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
       </div>
       <div>
-        <div class="feat-title">Share your history <span class="feat-arrow">›</span></div>
-        <p class="feat-desc">Public QR code — anyone can verify your insurance and service history instantly.</p>
+        <div class="feat-title"><span data-i18n="feat3_title">Share your history</span> <span class="feat-arrow">›</span></div>
+        <p class="feat-desc" data-i18n="feat3_desc">Public QR code — anyone can verify your insurance and service history instantly.</p>
       </div>
     </a>
   </div>
@@ -650,19 +672,19 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
     <div class="bsep-grid">
       <div class="bsep-item">
         <div class="bsep-num">01</div>
-        <div class="bsep-text">Your history, complete and tamper-proof</div>
+        <div class="bsep-text" data-i18n="bsep1">Your history, complete and tamper-proof</div>
       </div>
       <div class="bsep-item">
         <div class="bsep-num">02</div>
-        <div class="bsep-text">One QR. Every insurer. Instant trust.</div>
+        <div class="bsep-text" data-i18n="bsep2">One QR. Every insurer. Instant trust.</div>
       </div>
       <div class="bsep-item">
         <div class="bsep-num">03</div>
-        <div class="bsep-text">AI that reads your car, not just a form</div>
+        <div class="bsep-text" data-i18n="bsep3">AI that reads your car, not just a form</div>
       </div>
       <div class="bsep-item">
         <div class="bsep-num">04</div>
-        <div class="bsep-text">Reminders before the deadline, not after</div>
+        <div class="bsep-text" data-i18n="bsep4">Reminders before the deadline, not after</div>
       </div>
     </div>
   </div>
@@ -812,45 +834,78 @@ const API = (window.Config && window.Config.apiBaseUrl) || 'http://46.225.100.15
 fetch(API + '/api/stats', { signal: AbortSignal.timeout(5000) })
   .then(r => r.json()).then(() => {}).catch(() => {});
 
+/* ── i18n ── */
+(function () {
+  const t = {
+    en: {
+      nav_about: 'About', nav_marketplace: 'Marketplace', nav_partners: 'Partners',
+      nav_login: 'Log in', nav_cta: 'Get started →',
+      hero_tag: 'Insurance · Verification · Trust',
+      hero_h1_pre: 'Your car insurance,<br>in one ',
+      hero_desc: 'Every road you’ve driven. Every service. Every policy.<br>Mulberry holds it all — intact, verified, and yours to share with one scan.',
+      card_ttl: 'Get your free YellowCard', card_sub: 'Free for drivers · No credit card required',
+      card_cta: 'Sign up — it’s free', card_email: 'Continue with email', card_or: 'or',
+      feat1_title: 'Register your vehicle', feat1_desc: 'Plate, VIN and owner — get your YellowCard in under 2 minutes, free.',
+      feat2_title: 'Get AI insurance offers', feat2_desc: 'MulberryAI reads your plate and proposes the best RCA and CASCO deals.',
+      feat3_title: 'Share your history', feat3_desc: 'Public QR code — anyone can verify your insurance and service history instantly.',
+      bsep1: 'Your history, complete and tamper-proof', bsep2: 'One QR. Every insurer. Instant trust.',
+      bsep3: 'AI that reads your car, not just a form', bsep4: 'Reminders before the deadline, not after',
+    },
+    ro: {
+      nav_about: 'Despre', nav_marketplace: 'Piață', nav_partners: 'Parteneri',
+      nav_login: 'Autentificare', nav_cta: '\xCEncepe →',
+      hero_tag: 'Asigurare · Verificare · \xCEncredere',
+      hero_h1_pre: 'Asigurarea ta auto,<br>într-un singur ',
+      hero_desc: 'Fiecare drum parcurs. Fiecare revizie. Fiecare poliță.<br>Mulberry le păstrează pe toate — integre, verificate, ale tale la un scan.',
+      card_ttl: 'Obține YellowCard gratuit', card_sub: 'Gratuit pentru şoferi · Fără card de credit',
+      card_cta: '\xCEnregistrează-te — gratuit', card_email: 'Continuă cu email', card_or: 'sau',
+      feat1_title: '\xCEnregistrează vehiculul', feat1_desc: 'Număr, VIN şi proprietar — obții YellowCard \xeen sub 2 minute, gratuit.',
+      feat2_title: 'Oferte AI de asigurare', feat2_desc: 'MulberryAI citeşte numărul tău şi propune cele mai bune oferte RCA şi CASCO.',
+      feat3_title: 'Partajează istoricul', feat3_desc: 'Cod QR public — oricine \xeeți poate verifica asigurarea şi istoricul instant.',
+      bsep1: 'Istoricul tău, complet şi nealterabil', bsep2: 'Un QR. Orice asigurător. \xCEncredere instant.',
+      bsep3: 'AI care citeşte maşina, nu formularul', bsep4: 'Notificări \xeenainte de termen, nu după',
+    }
+  };
+
+  function applyLang(l) {
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.dataset.i18n, val = t[l][key];
+      if (val === undefined) return;
+      /* use innerHTML only for elements that carry HTML (br, entities) */
+      if (val.indexOf('<') !== -1) el.innerHTML = val;
+      else el.textContent = val;
+    });
+    document.querySelectorAll('.nav-lang-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.lang === l);
+    });
+  }
+
+  document.querySelectorAll('.nav-lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { applyLang(btn.dataset.lang); });
+  });
+})();
+
 /* ── typewriter ── */
 (function () {
   const words = ['YellowCard.', 'MulberryID.'];
-  const el    = document.getElementById('tw-target');
-  const cur   = document.querySelector('.tw-cursor');
+  const el = document.getElementById('tw-target');
   if (!el) return;
-
   let wi = 0, ci = 0, deleting = false;
 
   function tick() {
     const word = words[wi];
-
     if (!deleting) {
       ci++;
       el.textContent = word.slice(0, ci);
-      if (ci === word.length) {
-        /* pause 2 s at full word, then start deleting */
-        setTimeout(() => { deleting = true; tick(); }, 2000);
-        return;
-      }
+      if (ci === word.length) { setTimeout(function(){ deleting = true; tick(); }, 2000); return; }
       setTimeout(tick, 88);
     } else {
       ci--;
       el.textContent = word.slice(0, ci);
-      if (ci === 0) {
-        deleting = false;
-        wi = (wi + 1) % words.length;
-        /* brief pause before typing next word */
-        setTimeout(tick, 340);
-        return;
-      }
+      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; setTimeout(tick, 340); return; }
       setTimeout(tick, 52);
     }
   }
-
-  /* hide cursor while typing second colour word */
-  const origColor = getComputedStyle(document.documentElement)
-    .getPropertyValue('--yellow').trim();
-
   setTimeout(tick, 700);
 })();
 </script>
