@@ -518,60 +518,103 @@ nav {
 .pc-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1.65; }
 
 /* ── MULBERRY TRUST ──────────────────────────────── */
-.trust { background: #fff; padding: 96px 32px; }
-.trust-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.trust-left {}
-.trust-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #f0fdf4; border: 1px solid #bbf7d0;
-  border-radius: 100px; padding: 5px 14px;
-  font-size: 11px; font-weight: 700; color: #16a34a;
-  letter-spacing: .1em; text-transform: uppercase;
-  margin-bottom: 24px;
+.trust { background: #fff; padding: 100px 32px 80px; overflow: hidden; }
+.trust-inner { max-width: 860px; margin: 0 auto; text-align: center; }
+
+/* Headline row */
+.trust-hl {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 14px;
+  font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800;
+  letter-spacing: -.04em; color: #0a0a0a; line-height: 1;
+  margin-bottom: 64px;
 }
-.trust-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
-.trust-logo-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.trust-logo-mark {
-  width: 56px; height: 56px; flex-shrink: 0;
-  background: linear-gradient(135deg, #22c55e 0%, #a855f7 50%, #14b8a6 100%);
-  border-radius: 14px;
+.trust-pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  border: 1.5px solid #d1d5db; border-radius: 100px;
+  padding: 8px 18px 8px 10px;
+  font-size: clamp(1.1rem, 2.5vw, 1.8rem); font-weight: 800;
+  letter-spacing: -.03em; color: #0a0a0a;
+  background: #fff;
+}
+.trust-pill-mark {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(135deg, #22c55e 0%, #a855f7 55%, #14b8a6 100%);
   display: flex; align-items: center; justify-content: center;
 }
-.trust-logo-mark svg { width: 34px; height: 34px; }
-.trust-wordmark { font-size: 2rem; font-weight: 800; letter-spacing: -.03em; color: #0a0a0a; line-height: 1; }
-.trust-wordmark span { background: linear-gradient(90deg, #a855f7 0%, #14b8a6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-.trust-tagline { font-size: 1.05rem; font-weight: 400; color: #6b7280; line-height: 1.6; margin-bottom: 40px; max-width: 400px; }
-.trust-tagline strong { color: #0a0a0a; font-weight: 700; }
-.trust-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #0a0a0a; color: #fff;
-  padding: 13px 24px; border-radius: 10px;
-  font-size: 14px; font-weight: 700; text-decoration: none;
-  transition: opacity .15s;
+.trust-pill-mark svg { width: 22px; height: 22px; }
+.trust-pill-word { background: linear-gradient(90deg, #7c3aed 0%, #0d9488 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.trust-star { color: #7c3aed; font-size: clamp(1.6rem, 3.5vw, 2.6rem); line-height: 1; }
+
+/* Phone mockup */
+.trust-phone-wrap {
+  display: flex; justify-content: center;
+  margin-bottom: 72px;
 }
-.trust-cta:hover { opacity: .85; }
-.trust-right { display: flex; flex-direction: column; gap: 16px; }
-.trust-item {
-  display: flex; align-items: flex-start; gap: 16px;
+.trust-phone {
+  width: 260px;
+  background: #1a1a1a;
+  border-radius: 36px;
+  padding: 14px;
+  box-shadow: 0 40px 80px rgba(0,0,0,.18), 0 0 0 1px rgba(0,0,0,.12), inset 0 0 0 1px rgba(255,255,255,.08);
+  position: relative;
+}
+.trust-phone::before {
+  content: '';
+  position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+  width: 72px; height: 22px;
+  background: #1a1a1a; border-radius: 0 0 14px 14px; z-index: 2;
+}
+.trust-phone-screen {
+  background: linear-gradient(135deg, #14b8a6 0%, #8b5cf6 50%, #d946ef 100%);
+  border-radius: 24px; overflow: hidden;
+  padding: 40px 24px 32px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 320px; position: relative;
+}
+.trust-phone-screen::before {
+  content: '9:41';
+  position: absolute; top: 16px; left: 24px;
+  font-size: 11px; font-weight: 700; color: rgba(255,255,255,.85);
+  letter-spacing: .02em;
+}
+.trust-card-logo {
+  width: 52px; height: 52px; margin-bottom: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.trust-card-logo svg { width: 52px; height: 52px; }
+.trust-card-label {
+  font-size: 28px; font-weight: 700; color: #fff;
+  letter-spacing: -.02em;
+}
+
+/* Benefits grid */
+.trust-benefits {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  text-align: left;
+}
+.trust-ben {
   background: #fafafa; border: 1px solid #f0f0f0;
-  border-radius: 14px; padding: 22px 24px;
+  border-radius: 16px; padding: 24px 22px;
   transition: box-shadow .2s, border-color .2s;
 }
-.trust-item:hover { box-shadow: 0 4px 20px rgba(0,0,0,.06); border-color: #e0e0e0; }
-.trust-item-ico {
-  width: 44px; height: 44px; flex-shrink: 0; border-radius: 11px;
+.trust-ben:hover { box-shadow: 0 8px 32px rgba(0,0,0,.07); border-color: #e5e7eb; }
+.trust-ben-ico {
+  width: 40px; height: 40px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
+  margin-bottom: 14px;
 }
-.trust-item-ico.green  { background: #f0fdf4; }
-.trust-item-ico.purple { background: #faf5ff; }
-.trust-item-ico.teal   { background: #f0fdfa; }
-.trust-item-ico svg { width: 22px; height: 22px; }
-.trust-item-body {}
-.trust-item-title { font-size: 15px; font-weight: 700; color: #0a0a0a; margin-bottom: 4px; }
-.trust-item-desc { font-size: 13px; color: #6b7280; line-height: 1.6; }
+.trust-ben-ico.g { background: #f0fdf4; }
+.trust-ben-ico.p { background: #faf5ff; }
+.trust-ben-ico.t { background: #f0fdfa; }
+.trust-ben-ico svg { width: 20px; height: 20px; }
+.trust-ben-title { font-size: 14px; font-weight: 700; color: #0a0a0a; margin-bottom: 6px; }
+.trust-ben-desc { font-size: 12.5px; color: #6b7280; line-height: 1.65; }
 @media (max-width: 768px) {
-  .trust-inner { grid-template-columns: 1fr; gap: 48px; }
-  .trust { padding: 64px 20px; }
+  .trust { padding: 64px 20px 56px; }
+  .trust-benefits { grid-template-columns: 1fr; }
+  .trust-phone { width: 220px; }
+  .trust-phone-screen { min-height: 260px; }
 }
 
 /* ── PARTNERS CTA ────────────────────────────────── */
@@ -845,54 +888,65 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
 <section class="trust">
   <div class="trust-inner">
 
-    <div class="trust-left">
-      <div class="trust-badge"><span class="trust-badge-dot"></span>Program de certificare</div>
-      <div class="trust-logo-row">
-        <div class="trust-logo-mark">
-          <svg viewBox="0 0 262 218" xmlns="http://www.w3.org/2000/svg" fill="none">
+    <!-- Headline Apple-style -->
+    <div class="trust-hl">
+      <span>Get</span>
+      <div class="trust-pill">
+        <div class="trust-pill-mark">
+          <svg viewBox="0 0 262 218" xmlns="http://www.w3.org/2000/svg">
             <path fill="white" d="M96.861572,118.084030 C97.029518,120.882790 96.421371,122.099976 93.577713,122.066284 C80.934906,121.916496 68.289314,122.001328 55.668179,122.001328 C52.690945,93.419327 78.224258,51.846504 123.023270,47.175724 C165.442413,42.753059 204.047531,77.584503 204.885315,121.617363 C191.185471,121.617363 177.484940,121.617363 163.402390,121.617363 C162.654221,110.776733 158.437820,101.565544 149.385803,94.948090 C143.248291,90.461281 136.361481,88.336647 128.801987,88.683388 C112.131081,89.448067 99.432487,101.043526 96.861572,118.084030z"/>
             <path fill="white" d="M157.999786,138.830322 C164.162888,138.832779 169.827957,138.923935 175.488495,138.803558 C178.753693,138.734116 181.614380,139.966537 181.718506,143.108810 C181.796234,145.455154 180.415695,148.918320 178.556488,150.082153 C168.557007,156.341690 158.388382,162.390366 147.926956,167.837357 C135.168152,174.480591 122.200729,173.649734 109.718468,166.750534 C100.405632,161.603149 91.313904,156.057098 82.076164,150.771667 C78.995720,149.009171 77.178337,146.646027 78.089699,143.043259 C79.061211,139.202698 82.118904,138.789703 85.544411,138.798706 C109.529427,138.861725 133.514679,138.831039 157.999786,138.830322z"/>
           </svg>
         </div>
-        <div class="trust-wordmark">Mulberry <span>Trust</span></div>
+        Mulberry&nbsp;<span class="trust-pill-word">Trust</span>
       </div>
-      <p class="trust-tagline"><strong>Get verified.</strong> Statut digital de încredere pentru șoferi, parteneri și vehicule — validat prin datele Mulberry.</p>
-      <a href="/mulberry_app.html" class="trust-cta">Aplică pentru verificare →</a>
+      <span>Get verified.</span>
+      <span class="trust-star">★</span>
     </div>
 
-    <div class="trust-right">
-      <div class="trust-item">
-        <div class="trust-item-ico green">
+    <!-- iPhone mockup -->
+    <div class="trust-phone-wrap">
+      <div class="trust-phone">
+        <div class="trust-phone-screen">
+          <div class="trust-card-logo">
+            <svg viewBox="0 0 262 218" xmlns="http://www.w3.org/2000/svg">
+              <path fill="white" d="M96.861572,118.084030 C97.029518,120.882790 96.421371,122.099976 93.577713,122.066284 C80.934906,121.916496 68.289314,122.001328 55.668179,122.001328 C52.690945,93.419327 78.224258,51.846504 123.023270,47.175724 C165.442413,42.753059 204.047531,77.584503 204.885315,121.617363 C191.185471,121.617363 177.484940,121.617363 163.402390,121.617363 C162.654221,110.776733 158.437820,101.565544 149.385803,94.948090 C143.248291,90.461281 136.361481,88.336647 128.801987,88.683388 C112.131081,89.448067 99.432487,101.043526 96.861572,118.084030z"/>
+              <path fill="white" d="M157.999786,138.830322 C164.162888,138.832779 169.827957,138.923935 175.488495,138.803558 C178.753693,138.734116 181.614380,139.966537 181.718506,143.108810 C181.796234,145.455154 180.415695,148.918320 178.556488,150.082153 C168.557007,156.341690 158.388382,162.390366 147.926956,167.837357 C135.168152,174.480591 122.200729,173.649734 109.718468,166.750534 C100.405632,161.603149 91.313904,156.057098 82.076164,150.771667 C78.995720,149.009171 77.178337,146.646027 78.089699,143.043259 C79.061211,139.202698 82.118904,138.789703 85.544411,138.798706 C109.529427,138.861725 133.514679,138.831039 157.999786,138.830322z"/>
+            </svg>
+          </div>
+          <div class="trust-card-label">Trust</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Benefits Apple-style grid -->
+    <div class="trust-benefits">
+      <div class="trust-ben">
+        <div class="trust-ben-ico g">
           <svg viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
           </svg>
         </div>
-        <div class="trust-item-body">
-          <div class="trust-item-title">Verified user status</div>
-          <div class="trust-item-desc">Insignă digitală vizibilă pe profilul tău — confirmă că identitatea, asigurarea și istoricul sunt verificate de Mulberry.</div>
-        </div>
+        <div class="trust-ben-title">Verified user status</div>
+        <div class="trust-ben-desc">Insignă digitală pe profilul tău — identitate, asigurare și istoric verificate de Mulberry.</div>
       </div>
-      <div class="trust-item">
-        <div class="trust-item-ico purple">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="trust-ben">
+        <div class="trust-ben-ico p">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
           </svg>
         </div>
-        <div class="trust-item-body">
-          <div class="trust-item-title">Top partner performers</div>
-          <div class="trust-item-desc">Service-urile și asigurătorii cu cele mai bune performanțe primesc certificare Mulberry Trust — vizibilitate maximă în rețea.</div>
-        </div>
+        <div class="trust-ben-title">Top partner performers</div>
+        <div class="trust-ben-desc">Certificare Mulberry Trust pentru service-urile și asigurătorii cu cele mai bune performanțe în rețea.</div>
       </div>
-      <div class="trust-item">
-        <div class="trust-item-ico teal">
+      <div class="trust-ben">
+        <div class="trust-ben-ico t">
           <svg viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><polyline points="9 10 12 13 15 10"/>
           </svg>
         </div>
-        <div class="trust-item-body">
-          <div class="trust-item-title">Certified vehicle profiles</div>
-          <div class="trust-item-desc">Vehiculele cu istoric complet și documente valide primesc profilul Certified — verificabil instant prin QR de oricine.</div>
-        </div>
+        <div class="trust-ben-title">Certified vehicle profiles</div>
+        <div class="trust-ben-desc">Profilul Certified pentru vehicule cu istoric complet — verificabil instant prin QR de oricine.</div>
       </div>
     </div>
 
