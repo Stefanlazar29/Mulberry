@@ -359,8 +359,8 @@ a{color:inherit;text-decoration:none}
 .gd-svc:hover .gd-svc-arr{color:rgba(255,255,255,.6)}
 
 /* ══ DARK ANALYTICS DASHBOARD (Gogo-style) ══════════════════ */
-#panel-analytics{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#0d0d0e;color:#fff}
-@media(max-width:768px){#panel-analytics{margin:-16px -14px;min-height:calc(100% + 32px)}}
+#panel-dashboard,#panel-analytics{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#0d0d0e;color:#fff}
+@media(max-width:768px){#panel-dashboard,#panel-analytics{margin:-16px -14px;min-height:calc(100% + 32px)}}
 .gd{display:flex;flex-direction:column;gap:14px;padding:28px 32px}
 @media(max-width:768px){.gd{padding:18px 16px;gap:12px}}
 
@@ -609,7 +609,7 @@ a{color:inherit;text-decoration:none}
     <div class="sb-sep"></div>
     <div class="sb-label">Navigare</div>
 
-    <button class="nav-item" data-p="dashboard" onclick="goPanel('dashboard')">
+    <button class="nav-item active" data-p="dashboard" onclick="goPanel('dashboard')">
       <span class="ni-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
       Dashboard
     </button>
@@ -622,12 +622,28 @@ a{color:inherit;text-decoration:none}
       <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
       Marketplace
     </button>
-    <button class="nav-item active" data-p="analytics" onclick="goPanel('analytics')">
-      <span class="ni-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+
+    <div class="sb-sep" style="margin-top:10px"></div>
+    <div class="sb-label">Servicii</div>
+
+    <a class="nav-item" href="/mulberry_cloud.html">
+      <span class="ni-icon" style="background:rgba(139,92,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg></span>
+      MulberryCloud
+    </a>
+    <a class="nav-item" href="/mulberry_menu.html">
+      <span class="ni-icon" style="background:rgba(59,130,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg></span>
+      MulberryHUB
+    </a>
+    <a class="nav-item" href="/mulberry_qdata.html">
+      <span class="ni-icon" style="background:rgba(236,255,84,.12)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
+      MulberryDrive
+    </a>
+    <button class="nav-item" data-p="analytics" onclick="goPanel('analytics')">
+      <span class="ni-icon" style="background:rgba(181,243,51,.15)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#b5f333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
       Analytics
     </button>
 
-    <div class="sb-sep" style="margin-top:14px"></div>
+    <div class="sb-sep" style="margin-top:10px"></div>
     <div class="sb-label">Cont</div>
 
     <button class="nav-item" data-p="settings" onclick="goPanel('settings')">
@@ -668,95 +684,92 @@ a{color:inherit;text-decoration:none}
 
   <main class="content">
 
-    <!-- DASHBOARD -->
-    <div class="panel" id="panel-dashboard">
-      <div class="ph">
-        <div class="ph-eyebrow">Overview</div>
-        <div class="ph-title" id="dash-title">Dashboard</div>
-        <div class="ph-sub" id="dash-greet">Bun venit în Mulberry</div>
-      </div>
+    <!-- DASHBOARD (dark Gogo-style) -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="gd">
 
-      <div class="g4">
-        <div class="stat-card">
-          <div class="sc-label"><div class="sc-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>Drivers</div>
-          <div class="sc-val" id="st-drivers">—</div>
-          <div class="sc-tag"><span>↑</span> Înregistrați</div>
+        <!-- Header -->
+        <div class="gd-hdr">
+          <div>
+            <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața</div>
+            <div class="gd-title">Mulberry Dashboard</div>
+          </div>
+          <div class="gd-hstats">
+            <div><div class="gd-hstat-lbl">Balanță</div><div class="gd-hstat-val">1.655,00 <sup>$</sup></div></div>
+            <div><div class="gd-hstat-lbl">Venit</div><div class="gd-hstat-val">950,00 <sup>$</sup></div></div>
+            <div><div class="gd-hstat-lbl">Cheltuieli</div><div class="gd-hstat-val">382,00 <sup>$</sup></div></div>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="sc-label"><div class="sc-ico"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>Parteneri</div>
-          <div class="sc-val" id="st-partners">—</div>
-          <div class="sc-tag"><span>●</span> Activi</div>
-        </div>
-        <div class="stat-card">
-          <div class="sc-label"><div class="sc-ico"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>Vehicule</div>
-          <div class="sc-val" id="st-vehicles">—</div>
-          <div class="sc-tag"><span>●</span> YellowCards</div>
-        </div>
-        <div class="stat-card">
-          <div class="sc-label"><div class="sc-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>Oferte</div>
-          <div class="sc-val" id="st-offers">—</div>
-          <div class="sc-tag">Marketplace</div>
-        </div>
-      </div>
 
-      <div class="g2">
-        <div>
-          <div class="ph-eyebrow" style="font-size:9.5px;margin-bottom:10px">YellowCard activ</div>
-          <div class="ycard">
-            <div class="yc-head">
-              <div>
-                <div class="yc-brand">MulberryID · MLBR</div>
-                <div class="yc-name" id="yc-name">YellowCard</div>
+        <!-- Row 1: Left stacked cards + Blue analytics -->
+        <div class="gd-r1">
+          <div class="gd-lcol">
+            <div class="gdc gdc-gray">
+              <span class="gdc-badge">29/user</span>
+              <div class="gdc-pct">65%</div>
+              <div class="gdc-lbl">Transfer</div>
+            </div>
+            <div class="gdc gdc-lime">
+              <span class="gdc-badge">8/user</span>
+              <div class="gdc-pct">31%</div>
+              <div class="gdc-lbl">Receive</div>
+            </div>
+          </div>
+          <div class="gdc gdc-blue">
+            <div class="gda-left">
+              <div class="gda-eyebrow">Analytics</div>
+              <div class="gda-pct">78%</div>
+              <div class="gda-trend">Increase <span class="gda-chip">71.2% <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span></div>
+              <div class="gda-pills">
+                <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Year-end storage improvements</button>
+                <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Increase in property investment branch</button>
               </div>
-              <div class="yc-chip">
-                <svg viewBox="0 0 24 20" fill="none">
-                  <rect x="1" y="1" width="22" height="18" rx="3" stroke="#2C0E12" stroke-width="1.5" fill="rgba(44,14,18,0.12)"/>
-                  <line x1="1" y1="7" x2="23" y2="7" stroke="#2C0E12" stroke-width="1"/>
-                  <line x1="8" y1="1" x2="8" y2="19" stroke="#2C0E12" stroke-width="1"/>
+            </div>
+            <div class="gda-right">
+              <div class="gda-donut-wrap">
+                <svg class="gda-donut" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="17" stroke-dasharray="225 64" stroke-linecap="round" transform="rotate(-90 60 60)"/>
                 </svg>
+                <div class="gda-donut-inner"><div class="gda-donut-val">78%</div><div class="gda-donut-sub">score</div></div>
               </div>
-            </div>
-            <div class="yc-fields">
-              <div><div class="yc-fl">Nr. Înmatriculare</div><div class="yc-fv" id="yc-plate">B-12-MLB</div></div>
-              <div><div class="yc-fl">VIN</div><div class="yc-fv" id="yc-vin">WA0ZZ8K9DA1</div></div>
-              <div><div class="yc-fl">Titular</div><div class="yc-fv" id="yc-owner">—</div></div>
-              <div><div class="yc-fl">Status</div><div class="yc-fv">✓ Verificat</div></div>
-            </div>
-            <div class="yc-foot">
-              <div class="yc-verify">
-                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-                100% web visibility
-              </div>
-              <div class="yc-qr">
-                <img src="/qr.png" alt="QR" style="width:46px;height:46px;display:block;border-radius:5px">
-              </div>
+              <button class="gda-arr">↗</button>
             </div>
           </div>
         </div>
 
-        <div class="acard">
-          <div class="acard-title">Activitate recentă</div>
-          <div class="act-row">
-            <div class="act-ico"><svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg></div>
-            <div class="act-main"><div class="act-txt">Autentificare</div><div class="act-meta">Sesiune activă</div></div>
-            <div class="act-time" id="at-login">—</div>
+        <!-- Row 2: Cash + Period + Payment -->
+        <div class="gd-r2">
+          <div class="gdc gdc-cash">
+            <div class="gdc-cash-top"><div class="gdc-cash-lbl">Cash</div><div class="gdc-cash-amt">816,752 <span class="gdc-cash-badge">USD</span></div></div>
+            <div class="gdc-cash-growth">+36%</div>
+            <div class="gdc-cash-sub">grow since last week</div>
+            <div class="gdc-bars">
+              <div class="gdc-bar" style="height:28%"></div>
+              <div class="gdc-bar gdc-bar-mid" style="height:45%"></div>
+              <div class="gdc-bar gdc-bar-hi" style="height:66%"></div>
+              <div class="gdc-bar gdc-bar-blue" style="height:100%"></div>
+            </div>
           </div>
-          <div class="act-row">
-            <div class="act-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <div class="act-main"><div class="act-txt">Backend API</div><div class="act-meta" id="at-api">verificare...</div></div>
-            <div class="act-time" id="at-health-time" style="color:var(--green)">—</div>
+          <div class="gdc gdc-period">
+            <div class="gdc-period-hd">
+              <div><div class="gdc-period-title">Period Analytic</div><div class="gdc-period-sub">3 Month</div></div>
+              <button class="gdc-arr-green">↗</button>
+            </div>
+            <div class="gdc-period-lbl">User Authorized</div>
+            <div class="gdc-period-val">18,785 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           </div>
-          <div class="act-row">
-            <div class="act-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
-            <div class="act-main"><div class="act-txt">YellowCard</div><div class="act-meta">Identitate digitală</div></div>
-            <div class="act-time" style="color:var(--wine);font-weight:700">MLBR</div>
-          </div>
-          <div class="act-row">
-            <div class="act-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-            <div class="act-main"><div class="act-txt">Token JWT</div><div class="act-meta">Valid 24h</div></div>
-            <div class="act-time" id="at-expire">—</div>
+          <div class="gdc gdc-pay">
+            <div class="gdc-pay-hd">
+              <div class="gdc-pay-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="17 7 12 2 7 7"/><polyline points="7 17 12 22 17 17"/></svg></div>
+              <div class="gdc-pay-title">Payment Transaction</div>
+            </div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">1,120 <sup>$</sup></div><div class="gdc-pay-name">Repayment cash</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">3,810 <sup>$</sup></div><div class="gdc-pay-name">Office leasing</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">12,760 <sup>$</sup></div><div class="gdc-pay-name">Employee salary</div></div>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -942,209 +955,61 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
 
-    <!-- ANALYTICS DARK DASHBOARD (Gogo-style) -->
-    <div class="panel active" id="panel-analytics">
+    <!-- ANALYTICS — metrici focusate -->
+    <div class="panel" id="panel-analytics">
       <div class="gd">
-
-        <!-- Header -->
         <div class="gd-hdr">
           <div>
-            <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața</div>
-            <div class="gd-title">Mulberry Dashboard</div>
+            <div class="gd-greeting">Metrici &amp; rapoarte</div>
+            <div class="gd-title">Analytics</div>
           </div>
           <div class="gd-hstats">
-            <div>
-              <div class="gd-hstat-lbl">Balanță</div>
-              <div class="gd-hstat-val">1.655,00 <sup>$</sup></div>
-            </div>
-            <div>
-              <div class="gd-hstat-lbl">Venit</div>
-              <div class="gd-hstat-val">950,00 <sup>$</sup></div>
-            </div>
-            <div>
-              <div class="gd-hstat-lbl">Cheltuieli</div>
-              <div class="gd-hstat-val">382,00 <sup>$</sup></div>
-            </div>
+            <div><div class="gd-hstat-lbl">Balanță</div><div class="gd-hstat-val">1.655,00 <sup>$</sup></div></div>
+            <div><div class="gd-hstat-lbl">Venit</div><div class="gd-hstat-val">950,00 <sup>$</sup></div></div>
+            <div><div class="gd-hstat-lbl">Cheltuieli</div><div class="gd-hstat-val">382,00 <sup>$</sup></div></div>
           </div>
         </div>
-
-        <!-- Service shortcuts -->
-        <div class="gd-services">
-          <!-- MulberryCloud -->
-          <a class="gd-svc" href="/mulberry_cloud.html">
-            <div class="gd-svc-ico" style="background:rgba(139,92,246,.18)">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
-              </svg>
+        <!-- Full analytics card -->
+        <div class="gdc gdc-blue" style="min-height:220px">
+          <div class="gda-left">
+            <div class="gda-eyebrow">Performanță financiară</div>
+            <div class="gda-pct">78%</div>
+            <div class="gda-trend">Creștere <span class="gda-chip">71.2% <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span></div>
+            <div class="gda-pills">
+              <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Îmbunătățiri stocaj anual</button>
+              <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Creștere investiții proprietăți</button>
             </div>
-            <div class="gd-svc-name">MulberryCloud</div>
-            <div class="gd-svc-desc">Stocare &amp; documente</div>
-            <div class="gd-svc-arr">↗</div>
-          </a>
-          <!-- MulberryHUB -->
-          <a class="gd-svc" href="/mulberry_menu.html">
-            <div class="gd-svc-ico" style="background:rgba(59,130,246,.18)">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="3"/>
-                <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
-                <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
-                <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"/><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"/>
-                <line x1="19.07" y1="4.93" x2="16.95" y2="7.05"/><line x1="7.05" y1="16.95" x2="4.93" y2="19.07"/>
+          </div>
+          <div class="gda-right">
+            <div class="gda-donut-wrap">
+              <svg class="gda-donut" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
+                <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="17" stroke-dasharray="225 64" stroke-linecap="round" transform="rotate(-90 60 60)"/>
               </svg>
+              <div class="gda-donut-inner"><div class="gda-donut-val">78%</div><div class="gda-donut-sub">score</div></div>
             </div>
-            <div class="gd-svc-name">MulberryHUB</div>
-            <div class="gd-svc-desc">Centrul de control</div>
-            <div class="gd-svc-arr">↗</div>
-          </a>
-          <!-- MulberryDrive -->
-          <a class="gd-svc" href="/mulberry_qdata.html">
-            <div class="gd-svc-ico" style="background:rgba(236,255,84,.1)">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="1" y="3" width="15" height="13" rx="2"/>
-                <path d="M16 8h4l3 3v5h-7V8z"/>
-                <circle cx="5.5" cy="18.5" r="2.5"/>
-                <circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
-            </div>
-            <div class="gd-svc-name">MulberryDrive</div>
-            <div class="gd-svc-desc">Vehicule &amp; trasee</div>
-            <div class="gd-svc-arr">↗</div>
-          </a>
-          <!-- Mulberry Analytics -->
-          <div class="gd-svc" style="border-color:rgba(181,243,51,.2);background:#0f1a00" onclick="void(0)">
-            <div class="gd-svc-ico" style="background:rgba(181,243,51,.15)">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#b5f333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-            <div class="gd-svc-name" style="color:#b5f333">Mulberry Analytics</div>
-            <div class="gd-svc-desc">Metrici &amp; rapoarte</div>
-            <div class="gd-svc-arr" style="color:rgba(181,243,51,.4)">● activ</div>
+            <button class="gda-arr">↗</button>
           </div>
         </div>
-
-        <!-- Row 1: Left stacked cards + Blue analytics -->
-        <div class="gd-r1">
-          <div class="gd-lcol">
-            <!-- Gray striped card -->
-            <div class="gdc gdc-gray">
-              <span class="gdc-badge">29/user</span>
-              <div class="gdc-pct">65%</div>
-              <div class="gdc-lbl">Transfer</div>
-            </div>
-            <!-- Lime card -->
-            <div class="gdc gdc-lime">
-              <span class="gdc-badge">8/user</span>
-              <div class="gdc-pct">31%</div>
-              <div class="gdc-lbl">Receive</div>
-            </div>
-          </div>
-
-          <!-- Blue analytics card -->
-          <div class="gdc gdc-blue">
-            <div class="gda-left">
-              <div class="gda-eyebrow">Analytics</div>
-              <div class="gda-pct">78%</div>
-              <div class="gda-trend">
-                Increase
-                <span class="gda-chip">
-                  71.2%
-                  <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
-                </span>
-              </div>
-              <div class="gda-pills">
-                <button class="gda-pill">
-                  <span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>
-                  Year-end storage improvements
-                </button>
-                <button class="gda-pill">
-                  <span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>
-                  Increase in property investment branch
-                </button>
-              </div>
-            </div>
-            <div class="gda-right">
-              <div class="gda-donut-wrap">
-                <!-- r=46, circ=289.03, 78%=225.4, gap=63.6 -->
-                <svg class="gda-donut" viewBox="0 0 120 120">
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="17"
-                    stroke-dasharray="225 64" stroke-linecap="round"
-                    transform="rotate(-90 60 60)"/>
-                </svg>
-                <div class="gda-donut-inner">
-                  <div class="gda-donut-val">78%</div>
-                  <div class="gda-donut-sub">score</div>
-                </div>
-              </div>
-              <button class="gda-arr">↗</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Row 2: Cash + Period + Payment -->
+        <!-- Bottom: Cash + Period + Payment -->
         <div class="gd-r2">
-
-          <!-- Cash card -->
           <div class="gdc gdc-cash">
-            <div class="gdc-cash-top">
-              <div class="gdc-cash-lbl">Cash</div>
-              <div class="gdc-cash-amt">816,752 <span class="gdc-cash-badge">USD</span></div>
-            </div>
+            <div class="gdc-cash-top"><div class="gdc-cash-lbl">Cash</div><div class="gdc-cash-amt">816,752 <span class="gdc-cash-badge">USD</span></div></div>
             <div class="gdc-cash-growth">+36%</div>
             <div class="gdc-cash-sub">grow since last week</div>
-            <div class="gdc-bars">
-              <div class="gdc-bar" style="height:28%"></div>
-              <div class="gdc-bar gdc-bar-mid" style="height:45%"></div>
-              <div class="gdc-bar gdc-bar-hi" style="height:66%"></div>
-              <div class="gdc-bar gdc-bar-blue" style="height:100%"></div>
-            </div>
+            <div class="gdc-bars"><div class="gdc-bar" style="height:28%"></div><div class="gdc-bar gdc-bar-mid" style="height:45%"></div><div class="gdc-bar gdc-bar-hi" style="height:66%"></div><div class="gdc-bar gdc-bar-blue" style="height:100%"></div></div>
           </div>
-
-          <!-- Period Analytic card -->
           <div class="gdc gdc-period">
-            <div class="gdc-period-hd">
-              <div>
-                <div class="gdc-period-title">Period Analytic</div>
-                <div class="gdc-period-sub">3 Month</div>
-              </div>
-              <button class="gdc-arr-green">↗</button>
-            </div>
+            <div class="gdc-period-hd"><div><div class="gdc-period-title">Period Analytic</div><div class="gdc-period-sub">3 Month</div></div><button class="gdc-arr-green">↗</button></div>
             <div class="gdc-period-lbl">User Authorized</div>
-            <div class="gdc-period-val">
-              18,785
-              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
-              </svg>
-            </div>
+            <div class="gdc-period-val">18,785 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
           </div>
-
-          <!-- Payment Transaction card -->
           <div class="gdc gdc-pay">
-            <div class="gdc-pay-hd">
-              <div class="gdc-pay-ico">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="12" y1="2" x2="12" y2="22"/>
-                  <polyline points="17 7 12 2 7 7"/>
-                  <polyline points="7 17 12 22 17 17"/>
-                </svg>
-              </div>
-              <div class="gdc-pay-title">Payment Transaction</div>
-            </div>
-            <div class="gdc-pay-row">
-              <div class="gdc-pay-amt">1,120 <sup>$</sup></div>
-              <div class="gdc-pay-name">Repayment cash</div>
-            </div>
-            <div class="gdc-pay-row">
-              <div class="gdc-pay-amt">3,810 <sup>$</sup></div>
-              <div class="gdc-pay-name">Office leasing</div>
-            </div>
-            <div class="gdc-pay-row">
-              <div class="gdc-pay-amt">12,760 <sup>$</sup></div>
-              <div class="gdc-pay-name">Employee salary</div>
-            </div>
+            <div class="gdc-pay-hd"><div class="gdc-pay-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="17 7 12 2 7 7"/><polyline points="7 17 12 22 17 17"/></svg></div><div class="gdc-pay-title">Payment Transaction</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">1,120 <sup>$</sup></div><div class="gdc-pay-name">Repayment cash</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">3,810 <sup>$</sup></div><div class="gdc-pay-name">Office leasing</div></div>
+            <div class="gdc-pay-row"><div class="gdc-pay-amt">12,760 <sup>$</sup></div><div class="gdc-pay-name">Employee salary</div></div>
           </div>
-
         </div>
       </div>
     </div>
@@ -1480,15 +1345,16 @@ function enterApp() {
     ex.textContent = exp.toLocaleDateString('ro-RO',{day:'2-digit',month:'2-digit'});
   }
   const greet = greeting() + (currentUser?.email ? ', ' + currentUser.email.split('@')[0] : '');
-  document.getElementById('dash-greet').textContent = greet;
-  goPanel('analytics');
+  goPanel('dashboard');
+  const gl = document.getElementById('gd-greeting-lbl');
+  if (gl) gl.textContent = greet;
 }
 
 const PANEL_META = {
   dashboard:   ['Dashboard',   () => greeting()],
   yellowcard:  ['YellowCard',  () => 'Identitatea digitală a vehiculului tău'],
   marketplace: ['Marketplace', () => 'Servicii auto verificate Mulberry'],
-  analytics:   ['Analytics',   () => 'Performanță și metrici financiare'],
+  analytics:   ['Analytics',   () => 'Metrici și rapoarte financiare'],
   settings:    ['Setări',      () => 'Configurare cont și aplicație']
 };
 
