@@ -564,7 +564,7 @@ function goBack() {
    STEP 2 — OTP
 ══════════════════════════════ */
 function initOTP() {
-  const email = sessionStorage.getItem('mulberry_email') || '';
+  const email = sessionStorage.getItem('pending_email') || sessionStorage.getItem('mulberry_email') || '';
   if (email) {
     currentEmail = email;
     document.getElementById('email-display').textContent = email;
@@ -877,16 +877,35 @@ dz.addEventListener('drop', e => {
   if (file) handleFile({ target: { files: [file] } });
 });
 
-/* Auth state */
-sb.auth.onAuthStateChange((event, session) => {
-  if (event === 'SIGNED_IN' && session) {
-    currentEmail = session.user.email || '';
-    document.getElementById('email-display').textContent = currentEmail;
+// ─── LOAD: gestionează redirect Google + email OTP ────────────
+window.addEventListener('load', async () => {
+  // Curăță hash-ul după OAuth
+  if (window.location.hash.includes('access_token')) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+
+  const { data: { session } } = await sb.auth.getSession();
+
+  if (session) {
+    // Venit din Google OAuth — extragem emailul, distrugem sesiunea
+    const email = session.user.email;
+    await sb.auth.signOut();
+    sessionStorage.setItem('pending_email', email);
+    currentEmail = email;
+    document.getElementById('email-display').textContent = email;
+    // Trimite OTP automat
+    await sb.auth.signInWithOtp({ email });
+    startResendTimer();
+  } else {
+    // Venit din email OTP direct — luăm emailul din sessionStorage
+    initOTP();
   }
 });
 
-/* Init */
-initOTP();
+// ─── AUTH STATE — ignorat, OTP e metoda de verificare ─────────
+sb.auth.onAuthStateChange((event, session) => {
+  // Nu face nimic automat
+});
 </script>
 </body>
 </html>
