@@ -8,3 +8,5 @@ bcrypt==4.1.2
 PyJWT==2.8.0
 aiofiles==23.2.1
 streamlit
+supabase>=2.0.0
+httpx>=0.25.0
