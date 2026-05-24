@@ -921,6 +921,19 @@ const SB_URL  = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
 const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
 const sb = supabase.createClient(SB_URL, SB_ANON);
 
+// Whitelist guard — runs on every page load
+(async () => {
+  const ALLOWED_EMAILS = ['sefanlazar7@gmail.com'];
+  const { data: { user } } = await sb.auth.getUser();
+  if (user && !ALLOWED_EMAILS.includes(user.email)) {
+    await sb.auth.signOut();
+    window.location.href = '/mulberry_login.html';
+  } else if (user && ALLOWED_EMAILS.includes(user.email)) {
+    currentUser = { email: user.email };
+    enterApp();
+  }
+})();
+
 let afCurrentEmail = '';
 let afResendInterval = null;
 
