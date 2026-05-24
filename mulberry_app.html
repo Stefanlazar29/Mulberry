@@ -340,6 +340,102 @@ a{color:inherit;text-decoration:none}
   .bnav{display:block}.toast{bottom:calc(var(--bh) + 10px)}.ph-title{font-size:20px}.mkt-grid{grid-template-columns:1fr}
 }
 @media(max-width:400px){.g4{grid-template-columns:1fr 1fr}.sc-val{font-size:28px}.ph-title{font-size:18px}.content{padding:12px 10px calc(var(--bh) + 12px)}}
+
+/* ══ DARK ANALYTICS DASHBOARD (Gogo-style) ══════════════════ */
+#panel-analytics{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#0d0d0e;color:#fff}
+@media(max-width:768px){#panel-analytics{margin:-16px -14px;min-height:calc(100% + 32px)}}
+.gd{display:flex;flex-direction:column;gap:14px;padding:28px 32px}
+@media(max-width:768px){.gd{padding:18px 16px;gap:12px}}
+
+/* Header */
+.gd-hdr{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.gd-greeting{font-size:12px;color:rgba(255,255,255,.45);font-weight:500;margin-bottom:5px}
+.gd-title{font-size:clamp(26px,3.2vw,42px);font-weight:900;letter-spacing:-1.2px;line-height:1.05;font-family:var(--font-head);color:#fff}
+.gd-hstats{display:flex;gap:36px;align-items:center}
+.gd-hstat-lbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;margin-bottom:4px;letter-spacing:.04em}
+.gd-hstat-val{font-size:clamp(18px,2vw,26px);font-weight:800;color:#fff;letter-spacing:-.5px}
+.gd-hstat-val sup{font-size:12px;font-weight:500;color:rgba(255,255,255,.55)}
+
+/* Grid rows */
+.gd-r1{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:stretch}
+.gd-r2{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:14px;align-items:stretch}
+@media(max-width:1024px){.gd-r1{grid-template-columns:190px 1fr}}
+@media(max-width:900px){.gd-r2{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.gd-r1,.gd-r2{grid-template-columns:1fr}}
+
+.gd-lcol{display:flex;flex-direction:column;gap:14px}
+
+/* Base card */
+.gdc{border-radius:20px;padding:22px 20px;position:relative;overflow:hidden}
+
+/* Gray striped card */
+.gdc-gray{
+  background:repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.01) 1.5px,rgba(255,255,255,.01) 10px),#2c2c2e;
+  flex:1;min-height:120px}
+
+/* Lime card */
+.gdc-lime{background:#b5f333;color:#1c1e00;flex:1;min-height:120px}
+
+.gdc-pct{font-size:clamp(38px,4vw,54px);font-weight:900;letter-spacing:-1.5px;line-height:1}
+.gdc-lbl{font-size:13px;font-weight:600;opacity:.65;margin-top:6px}
+.gdc-badge{position:absolute;top:16px;right:16px;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;background:rgba(255,255,255,.14);color:rgba(255,255,255,.8)}
+.gdc-lime .gdc-badge{background:rgba(0,0,0,.13);color:rgba(0,0,0,.65)}
+
+/* Blue analytics card */
+.gdc-blue{background:#1e4fd8;display:flex;align-items:stretch;padding:26px 24px}
+.gda-left{flex:1;display:flex;flex-direction:column}
+.gda-eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px}
+.gda-pct{font-size:clamp(50px,6vw,76px);font-weight:900;letter-spacing:-3px;line-height:.9;color:#fff}
+.gda-trend{display:flex;align-items:center;gap:10px;margin:12px 0 20px;font-size:17px;font-weight:700;color:#fff}
+.gda-chip{font-size:11px;font-weight:700;background:rgba(255,255,255,.2);padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:4px}
+.gda-pills{display:flex;flex-direction:column;gap:8px;margin-top:auto}
+.gda-pill{display:flex;align-items:center;gap:10px;padding:10px 16px;background:rgba(255,255,255,.13);border-radius:30px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s;color:#fff;border:none;text-align:left;font-family:var(--font)}
+.gda-pill:hover{background:rgba(255,255,255,.2)}
+.gda-pill-ico{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+
+.gda-right{width:165px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+.gda-donut-wrap{position:relative;width:134px;height:134px;display:flex;align-items:center;justify-content:center}
+.gda-donut{width:134px;height:134px}
+.gda-donut-inner{position:absolute;text-align:center;pointer-events:none}
+.gda-donut-val{font-size:18px;font-weight:800;color:#fff}
+.gda-donut-sub{font-size:9px;color:rgba(255,255,255,.45);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
+.gda-arr{position:absolute;bottom:0;right:0;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.35);border:none;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:background .15s}
+.gda-arr:hover{background:rgba(0,0,0,.55)}
+
+/* Cash card */
+.gdc-cash{background:#1c1c1e}
+.gdc-cash-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px}
+.gdc-cash-lbl{font-size:13px;color:rgba(255,255,255,.45);font-weight:600}
+.gdc-cash-amt{font-size:clamp(14px,1.5vw,18px);font-weight:800;color:#fff;display:flex;align-items:center;gap:6px}
+.gdc-cash-badge{font-size:9px;font-weight:800;background:rgba(255,255,255,.12);padding:2px 7px;border-radius:6px;color:rgba(255,255,255,.7)}
+.gdc-cash-growth{font-size:clamp(26px,3vw,36px);font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:2px}
+.gdc-cash-sub{font-size:11px;color:rgba(255,255,255,.35);margin-bottom:18px}
+.gdc-bars{display:flex;align-items:flex-end;gap:8px;height:64px}
+.gdc-bar{flex:1;border-radius:6px 6px 0 0;background:rgba(255,255,255,.1)}
+.gdc-bar-mid{background:rgba(255,255,255,.22)}
+.gdc-bar-hi{background:rgba(255,255,255,.6)}
+.gdc-bar-blue{background:#1e4fd8}
+
+/* Period card */
+.gdc-period{background:#f4f4f2;color:#111}
+.gdc-period-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+.gdc-period-title{font-size:15px;font-weight:800;color:#111;font-family:var(--font-head)}
+.gdc-period-sub{font-size:12px;color:rgba(0,0,0,.4);margin-top:2px}
+.gdc-period-lbl{font-size:11px;color:rgba(0,0,0,.4);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.gdc-period-val{font-size:clamp(32px,3.5vw,46px);font-weight:900;letter-spacing:-2px;color:#111;display:flex;align-items:center;gap:10px;font-family:var(--font-head)}
+.gdc-arr-green{width:40px;height:40px;border-radius:50%;background:#b5f333;border:none;color:#1c1e00;display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:background .15s;flex-shrink:0}
+.gdc-arr-green:hover{background:#a3e020}
+
+/* Payment card */
+.gdc-pay{background:#232325}
+.gdc-pay-hd{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.gdc-pay-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-pay-title{font-size:13px;font-weight:700;color:#fff}
+.gdc-pay-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.gdc-pay-row:last-child{border-bottom:none;padding-bottom:0}
+.gdc-pay-amt{font-size:16px;font-weight:800;color:#fff}
+.gdc-pay-amt sup{font-size:9px;color:rgba(255,255,255,.55);vertical-align:super}
+.gdc-pay-name{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
   </style>
 </head>
 <body>
@@ -508,6 +604,10 @@ a{color:inherit;text-decoration:none}
     <button class="nav-item" data-p="marketplace" onclick="goPanel('marketplace')">
       <span class="ni-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
       Marketplace
+    </button>
+    <button class="nav-item" data-p="analytics" onclick="goPanel('analytics')">
+      <span class="ni-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+      Analytics
     </button>
 
     <div class="sb-sep" style="margin-top:14px"></div>
@@ -825,6 +925,158 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
 
+    <!-- ANALYTICS DARK DASHBOARD (Gogo-style) -->
+    <div class="panel" id="panel-analytics">
+      <div class="gd">
+
+        <!-- Header -->
+        <div class="gd-hdr">
+          <div>
+            <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața</div>
+            <div class="gd-title">Mulberry Dashboard</div>
+          </div>
+          <div class="gd-hstats">
+            <div>
+              <div class="gd-hstat-lbl">Balanță</div>
+              <div class="gd-hstat-val">1.655,00 <sup>$</sup></div>
+            </div>
+            <div>
+              <div class="gd-hstat-lbl">Venit</div>
+              <div class="gd-hstat-val">950,00 <sup>$</sup></div>
+            </div>
+            <div>
+              <div class="gd-hstat-lbl">Cheltuieli</div>
+              <div class="gd-hstat-val">382,00 <sup>$</sup></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 1: Left stacked cards + Blue analytics -->
+        <div class="gd-r1">
+          <div class="gd-lcol">
+            <!-- Gray striped card -->
+            <div class="gdc gdc-gray">
+              <span class="gdc-badge">29/user</span>
+              <div class="gdc-pct">65%</div>
+              <div class="gdc-lbl">Transfer</div>
+            </div>
+            <!-- Lime card -->
+            <div class="gdc gdc-lime">
+              <span class="gdc-badge">8/user</span>
+              <div class="gdc-pct">31%</div>
+              <div class="gdc-lbl">Receive</div>
+            </div>
+          </div>
+
+          <!-- Blue analytics card -->
+          <div class="gdc gdc-blue">
+            <div class="gda-left">
+              <div class="gda-eyebrow">Analytics</div>
+              <div class="gda-pct">78%</div>
+              <div class="gda-trend">
+                Increase
+                <span class="gda-chip">
+                  71.2%
+                  <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+                </span>
+              </div>
+              <div class="gda-pills">
+                <button class="gda-pill">
+                  <span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>
+                  Year-end storage improvements
+                </button>
+                <button class="gda-pill">
+                  <span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>
+                  Increase in property investment branch
+                </button>
+              </div>
+            </div>
+            <div class="gda-right">
+              <div class="gda-donut-wrap">
+                <!-- r=46, circ=289.03, 78%=225.4, gap=63.6 -->
+                <svg class="gda-donut" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="17"
+                    stroke-dasharray="225 64" stroke-linecap="round"
+                    transform="rotate(-90 60 60)"/>
+                </svg>
+                <div class="gda-donut-inner">
+                  <div class="gda-donut-val">78%</div>
+                  <div class="gda-donut-sub">score</div>
+                </div>
+              </div>
+              <button class="gda-arr">↗</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Cash + Period + Payment -->
+        <div class="gd-r2">
+
+          <!-- Cash card -->
+          <div class="gdc gdc-cash">
+            <div class="gdc-cash-top">
+              <div class="gdc-cash-lbl">Cash</div>
+              <div class="gdc-cash-amt">816,752 <span class="gdc-cash-badge">USD</span></div>
+            </div>
+            <div class="gdc-cash-growth">+36%</div>
+            <div class="gdc-cash-sub">grow since last week</div>
+            <div class="gdc-bars">
+              <div class="gdc-bar" style="height:28%"></div>
+              <div class="gdc-bar gdc-bar-mid" style="height:45%"></div>
+              <div class="gdc-bar gdc-bar-hi" style="height:66%"></div>
+              <div class="gdc-bar gdc-bar-blue" style="height:100%"></div>
+            </div>
+          </div>
+
+          <!-- Period Analytic card -->
+          <div class="gdc gdc-period">
+            <div class="gdc-period-hd">
+              <div>
+                <div class="gdc-period-title">Period Analytic</div>
+                <div class="gdc-period-sub">3 Month</div>
+              </div>
+              <button class="gdc-arr-green">↗</button>
+            </div>
+            <div class="gdc-period-lbl">User Authorized</div>
+            <div class="gdc-period-val">
+              18,785
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Payment Transaction card -->
+          <div class="gdc gdc-pay">
+            <div class="gdc-pay-hd">
+              <div class="gdc-pay-ico">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="2" x2="12" y2="22"/>
+                  <polyline points="17 7 12 2 7 7"/>
+                  <polyline points="7 17 12 22 17 17"/>
+                </svg>
+              </div>
+              <div class="gdc-pay-title">Payment Transaction</div>
+            </div>
+            <div class="gdc-pay-row">
+              <div class="gdc-pay-amt">1,120 <sup>$</sup></div>
+              <div class="gdc-pay-name">Repayment cash</div>
+            </div>
+            <div class="gdc-pay-row">
+              <div class="gdc-pay-amt">3,810 <sup>$</sup></div>
+              <div class="gdc-pay-name">Office leasing</div>
+            </div>
+            <div class="gdc-pay-row">
+              <div class="gdc-pay-amt">12,760 <sup>$</sup></div>
+              <div class="gdc-pay-name">Employee salary</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <nav class="bnav">
@@ -840,6 +1092,10 @@ a{color:inherit;text-decoration:none}
       <button class="bn-item" data-p="marketplace" onclick="goPanel('marketplace')">
         <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
         Market
+      </button>
+      <button class="bn-item" data-p="analytics" onclick="goPanel('analytics')">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Chart
       </button>
       <button class="bn-item" data-p="settings" onclick="goPanel('settings')">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
@@ -1160,12 +1416,17 @@ const PANEL_META = {
   dashboard:   ['Dashboard',   () => greeting()],
   yellowcard:  ['YellowCard',  () => 'Identitatea digitală a vehiculului tău'],
   marketplace: ['Marketplace', () => 'Servicii auto verificate Mulberry'],
+  analytics:   ['Analytics',   () => 'Performanță și metrici financiare'],
   settings:    ['Setări',      () => 'Configurare cont și aplicație']
 };
 
 function goPanel(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+name)?.classList.add('active');
+  if (name === 'analytics') {
+    const gl = document.getElementById('gd-greeting-lbl');
+    if (gl) gl.textContent = greeting();
+  }
   document.querySelectorAll('[data-p]').forEach(n =>
     n.classList.toggle('active', n.dataset.p === name)
   );
