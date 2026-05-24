@@ -453,6 +453,73 @@ a{color:inherit;text-decoration:none}
 .gdc-pay-amt{font-size:16px;font-weight:800;color:#fff}
 .gdc-pay-amt sup{font-size:9px;color:rgba(255,255,255,.55);vertical-align:super}
 .gdc-pay-name{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
+
+/* ── Service tiles (MulberryGO + YellowCard) ── */
+.gdc-tile{cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;border:none;text-align:left;font-family:var(--font);transition:all .22s}
+.gdc-tile:hover{transform:translateY(-3px)}
+.gdc-tile-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:auto}
+.gdc-tile-name{font-family:'Outfit','Plus Jakarta Sans',sans-serif;font-size:clamp(20px,2vw,26px);font-weight:900;letter-spacing:-.5px;color:#fff;margin:12px 0 3px;line-height:1}
+.gdc-tile-sub{font-size:12px;font-weight:600;color:rgba(255,255,255,.5)}
+.gdc-tile-arr{margin-top:10px;font-size:20px;color:rgba(255,255,255,.25);transition:color .15s}
+.gdc-tile:hover .gdc-tile-arr{color:rgba(255,255,255,.6)}
+.gdc-go{background:repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.01) 1.5px,rgba(255,255,255,.01) 10px),#1e2025}
+.gdc-yc{background:#b5f333;color:#1c1e00}
+.gdc-yc .gdc-tile-name{color:#1c1e00}
+.gdc-yc .gdc-tile-sub{color:rgba(0,0,0,.5)}
+.gdc-yc .gdc-tile-arr{color:rgba(0,0,0,.22)}
+.gdc-yc:hover .gdc-tile-arr{color:rgba(0,0,0,.5)}
+
+/* ── MulberryAI ── */
+.gda-ai-title{font-family:'Outfit','Plus Jakarta Sans',sans-serif;font-size:clamp(28px,3.5vw,44px);font-weight:900;letter-spacing:-1.5px;color:#fff;line-height:1;margin:6px 0 16px}
+.gd-ai-bar{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.13);border-radius:30px;padding:7px 8px 7px 16px;margin-bottom:10px}
+.gd-ai-input{flex:1;background:transparent;border:none;color:#fff;font-family:var(--font);font-size:13px;outline:none;min-width:0}
+.gd-ai-input::placeholder{color:rgba(255,255,255,.4)}
+.gd-ai-photo{width:32px;height:32px;background:rgba(255,255,255,.14);border:none;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .15s}
+.gd-ai-photo:hover{background:rgba(255,255,255,.24)}
+.gd-ai-send{width:34px;height:34px;background:#b5f333;border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:opacity .15s}
+.gd-ai-send:hover{opacity:.85}
+.gd-ai-chips{display:flex;gap:7px;flex-wrap:wrap}
+.gd-ai-chip{font-family:var(--font);font-size:11px;font-weight:600;padding:6px 13px;background:rgba(255,255,255,.1);border:none;border-radius:20px;color:rgba(255,255,255,.7);cursor:pointer;transition:background .15s}
+.gd-ai-chip:hover{background:rgba(255,255,255,.18)}
+.gd-ai-resp{display:none;margin-top:12px;padding:11px 14px;background:rgba(255,255,255,.08);border-radius:14px;font-size:12.5px;color:rgba(255,255,255,.8);line-height:1.55}
+
+/* ── MulberryCloud card ── */
+.gdc-cloud{background:#0e1017;cursor:pointer;transition:all .2s}
+.gdc-cloud:hover{background:#161920;transform:translateY(-2px)}
+.gdc-cloud-ico{width:42px;height:42px;border-radius:12px;background:rgba(139,92,246,.18);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.gdc-cloud-name{font-family:'Outfit','Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#fff;letter-spacing:-.3px}
+.gdc-cloud-sub{font-size:11px;color:rgba(255,255,255,.38);margin-top:3px;margin-bottom:14px}
+.gdc-cloud-items{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.gdc-cloud-item{display:flex;align-items:center;gap:8px;font-size:11.5px;color:rgba(255,255,255,.5)}
+.gdc-cloud-item-ico{width:24px;height:24px;border-radius:6px;background:rgba(139,92,246,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-cloud-btn{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:7px 14px;background:rgba(139,92,246,.18);border:1px solid rgba(139,92,246,.28);border-radius:20px;color:#a78bfa;cursor:pointer;transition:background .15s;font-family:var(--font)}
+.gdc-cloud-btn:hover{background:rgba(139,92,246,.32)}
+
+/* ── MulberryDrive card ── */
+.gdc-drive{background:#0a0e14}
+.gdc-drive-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.gdc-drive-name{font-family:'Outfit','Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:#fff}
+.gdc-drive-sub{font-size:11px;color:rgba(255,255,255,.38);margin-top:2px}
+.gdc-map-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;flex:1}
+.gdc-map-ico{width:46px;height:46px;background:rgba(236,255,84,.1);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gdc-map-lbl{font-size:13px;font-weight:700;color:#fff}
+.gdc-map-note{font-size:11px;color:rgba(255,255,255,.35);line-height:1.4}
+.gdc-map-btn{font-size:11px;font-weight:700;padding:7px 18px;background:rgba(236,255,84,.1);border:1px solid rgba(236,255,84,.18);border-radius:20px;color:#ECFF54;cursor:pointer;transition:background .15s;font-family:var(--font)}
+.gdc-map-btn:hover{background:rgba(236,255,84,.2)}
+
+/* ── MulberryHUB Last Updates ── */
+.gdc-hub{background:#151618}
+.gdc-hub-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.gdc-hub-ico{width:34px;height:34px;background:rgba(59,130,246,.15);border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.gdc-hub-name{font-family:'Outfit',sans-serif;font-size:13px;font-weight:800;color:#fff}
+.gdc-hub-badge{font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.07em;margin-top:1px}
+.gdc-hub-row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.gdc-hub-row:last-child{border-bottom:none;padding-bottom:0}
+.gdc-hub-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.18);margin-top:4px;flex-shrink:0}
+.gdc-hub-dot-new{background:#60a5fa;box-shadow:0 0 7px rgba(96,165,250,.55)}
+.gdc-hub-dot-feat{background:#b5f333;box-shadow:0 0 7px rgba(181,243,51,.4)}
+.gdc-hub-event{font-size:12px;font-weight:600;color:#fff;line-height:1.35}
+.gdc-hub-time{font-size:10.5px;color:rgba(255,255,255,.32);margin-top:2px}
   </style>
 </head>
 <body>
@@ -684,92 +751,163 @@ a{color:inherit;text-decoration:none}
 
   <main class="content">
 
-    <!-- DASHBOARD (dark Gogo-style) -->
+    <!-- DASHBOARD -->
     <div class="panel active" id="panel-dashboard">
       <div class="gd">
 
-        <!-- Header -->
-        <div class="gd-hdr">
+        <!-- Header — fără cifre -->
+        <div class="gd-hdr" style="align-items:flex-start">
           <div>
             <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața</div>
             <div class="gd-title">Mulberry Dashboard</div>
           </div>
-          <div class="gd-hstats">
-            <div><div class="gd-hstat-lbl">Balanță</div><div class="gd-hstat-val">1.655,00 <sup>$</sup></div></div>
-            <div><div class="gd-hstat-lbl">Venit</div><div class="gd-hstat-val">950,00 <sup>$</sup></div></div>
-            <div><div class="gd-hstat-lbl">Cheltuieli</div><div class="gd-hstat-val">382,00 <sup>$</sup></div></div>
-          </div>
         </div>
 
-        <!-- Row 1: Left stacked cards + Blue analytics -->
+        <!-- Row 1: Tiles + MulberryAI -->
         <div class="gd-r1">
           <div class="gd-lcol">
-            <div class="gdc gdc-gray">
-              <span class="gdc-badge">29/user</span>
-              <div class="gdc-pct">65%</div>
-              <div class="gdc-lbl">Transfer</div>
-            </div>
-            <div class="gdc gdc-lime">
-              <span class="gdc-badge">8/user</span>
-              <div class="gdc-pct">31%</div>
-              <div class="gdc-lbl">Receive</div>
-            </div>
+
+            <!-- MulberryGO → Marketplace -->
+            <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')">
+              <div class="gdc-tile-ico" style="background:rgba(255,255,255,.07)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
+                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              </div>
+              <div class="gdc-tile-name">MulberryGO</div>
+              <div class="gdc-tile-sub">Book a service</div>
+              <div class="gdc-tile-arr">→</div>
+            </button>
+
+            <!-- YellowCard → panel -->
+            <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')">
+              <div class="gdc-tile-ico" style="background:rgba(0,0,0,.1)">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
+                </svg>
+              </div>
+              <div class="gdc-tile-name">YellowCard</div>
+              <div class="gdc-tile-sub">Cardul meu digital</div>
+              <div class="gdc-tile-arr">→</div>
+            </button>
+
           </div>
+
+          <!-- MulberryAI -->
           <div class="gdc gdc-blue">
             <div class="gda-left">
-              <div class="gda-eyebrow">Analytics</div>
-              <div class="gda-pct">78%</div>
-              <div class="gda-trend">Increase <span class="gda-chip">71.2% <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span></div>
-              <div class="gda-pills">
-                <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Year-end storage improvements</button>
-                <button class="gda-pill"><span class="gda-pill-ico"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg></span>Increase in property investment branch</button>
+              <div class="gda-eyebrow">Asistent inteligent</div>
+              <div class="gda-ai-title">Mulberry <span style="color:#b5f333">AI</span></div>
+
+              <!-- Search bar + photo -->
+              <div class="gd-ai-bar">
+                <label class="gd-ai-photo" title="Adaugă poză">
+                  <input type="file" accept="image/*" style="display:none" id="ai-photo-input" onchange="aiHandlePhoto(event)">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </label>
+                <input type="text" id="ai-query" class="gd-ai-input" placeholder="Întreabă asistentul Mulberry..." onkeydown="if(event.key==='Enter')aiSendQuery()">
+                <button class="gd-ai-send" onclick="aiSendQuery()">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1c1e00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
               </div>
+
+              <!-- Quick chips -->
+              <div class="gd-ai-chips">
+                <button class="gd-ai-chip" onclick="aiChip(this)">Verifică ITP</button>
+                <button class="gd-ai-chip" onclick="aiChip(this)">Status asigurare</button>
+                <button class="gd-ai-chip" onclick="aiChip(this)">Analiză vehicul</button>
+              </div>
+
+              <div id="ai-response" class="gd-ai-resp"></div>
             </div>
             <div class="gda-right">
               <div class="gda-donut-wrap">
                 <svg class="gda-donut" viewBox="0 0 120 120">
                   <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="#fff" stroke-width="17" stroke-dasharray="225 64" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+                  <circle cx="60" cy="60" r="46" fill="none" stroke="#b5f333" stroke-width="17" stroke-dasharray="289 0" stroke-linecap="round" transform="rotate(-90 60 60)"/>
                 </svg>
-                <div class="gda-donut-inner"><div class="gda-donut-val">78%</div><div class="gda-donut-sub">score</div></div>
+                <div class="gda-donut-inner">
+                  <div class="gda-donut-val" style="color:#b5f333;font-size:14px">AI</div>
+                  <div class="gda-donut-sub">online</div>
+                </div>
               </div>
-              <button class="gda-arr">↗</button>
+              <button class="gda-arr" onclick="goPanel('analytics')">↗</button>
             </div>
           </div>
         </div>
 
-        <!-- Row 2: Cash + Period + Payment -->
+        <!-- Row 2: Cloud + Drive + HUB -->
         <div class="gd-r2">
-          <div class="gdc gdc-cash">
-            <div class="gdc-cash-top"><div class="gdc-cash-lbl">Cash</div><div class="gdc-cash-amt">816,752 <span class="gdc-cash-badge">USD</span></div></div>
-            <div class="gdc-cash-growth">+36%</div>
-            <div class="gdc-cash-sub">grow since last week</div>
-            <div class="gdc-bars">
-              <div class="gdc-bar" style="height:28%"></div>
-              <div class="gdc-bar gdc-bar-mid" style="height:45%"></div>
-              <div class="gdc-bar gdc-bar-hi" style="height:66%"></div>
-              <div class="gdc-bar gdc-bar-blue" style="height:100%"></div>
-            </div>
-          </div>
-          <div class="gdc gdc-period">
-            <div class="gdc-period-hd">
-              <div><div class="gdc-period-title">Period Analytic</div><div class="gdc-period-sub">3 Month</div></div>
-              <button class="gdc-arr-green">↗</button>
-            </div>
-            <div class="gdc-period-lbl">User Authorized</div>
-            <div class="gdc-period-val">18,785 <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          </div>
-          <div class="gdc gdc-pay">
-            <div class="gdc-pay-hd">
-              <div class="gdc-pay-ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><polyline points="17 7 12 2 7 7"/><polyline points="7 17 12 22 17 17"/></svg></div>
-              <div class="gdc-pay-title">Payment Transaction</div>
-            </div>
-            <div class="gdc-pay-row"><div class="gdc-pay-amt">1,120 <sup>$</sup></div><div class="gdc-pay-name">Repayment cash</div></div>
-            <div class="gdc-pay-row"><div class="gdc-pay-amt">3,810 <sup>$</sup></div><div class="gdc-pay-name">Office leasing</div></div>
-            <div class="gdc-pay-row"><div class="gdc-pay-amt">12,760 <sup>$</sup></div><div class="gdc-pay-name">Employee salary</div></div>
-          </div>
-        </div>
 
+          <!-- MulberryCloud -->
+          <div class="gdc gdc-cloud" onclick="location.href='/mulberry_cloud.html'">
+            <div class="gdc-cloud-ico">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+            </div>
+            <div class="gdc-cloud-name">MulberryCloud</div>
+            <div class="gdc-cloud-sub">Stocare &amp; documente</div>
+            <div class="gdc-cloud-items">
+              <div class="gdc-cloud-item">
+                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                Documente vehicul
+              </div>
+              <div class="gdc-cloud-item">
+                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 12 11 14 15 10"/></svg></div>
+                Asigurări &amp; ITP
+              </div>
+            </div>
+            <button class="gdc-cloud-btn">Deschide Cloud ↗</button>
+          </div>
+
+          <!-- MulberryDrive -->
+          <div class="gdc gdc-drive" style="display:flex;flex-direction:column;gap:12px">
+            <div class="gdc-drive-hd">
+              <div>
+                <div class="gdc-drive-name">MulberryDrive</div>
+                <div class="gdc-drive-sub">Navigație powered by Mapbok</div>
+              </div>
+            </div>
+            <div class="gdc-map-box" style="flex:1">
+              <div class="gdc-map-ico">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="gdc-map-lbl">Navigație GPS</div>
+              <div class="gdc-map-note">Mapbok · timp real<br>Integrare activă</div>
+              <button class="gdc-map-btn">Pornește navigația →</button>
+            </div>
+          </div>
+
+          <!-- MulberryHUB Last Updates -->
+          <div class="gdc gdc-hub">
+            <div class="gdc-hub-hd">
+              <div class="gdc-hub-ico">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="gdc-hub-name">MulberryHUB</div>
+                <div class="gdc-hub-badge">Last Updates</div>
+              </div>
+            </div>
+            <div class="gdc-hub-row">
+              <div class="gdc-hub-dot gdc-hub-dot-new"></div>
+              <div><div class="gdc-hub-event">Dashboard negru + MulberryAI</div><div class="gdc-hub-time">Azi, 25 Mai 2026</div></div>
+            </div>
+            <div class="gdc-hub-row">
+              <div class="gdc-hub-dot gdc-hub-dot-feat"></div>
+              <div><div class="gdc-hub-event">Servicii colorate în meniu sidebar</div><div class="gdc-hub-time">25 Mai 2026</div></div>
+            </div>
+            <div class="gdc-hub-row">
+              <div class="gdc-hub-dot"></div>
+              <div><div class="gdc-hub-event">YellowCard + Analytics panel</div><div class="gdc-hub-time">24 Mai 2026</div></div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
 
@@ -1393,6 +1531,38 @@ document.addEventListener('keydown', e => {
   const s = loadSession();
   if (s && s.token) enterApp();
 })();
+
+function aiChip(btn) {
+  document.getElementById('ai-query').value = btn.textContent;
+  aiSendQuery();
+}
+
+async function aiSendQuery() {
+  const q = (document.getElementById('ai-query')?.value || '').trim();
+  if (!q) return;
+  const resp = document.getElementById('ai-response');
+  resp.style.display = 'block';
+  resp.textContent = '⏳ Se procesează...';
+  try {
+    const r = await fetch(API + '/api/ai-chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ query: q, user: currentUser?.email })
+    });
+    const d = await r.json();
+    resp.textContent = d.response || d.message || 'Răspuns primit.';
+  } catch(e) {
+    resp.textContent = 'Mulberry AI analizează: "' + q + '". Funcționalitate completă în curând.';
+  }
+}
+
+function aiHandlePhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const resp = document.getElementById('ai-response');
+  resp.style.display = 'block';
+  resp.textContent = '📷 Poză primită: ' + file.name + '. Analiza AI în curând...';
+}
 </script>
 </body>
 </html>
