@@ -47,66 +47,7 @@ html, body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 80% at 15% 50%, rgba(13,42,100,0.6) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 50% 30%, rgba(0,180,100,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 70% at 85% 60%, rgba(13,42,100,0.5) 0%, transparent 70%),
-    radial-gradient(ellipse 30% 40% at 30% 80%, rgba(200,100,0,0.2) 0%, transparent 60%);
-}
-
-/* Glass panels */
-.glass-panels {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.glass-panel {
-  position: absolute;
-  width: 80px;
-  height: 70vh;
-  border-radius: 40px;
-  backdrop-filter: blur(2px);
-  transform-origin: bottom center;
-}
-
-.glass-panel:nth-child(1) {
-  left: 8%;
-  background: linear-gradient(170deg, rgba(30,80,200,0.3) 0%, rgba(0,150,80,0.1) 50%, rgba(200,100,0,0.2) 100%);
-  border: 1px solid rgba(100,150,255,0.15);
-  transform: rotate(-8deg) translateY(5%);
-}
-.glass-panel:nth-child(2) {
-  left: 18%;
-  background: linear-gradient(160deg, rgba(50,100,220,0.25) 0%, rgba(0,180,100,0.08) 60%, transparent 100%);
-  border: 1px solid rgba(80,130,255,0.1);
-  transform: rotate(-4deg) translateY(2%);
-  height: 75vh;
-}
-.glass-panel:nth-child(3) {
-  left: 28%;
-  background: linear-gradient(155deg, rgba(20,60,180,0.2) 0%, rgba(0,200,120,0.06) 50%, rgba(180,80,0,0.1) 100%);
-  border: 1px solid rgba(60,110,240,0.08);
-  transform: rotate(-1deg);
-  height: 80vh;
-  width: 60px;
-}
-.glass-panel:nth-child(4) {
-  left: 36%;
-  background: linear-gradient(150deg, rgba(15,50,160,0.15) 0%, transparent 70%);
-  border: 1px solid rgba(40,90,220,0.06);
-  transform: rotate(2deg) translateY(3%);
-  height: 72vh;
-  width: 50px;
-}
-.glass-panel:nth-child(5) {
-  left: 42%;
-  background: linear-gradient(145deg, rgba(10,40,140,0.1) 0%, transparent 60%);
-  border: 1px solid rgba(20,70,200,0.05);
-  transform: rotate(5deg) translateY(8%);
-  height: 65vh;
-  width: 40px;
+    radial-gradient(ellipse 100% 65% at 50% 100%, #39FF12 0%, #22E000 7%, #00B800 17%, #005000 32%, #001A00 48%, #000 65%);
 }
 
 /* LAYOUT */
@@ -536,15 +477,7 @@ html, body {
 </head>
 <body>
 
-<div class="bg-visual">
-  <div class="glass-panels">
-    <div class="glass-panel"></div>
-    <div class="glass-panel"></div>
-    <div class="glass-panel"></div>
-    <div class="glass-panel"></div>
-    <div class="glass-panel"></div>
-  </div>
-</div>
+<div class="bg-visual"></div>
 
 <div class="layout">
 
