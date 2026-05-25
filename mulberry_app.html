@@ -342,6 +342,59 @@ a{color:inherit;text-decoration:none}
 }
 @media(max-width:400px){.g4{grid-template-columns:1fr 1fr}.sc-val{font-size:28px}.ph-title{font-size:18px}.content{padding:12px 10px calc(var(--bh) + 12px)}}
 
+/* ══ SPHERE-UI LIGHT DASHBOARD ═══════════════════════════════ */
+#panel-dashboard .gd-greeting{color:rgba(0,0,0,.38)}
+#panel-dashboard .gd-title{color:#111}
+#panel-dashboard .gdc{background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.06)}
+#panel-dashboard .gdc-go{background:#fff!important}
+#panel-dashboard .gdc-yc{background:linear-gradient(145deg,#ccf73c,#b5f333)!important}
+#panel-dashboard .gdc-tile-name{color:#111}
+#panel-dashboard .gdc-tile-sub{color:rgba(0,0,0,.42)}
+#panel-dashboard .gdc-tile-arr{color:rgba(0,0,0,.18)}
+#panel-dashboard .gdc-tile:hover{background:#fafafa!important;box-shadow:0 8px 28px rgba(0,0,0,.1);transform:translateY(-2px)}
+#panel-dashboard .gdc-blue{background:#111!important}
+#panel-dashboard .gd-ai-input{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.14)!important;color:#fff!important}
+#panel-dashboard .gd-ai-input::placeholder{color:rgba(255,255,255,.3)!important}
+#panel-dashboard .gd-ai-chip{background:rgba(255,255,255,.11)!important;border-color:rgba(255,255,255,.14)!important;color:rgba(255,255,255,.62)!important}
+#panel-dashboard .gdc-cloud,#panel-dashboard .gdc-drive,#panel-dashboard .gdc-hub{background:#fff!important}
+#panel-dashboard .gdc-cloud-name,#panel-dashboard .gdc-drive-name{color:#111!important;font-weight:400}
+#panel-dashboard .gdc-cloud-sub,#panel-dashboard .gdc-drive-sub{color:rgba(0,0,0,.38)!important}
+#panel-dashboard .gdc-cloud-item{color:rgba(0,0,0,.48)!important}
+#panel-dashboard .gdc-cloud-btn{background:rgba(124,58,237,.1)!important;border-color:rgba(124,58,237,.18)!important;color:#7c3aed!important}
+#panel-dashboard .gdc-map-box{background:#f2f2f0!important;border-radius:14px}
+#panel-dashboard .gdc-map-lbl{color:#111!important}
+#panel-dashboard .gdc-map-note{color:rgba(0,0,0,.38)!important}
+#panel-dashboard .gdc-map-btn{background:#111!important;color:#fff!important;border:none}
+#panel-dashboard .gdc-hub-name{color:#111!important;font-weight:500}
+#panel-dashboard .gdc-hub-badge{color:rgba(0,0,0,.3)!important}
+#panel-dashboard .gdc-hub-event{color:#111!important}
+#panel-dashboard .gdc-hub-time{color:rgba(0,0,0,.3)!important}
+#panel-dashboard .gdc-hub-row{border-color:rgba(0,0,0,.06)!important}
+#panel-dashboard .gdc-hub-ico{background:rgba(59,130,246,.12)!important}
+#panel-dashboard .gdc-cloud-item-ico{background:rgba(139,92,246,.1)!important}
+
+/* Period tabs */
+.sph-tabs{display:flex;gap:3px;background:rgba(0,0,0,.08);padding:3px;border-radius:9px;width:fit-content;margin-bottom:12px}
+.sph-tab{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;color:rgba(0,0,0,.38);background:transparent;border:none;padding:4px 11px;border-radius:6px;cursor:pointer;transition:all .18s;letter-spacing:.01em}
+.sph-tab.active{background:#fff;color:#111;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+/* Mini bar chart */
+.sph-mini-chart{display:flex;align-items:flex-end;gap:3px;height:44px;margin-top:auto;padding-top:10px}
+.sph-bar{border-radius:3px 3px 0 0;flex:1;min-width:0;transition:opacity .15s}
+.sph-bar.lime{background:#b5f333}
+.sph-bar.dark{background:#1a1a1a}
+.sph-bar.muted{background:rgba(0,0,0,.1)}
+
+/* Stat badge */
+.sph-badge{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;font-family:'Inter',sans-serif}
+.sph-badge.up{background:rgba(181,243,51,.22);color:#3a6a00}
+
+/* Card top row (icon + arrow) */
+.sph-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.sph-card-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sph-arr{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.06);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;color:rgba(0,0,0,.45);transition:background .15s}
+.sph-arr:hover{background:rgba(0,0,0,.12);color:#111}
+
 /* ══ SERVICE CARDS ════════════════════════════════════════════ */
 .gd-services{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 @media(max-width:900px){.gd-services{grid-template-columns:repeat(2,1fr)}}
@@ -360,8 +413,10 @@ a{color:inherit;text-decoration:none}
 .gd-svc:hover .gd-svc-arr{color:rgba(255,255,255,.6)}
 
 /* ══ DARK ANALYTICS DASHBOARD (Gogo-style) ══════════════════ */
-#panel-dashboard,#panel-analytics{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#0d0d0e;color:#fff}
-@media(max-width:768px){#panel-dashboard,#panel-analytics{margin:-16px -14px;min-height:calc(100% + 32px)}}
+#panel-analytics{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#0d0d0e;color:#fff}
+#panel-dashboard{margin:-28px -32px;padding:0;min-height:calc(100% + 56px);background:#ebebea;color:#111}
+@media(max-width:768px){#panel-analytics{margin:-16px -14px;min-height:calc(100% + 32px)}}
+@media(max-width:768px){#panel-dashboard{margin:-16px -14px;min-height:calc(100% + 32px)}}
 .gd{display:flex;flex-direction:column;gap:14px;padding:28px 32px}
 @media(max-width:768px){.gd{padding:18px 16px;gap:12px}}
 
@@ -756,7 +811,7 @@ a{color:inherit;text-decoration:none}
     <div class="panel active" id="panel-dashboard">
       <div class="gd">
 
-        <!-- Header — fără cifre -->
+        <!-- Header -->
         <div class="gd-hdr" style="align-items:flex-start">
           <div>
             <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața</div>
@@ -769,28 +824,52 @@ a{color:inherit;text-decoration:none}
           <div class="gd-lcol">
 
             <!-- MulberryGO → Marketplace -->
-            <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')">
-              <div class="gdc-tile-ico" style="background:rgba(255,255,255,.07)">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
-                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                </svg>
+            <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')" style="display:flex;flex-direction:column;text-align:left">
+              <div class="sph-card-top">
+                <div class="sph-card-ico" style="background:rgba(181,243,51,.15)">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
+                    <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                  </svg>
+                </div>
+                <button class="sph-arr" onclick="event.stopPropagation();goPanel('marketplace')">↗</button>
               </div>
-              <div class="gdc-tile-name">MulberryGO</div>
+              <div class="gdc-tile-name" style="margin:6px 0 2px">MulberryGO</div>
               <div class="gdc-tile-sub">Book a service</div>
-              <div class="gdc-tile-arr">→</div>
+              <div class="sph-tabs" style="margin-top:10px" onclick="event.stopPropagation()">
+                <button class="sph-tab active" onclick="this.parentNode.querySelectorAll('.sph-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Azi</button>
+                <button class="sph-tab" onclick="this.parentNode.querySelectorAll('.sph-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Săpt</button>
+                <button class="sph-tab" onclick="this.parentNode.querySelectorAll('.sph-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Lună</button>
+              </div>
+              <div class="sph-mini-chart">
+                <div class="sph-bar muted" style="height:32%"></div>
+                <div class="sph-bar dark" style="height:50%"></div>
+                <div class="sph-bar dark" style="height:42%"></div>
+                <div class="sph-bar dark" style="height:65%"></div>
+                <div class="sph-bar dark" style="height:55%"></div>
+                <div class="sph-bar dark" style="height:78%"></div>
+                <div class="sph-bar dark" style="height:60%"></div>
+                <div class="sph-bar dark" style="height:85%"></div>
+                <div class="sph-bar dark" style="height:70%"></div>
+                <div class="sph-bar dark" style="height:90%"></div>
+                <div class="sph-bar muted" style="height:28%"></div>
+                <div class="sph-bar lime" style="height:100%"></div>
+              </div>
             </button>
 
             <!-- YellowCard → panel -->
-            <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')">
-              <div class="gdc-tile-ico" style="background:rgba(0,0,0,.1)">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
-                </svg>
+            <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')" style="display:flex;flex-direction:column;text-align:left">
+              <div class="sph-card-top">
+                <div class="sph-card-ico" style="background:rgba(0,0,0,.1)">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
+                  </svg>
+                </div>
+                <div style="font-size:10px;font-weight:600;background:rgba(0,0,0,.12);padding:3px 9px;border-radius:20px;color:rgba(0,0,0,.55);font-family:'Inter',sans-serif">Activ</div>
               </div>
-              <div class="gdc-tile-name">YellowCard</div>
+              <div class="gdc-tile-name" style="margin:8px 0 2px">YellowCard</div>
               <div class="gdc-tile-sub">Cardul meu digital</div>
-              <div class="gdc-tile-arr">→</div>
+              <div class="gdc-tile-arr" style="margin-top:auto;padding-top:10px">→</div>
             </button>
 
           </div>
@@ -800,8 +879,6 @@ a{color:inherit;text-decoration:none}
             <div class="gda-left">
               <div class="gda-eyebrow">Asistent inteligent</div>
               <div class="gda-ai-title">Mulberry <span style="color:#b5f333">AI</span></div>
-
-              <!-- Search bar + photo -->
               <div class="gd-ai-bar">
                 <label class="gd-ai-photo" title="Adaugă poză">
                   <input type="file" accept="image/*" style="display:none" id="ai-photo-input" onchange="aiHandlePhoto(event)">
@@ -812,14 +889,11 @@ a{color:inherit;text-decoration:none}
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1c1e00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                 </button>
               </div>
-
-              <!-- Quick chips -->
               <div class="gd-ai-chips">
                 <button class="gd-ai-chip" onclick="aiChip(this)">Verifică ITP</button>
                 <button class="gd-ai-chip" onclick="aiChip(this)">Status asigurare</button>
                 <button class="gd-ai-chip" onclick="aiChip(this)">Analiză vehicul</button>
               </div>
-
               <div id="ai-response" class="gd-ai-resp"></div>
             </div>
             <div class="gda-right">
@@ -842,13 +916,16 @@ a{color:inherit;text-decoration:none}
         <div class="gd-r2">
 
           <!-- MulberryCloud -->
-          <div class="gdc gdc-cloud" onclick="location.href='/mulberry_cloud.html'">
-            <div class="gdc-cloud-ico">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+          <div class="gdc gdc-cloud" onclick="location.href='/mulberry_cloud.html'" style="cursor:pointer">
+            <div class="sph-card-top">
+              <div class="gdc-cloud-ico" style="margin-bottom:0">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+              </div>
+              <button class="sph-arr" onclick="event.stopPropagation();location.href='/mulberry_cloud.html'">↗</button>
             </div>
-            <div class="gdc-cloud-name">MulberryCloud</div>
+            <div class="gdc-cloud-name" style="margin-top:10px">MulberryCloud</div>
             <div class="gdc-cloud-sub">Stocare &amp; documente</div>
-            <div class="gdc-cloud-items">
+            <div class="gdc-cloud-items" style="margin-top:12px">
               <div class="gdc-cloud-item">
                 <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
                 Documente vehicul
@@ -858,20 +935,21 @@ a{color:inherit;text-decoration:none}
                 Asigurări &amp; ITP
               </div>
             </div>
-            <button class="gdc-cloud-btn">Deschide Cloud ↗</button>
+            <button class="gdc-cloud-btn" style="margin-top:14px">Deschide Cloud ↗</button>
           </div>
 
           <!-- MulberryDrive -->
           <div class="gdc gdc-drive" style="display:flex;flex-direction:column;gap:12px">
-            <div class="gdc-drive-hd">
+            <div class="sph-card-top">
               <div>
                 <div class="gdc-drive-name">MulberryDrive</div>
                 <div class="gdc-drive-sub">Navigație powered by Mapbok</div>
               </div>
+              <button class="sph-arr">↗</button>
             </div>
             <div class="gdc-map-box" style="flex:1">
               <div class="gdc-map-ico">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
                 </svg>
               </div>
@@ -883,28 +961,31 @@ a{color:inherit;text-decoration:none}
 
           <!-- MulberryHUB Last Updates -->
           <div class="gdc gdc-hub">
-            <div class="gdc-hub-hd">
-              <div class="gdc-hub-ico">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
-                </svg>
+            <div class="sph-card-top" style="margin-bottom:14px">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div class="gdc-hub-ico">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 20V10M12 20V4M6 20v-6"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="gdc-hub-name">MulberryHUB</div>
+                  <div class="gdc-hub-badge">Last Updates</div>
+                </div>
               </div>
-              <div>
-                <div class="gdc-hub-name">MulberryHUB</div>
-                <div class="gdc-hub-badge">Last Updates</div>
-              </div>
+              <span class="sph-badge up">3 nou</span>
             </div>
             <div class="gdc-hub-row">
               <div class="gdc-hub-dot gdc-hub-dot-new"></div>
-              <div><div class="gdc-hub-event">Dashboard negru + MulberryAI</div><div class="gdc-hub-time">Azi, 25 Mai 2026</div></div>
+              <div><div class="gdc-hub-event">Sphere UI dashboard — redesign complet</div><div class="gdc-hub-time">Azi, 26 Mai 2026</div></div>
             </div>
             <div class="gdc-hub-row">
               <div class="gdc-hub-dot gdc-hub-dot-feat"></div>
-              <div><div class="gdc-hub-event">Servicii colorate în meniu sidebar</div><div class="gdc-hub-time">25 Mai 2026</div></div>
+              <div><div class="gdc-hub-event">Favicon PNG + Inter font thin</div><div class="gdc-hub-time">25 Mai 2026</div></div>
             </div>
             <div class="gdc-hub-row">
               <div class="gdc-hub-dot"></div>
-              <div><div class="gdc-hub-event">YellowCard + Analytics panel</div><div class="gdc-hub-time">24 Mai 2026</div></div>
+              <div><div class="gdc-hub-event">MulberryFAST — 6 carduri servicii</div><div class="gdc-hub-time">25 Mai 2026</div></div>
             </div>
           </div>
 
