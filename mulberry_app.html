@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Outfit:wght@600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Outfit:wght@600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -178,7 +178,7 @@ a{color:inherit;text-decoration:none}
 .sb-logo-ver{font-size:9px;color:rgba(255,255,255,.3);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
 
 .sb-sep{height:1px;background:rgba(255,255,255,.1);margin:10px 10px 14px}
-.sb-label{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.1em;padding:0 12px;margin-bottom:4px;font-family:'Nunito',sans-serif}
+.sb-label{font-size:9.5px;font-weight:700;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.1em;padding:0 12px;margin-bottom:4px;font-family:'Urbanist',sans-serif}
 
 .nav-item{
   display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;
@@ -202,7 +202,7 @@ a{color:inherit;text-decoration:none}
 .sb-user.confirm-logout .sb-uname::after{content:' · Confirmi?';color:rgba(239,68,68,.8);font-weight:400}
 .sb-avatar{width:34px;height:34px;border-radius:50%;background:var(--yellow);color:var(--wine);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
 .sb-uinfo{flex:1;min-width:0}
-.sb-uname{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff;font-family:'Nunito',sans-serif}
+.sb-uname{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff;font-family:'Urbanist',sans-serif}
 .sb-uemail{font-size:11px;color:rgba(255,255,255,.38);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sb-logout svg{width:15px;height:15px;stroke:rgba(255,255,255,.38);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
 
@@ -211,7 +211,7 @@ a{color:inherit;text-decoration:none}
 .tb-hamburger{display:none;width:40px;height:40px;background:transparent;border:none;border-radius:10px;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0;padding:0}
 .tb-hamburger img{width:30px;height:30px;border-radius:8px;object-fit:cover;display:block}
 .tb-info{flex:1}
-.tb-title{font-size:16px;font-weight:800;letter-spacing:-.2px;color:var(--black)}
+.tb-title{font-size:16px;font-weight:700;letter-spacing:-.2px;color:var(--black);font-family:'Urbanist',sans-serif}
 .tb-sub{font-size:11.5px;color:var(--dim2);margin-top:1px}
 .tb-actions{display:flex;align-items:center;gap:10px}
 .tb-status{display:flex;align-items:center;gap:7px;background:var(--gray);border:1px solid var(--b1);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--dim2)}
@@ -352,8 +352,8 @@ a{color:inherit;text-decoration:none}
 @media(max-width:400px){.g4{grid-template-columns:1fr 1fr}.sc-val{font-size:28px}.ph-title{font-size:18px}.content{padding:12px 10px calc(var(--bh) + 12px)}}
 
 /* ══ SPHERE-UI LIGHT DASHBOARD ═══════════════════════════════ */
-#panel-dashboard .gd-greeting{color:rgba(0,0,0,.38)}
-#panel-dashboard .gd-title{color:#111}
+#panel-dashboard .gd-greeting{color:rgba(0,0,0,.45)}
+#panel-dashboard .gd-title{color:#111;font-weight:700}
 #panel-dashboard .gdc{background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.06)}
 #panel-dashboard .gdc-go{background:#fff!important}
 #panel-dashboard .gdc-yc{background:linear-gradient(145deg,#ccf73c,#b5f333)!important}
@@ -431,21 +431,19 @@ a{color:inherit;text-decoration:none}
 
 /* Header */
 .gd-hdr{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.gd-greeting{font-size:12px;color:rgba(255,255,255,.38);font-weight:400;margin-bottom:6px;font-family:'Inter',sans-serif;letter-spacing:.01em}
-.gd-title{font-size:clamp(24px,2.8vw,38px);font-weight:300;letter-spacing:-.3px;line-height:1.08;font-family:'Nunito','Inter',sans-serif;color:#fff}
+.gd-greeting{font-size:13px;color:rgba(255,255,255,.45);font-weight:400;margin-bottom:4px;font-family:'Urbanist','Inter',sans-serif;letter-spacing:.01em}
+.gd-title{font-size:clamp(28px,3.2vw,46px);font-weight:600;letter-spacing:-.5px;line-height:1.05;font-family:'Urbanist','Inter',sans-serif;color:#fff}
 .gd-hstats{display:flex;gap:36px;align-items:center}
 .gd-hstat-lbl{font-size:11px;color:rgba(255,255,255,.4);font-weight:600;margin-bottom:4px;letter-spacing:.04em}
 .gd-hstat-val{font-size:clamp(18px,2vw,26px);font-weight:800;color:#fff;letter-spacing:-.5px}
 .gd-hstat-val sup{font-size:12px;font-weight:500;color:rgba(255,255,255,.55)}
 
 /* Grid rows */
-.gd-r1{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:stretch}
+.gd-r1{display:grid;grid-template-columns:1fr 1fr 1.8fr;gap:14px;align-items:stretch}
 .gd-r2{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:14px;align-items:stretch}
-@media(max-width:1024px){.gd-r1{grid-template-columns:190px 1fr}}
-@media(max-width:900px){.gd-r2{grid-template-columns:1fr 1fr}}
+@media(max-width:1100px){.gd-r1{grid-template-columns:1fr 1fr 1.6fr}}
+@media(max-width:900px){.gd-r1{grid-template-columns:1fr 1fr}.gd-r2{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){.gd-r1,.gd-r2{grid-template-columns:1fr}}
-
-.gd-lcol{display:flex;flex-direction:column;gap:14px}
 
 /* Base card */
 .gdc{border-radius:20px;padding:22px 20px;position:relative;overflow:hidden}
@@ -520,11 +518,11 @@ a{color:inherit;text-decoration:none}
 .gdc-pay-name{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:500}
 
 /* ── Service tiles (MulberryGO + YellowCard) ── */
-.gdc-tile{cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;border:none;text-align:left;font-family:var(--font);transition:all .22s}
+.gdc-tile{cursor:pointer;display:flex;flex-direction:column;border:none;text-align:left;font-family:var(--font);transition:all .22s;min-height:220px;width:100%}
 .gdc-tile:hover{transform:translateY(-3px)}
 .gdc-tile-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-bottom:auto}
-.gdc-tile-name{font-family:'Inter',sans-serif;font-size:clamp(18px,1.8vw,24px);font-weight:300;letter-spacing:-.2px;color:#fff;margin:12px 0 3px;line-height:1}
-.gdc-tile-sub{font-size:12px;font-weight:400;color:rgba(255,255,255,.42);font-family:'Inter',sans-serif}
+.gdc-tile-name{font-family:'Urbanist',sans-serif;font-size:20px;font-weight:600;letter-spacing:-.2px;color:#fff;margin:14px 0 4px;line-height:1.1}
+.gdc-tile-sub{font-size:12px;font-weight:400;color:rgba(255,255,255,.42);font-family:'Inter',sans-serif;letter-spacing:.01em}
 .gdc-tile-arr{margin-top:10px;font-size:20px;color:rgba(255,255,255,.25);transition:color .15s}
 .gdc-tile:hover .gdc-tile-arr{color:rgba(255,255,255,.6)}
 .gdc-go{background:repeating-linear-gradient(-45deg,rgba(255,255,255,.04) 0,rgba(255,255,255,.04) 1.5px,rgba(255,255,255,.01) 1.5px,rgba(255,255,255,.01) 10px),#1e2025}
@@ -830,58 +828,50 @@ a{color:inherit;text-decoration:none}
 
         <!-- Row 1: Tiles + MulberryAI -->
         <div class="gd-r1">
-          <div class="gd-lcol">
 
-            <!-- MulberryGO → Marketplace -->
-            <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')" style="display:flex;flex-direction:column;text-align:left">
-              <div class="sph-card-top">
-                <div class="sph-card-ico" style="background:rgba(181,243,51,.15)">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
-                    <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                  </svg>
-                </div>
-                <button class="sph-arr" onclick="event.stopPropagation();goPanel('marketplace')">↗</button>
+          <!-- MulberryGO → Marketplace -->
+          <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')">
+            <div class="sph-card-top">
+              <div class="sph-card-ico" style="background:rgba(181,243,51,.15)">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
+                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
               </div>
-              <div class="gdc-tile-name" style="margin:6px 0 2px">MulberryGO</div>
-              <div class="gdc-tile-sub">Book a service</div>
-              <div class="sph-tabs" style="margin-top:10px" onclick="event.stopPropagation()">
-                <button class="sph-tab active" onclick="this.parentNode.querySelectorAll('.sph-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Azi</button>
-                <button class="sph-tab" onclick="this.parentNode.querySelectorAll('.sph-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Săpt</button>
-                <button class="sph-tab" onclick="this.parentNode.querySelectorAll('.sph-tab').forEach(t=>t.classList.remove('active'));this.classList.add('active')">Lună</button>
-              </div>
-              <div class="sph-mini-chart">
-                <div class="sph-bar muted" style="height:32%"></div>
-                <div class="sph-bar dark" style="height:50%"></div>
-                <div class="sph-bar dark" style="height:42%"></div>
-                <div class="sph-bar dark" style="height:65%"></div>
-                <div class="sph-bar dark" style="height:55%"></div>
-                <div class="sph-bar dark" style="height:78%"></div>
-                <div class="sph-bar dark" style="height:60%"></div>
-                <div class="sph-bar dark" style="height:85%"></div>
-                <div class="sph-bar dark" style="height:70%"></div>
-                <div class="sph-bar dark" style="height:90%"></div>
-                <div class="sph-bar muted" style="height:28%"></div>
-                <div class="sph-bar lime" style="height:100%"></div>
-              </div>
-            </button>
+              <button class="sph-arr" onclick="event.stopPropagation();goPanel('marketplace')">↗</button>
+            </div>
+            <div class="gdc-tile-name">MulberryGO</div>
+            <div class="gdc-tile-sub">Book a service</div>
+            <div class="sph-mini-chart" style="margin-top:auto">
+              <div class="sph-bar muted" style="height:32%"></div>
+              <div class="sph-bar dark" style="height:50%"></div>
+              <div class="sph-bar dark" style="height:42%"></div>
+              <div class="sph-bar dark" style="height:65%"></div>
+              <div class="sph-bar dark" style="height:55%"></div>
+              <div class="sph-bar dark" style="height:78%"></div>
+              <div class="sph-bar dark" style="height:60%"></div>
+              <div class="sph-bar dark" style="height:85%"></div>
+              <div class="sph-bar dark" style="height:70%"></div>
+              <div class="sph-bar dark" style="height:90%"></div>
+              <div class="sph-bar muted" style="height:28%"></div>
+              <div class="sph-bar lime" style="height:100%"></div>
+            </div>
+          </button>
 
-            <!-- YellowCard → panel -->
-            <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')" style="display:flex;flex-direction:column;text-align:left">
-              <div class="sph-card-top">
-                <div class="sph-card-ico" style="background:rgba(0,0,0,.1)">
-                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
-                  </svg>
-                </div>
-                <div style="font-size:10px;font-weight:600;background:rgba(0,0,0,.12);padding:3px 9px;border-radius:20px;color:rgba(0,0,0,.55);font-family:'Inter',sans-serif">Activ</div>
+          <!-- YellowCard → panel -->
+          <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')">
+            <div class="sph-card-top">
+              <div class="sph-card-ico" style="background:rgba(0,0,0,.1)">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
+                </svg>
               </div>
-              <div class="gdc-tile-name" style="margin:8px 0 2px">YellowCard</div>
-              <div class="gdc-tile-sub">Cardul meu digital</div>
-              <div class="gdc-tile-arr" style="margin-top:auto;padding-top:10px">→</div>
-            </button>
-
-          </div>
+              <div style="font-size:10px;font-weight:600;background:rgba(0,0,0,.12);padding:3px 9px;border-radius:20px;color:rgba(0,0,0,.55);font-family:'Urbanist',sans-serif;letter-spacing:.02em">Activ</div>
+            </div>
+            <div class="gdc-tile-name">YellowCard</div>
+            <div class="gdc-tile-sub">Cardul meu digital</div>
+            <div class="gdc-tile-arr" style="margin-top:auto;padding-top:14px;font-size:20px">→</div>
+          </button>
 
           <!-- MulberryAI -->
           <div class="gdc gdc-blue">
