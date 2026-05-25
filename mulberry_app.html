@@ -1434,7 +1434,7 @@ a{color:inherit;text-decoration:none}
           <path fill="url(#gm-wg)" opacity=".45" d="M26 10C26 10 36 15 42 26C36 37 26 42 26 42C26 42 16 37 10 26C16 15 26 10 26 10Z"/>
         </svg>
         <div class="gm-welcome-title">Bine ai venit în MulberryAI</div>
-        <div class="gm-welcome-sub">Asistentul tău automotive inteligent, powered by Gemini. Întreabă orice despre vehiculul tău.</div>
+        <div class="gm-welcome-sub">Asistentul tău automotive inteligent, powered by Gemini.<br>Întreabă orice despre vehiculul tău.</div>
         <div class="gm-chip-grid">
           <button class="gm-chip" onclick="gmChip(this)">Verifică ITP</button>
           <button class="gm-chip" onclick="gmChip(this)">Status asigurare</button>
@@ -1776,6 +1776,12 @@ function syncUser() {
   const tbEmail = document.getElementById('tb-profile-email');
   if (tbEmail) tbEmail.textContent = raw;
 
+  // Personalize Gemini modal input placeholder with first name
+  const firstName = (fullName || name).split(' ')[0];
+  const firstCap  = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+  const gmInput = document.getElementById('gm-input');
+  if (gmInput) gmInput.placeholder = 'Ce vrei să știi astăzi, ' + firstCap + '?';
+
   // Sidebar & settings
   [['sb-uname', fullName || name], ['sb-uemail', raw],
    ['set-uname', fullName || name], ['set-uemail', raw],
@@ -1909,8 +1915,20 @@ function aiHandlePhoto(event) {
 
 // ─── GEMINI MODAL ─────────────────────────────────────────────
 function openGeminiModal() {
-  document.getElementById('gm-overlay').classList.remove('hidden');
-  setTimeout(() => document.getElementById('gm-input')?.focus(), 80);
+  const overlay = document.getElementById('gm-overlay');
+  const input   = document.getElementById('gm-input');
+  // Personalize welcome title with first name
+  if (currentUser) {
+    const fullName  = currentUser.name || currentUser.email || '';
+    const rawFirst  = fullName.includes('@') ? fullName.split('@')[0] : fullName.split(' ')[0];
+    const firstName = rawFirst.charAt(0).toUpperCase() + rawFirst.slice(1);
+    const wTitle = overlay?.querySelector('.gm-welcome-title');
+    if (wTitle && wTitle.textContent === 'Bine ai venit în MulberryAI') {
+      wTitle.textContent = 'Bună ziua, ' + firstName + '!';
+    }
+  }
+  overlay?.classList.remove('hidden');
+  setTimeout(() => input?.focus(), 80);
 }
 function closeGeminiModal() {
   document.getElementById('gm-overlay').classList.add('hidden');
