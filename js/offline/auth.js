@@ -132,4 +132,22 @@
     clearToken();
     if (typeof window.show === 'function') window.show('login');
   };
+
+  /* ── Google OAuth callback handler ─────────────────────── */
+  (function handleOAuthCallback() {
+    var hash = window.location.hash;
+    if (hash.includes('access_token=')) {
+      var params = new URLSearchParams(hash.substring(1));
+      var accessToken = params.get('access_token');
+      if (accessToken) {
+        saveToken(accessToken);
+        history.replaceState(null, '', window.location.pathname);
+        if (typeof window.bootApp === 'function') {
+          window.bootApp();
+        } else if (typeof window.show === 'function') {
+          window.show('dash');
+        }
+      }
+    }
+  })();
 })();
