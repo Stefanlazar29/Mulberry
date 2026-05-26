@@ -1571,9 +1571,9 @@ const SB_URL  = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
 const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
 const sb = supabase.createClient(SB_URL, SB_ANON);
 
-// Whitelist guard — distruge orice sesiune existentă la încărcare
+// Whitelist guard — distruge sesiunea doar dacă NU suntem în flux OAuth
 (async () => {
-  // Nu distruge sesiunea dacă suntem în redirect OAuth
+  if (sessionStorage.getItem('mlbr_oauth')) return;
   if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
   const { data: { user } } = await sb.auth.getUser();
   if (user) await sb.auth.signOut();
@@ -1598,6 +1598,7 @@ function afSwitchTab(btn) {
 }
 
 async function afSignInWithGoogle() {
+  sessionStorage.setItem('mlbr_oauth', '1');
   const { error } = await sb.auth.signInWithOAuth({
     provider: 'google',
     options: {
@@ -1605,7 +1606,7 @@ async function afSignInWithGoogle() {
       queryParams: { prompt: 'select_account', access_type: 'online' }
     }
   });
-  if (error) afShowAlert('af-alert-1', error.message);
+  if (error) { sessionStorage.removeItem('mlbr_oauth'); afShowAlert('af-alert-1', error.message); }
 }
 
 async function afSendOTP() {
@@ -1732,7 +1733,8 @@ if (window.location.hash.includes('access_token')) {
 
 // Supabase OAuth redirect — login direct / sign-up → talon
 sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'SIGNED_IN' && session) {
+  if (event === 'SIGNED_IN' && session && sessionStorage.getItem('mlbr_oauth')) {
+    sessionStorage.removeItem('mlbr_oauth');
     const user   = session.user;
     const email  = user.email;
     const name   = user.user_metadata?.full_name || null;
@@ -1742,9 +1744,9 @@ sb.auth.onAuthStateChange(async (event, session) => {
     // User nou = cont creat în ultimele 30 de secunde
     const isNew = (Date.now() - new Date(user.created_at).getTime()) < 30000;
     if (isNew) {
-      afGoToStep(3); // Sign-up → scanează talonul
+      afGoToStep(3);
     } else {
-      enterApp();   // Login → intră direct
+      enterApp();
     }
   }
 });
@@ -1919,11 +1921,10 @@ document.addEventListener('keydown', e => {
 });
 
 (async function() {
-  // Nu distruge sesiunea dacă suntem în redirect OAuth
+  if (sessionStorage.getItem('mlbr_oauth')) return;
   if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
   await sb.auth.signOut();
   localStorage.removeItem('mlbr_s');
-  sessionStorage.clear();
 })();
 
 function aiChip(btn) {
