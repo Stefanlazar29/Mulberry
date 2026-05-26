@@ -1573,10 +1573,10 @@ const sb = supabase.createClient(SB_URL, SB_ANON);
 
 // Whitelist guard — distruge orice sesiune existentă la încărcare
 (async () => {
+  // Nu distruge sesiunea dacă suntem în redirect OAuth
+  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
   const { data: { user } } = await sb.auth.getUser();
-  if (user) {
-    await sb.auth.signOut();
-  }
+  if (user) await sb.auth.signOut();
 })();
 
 let afCurrentEmail = '';
@@ -1919,6 +1919,8 @@ document.addEventListener('keydown', e => {
 });
 
 (async function() {
+  // Nu distruge sesiunea dacă suntem în redirect OAuth
+  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) return;
   await sb.auth.signOut();
   localStorage.removeItem('mlbr_s');
   sessionStorage.clear();
