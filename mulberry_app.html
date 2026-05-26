@@ -268,11 +268,13 @@ a{color:inherit;text-decoration:none}
 .gm-msg-user-wrap{display:flex;justify-content:flex-end}
 .gm-msg-user{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:18px 18px 4px 18px;padding:12px 18px;max-width:72%;font-size:14px;color:#1f1f1f;line-height:1.55;font-family:'Inter',sans-serif;word-wrap:break-word;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .gm-msg-ai{max-width:78%;font-size:14.5px;color:#1f1f1f;line-height:1.7;font-family:'Inter',sans-serif;word-wrap:break-word;padding:4px 0}
-.gm-thinking{display:flex;gap:6px;align-items:center;padding:10px 0}
-.gm-thinking span{width:9px;height:9px;border-radius:50%;animation:gmPulse 1.4s ease-in-out infinite}
-.gm-thinking span:nth-child(1){background:#4285F4}
-.gm-thinking span:nth-child(2){background:#EA4335;animation-delay:.18s}
-.gm-thinking span:nth-child(3){background:#FBBC04;animation-delay:.36s}
+.gm-thinking{display:flex;gap:8px;align-items:center;padding:10px 0}
+.gm-thinking-spark{width:22px;height:22px;object-fit:contain;flex-shrink:0;animation:gmSparkPulse 1.8s ease-in-out infinite}
+@keyframes gmSparkPulse{0%,100%{opacity:.55;transform:scale(.88)}50%{opacity:1;transform:scale(1.08)}}
+.gm-thinking span{width:8px;height:8px;border-radius:50%;animation:gmPulse 1.4s ease-in-out infinite}
+.gm-thinking span:nth-child(2){background:#4285F4}
+.gm-thinking span:nth-child(3){background:#EA4335;animation-delay:.18s}
+.gm-thinking span:nth-child(4){background:#FBBC04;animation-delay:.36s}
 @keyframes gmPulse{0%,80%,100%{opacity:.3;transform:scale(.75)}40%{opacity:1;transform:scale(1)}}
 /* Input area */
 .gm-input-area{flex-shrink:0;padding:14px 20px 18px}
@@ -1919,10 +1921,7 @@ function gmSwitchToChat() {
   const body = document.getElementById('gm-body');
   if (body && body.dataset.state !== 'chat') body.dataset.state = 'chat';
 }
-/* ── Gemini API + conversation history ── */
-const GEMINI_KEY = 'AIzaSyDNqrg7_tIZ0COV8mpQqI1FmLoAa0HOR_Q';
-const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + GEMINI_KEY;
-const GEMINI_SYSTEM = 'Ești MulberryAI, asistentul auto inteligent al platformei Mulberry. Ajuți utilizatorii cu întrebări despre vehiculele lor, mentenanță, diagnosticare, asigurări și servicii auto. Fii concis, prietenos și profesionist. Răspunde în limba utilizatorului.';
+/* ── Gemini conversation history ── */
 const GM_HIST_KEY = 'mulberry_gm_history';
 let gmHistory = [];
 
@@ -1968,20 +1967,17 @@ async function gmSend() {
   gmHistory.push({ role: 'user', parts: [{ text: q }] });
   // Thinking bubble
   const thinkDiv = document.createElement('div'); thinkDiv.className = 'gm-msg-ai';
-  thinkDiv.innerHTML = '<div class="gm-thinking"><span></span><span></span><span></span></div>';
+  thinkDiv.innerHTML = '<div class="gm-thinking"><img src="/gemini-spark.png" class="gm-thinking-spark" alt=""><span></span><span></span><span></span></div>';
   msgs.appendChild(thinkDiv);
   msgs.scrollTop = msgs.scrollHeight;
   try {
-    const r = await fetch(GEMINI_URL, {
+    const r = await fetch(API + '/api/gemini-chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: GEMINI_SYSTEM }] },
-        contents: gmHistory
-      })
+      body: JSON.stringify({ contents: gmHistory })
     });
     const d = await r.json();
-    const text = d.candidates?.[0]?.content?.parts?.[0]?.text || 'Răspuns primit.';
+    const text = d.response || 'Răspuns primit.';
     thinkDiv.textContent = text;
     gmHistory.push({ role: 'model', parts: [{ text }] });
     gmSaveHistory();
