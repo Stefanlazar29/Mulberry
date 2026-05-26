@@ -1,0 +1,11 @@
+# Railway — Nixpacks. Pornește uvicorn cu modulul backend.main (nu `python backend/main.py`:
+# acel mod de rulare pune /app/backend pe sys.path și rupe `from backend import …`).
+#
+# Preferă Dockerfile în dashboard dacă vrei imagine identică cu local Docker.
+
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "sh -c 'export PYTHONPATH=/app && exec uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8080}'"
+healthcheckPath = "/api/health"

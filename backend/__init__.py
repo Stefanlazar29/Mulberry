@@ -1,1 +1,1 @@
-# Mulberry backend package (Streamlit DB helpers + FastAPI app).
+# Pachet backend — permite `uvicorn backend.main:app` din rădăcina proiectului.

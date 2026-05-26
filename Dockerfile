@@ -1,27 +1,30 @@
-# Mulberry — FastAPI (uvicorn)
-FROM python:3.11-slim-bookworm
+# Mulberry — FastAPI (Railway, Fly.io, or any Docker host)
+# Railway: conectează repo-ul, lasă detectarea Dockerfile; setează DATABASE_URL (ex. Supabase).
 
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=1
+FROM python:3.11-slim-bookworm
 
 WORKDIR /app
 
+# Obligatoriu pentru `from backend import …` — rădăcina proiectului trebuie pe PYTHONPATH
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app
+
+# Wheels pentru psycopg2-binary de obicei suficiente; build-essential pentru pachete fără wheel
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    sqlite3 \
+    build-essential \
+    libpq-dev \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
+# Instalare dependențe, apoi tot repo-ul (folderul backend/ la /app/backend — nu doar conținutul lui).
+COPY backend/requirements.txt backend/requirements.txt
+RUN pip install --upgrade pip && pip install -r backend/requirements.txt
 
-COPY . /app
+COPY . .
 
-RUN mkdir -p /data
+EXPOSE 8080
 
-ENV SQLITE_PATH=/data/mulberry.db
-
-# Render (și altele) injectează PORT la runtime; în dashboard setează Port = același port sau lasă PORT din mediu.
-EXPOSE 10000
-
-# Formă shell: ${PORT:-10000} la pornire. Folosim `python -m uvicorn` ca să nu depindem de PATH (evită „uvicorn: not found”).
-CMD python -m uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-10000}
+# Railway injectează PORT; implicit 8000 pentru docker local
+CMD ["sh", "-c", "exec uvicorn backend.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
