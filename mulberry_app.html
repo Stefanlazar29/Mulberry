@@ -1730,21 +1730,22 @@ if (window.location.hash.includes('access_token')) {
   window.history.replaceState({}, document.title, window.location.pathname);
 }
 
-// Supabase OAuth redirect — extrage emailul, distruge sesiunea, trimite OTP
+// Supabase OAuth redirect — login direct / sign-up → talon
 sb.auth.onAuthStateChange(async (event, session) => {
   if (event === 'SIGNED_IN' && session) {
-    const email = session.user.email;
-    const name  = session.user.user_metadata?.full_name || null;
-    const avatar = session.user.user_metadata?.avatar_url || null;
-    await sb.auth.signOut();
-    afCurrentEmail = email;
-    currentUser = { email, name, avatar };
-    const el = document.getElementById('af-email-display');
-    if (el) el.textContent = email;
-    await sb.auth.signInWithOtp({ email });
-    afGoToStep(2);
-    afSetupOTP();
-    afStartResendTimer();
+    const user   = session.user;
+    const email  = user.email;
+    const name   = user.user_metadata?.full_name || null;
+    const avatar = user.user_metadata?.avatar_url || null;
+    currentUser  = { email, name, avatar };
+
+    // User nou = cont creat în ultimele 30 de secunde
+    const isNew = (Date.now() - new Date(user.created_at).getTime()) < 30000;
+    if (isNew) {
+      afGoToStep(3); // Sign-up → scanează talonul
+    } else {
+      enterApp();   // Login → intră direct
+    }
   }
 });
 

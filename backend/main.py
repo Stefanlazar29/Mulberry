@@ -766,6 +766,58 @@ async def gemini_chat_proxy(inp: GeminiChatIn):
     raise HTTPException(status_code=502, detail=f"Gemini error: {e}")
 
 
+class TalonScanIn(BaseModel):
+  image: str      # base64
+  mime_type: str  # image/jpeg | image/png
+
+
+@app.post("/api/scan-talon")
+async def scan_talon(inp: TalonScanIn):
+  """OCR certificat de înmatriculare (talon) via Gemini Vision."""
+  import urllib.request as _urlreq
+  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+  if not _GEMINI_KEY:
+    raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured on server")
+  _GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={_GEMINI_KEY}"
+  prompt = (
+    "Ești un expert în documente auto românești. Analizează această imagine a unui certificat de înmatriculare "
+    "(talon) și extrage EXACT următoarele câmpuri în format JSON:\n"
+    "{\n"
+    '  "vin": "...",\n'
+    '  "plate": "...",\n'
+    '  "owner": "...",\n'
+    '  "brand": "...",\n'
+    '  "model": "...",\n'
+    '  "year": "..."\n'
+    "}\n"
+    "Dacă un câmp nu este vizibil sau lizibil, pune null. Răspunde DOAR cu JSON-ul, fără explicații."
+  )
+  payload = json.dumps({
+    "contents": [{
+      "parts": [
+        {"text": prompt},
+        {"inline_data": {"mime_type": inp.mime_type, "data": inp.image}}
+      ]
+    }]
+  }).encode("utf-8")
+  def _call():
+    req = _urlreq.Request(_GEMINI_URL, data=payload, headers={"Content-Type": "application/json"})
+    with _urlreq.urlopen(req, timeout=30) as resp:
+      return json.loads(resp.read())
+  try:
+    loop = asyncio.get_event_loop()
+    data = await loop.run_in_executor(None, _call)
+    raw = data["candidates"][0]["content"]["parts"][0]["text"]
+    # Curăță markdown code blocks dacă Gemini le adaugă
+    raw = raw.strip().lstrip("```json").lstrip("```").rstrip("```").strip()
+    extracted = json.loads(raw)
+    return extracted
+  except json.JSONDecodeError:
+    raise HTTPException(status_code=422, detail="Nu am putut interpreta răspunsul AI. Încearcă o poză mai clară.")
+  except Exception as e:
+    raise HTTPException(status_code=502, detail=f"Eroare OCR: {e}")
+
+
 @app.get("/debug/status")
 def debug_status():
   """Diagnostic: utilizatori și mașini din DB (pentru debugging)."""
