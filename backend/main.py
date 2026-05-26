@@ -739,7 +739,9 @@ def exo_chat(inp: ExoChatIn, current: database.UserRow = Depends(require_device_
 async def gemini_chat_proxy(inp: GeminiChatIn):
   """Proxy Gemini 2.0 Flash — cheia API rămâne pe server, nu în sursa paginii."""
   import urllib.request as _urlreq
-  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "AIzaSyDNqrg7_tIZ0COV8mpQqI1FmLoAa0HOR_Q")
+  _GEMINI_KEY = os.environ.get("GEMINI_API_KEY", "")
+  if not _GEMINI_KEY:
+    raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured on server")
   _GEMINI_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={_GEMINI_KEY}"
   _SYSTEM = (
     "Ești MulberryAI, asistentul auto inteligent al platformei Mulberry. "
