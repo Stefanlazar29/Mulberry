@@ -1726,14 +1726,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Curăță URL-ul după auth
-if (window.location.hash.includes('access_token')) {
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
+// Curăță URL-ul după auth — după ce onAuthStateChange a procesat token-ul
+setTimeout(() => {
+  if (window.location.hash.includes('access_token')) {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+}, 500);
 
 // Supabase OAuth redirect — login direct / sign-up → talon
 sb.auth.onAuthStateChange(async (event, session) => {
-  if (event === 'SIGNED_IN' && session && sessionStorage.getItem('mlbr_oauth')) {
+  if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session && sessionStorage.getItem('mlbr_oauth')) {
     sessionStorage.removeItem('mlbr_oauth');
     const user   = session.user;
     const email  = user.email;
