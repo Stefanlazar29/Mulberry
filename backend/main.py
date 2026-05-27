@@ -351,29 +351,6 @@ def make_token(user_id: int, identifier: str, role: str = "user") -> str:
   payload = {"sub": str(user_id), "identifier": identifier, "role": role, "exp": exp}
   return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALG)
 
-@app.post("/auth/google/exchange")
-def google_token_exchange(request: Request, body: dict = Body(...)):
-  """Schimbă tokenul Supabase cu un JWT backend."""
-  supabase_token = body.get("access_token")
-  if not supabase_token:
-    raise HTTPException(status_code=400, detail="Token lipsă")
-  try:
-    from supabase import create_client
-    _sb_url = os.getenv("SUPABASE_URL", "")
-    _sb_key = os.getenv("SUPABASE_SERVICE_KEY", "")
-    sb = create_client(_sb_url, _sb_key)
-    user_resp = sb.auth.get_user(supabase_token)
-    email = user_resp.user.email
-  except Exception:
-    raise HTTPException(status_code=401, detail="Token Supabase invalid")
-  user = database.get_user_by_identifier(email)
-  if not user:
-    raise HTTPException(status_code=404, detail="Cont inexistent. Înregistrează-te mai întâi.")
-  token = make_token(user_id=user.id, identifier=email, role=user.role or "user")
-  return TokenOut(access_token=token, role=user.role or "user")
-
-
-
 def _user_from_jwt_token(token: str) -> database.UserRow:
   try:
     payload = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALG])
@@ -507,6 +484,29 @@ def optional_device_fingerprint(
 # ────────────────────────────────────────────────────────────────
 
 app = FastAPI(title="Mulberry API", version="1.2")
+
+
+@app.post("/auth/google/exchange")
+def google_token_exchange(body: dict = Body(...)):
+  """Schimbă tokenul Supabase cu un JWT backend."""
+  supabase_token = body.get("access_token")
+  if not supabase_token:
+    raise HTTPException(status_code=400, detail="Token lipsă")
+  try:
+    from supabase import create_client
+    _sb_url = os.getenv("SUPABASE_URL", "")
+    _sb_key = os.getenv("SUPABASE_SERVICE_KEY", "")
+    sb = create_client(_sb_url, _sb_key)
+    user_resp = sb.auth.get_user(supabase_token)
+    email = user_resp.user.email
+  except Exception:
+    raise HTTPException(status_code=401, detail="Token Supabase invalid")
+  user = database.get_user_by_identifier(email)
+  if not user:
+    raise HTTPException(status_code=404, detail="Cont inexistent. Înregistrează-te mai întâi.")
+  token = make_token(user_id=user.id, identifier=email, role=user.role or "user")
+  return TokenOut(access_token=token, role=user.role or "user")
+
 
 # CORS: dev local + producție Mulberry/Vercel + supliment din MULBERRY_CORS_ORIGINS
 def _resolve_cors_origins() -> List[str]:
