@@ -1613,7 +1613,7 @@ async function afSendOTP() {
   const email = (document.getElementById('af-email').value || '').trim();
   if (!email || !email.includes('@')) return afShowAlert('af-alert-1', 'Introdu un email valid.');
   afCurrentEmail = email;
-  const { error } = await sb.auth.signInWithOtp({ email });
+  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
   if (error) return afShowAlert('af-alert-1', error.message);
   document.getElementById('af-email-display').textContent = email;
   afGoToStep(2);
@@ -1630,7 +1630,7 @@ async function afVerifyOTP() {
 }
 
 async function afResendOTP() {
-  await sb.auth.signInWithOtp({ email: afCurrentEmail });
+  await sb.auth.signInWithOtp({ email: afCurrentEmail, options: { shouldCreateUser: true } });
   afStartResendTimer();
 }
 
