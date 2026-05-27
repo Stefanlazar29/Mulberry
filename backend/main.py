@@ -503,7 +503,10 @@ def google_token_exchange(body: dict = Body(...)):
     raise HTTPException(status_code=401, detail="Token Supabase invalid")
   user = database.get_user_by_identifier(email)
   if not user:
-    raise HTTPException(status_code=404, detail="Cont inexistent. Înregistrează-te mai întâi.")
+    import secrets, bcrypt as _bcrypt
+    fake_pw = secrets.token_hex(32).encode("utf-8")
+    fake_hash = _bcrypt.hashpw(fake_pw, _bcrypt.gensalt()).decode("ascii")
+    user = database.create_user(identifier=email, password_hash=fake_hash)
   token = make_token(user_id=user.id, identifier=email, role=user.role or "user")
   return TokenOut(access_token=token, role=user.role or "user")
 
