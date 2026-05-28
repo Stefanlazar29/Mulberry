@@ -1874,47 +1874,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Auto-login la reload dacă există sesiune Supabase activă
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const { data: { session } } = await sb.auth.getSession();
-    if (session?.user) {
-      currentUser = {
-        email: session.user.email,
-        name:  session.user.user_metadata?.full_name || null,
-        avatar: session.user.user_metadata?.avatar_url || null
-      };
-      enterApp();
-    }
-  } catch(e) {
-    // sesiune lipsă sau expirată — rămâne pe login
-  }
-});
-
-// Curăță URL-ul după auth — după ce onAuthStateChange a procesat token-ul
+// Curăță URL-ul după auth
 setTimeout(() => {
   if (window.location.hash.includes('access_token')) {
     window.history.replaceState({}, document.title, window.location.pathname);
   }
 }, 500);
 
-// Supabase OAuth redirect — login direct / sign-up → talon
+// Supabase auth — reload (INITIAL_SESSION) + Google OAuth (SIGNED_IN)
+let _sessionRestored = false;
 sb.auth.onAuthStateChange(async (event, session) => {
-  if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && session && sessionStorage.getItem('mlbr_oauth')) {
+  // Reload: sesiune existentă → intră direct în app fără re-login
+  if (event === 'INITIAL_SESSION' && session?.user && !_sessionRestored) {
+    _sessionRestored = true;
+    currentUser = {
+      email:  session.user.email,
+      name:   session.user.user_metadata?.full_name || null,
+      avatar: session.user.user_metadata?.avatar_url || null
+    };
+    enterApp();
+    return;
+  }
+  // Google OAuth nou
+  if (event === 'SIGNED_IN' && session && sessionStorage.getItem('mlbr_oauth')) {
+    _sessionRestored = true;
     sessionStorage.removeItem('mlbr_oauth');
-    const user   = session.user;
-    const email  = user.email;
-    const name   = user.user_metadata?.full_name || null;
-    const avatar = user.user_metadata?.avatar_url || null;
-    currentUser  = { email, name, avatar };
-
-    // User nou = cont creat în ultimele 30 de secunde
+    const user  = session.user;
+    currentUser = {
+      email:  user.email,
+      name:   user.user_metadata?.full_name || null,
+      avatar: user.user_metadata?.avatar_url || null
+    };
     const isNew = (Date.now() - new Date(user.created_at).getTime()) < 30000;
-    if (isNew) {
-      afGoToStep(3);
-    } else {
-      enterApp();
-    }
+    if (isNew) { afGoToStep(3); } else { enterApp(); }
   }
 });
 
