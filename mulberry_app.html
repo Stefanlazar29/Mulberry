@@ -1874,6 +1874,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// Auto-login la reload dacă există token valid
+document.addEventListener('DOMContentLoaded', async () => {
+  const token = (typeof window.api !== 'undefined' && window.api.getToken)
+    ? window.api.getToken()
+    : localStorage.getItem('mulberry_session') || '';
+  if (token) {
+    try {
+      await window.api.me();
+      enterApp();
+    } catch(e) {
+      // token expirat sau invalid — rămâne la login
+    }
+  }
+});
+
 // Curăță URL-ul după auth — după ce onAuthStateChange a procesat token-ul
 setTimeout(() => {
   if (window.location.hash.includes('access_token')) {
