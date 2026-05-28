@@ -644,68 +644,170 @@ a{color:inherit;text-decoration:none}
 .gdc-hub-event{font-size:12px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.35;font-family:'Inter',sans-serif}
 .gdc-hub-time{font-size:10.5px;color:rgba(255,255,255,.28);margin-top:2px;font-family:'Inter',sans-serif}
 
-/* ══ NEW DASHBOARD — Apple/Glassmorphism ══════════════════════ */
-#panel-dashboard{background:#F2F2F7;min-height:100%;padding:0;margin:0}
-.nd-wrap{padding:0 0 calc(var(--bh,72px) + 16px)}
-.nd-greet-row{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 10px}
-.nd-hello{font-size:22px;font-weight:600;color:#111;letter-spacing:-.4px}
-.nd-greet-avatar{width:36px;height:36px;border-radius:50%;background:#4A5568;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;border:.5px solid rgba(255,255,255,.3)}
+/* ══ NEW DASHBOARD — Responsive (mobile carousel + desktop two-col) ══ */
+:root{
+  --nd-bg:#F0F0F2;--nd-card:#FFFFFF;--nd-yellow:#E1FF00;--nd-ink:#111111;
+  --nd-dim:rgba(60,60,67,0.6);--nd-sep:rgba(60,60,67,0.1);--nd-icon:#1A1A1A;
+  --nd-green:#1DB87A;--nd-orange:#F59E0B;--nd-trust:#7C3AED;
+  --nd-shadow:0 2px 16px rgba(0,0,0,0.07);--nd-shadow-lg:0 6px 28px rgba(0,0,0,0.1);
+  --nd-r:20px;
+}
+#panel-dashboard{background:var(--nd-bg);min-height:100%;padding:0;margin:0}
+.nd-wrap{padding:0 0 calc(var(--bh,72px)+16px)}
+
+/* greeting */
+.nd-greet-card{padding:18px 20px 10px}
+.nd-greet-top{display:flex;justify-content:space-between;align-items:center}
+.nd-gr-sub{display:none;font-size:13px;color:var(--nd-dim);margin-bottom:2px}
+.nd-hello{font-size:22px;font-weight:600;color:var(--nd-ink);letter-spacing:-.4px}
+.nd-greet-avatar{width:36px;height:36px;border-radius:50%;background:#4A5568;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0}
 .nd-greet-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.nd-gr-actions{display:none;flex-direction:column;gap:6px;margin-top:14px}
+.nd-gr-action{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:12px;background:#F5F5F7;cursor:pointer;transition:background .15s}
+.nd-gr-action:hover{background:#EBEBEE}
+.nd-gr-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nd-gr-txt{font-size:12.5px;font-weight:500;color:var(--nd-ink);flex:1}
+.nd-gr-arr{color:rgba(0,0,0,0.25)}
+
+/* two-col layout (mobile: single column) */
+.nd-two-col{display:flex;flex-direction:column}
+.nd-col-left{display:flex;flex-direction:column;gap:0}
+.nd-col-right{display:flex;flex-direction:column}
+
+/* carousel */
 .nd-carousel-wrap{overflow:hidden;margin:0 16px;border-radius:20px}
 .nd-carousel-track{display:flex;transition:transform .35s cubic-bezier(.4,0,.2,1)}
 .nd-ycard{min-width:100%;border-radius:20px;padding:18px 20px;flex-shrink:0;cursor:pointer}
-.nd-ycard-yellow{background:#E1FF00}
+.nd-ycard-yellow{background:var(--nd-yellow)}
 .nd-ycard-trust{background:#7C3AED}
 .nd-ycard-add{background:#F5F5F5;border:1.5px dashed rgba(0,0,0,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px}
 .nd-ycard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
-.nd-ycard-badge{font-size:11px;font-weight:600;color:#111;background:rgba(0,0,0,.09);padding:3px 10px;border-radius:20px}
+.nd-ycard-badge{font-size:11px;font-weight:600;color:#111;background:rgba(255,255,255,.55);padding:3px 10px;border-radius:20px}
 .nd-ycard-badge-trust{font-size:11px;font-weight:600;color:#fff;background:rgba(255,255,255,.15);padding:3px 10px;border-radius:20px}
 .nd-ycard-logo{height:26px;width:auto;filter:invert(1);opacity:.8}
 .nd-ycard-logo-trust{height:26px;width:auto;opacity:.7}
-.nd-ycard-vin{font-size:10px;color:rgba(0,0,0,.4);margin-bottom:3px;font-family:'DM Mono','JetBrains Mono',monospace;letter-spacing:.3px}
-.nd-ycard-vin-trust{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px;font-family:'DM Mono','JetBrains Mono',monospace}
+.nd-ycard-vin{font-size:10px;color:rgba(0,0,0,.4);margin-bottom:3px;font-family:'DM Mono',monospace;letter-spacing:.3px}
+.nd-ycard-vin-trust{font-size:10px;color:rgba(255,255,255,.4);margin-bottom:3px;font-family:'DM Mono',monospace}
 .nd-ycard-plate{font-size:22px;font-weight:700;color:#111;letter-spacing:2px}
 .nd-ycard-plate-trust{font-size:22px;font-weight:700;color:#fff;letter-spacing:2px}
 .nd-ycard-chev{display:flex;justify-content:center;margin-top:14px}
 .nd-ycard-add-icon{width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.06);display:flex;align-items:center;justify-content:center;margin-bottom:7px}
 .nd-ycard-add-lbl{font-size:12px;font-weight:500;color:#888}
-.nd-dots{display:flex;justify-content:center;gap:5px;margin:10px 0 12px}
+
+/* dots */
+.nd-dots{display:flex;justify-content:center;gap:5px;margin:10px 0 0;padding:0 16px}
 .nd-dot{height:5px;border-radius:3px;background:rgba(0,0,0,.2);width:6px;transition:all .3s}
 .nd-dot.active{width:18px;background:#1A1A1A}
-.nd-sortbar{display:flex;justify-content:space-between;align-items:center;padding:0 20px 10px}
-.nd-sort-item{display:flex;align-items:center;gap:4px;font-size:12px;color:#999;cursor:pointer}
+
+/* pills */
+.nd-pills{display:none;gap:7px;flex-wrap:wrap;padding:10px 0 0}
+.nd-pill{display:flex;align-items:center;gap:4px;padding:5px 11px;border-radius:20px;font-size:11px;font-weight:600}
+.nd-pill-ok{background:rgba(29,184,122,.1);color:#1DB87A}
+.nd-pill-warn{background:rgba(245,158,11,.1);color:#F59E0B}
+.nd-pdot{width:5px;height:5px;border-radius:50%;background:currentColor}
+
+/* sortbar */
+.nd-sortbar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 10px}
+.nd-sort-item{display:flex;align-items:center;gap:4px;font-size:12px;color:#999;cursor:pointer;font-weight:500}
+
+/* icons */
 .nd-icons-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:0 20px 18px;text-align:center}
-.nd-icon-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0}
-.nd-icon-circle{width:54px;height:54px;border-radius:50%;background:rgba(20,20,20,.88);display:flex;align-items:center;justify-content:center;border:.5px solid rgba(255,255,255,.1);transition:transform .15s}
-.nd-icon-btn:active .nd-icon-circle{transform:scale(.94)}
+.nd-icon-btn{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
+.nd-icon-circle{width:54px;height:54px;border-radius:50%;background:var(--nd-icon);display:flex;align-items:center;justify-content:center;border:.5px solid rgba(255,255,255,.1);transition:transform .15s;box-shadow:0 3px 14px rgba(0,0,0,.2)}
+.nd-icon-btn:hover .nd-icon-circle{transform:scale(1.06)}
+.nd-icon-btn:active .nd-icon-circle{transform:scale(.92)}
 .nd-icon-lbl{font-size:11px;color:#222;font-weight:500;line-height:1.3}
-.nd-feat-card{margin:0 16px 10px;background:rgba(255,255,255,.65);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .15s}
+
+/* feat cards */
+.nd-feat-card{margin:0 16px 10px;background:rgba(255,255,255,.85);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:transform .15s;box-shadow:var(--nd-shadow)}
+.nd-feat-card:hover{transform:translateY(-1px);box-shadow:var(--nd-shadow-lg)}
 .nd-feat-card:active{transform:scale(.98)}
-.nd-feat-ico{width:44px;height:44px;border-radius:50%;background:rgba(20,20,20,.88);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nd-feat-ico{width:44px;height:44px;border-radius:50%;background:var(--nd-icon);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .nd-feat-content{flex:1}
 .nd-feat-title{font-size:14px;font-weight:600;color:#111;margin-bottom:6px;letter-spacing:-.2px}
 .nd-feat-search{background:rgba(0,0,0,.05);border-radius:20px;padding:6px 12px;font-size:12px;color:#bbb;border:.5px solid rgba(0,0,0,.06)}
 .nd-feat-sub{font-size:12px;color:#aaa}
-.nd-family-banner{margin:0 16px 16px;background:linear-gradient(135deg,#7C3AED,#A855F7);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer}
-.nd-family-ico{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.nd-family-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
-.nd-family-sub{font-size:11px;color:rgba(255,255,255,.65)}
-.nd-family-btn{font-size:12px;font-weight:600;color:#fff;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.nd-status-card{margin:0 16px 10px;background:rgba(255,255,255,.65);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 16px}
-.nd-status-title{font-size:10px;color:#999;font-weight:500;letter-spacing:.5px;margin-bottom:8px}
+
+/* status card */
+.nd-status-card{background:rgba(255,255,255,.85);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 16px;box-shadow:var(--nd-shadow)}
+.nd-status-title{font-size:10px;color:#999;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px}
 .nd-status-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:.5px solid rgba(0,0,0,.05);font-size:12px}
 .nd-status-row:last-child{border-bottom:none}
 .nd-status-lbl{color:#555}
+
+/* activity card (desktop only by default) */
+.nd-activity-card{display:none;margin:0 16px 10px;background:rgba(255,255,255,.85);border:.5px solid rgba(255,255,255,.9);border-radius:16px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:14px 16px;box-shadow:var(--nd-shadow)}
+.nd-act-title{font-size:10px;color:#999;font-weight:500;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px}
+.nd-act-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:.5px solid rgba(0,0,0,.05);cursor:pointer;transition:background .1s}
+.nd-act-row:last-child{border-bottom:none}
+.nd-act-ic{width:34px;height:34px;border-radius:10px;background:#F2F2F5;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nd-act-name{font-size:13px;font-weight:500;color:#111;flex:1}
+.nd-act-sub{font-size:11px;color:#999}
+.nd-act-arr{color:rgba(0,0,0,.2)}
+
+/* family banner */
+.nd-family-banner{margin:0 16px 16px;background:linear-gradient(135deg,#6D28D9,#9333EA);border-radius:16px;padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 4px 20px rgba(109,40,217,.25)}
+.nd-family-ico{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nd-family-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.nd-family-sub{font-size:11px;color:rgba(255,255,255,.65)}
+.nd-family-btn{font-size:12px;font-weight:600;color:#fff;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:20px;white-space:nowrap;flex-shrink:0;margin-left:auto}
+
+/* bottom nav */
 .bnav{background:rgba(249,249,251,.92)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;border-top:1px solid rgba(0,0,0,.07)!important;height:auto!important;padding:10px 0 22px!important}
 .bnav-inner{justify-content:space-around!important}
 .bn-item{color:#1c1c1e!important}
 .bn-item svg{stroke:#1c1c1e!important;width:24px!important;height:24px!important}
 .bn-center-logo{background:#1c1c1e!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;flex:0 0 46px!important}
 .bn-center-logo img{filter:invert(1);width:26px;height:26px;border-radius:50%}
+
+/* ── Desktop layout ── */
+@media(min-width:769px){
+  .nd-wrap{padding:28px 32px 48px;max-width:960px;margin:0 auto}
+
+  /* greeting → full card */
+  .nd-greet-card{padding:20px 22px;background:var(--nd-card);border-radius:var(--nd-r);box-shadow:var(--nd-shadow);margin-bottom:14px}
+  .nd-gr-sub{display:block}
+  .nd-greet-avatar{display:none}
+  .nd-gr-actions{display:flex}
+
+  /* two-col grid */
+  .nd-two-col{display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start}
+  .nd-col-left{position:sticky;top:80px;gap:14px;padding:0}
+  .nd-col-right{padding:0}
+
+  /* carousel → single card (no drag) */
+  .nd-carousel-wrap{margin:0;border-radius:22px;box-shadow:0 6px 24px rgba(200,220,0,.22)}
+  .nd-carousel-track{transform:none!important;transition:none!important}
+  #nd-trust-card,#nd-add-card{display:none!important}
+  .nd-dots{display:none}
+  .nd-ycard{min-width:100%}
+
+  /* pills visible */
+  .nd-pills{display:flex}
+
+  /* status card solid on desktop */
+  .nd-status-card{background:var(--nd-card);border:none;backdrop-filter:none;border-radius:var(--nd-r)}
+
+  /* icon circles bigger */
+  .nd-icon-circle{width:60px;height:60px}
+  .nd-icons-row{padding:0 0 14px;gap:8px}
+  .nd-sortbar{padding:0 0 14px}
+
+  /* feat cards solid */
+  .nd-feat-card{margin:0 0 10px;background:var(--nd-card);border:none;backdrop-filter:none;border-radius:var(--nd-r)}
+
+  /* activity card visible */
+  .nd-activity-card{display:block;margin:0 0 10px;background:var(--nd-card);border:none;backdrop-filter:none;border-radius:var(--nd-r)}
+
+  /* family banner */
+  .nd-family-banner{margin:0}
+}
+
 @media(max-width:768px){
   .nd-icon-circle{width:50px;height:50px}
   .nd-icon-lbl{font-size:10px}
 }
+
   </style>
 </head>
 <body>
@@ -974,141 +1076,239 @@ a{color:inherit;text-decoration:none}
     <div class="panel active" id="panel-dashboard">
       <div class="nd-wrap">
 
-        <!-- Greeting -->
-        <div class="nd-greet-row">
-          <div class="nd-hello">Hello, <span id="gd-main-title">there</span></div>
-          <div class="nd-greet-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
+        <!-- Greeting: simple row on mobile, full card on desktop -->
+        <div class="nd-greet-card">
+          <div class="nd-greet-top">
+            <div>
+              <div class="nd-gr-sub">Bună ziua,</div>
+              <div class="nd-hello">Hello, <span id="gd-main-title">there</span></div>
+            </div>
+            <div class="nd-greet-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
+          </div>
+          <!-- Desktop action shortcuts -->
+          <div class="nd-gr-actions">
+            <div class="nd-gr-action" onclick="goPanel('marketplace')">
+              <div class="nd-gr-dot" style="background:#E1FF00;border:1.5px solid rgba(0,0,0,0.1)"></div>
+              <span class="nd-gr-txt">Programează un service</span>
+              <svg class="nd-gr-arr" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="nd-gr-action">
+              <div class="nd-gr-dot" style="background:#F59E0B"></div>
+              <span class="nd-gr-txt">Revizie scadentă în 32 zile</span>
+              <svg class="nd-gr-arr" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="nd-gr-action" onclick="goPanel('yellowcard')">
+              <div class="nd-gr-dot" style="background:#1DB87A"></div>
+              <span class="nd-gr-txt">Verifică documentele</span>
+              <svg class="nd-gr-arr" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
         </div>
 
-        <!-- Carousel -->
-        <div class="nd-carousel-wrap">
-          <div class="nd-carousel-track" id="nd-car-track">
+        <div class="nd-two-col">
 
-            <!-- Card 0: Yellowcard -->
-            <div class="nd-ycard nd-ycard-yellow" onclick="goPanel('yellowcard')">
-              <div class="nd-ycard-top">
-                <span class="nd-ycard-badge">Yellowcard</span>
-                <img src="/favicon.png" class="nd-ycard-logo" alt="Mulberry">
+          <!-- LEFT: yellowcard + pills + status -->
+          <div class="nd-col-left">
+
+            <!-- Carousel (mobile swipe / desktop = single card) -->
+            <div class="nd-carousel-wrap">
+              <div class="nd-carousel-track" id="nd-car-track">
+
+                <div class="nd-ycard nd-ycard-yellow" onclick="goPanel('yellowcard')">
+                  <div class="nd-ycard-top">
+                    <span class="nd-ycard-badge">Yellowcard</span>
+                    <img src="/favicon.png" class="nd-ycard-logo" alt="Mulberry">
+                  </div>
+                  <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
+                  <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
+                  <div class="nd-ycard-chev">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                </div>
+
+                <div class="nd-ycard nd-ycard-trust" id="nd-trust-card" style="display:none">
+                  <div class="nd-ycard-top">
+                    <span class="nd-ycard-badge-trust">MulberryTrust</span>
+                    <img src="/favicon.png" class="nd-ycard-logo-trust" alt="Mulberry">
+                  </div>
+                  <div class="nd-ycard-vin-trust" id="nd-trust-vin">VIN: —</div>
+                  <div class="nd-ycard-plate-trust" id="nd-trust-plate">— ——</div>
+                  <div class="nd-ycard-chev">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                </div>
+
+                <div class="nd-ycard nd-ycard-add" id="nd-add-card" onclick="goPanel('addvehicle')">
+                  <div class="nd-ycard-add-icon">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </div>
+                  <div class="nd-ycard-add-lbl">Adaugă vehicul</div>
+                </div>
+
               </div>
-              <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
-              <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
-              <div class="nd-ycard-chev">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+
+            <!-- Dots (mobile only) -->
+            <div class="nd-dots">
+              <div class="nd-dot active" id="nd-dot-0"></div>
+              <div class="nd-dot" id="nd-dot-1" style="display:none"></div>
+              <div class="nd-dot" id="nd-dot-2"></div>
+            </div>
+
+            <!-- Status pills (desktop only) -->
+            <div class="nd-pills">
+              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>ITP Valid</div>
+              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>RCA Valid</div>
+              <div class="nd-pill nd-pill-warn"><div class="nd-pdot"></div>Revizie 32 zile</div>
+            </div>
+
+            <!-- Status card -->
+            <div class="nd-status-card">
+              <div class="nd-status-title">STARE VEHICUL</div>
+              <div class="nd-status-row"><span class="nd-status-lbl">ITP</span><span id="nd-itp-val" style="color:#1DB87A;font-weight:600">—</span></div>
+              <div class="nd-status-row"><span class="nd-status-lbl">RCA</span><span id="nd-rca-val" style="color:#1DB87A;font-weight:600">—</span></div>
+              <div class="nd-status-row"><span class="nd-status-lbl">Revizie</span><span id="nd-rev-val" style="color:#F59E0B;font-weight:600">—</span></div>
+            </div>
+
+          </div><!-- /col-left -->
+
+          <!-- RIGHT: actions + features -->
+          <div class="nd-col-right">
+
+            <!-- Sort bar -->
+            <div class="nd-sortbar">
+              <div class="nd-sort-item">
+                <svg viewBox="0 0 18 14" width="15" height="13" fill="none"><rect x="0" y="0" width="18" height="2.5" rx="1.25" fill="#999"/><rect x="2" y="5.5" width="14" height="2.5" rx="1.25" fill="#999"/><rect x="4" y="11" width="10" height="2.5" rx="1.25" fill="#999"/></svg>
+                Sort by
+              </div>
+              <div class="nd-sort-item">
+                MulberryFAST
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
             </div>
 
-            <!-- Card 1: Trust (hidden by default) -->
-            <div class="nd-ycard nd-ycard-trust" id="nd-trust-card" style="display:none">
-              <div class="nd-ycard-top">
-                <span class="nd-ycard-badge-trust">MulberryTrust</span>
-                <img src="/favicon.png" class="nd-ycard-logo-trust" alt="Mulberry">
+            <!-- Icon grid — bold filled icons -->
+            <div class="nd-icons-row">
+              <button class="nd-icon-btn" onclick="goPanel('marketplace')">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <rect x="2" y="9" width="18" height="13" rx="2.5" fill="rgba(255,255,255,0.9)"/>
+                    <path d="M20 13h5l3 3.5V22h-8V13z" fill="rgba(255,255,255,0.72)"/>
+                    <circle cx="8" cy="24.5" r="3.5" fill="rgba(255,255,255,0.9)"/>
+                    <circle cx="23" cy="24.5" r="3.5" fill="rgba(255,255,255,0.72)"/>
+                  </svg>
+                </div>
+                <span class="nd-icon-lbl">Mulberry<br>GO</span>
+              </button>
+              <button class="nd-icon-btn" onclick="goPanel('yellowcard')">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <rect x="4" y="4" width="10" height="10" rx="2" fill="rgba(255,255,255,0.9)"/>
+                    <rect x="18" y="4" width="10" height="10" rx="2" fill="rgba(255,255,255,0.72)"/>
+                    <rect x="4" y="18" width="10" height="10" rx="2" fill="rgba(255,255,255,0.72)"/>
+                    <rect x="18" y="18" width="10" height="10" rx="2" fill="rgba(255,255,255,0.5)"/>
+                  </svg>
+                </div>
+                <span class="nd-icon-lbl">Mulberry<br>ID</span>
+              </button>
+              <button class="nd-icon-btn" onclick="goPanel('analytics')">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <path d="M16 4C11 4 8 8.5 8 12.5V21L5 24H27L24 21V12.5C24 8.5 21 4 16 4Z" fill="rgba(255,255,255,0.88)"/>
+                    <rect x="13" y="24" width="6" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
+                    <circle cx="23" cy="7" r="4" fill="#E1FF00"/>
+                  </svg>
+                </div>
+                <span class="nd-icon-lbl">Mulberry<br>EXO</span>
+              </button>
+              <button class="nd-icon-btn" onclick="location.href='/mulberry_cloud.html'">
+                <div class="nd-icon-circle">
+                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
+                    <path d="M11 24Q6 24 6 19Q6 14 11 14Q10 8 17 8Q24 8 23 14Q27 14 27 19Q27 24 23 24Z" fill="rgba(255,255,255,0.88)"/>
+                    <path d="M17 12L17 21M14 15.5L17 12L20 15.5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="nd-icon-lbl">Mulberry<br>Cloud</span>
+              </button>
+            </div>
+
+            <!-- MulberryAI -->
+            <div class="nd-feat-card" onclick="openGeminiModal()">
+              <div class="nd-feat-ico">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+                  <circle cx="16" cy="16" r="4.5" fill="rgba(255,255,255,0.95)"/>
+                  <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="rgba(255,255,255,0.6)" stroke-width="2.4" stroke-linecap="round"/>
+                  <path d="M7.8 7.8l2.8 2.8M21.4 21.4l2.8 2.8M7.8 24.2l2.8-2.8M21.4 10.6l2.8-2.8" stroke="rgba(255,255,255,0.32)" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
               </div>
-              <div class="nd-ycard-vin-trust" id="nd-trust-vin">VIN: —</div>
-              <div class="nd-ycard-plate-trust" id="nd-trust-plate">— ——</div>
-              <div class="nd-ycard-chev">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <div class="nd-feat-content">
+                <div class="nd-feat-title">MulberryAI</div>
+                <div class="nd-feat-search" id="nd-ai-hint">Întreabă orice...</div>
               </div>
             </div>
 
-            <!-- Card 2: Add vehicle -->
-            <div class="nd-ycard nd-ycard-add" id="nd-add-card" onclick="goPanel('addvehicle')">
-              <div class="nd-ycard-add-icon">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <!-- MulberryHUB -->
+            <div class="nd-feat-card" onclick="location.href='/mulberry_menu.html'">
+              <div class="nd-feat-ico">
+                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
+                  <rect x="8" y="5" width="16" height="22" rx="2.5" fill="rgba(255,255,255,0.72)"/>
+                  <line x1="12" y1="12" x2="20" y2="12" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="12" y1="17" x2="20" y2="17" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+                  <line x1="12" y1="22" x2="16" y2="22" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+                </svg>
               </div>
-              <div class="nd-ycard-add-lbl">Adaugă vehicul</div>
+              <div class="nd-feat-content">
+                <div class="nd-feat-title">MulberryHUB</div>
+                <div class="nd-feat-sub" id="nd-hub-sub">History · PDF</div>
+              </div>
             </div>
 
-          </div>
-        </div>
-
-        <!-- Dots -->
-        <div class="nd-dots">
-          <div class="nd-dot active" id="nd-dot-0"></div>
-          <div class="nd-dot" id="nd-dot-1" style="display:none"></div>
-          <div class="nd-dot" id="nd-dot-2"></div>
-        </div>
-
-        <!-- Sort bar -->
-        <div class="nd-sortbar">
-          <div class="nd-sort-item">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-            Sort by
-          </div>
-          <div class="nd-sort-item">
-            Last 24h
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </div>
-        </div>
-
-        <!-- Icon circles -->
-        <div class="nd-icons-row">
-          <button class="nd-icon-btn" onclick="goPanel('marketplace')">
-            <div class="nd-icon-circle">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <!-- Activity (desktop only) -->
+            <div class="nd-activity-card">
+              <div class="nd-act-title">ACTIVITATE RECENTĂ</div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">Schimb ulei programat</div><div class="nd-act-sub">Ieri · MulberryGO</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">RCA reînnoit</div><div class="nd-act-sub">Acum 3 zile · YellowCard</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+              <div class="nd-act-row">
+                <div class="nd-act-ic">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div style="flex:1"><div class="nd-act-name">ITP verificat</div><div class="nd-act-sub">Săptămâna trecută</div></div>
+                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
             </div>
-            <span class="nd-icon-lbl">Mulberry<br>GO</span>
-          </button>
-          <button class="nd-icon-btn" onclick="goPanel('yellowcard')">
-            <div class="nd-icon-circle">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+
+            <!-- MulberryFamily -->
+            <div class="nd-family-banner" id="nd-family-banner" onclick="showFamilyUpsell()">
+              <div class="nd-family-ico">
+                <svg viewBox="0 0 28 28" width="20" height="20" fill="none">
+                  <circle cx="10" cy="9" r="3.5" stroke="rgba(255,255,255,0.9)" stroke-width="1.6"/>
+                  <path d="M4 22Q4 17 10 17Q16 17 16 22" stroke="rgba(255,255,255,0.9)" stroke-width="1.6" stroke-linecap="round"/>
+                  <circle cx="19" cy="10" r="2.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
+                  <path d="M16 22Q16 18.5 19 18.5Q22 18.5 22 22" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div style="flex:1">
+                <div class="nd-family-title">MulberryFamily</div>
+                <div class="nd-family-sub">Până la 3 vehicule · 3€/lună</div>
+              </div>
+              <div class="nd-family-btn">Activează</div>
             </div>
-            <span class="nd-icon-lbl">Mulberry<br>ID</span>
-          </button>
-          <button class="nd-icon-btn" onclick="goPanel('analytics')">
-            <div class="nd-icon-circle">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-            </div>
-            <span class="nd-icon-lbl">Mulberry<br>EXO</span>
-          </button>
-          <button class="nd-icon-btn" onclick="location.href='/mulberry_cloud.html'">
-            <div class="nd-icon-circle">
-              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
-            </div>
-            <span class="nd-icon-lbl">Mulberry<br>Cloud</span>
-          </button>
-        </div>
 
-        <!-- Status card -->
-        <div class="nd-status-card">
-          <div class="nd-status-title">STARE VEHICUL</div>
-          <div class="nd-status-row"><span class="nd-status-lbl">ITP</span><span id="nd-itp-val" style="color:#22c55e;font-weight:600">—</span></div>
-          <div class="nd-status-row"><span class="nd-status-lbl">RCA</span><span id="nd-rca-val" style="color:#22c55e;font-weight:600">—</span></div>
-          <div class="nd-status-row"><span class="nd-status-lbl">Revizie</span><span id="nd-rev-val" style="color:#f59e0b;font-weight:600">—</span></div>
-        </div>
+          </div><!-- /col-right -->
 
-        <!-- MulberryAI card -->
-        <div class="nd-feat-card" onclick="openGeminiModal()">
-          <div class="nd-feat-ico">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-          </div>
-          <div class="nd-feat-content">
-            <div class="nd-feat-title">MulberryAI</div>
-            <div class="nd-feat-search" id="nd-ai-hint">Întreabă orice...</div>
-          </div>
-        </div>
-
-        <!-- MulberryHUB card -->
-        <div class="nd-feat-card" onclick="location.href='/mulberry_menu.html'">
-          <div class="nd-feat-ico">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          </div>
-          <div class="nd-feat-content">
-            <div class="nd-feat-title">MulberryHUB</div>
-            <div class="nd-feat-sub" id="nd-hub-sub">History · PDF</div>
-          </div>
-        </div>
-
-        <!-- MulberryFamily banner -->
-        <div class="nd-family-banner" id="nd-family-banner" onclick="showFamilyUpsell()">
-          <div class="nd-family-ico">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div style="flex:1">
-            <div class="nd-family-title">MulberryFamily</div>
-            <div class="nd-family-sub">Până la 3 vehicule în același cont</div>
-          </div>
-          <div class="nd-family-btn">3€/lună</div>
-        </div>
+        </div><!-- /two-col -->
 
       </div>
 
