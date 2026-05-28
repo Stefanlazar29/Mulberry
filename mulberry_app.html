@@ -150,9 +150,23 @@ a{color:inherit;text-decoration:none}
 .af-err{font-size:13px;color:var(--red);margin-top:10px;min-height:18px;text-align:center}
 
 @media(max-width:768px){
-  #auth-screen{flex-direction:column}
-  .auth-left{display:none}
-  .auth-right{width:100%;padding:32px 24px;justify-content:flex-start;padding-top:52px}
+  #auth-screen{flex-direction:column;align-items:center;justify-content:center;padding:24px 20px}
+  .auth-left{
+    position:absolute;inset:0;z-index:0;
+    display:flex;padding:0;
+    background:rgba(0,0,0,.25);
+  }
+  .auth-left .al-logo,.auth-left .al-hero,.auth-left .al-features,.auth-left .al-foot{display:none}
+  .auth-right{
+    position:relative;z-index:1;
+    width:100%;max-width:420px;
+    background:rgba(8,8,8,.52);
+    backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+    border:1px solid rgba(255,255,255,.14);
+    border-radius:28px;
+    padding:36px 28px 32px;
+    justify-content:flex-start;
+  }
 }
 
 /* ══ APP SHELL ═════════════════════════════════════ */
@@ -658,7 +672,7 @@ a{color:inherit;text-decoration:none}
 /* greeting */
 .nd-greet-card{padding:18px 20px 10px}
 .nd-greet-top{display:flex;justify-content:space-between;align-items:center}
-.nd-gr-sub{display:none;font-size:13px;color:var(--nd-dim);margin-bottom:2px}
+.nd-gr-sub{font-size:12px;color:var(--nd-dim);margin-bottom:2px;font-weight:500;letter-spacing:.01em}
 .nd-hello{font-size:22px;font-weight:600;color:var(--nd-ink);letter-spacing:-.4px}
 .nd-greet-avatar{width:36px;height:36px;border-radius:50%;background:#4A5568;color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;flex-shrink:0}
 .nd-greet-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
@@ -671,11 +685,11 @@ a{color:inherit;text-decoration:none}
 
 /* two-col layout (mobile: single column) */
 .nd-two-col{display:flex;flex-direction:column}
-.nd-col-left{display:flex;flex-direction:column;gap:0}
-.nd-col-right{display:flex;flex-direction:column}
+.nd-col-left{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+.nd-col-right{display:flex;flex-direction:column;padding:0 16px}
 
 /* carousel */
-.nd-carousel-wrap{overflow:hidden;margin:0 16px;border-radius:20px}
+.nd-carousel-wrap{overflow:hidden;margin:0;border-radius:20px}
 .nd-carousel-track{display:flex;transition:transform .35s cubic-bezier(.4,0,.2,1)}
 .nd-ycard{min-width:100%;border-radius:20px;padding:18px 20px;flex-shrink:0;cursor:pointer}
 .nd-ycard-yellow{
@@ -1098,7 +1112,10 @@ a{color:inherit;text-decoration:none}
         <div class="nd-greet-card">
           <div class="nd-greet-top">
             <div>
-              <div class="nd-gr-sub">Bună ziua,</div>
+              <div class="nd-gr-sub" style="display:flex;align-items:center;gap:5px">
+                <img src="/favicon.png" style="height:13px;width:auto;opacity:.55" alt="">
+                <span id="gd-greeting-lbl">Bună ziua,</span>
+              </div>
               <div class="nd-hello">Hello, <span id="gd-main-title">there</span></div>
             </div>
             <div class="nd-greet-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
@@ -1118,7 +1135,7 @@ a{color:inherit;text-decoration:none}
                   <div class="nd-ycard-wm">M</div>
                   <div class="nd-ycard-top">
                     <span class="nd-ycard-badge">Yellowcard</span>
-                    <img src="/Mulberry.png" class="nd-ycard-brand-logo" alt="Mulberry">
+                    <img src="/Mulberry.png" class="nd-ycard-brand-logo" alt="Mulberry" onerror="this.src='/favicon.png';this.style.filter='brightness(0)'">
                   </div>
                   <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
                   <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
