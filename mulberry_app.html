@@ -1641,11 +1641,6 @@ function loadSession() {
 }
 function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; sb.auth.signOut(); }
 
-// Restore session on reload
-document.addEventListener('DOMContentLoaded', function() {
-  const s = loadSession();
-  if (s) { currentUser = s; enterApp(); }
-});
 
 let _tt;
 function toast(msg, type) {
@@ -2324,4 +2319,25 @@ function gmHandlePhoto(event) {
 function showFamilyUpsell(){
   alert('MulberryFamily · 3€/lună · Până la 3 vehicule în același cont');
 }
+
+// ── Session restore ────────────────────────────────────────────
+// Rulează direct la finalul scriptului (DOM gata, toate funcțiile definite).
+// 1) Verifică localStorage (instant) → intră în app.
+// 2) Fallback: Supabase getSession() → salvează + intră (pt Google OAuth).
+(async function _restoreSession() {
+  const saved = loadSession();
+  if (saved) { enterApp(); return; }
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session?.user) {
+      const u = session.user;
+      saveSession({
+        email:  u.email,
+        name:   u.user_metadata?.full_name  || null,
+        avatar: u.user_metadata?.avatar_url || null
+      });
+      enterApp();
+    }
+  } catch(_) {}
+})();
 </script>
