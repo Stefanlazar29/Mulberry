@@ -677,6 +677,55 @@ a{color:inherit;text-decoration:none}
 .gdc-hub-dot-feat{background:#b5f333;box-shadow:0 0 7px rgba(181,243,51,.4)}
 .gdc-hub-event{font-size:12px;font-weight:400;color:rgba(255,255,255,.82);line-height:1.35;font-family:'Inter',sans-serif}
 .gdc-hub-time{font-size:10.5px;color:rgba(255,255,255,.28);margin-top:2px;font-family:'Inter',sans-serif}
+
+/* ══ NEW DASHBOARD — Apple/Glassmorphism ══════════════════════ */
+#panel-dashboard{background:#f2f2f7;min-height:100%}
+.nd-wrap{max-width:600px;margin:0 auto;padding:24px 20px 80px}
+.nd-greet-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.nd-hello{font-size:2rem;font-weight:700;color:#1c1c1e;letter-spacing:-.03em;font-family:'Urbanist',sans-serif;line-height:1.1}
+.nd-greet-avatar{width:46px;height:46px;border-radius:50%;background:#3a3a3c;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;font-family:'Urbanist',sans-serif;overflow:hidden;flex-shrink:0;cursor:pointer}
+.nd-greet-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.nd-ycard{background:linear-gradient(140deg,#FFE500,#FFC700);border-radius:22px;padding:18px 20px 14px;cursor:pointer;margin-bottom:22px;box-shadow:0 8px 30px rgba(255,200,0,0.25);transition:transform .18s}
+.nd-ycard:active{transform:scale(0.98)}
+.nd-ycard-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.nd-ycard-badge{background:rgba(0,0,0,0.1);color:rgba(0,0,0,0.58);font-size:0.68rem;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.05em;font-family:'Urbanist',sans-serif}
+.nd-ycard-logo{width:36px;height:36px;border-radius:50%;object-fit:contain;background:rgba(0,0,0,0.1);padding:5px}
+.nd-ycard-vin{font-size:0.7rem;color:rgba(0,0,0,0.45);font-family:'DM Mono','JetBrains Mono',monospace;margin-bottom:5px;letter-spacing:.02em}
+.nd-ycard-plate{font-size:2.2rem;font-weight:800;color:#111;letter-spacing:.06em;font-family:'Urbanist',sans-serif;line-height:1}
+.nd-ycard-chev{text-align:center;margin-top:14px}
+.nd-sortbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding:0 2px}
+.nd-sort-item{display:flex;align-items:center;gap:5px;font-size:0.78rem;font-weight:600;color:#6e6e73;cursor:pointer;font-family:'Urbanist',sans-serif;user-select:none}
+.nd-icons-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:22px}
+.nd-icon-btn{display:flex;flex-direction:column;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:4px 2px;-webkit-tap-highlight-color:transparent}
+.nd-icon-circle{width:64px;height:64px;background:#1c1c1e;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px rgba(0,0,0,0.16);transition:transform .18s}
+.nd-icon-btn:active .nd-icon-circle{transform:scale(0.9)}
+.nd-icon-lbl{font-size:0.67rem;font-weight:600;color:#3a3a3c;text-align:center;font-family:'Urbanist',sans-serif;line-height:1.3}
+.nd-feat-card{background:rgba(255,255,255,0.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.65);border-radius:20px;padding:15px 16px;display:flex;align-items:center;gap:14px;margin-bottom:12px;box-shadow:0 2px 14px rgba(0,0,0,0.06);cursor:pointer;transition:transform .18s;-webkit-tap-highlight-color:transparent}
+.nd-feat-card:active{transform:scale(0.98)}
+.nd-feat-ico{width:52px;height:52px;background:#1c1c1e;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.18)}
+.nd-feat-content{flex:1;min-width:0}
+.nd-feat-title{font-size:0.95rem;font-weight:700;color:#1c1c1e;font-family:'Urbanist',sans-serif;margin-bottom:5px}
+.nd-feat-search{display:block;width:100%;background:rgba(0,0,0,0.055);border:none;border-radius:10px;padding:7px 12px;font-size:0.82rem;color:#8e8e93;font-family:'Urbanist',sans-serif}
+.nd-feat-sub{font-size:0.8rem;color:#8e8e93;font-family:'Urbanist',sans-serif;font-weight:500}
+/* New bottom nav */
+.bnav{background:rgba(249,249,251,0.92)!important;backdrop-filter:blur(22px)!important;-webkit-backdrop-filter:blur(22px)!important;border-top:1px solid rgba(0,0,0,0.07)!important;height:auto!important;padding:10px 0 22px!important}
+.bnav-inner{justify-content:space-around!important}
+.bn-item{color:#1c1c1e!important}
+.bn-item svg{stroke:#1c1c1e!important;width:24px!important;height:24px!important}
+.bn-center-logo{background:#1c1c1e!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;flex:0 0 46px!important}
+.bn-center-logo img{filter:invert(1);width:26px;height:26px;border-radius:50%}
+@media(max-width:768px){
+  .nd-wrap{padding:20px 16px 90px}
+  .nd-hello{font-size:1.75rem}
+  .nd-icon-circle{width:58px;height:58px}
+  .nd-icon-lbl{font-size:0.62rem}
+  #panel-dashboard .gd,.panel{padding:0!important}
+}
+@media(min-width:769px){
+  .nd-wrap{padding:28px 28px 48px}
+  .nd-icons-row{gap:8px}
+  .nd-icon-circle{width:68px;height:68px}
+}
   </style>
 </head>
 <body>
@@ -943,260 +992,90 @@ a{color:inherit;text-decoration:none}
 
     <!-- DASHBOARD -->
     <div class="panel active" id="panel-dashboard">
-      <div class="gd">
+      <div class="nd-wrap">
 
-        <!-- Header -->
-        <div class="gd-hdr" style="align-items:center">
-          <div>
-            <div class="gd-greeting" id="gd-greeting-lbl">Bună dimineața,</div>
-            <div class="gd-title" id="gd-main-title">MulberryFAST</div>
-          </div>
-          <div class="gd-hdr-av" id="gd-hdr-av">M</div>
+        <!-- Greeting -->
+        <div class="nd-greet-row">
+          <div class="nd-hello">Hello, <span id="gd-main-title">there</span></div>
+          <div class="nd-greet-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
         </div>
 
-        <!-- 4 equal service cards -->
-        <div class="gd-cards-grid">
-
-          <!-- MulberryGO -->
-          <button class="gd-svc-card" onclick="goPanel('marketplace')">
-            <div class="gd-svc-top">
-              <div class="gd-svc-ico" style="background:rgba(181,243,51,.13)">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
-                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                </svg>
-              </div>
-              <span class="gd-svc-arr">↗</span>
-            </div>
-            <div class="gd-svc-name">MulberryGO</div>
-            <div class="gd-svc-sub">Rezervă un serviciu auto</div>
-          </button>
-
-          <!-- MulberryCloud -->
-          <button class="gd-svc-card" onclick="location.href='/mulberry_cloud.html'">
-            <div class="gd-svc-top">
-              <div class="gd-svc-ico" style="background:rgba(167,139,250,.13)">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
-                </svg>
-              </div>
-              <span class="gd-svc-arr">↗</span>
-            </div>
-            <div class="gd-svc-name">MulberryCloud</div>
-            <div class="gd-svc-sub">Stocare &amp; documente</div>
-          </button>
-
-          <!-- MulberryHUB -->
-          <button class="gd-svc-card" onclick="goPanel('analytics')">
-            <div class="gd-svc-top">
-              <div class="gd-svc-ico" style="background:rgba(96,165,250,.13)">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 20V10M12 20V4M6 20v-6"/>
-                </svg>
-              </div>
-              <span class="gd-svc-arr">↗</span>
-            </div>
-            <div class="gd-svc-name">MulberryHUB</div>
-            <div class="gd-svc-sub">Statistici &amp; actualizări</div>
-          </button>
-
-          <!-- MulberryEXO -->
-          <button class="gd-svc-card" onclick="openGeminiModal()">
-            <div class="gd-svc-top">
-              <div class="gd-svc-ico" style="background:rgba(251,146,60,.13)">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fb923c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
-                </svg>
-              </div>
-              <span class="gd-svc-arr">↗</span>
-            </div>
-            <div class="gd-svc-name">MulberryEXO</div>
-            <div class="gd-svc-sub">Asistent AI avansat</div>
-          </button>
-
-        </div>
-
-        <!-- PLACEHOLDER so old Gemini card content is removed -->
-        <div style="display:none"
-          REMOVED_GEMINI_CARD_START
-          <!-- Gemini logo -->
-          <div class="gd-ai-gemini-brand">
-            <img class="gd-ai-gemini-logo-img" src="data:image/jpeg;base64,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7LZO1ak7/fL3bedj1jd14d3s4fB+Zim75ikB7cGXTDTuA/xqZNCYdL9iHB9x9f7xDv2YUU2njX9xlCHnQqAcBqwuXqCLTZQquunrHqstmPVZbtY5ZKFPRrKabEVd6srpaAhCCVXN3Ha2Ih3EZhtxHrjLOs624Nk2uiNyOQzWb4xArl+sPW6u1I3eAUwq/wAp/wC+nwU/+2gRBHO6/Lt3zA6UowfBV9P+m6kE1lSVO9c27WB8eLdMVI/EoQrMNf8A5zd8zRNXleQ27y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXG7y43eXP/aAAwDAQACAAMAAAAQ8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++++++++++++++++++++++++++++++++++++8+++++++++++m+++++++++++++++++++++++++++++++++8++++++++++4WW+++yXnS+++++++++a++89+++++++++++8++++++++++xw58+8P8ALvOHcdDTc0ZJqedFvvvvvvvvvvvvPvvvvvvvvYbk3776FfhT5UdQbf3X6VXeBVfvvvvvvvvvvvPvvvvvvvvvjoZ3fvu9OB8U+o/6/q6VffFVfvvvvvvvvvvvPvvvvvvvvvvjFfvvrKRTLLZfHPPLHrvrDvvvvvvvvvvvvvPvvvvvvvvvvrfvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvPvvvvvvvvvvvvv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" alt="Gemini">
+        <!-- Yellowcard -->
+        <div class="nd-ycard" onclick="goPanel('yellowcard')">
+          <div class="nd-ycard-top">
+            <span class="nd-ycard-badge">Yellowcard</span>
+            <img src="/favicon.png" class="nd-ycard-logo" alt="Mulberry">
           </div>
-          <!-- AI Search Bar — gradient border pill (Gemini) -->
-          <div class="gd-ai-search-wrap" id="gd-ai-sb-border">
-            <div class="gd-ai-search" onclick="openGeminiModal()">
-              <img src="/gemini-spark.png" class="gd-ai-search-star" alt="">
-              <span class="gd-ai-search-text">Întreabă MulberryAI orice despre vehiculul tău...</span>
-              <kbd class="gd-ai-search-kbd">⌘K</kbd>
-            </div>
+          <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
+          <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
+          <div class="nd-ycard-chev">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgba(0,0,0,0.3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
         </div>
 
-        <!-- Row 1: Tiles + MulberryAI -->
-        <div class="gd-r1">
-
-          <!-- MulberryGO → Marketplace -->
-          <button class="gdc gdc-go gdc-tile" onclick="goPanel('marketplace')">
-            <div class="sph-card-top">
-              <div class="sph-card-ico" style="background:rgba(181,243,51,.15)">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/>
-                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-                </svg>
-              </div>
-              <button class="sph-arr" onclick="event.stopPropagation();goPanel('marketplace')">↗</button>
-            </div>
-            <div class="gdc-tile-name">MulberryGO</div>
-            <div class="gdc-tile-sub">Book a service</div>
-            <div class="sph-mini-chart" style="margin-top:auto">
-              <div class="sph-bar muted" style="height:32%"></div>
-              <div class="sph-bar dark" style="height:50%"></div>
-              <div class="sph-bar dark" style="height:42%"></div>
-              <div class="sph-bar dark" style="height:65%"></div>
-              <div class="sph-bar dark" style="height:55%"></div>
-              <div class="sph-bar dark" style="height:78%"></div>
-              <div class="sph-bar dark" style="height:60%"></div>
-              <div class="sph-bar dark" style="height:85%"></div>
-              <div class="sph-bar dark" style="height:70%"></div>
-              <div class="sph-bar dark" style="height:90%"></div>
-              <div class="sph-bar muted" style="height:28%"></div>
-              <div class="sph-bar lime" style="height:100%"></div>
-            </div>
-          </button>
-
-          <!-- YellowCard → panel -->
-          <button class="gdc gdc-yc gdc-tile" onclick="goPanel('yellowcard')">
-            <div class="sph-card-top">
-              <div class="sph-card-ico" style="background:rgba(0,0,0,.1)">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/>
-                </svg>
-              </div>
-              <div style="font-size:10px;font-weight:600;background:rgba(0,0,0,.12);padding:3px 9px;border-radius:20px;color:rgba(0,0,0,.55);font-family:'Urbanist',sans-serif;letter-spacing:.02em">Activ</div>
-            </div>
-            <div class="gdc-tile-name">YellowCard</div>
-            <div class="gdc-tile-sub">Cardul meu digital</div>
-            <div class="gdc-tile-arr" style="margin-top:auto;padding-top:14px;font-size:20px">→</div>
-          </button>
-
-          <!-- MulberryAI -->
-          <div class="gdc gdc-blue">
-            <div class="gda-left">
-              <div class="gda-eyebrow">Asistent inteligent</div>
-              <div class="gda-ai-title">Mulberry <span style="color:#b5f333">AI</span></div>
-              <div class="gd-ai-bar">
-                <label class="gd-ai-photo" title="Adaugă poză">
-                  <input type="file" accept="image/*" style="display:none" id="ai-photo-input" onchange="aiHandlePhoto(event)">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                </label>
-                <input type="text" id="ai-query" class="gd-ai-input" placeholder="Întreabă asistentul Mulberry..." onkeydown="if(event.key==='Enter')aiSendQuery()">
-                <button class="gd-ai-send" onclick="aiSendQuery()">
-                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#1c1e00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                </button>
-              </div>
-              <div class="gd-ai-chips">
-                <button class="gd-ai-chip" onclick="aiChip(this)">Verifică ITP</button>
-                <button class="gd-ai-chip" onclick="aiChip(this)">Status asigurare</button>
-                <button class="gd-ai-chip" onclick="aiChip(this)">Analiză vehicul</button>
-              </div>
-              <div id="ai-response" class="gd-ai-resp"></div>
-            </div>
-            <div class="gda-right">
-              <div class="gda-donut-wrap">
-                <svg class="gda-donut" viewBox="0 0 120 120">
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="17"/>
-                  <circle cx="60" cy="60" r="46" fill="none" stroke="#b5f333" stroke-width="17" stroke-dasharray="289 0" stroke-linecap="round" transform="rotate(-90 60 60)"/>
-                </svg>
-                <div class="gda-donut-inner">
-                  <div class="gda-donut-val" style="color:#b5f333;font-size:14px">AI</div>
-                  <div class="gda-donut-sub">online</div>
-                </div>
-              </div>
-              <button class="gda-arr" onclick="goPanel('analytics')">↗</button>
-            </div>
+        <!-- Sort bar -->
+        <div class="nd-sortbar">
+          <div class="nd-sort-item">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            Short by
+          </div>
+          <div class="nd-sort-item">
+            Last 24h
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
         </div>
 
-        <!-- Row 2: Cloud + Drive + HUB -->
-        <div class="gd-r2">
-
-          <!-- MulberryCloud -->
-          <div class="gdc gdc-cloud" onclick="location.href='/mulberry_cloud.html'" style="cursor:pointer">
-            <div class="sph-card-top">
-              <div class="gdc-cloud-ico" style="margin-bottom:0">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
-              </div>
-              <button class="sph-arr" onclick="event.stopPropagation();location.href='/mulberry_cloud.html'">↗</button>
+        <!-- Icon circles -->
+        <div class="nd-icons-row">
+          <button class="nd-icon-btn" onclick="goPanel('marketplace')">
+            <div class="nd-icon-circle">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
             </div>
-            <div class="gdc-cloud-name" style="margin-top:10px">MulberryCloud</div>
-            <div class="gdc-cloud-sub">Stocare &amp; documente</div>
-            <div class="gdc-cloud-items" style="margin-top:12px">
-              <div class="gdc-cloud-item">
-                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-                Documente vehicul
-              </div>
-              <div class="gdc-cloud-item">
-                <div class="gdc-cloud-item-ico"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#a78bfa" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><polyline points="9 12 11 14 15 10"/></svg></div>
-                Asigurări &amp; ITP
-              </div>
+            <span class="nd-icon-lbl">Mulberry<br>GO</span>
+          </button>
+          <button class="nd-icon-btn" onclick="goPanel('yellowcard')">
+            <div class="nd-icon-circle">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
             </div>
-            <button class="gdc-cloud-btn" style="margin-top:14px">Deschide Cloud ↗</button>
-          </div>
-
-          <!-- MulberryDrive -->
-          <div class="gdc gdc-drive" style="display:flex;flex-direction:column;gap:12px">
-            <div class="sph-card-top">
-              <div>
-                <div class="gdc-drive-name">MulberryDrive</div>
-                <div class="gdc-drive-sub">Navigație powered by Mapbok</div>
-              </div>
-              <button class="sph-arr">↗</button>
+            <span class="nd-icon-lbl">Mulberry<br>ID</span>
+          </button>
+          <button class="nd-icon-btn" onclick="goPanel('analytics')">
+            <div class="nd-icon-circle">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
             </div>
-            <div class="gdc-map-box" style="flex:1">
-              <div class="gdc-map-ico">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5a8a00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-                </svg>
-              </div>
-              <div class="gdc-map-lbl">Navigație GPS</div>
-              <div class="gdc-map-note">Mapbok · timp real<br>Integrare activă</div>
-              <button class="gdc-map-btn">Pornește navigația →</button>
+            <span class="nd-icon-lbl">Mulberry<br>EXO</span>
+          </button>
+          <button class="nd-icon-btn" onclick="location.href='/mulberry_cloud.html'">
+            <div class="nd-icon-circle">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
             </div>
-          </div>
-
-          <!-- MulberryHUB Last Updates -->
-          <div class="gdc gdc-hub">
-            <div class="sph-card-top" style="margin-bottom:14px">
-              <div style="display:flex;align-items:center;gap:10px">
-                <div class="gdc-hub-ico">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 20V10M12 20V4M6 20v-6"/>
-                  </svg>
-                </div>
-                <div>
-                  <div class="gdc-hub-name">MulberryHUB</div>
-                  <div class="gdc-hub-badge">Last Updates</div>
-                </div>
-              </div>
-              <span class="sph-badge up">3 nou</span>
-            </div>
-            <div class="gdc-hub-row">
-              <div class="gdc-hub-dot gdc-hub-dot-new"></div>
-              <div><div class="gdc-hub-event">Sphere UI dashboard — redesign complet</div><div class="gdc-hub-time">Azi, 26 Mai 2026</div></div>
-            </div>
-            <div class="gdc-hub-row">
-              <div class="gdc-hub-dot gdc-hub-dot-feat"></div>
-              <div><div class="gdc-hub-event">Favicon PNG + Inter font thin</div><div class="gdc-hub-time">25 Mai 2026</div></div>
-            </div>
-            <div class="gdc-hub-row">
-              <div class="gdc-hub-dot"></div>
-              <div><div class="gdc-hub-event">MulberryFAST — 6 carduri servicii</div><div class="gdc-hub-time">25 Mai 2026</div></div>
-            </div>
-          </div>
-
+            <span class="nd-icon-lbl">Mulberry<br>Cloud</span>
+          </button>
         </div>
+
+        <!-- Feature cards -->
+        <div class="nd-feat-card" onclick="openGeminiModal()">
+          <div class="nd-feat-ico">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <div class="nd-feat-content">
+            <div class="nd-feat-title">MulberryAI</div>
+            <div class="nd-feat-search">Întreabă orice...</div>
+          </div>
+        </div>
+
+        <div class="nd-feat-card" onclick="location.href='/mulberry_menu.html'">
+          <div class="nd-feat-ico">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="nd-feat-content">
+            <div class="nd-feat-title">MulberryHUB</div>
+            <div class="nd-feat-sub">History · PDF</div>
+          </div>
+        </div>
+
       </div>
+
     </div>
 
     <!-- YELLOWCARD PANEL -->
@@ -1444,25 +1323,14 @@ a{color:inherit;text-decoration:none}
 
   <nav class="bnav">
     <div class="bnav-inner">
-      <button class="bn-item" data-p="dashboard" onclick="goPanel('dashboard')">
-        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-        Home
+      <button class="bn-item" onclick="history.back()">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
-      <button class="bn-item" data-p="yellowcard" onclick="goPanel('yellowcard')">
-        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg>
-        Card
-      </button>
-      <button class="bn-item" data-p="marketplace" onclick="goPanel('marketplace')">
-        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
-        Market
-      </button>
-      <button class="bn-item active" data-p="analytics" onclick="goPanel('analytics')">
-        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        Chart
+      <button class="bn-item bn-center-logo" data-p="dashboard" onclick="goPanel('dashboard')">
+        <img src="/favicon.png" alt="Mulberry">
       </button>
       <button class="bn-item" data-p="settings" onclick="goPanel('settings')">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        Setări
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
     </div>
   </nav>
@@ -1917,6 +1785,13 @@ function enterApp() {
     }
     gt.textContent = displayName.charAt(0).toUpperCase() + displayName.slice(1) + '!';
   }
+  // Load vehicle data for dashboard Yellowcard
+  apiGet('/me/vehicle').then(v => {
+    const vinEl = document.getElementById('nd-ycard-vin');
+    const plEl  = document.getElementById('nd-ycard-plate');
+    if (vinEl && v.vin)   vinEl.textContent = 'VIN: ' + v.vin;
+    if (plEl  && v.plate) plEl.textContent  = v.plate.toUpperCase();
+  }).catch(() => {});
 }
 
 const PANEL_META = {
