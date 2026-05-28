@@ -5,372 +5,317 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mulberry Cloud</title>
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" href="style.css">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --mc-bg: #e8e8e8;
-      --mc-card: #ffffff;
-      --mc-ink: #0a0a0a;
-      --mc-dim: rgba(10, 10, 10, 0.45);
-      --mc-neon: var(--mlb-neon, #e1ff00);
-      --mc-neon-dim: rgba(225, 255, 0, 0.35);
-      --mc-border: rgba(10, 10, 10, 0.08);
-      --mc-glass: rgba(255, 255, 255, 0.72);
+      --bg: #F2F2F7;
+      --card: #FFFFFF;
+      --ink: #1C1C1E;
+      --dim: rgba(60,60,67,0.6);
+      --sep: rgba(60,60,67,0.12);
+      --accent: #1C1C1E;
+      --yellow: #E1FF00;
+      --font: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
     }
-    .cloud-page {
-      background: var(--mc-bg);
-      min-height: 100vh;
-      color: var(--mc-ink);
-      font-family: var(--mlb-font, system-ui, sans-serif);
-    }
+    html, body { background: var(--bg); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
 
-    .cloud-neon-zone {
-      margin: 20px;
-      padding: 28px 20px;
-      border: 2px dashed var(--mc-neon-dim);
-      border-radius: 20px;
+    /* ── Topbar ── */
+    .mc-topbar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(242,242,247,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 0.5px solid var(--sep);
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px 10px;
+    }
+    .mc-back {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(0,0,0,0.07); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+      transition: background .15s;
+    }
+    .mc-back:active { background: rgba(0,0,0,0.14); }
+    .mc-back svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .mc-topbar-title { font-size: 17px; font-weight: 600; letter-spacing: -.3px; flex: 1; }
+    .mc-topbar-sub { font-size: 11px; color: var(--dim); margin-top: 1px; }
+
+    /* ── Upload zone ── */
+    .mc-upload-zone {
+      margin: 16px 16px 8px;
+      background: var(--card);
+      border: 1.5px dashed var(--sep);
+      border-radius: 18px;
+      padding: 22px 18px 18px;
+      cursor: pointer;
       text-align: center;
-      background: var(--mc-card);
-      box-shadow: 0 0 0 1px rgba(232, 255, 58, 0.2), 0 12px 40px rgba(10, 10, 10, 0.06);
-      transition: border-color 0.2s, box-shadow 0.25s, transform 0.2s;
-      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s;
       position: relative;
-      overflow: hidden;
     }
-    .cloud-neon-zone::before {
-      content: '';
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 50% 50%, rgba(232, 255, 58, 0.12), transparent 55%);
-      pointer-events: none;
-      opacity: 0.9;
+    .mc-upload-zone.dragover, .mc-upload-zone:hover {
+      border-color: rgba(0,0,0,0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
     }
-    .cloud-neon-zone:hover,
-    .cloud-neon-zone.dragover {
-      border-color: var(--mc-neon);
-      box-shadow: 0 0 24px rgba(232, 255, 58, 0.35), 0 12px 40px rgba(10, 10, 10, 0.08);
-      transform: translateY(-1px);
+    .mc-upload-zone input[type="file"] { display: none; }
+    .mc-upload-ico {
+      width: 44px; height: 44px; border-radius: 14px;
+      background: var(--accent); margin: 0 auto 12px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .cloud-neon-zone input[type="file"] { display: none; }
-    .cloud-neon-zone .neon-label { position: relative; z-index: 1; cursor: pointer; display: block; color: var(--mc-ink); font-size: 15px; font-weight: 600; }
-    .cloud-neon-zone .neon-hint { position: relative; z-index: 1; font-size: 12px; color: var(--mc-dim); margin-top: 8px; }
-    .cloud-neon-zone .upload-icon { position: relative; z-index: 1; width: 44px; height: 44px; margin: 0 auto 14px; color: var(--mc-ink); }
+    .mc-upload-ico svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .mc-upload-lbl { font-size: 15px; font-weight: 600; color: var(--ink); cursor: pointer; }
+    .mc-upload-hint { font-size: 12px; color: var(--dim); margin-top: 5px; line-height: 1.4; }
+    .mc-doc-types {
+      display: flex; gap: 6px; justify-content: center; flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .mc-doc-types label {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 12px; font-weight: 500; color: var(--ink);
+      background: rgba(0,0,0,0.05); border-radius: 20px;
+      padding: 5px 11px; cursor: pointer; transition: background .15s;
+      user-select: none;
+    }
+    .mc-doc-types label:has(input:checked) {
+      background: var(--accent); color: #fff;
+    }
+    .mc-doc-types input { display: none; }
 
-    .cloud-doc-type {
-      position: relative;
-      z-index: 1;
-      margin-top: 16px;
-      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    /* ── Upload preview ── */
+    .mc-upload-prev {
+      display: none; flex-wrap: wrap; gap: 10px;
+      padding: 0 16px 8px;
     }
-    .cloud-doc-type label {
-      display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--mc-ink);
-      cursor: pointer; opacity: 0.85;
+    .mc-upload-prev.is-visible { display: flex; }
+    .mc-upload-prev figure {
+      width: 72px; position: relative; margin: 0;
     }
-    .cloud-doc-type input { accent-color: #c4db00; }
+    .mc-upload-prev figcaption {
+      font-size: 10px; color: var(--dim); margin-top: 4px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .mc-upload-prev img {
+      width: 72px; height: 72px; object-fit: cover;
+      border-radius: 10px; background: var(--sep);
+    }
+    .mc-upload-prev .upload-prev-pdf {
+      width: 72px; height: 72px; border-radius: 10px;
+      background: rgba(0,0,0,0.06);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--dim); letter-spacing: .04em;
+    }
 
-    .cloud-drawer-tabs {
-      display: flex;
-      gap: 6px;
-      padding: 0 20px 12px;
-      overflow-x: auto;
+    /* ── Tabs ── */
+    .mc-tabs-wrap {
+      padding: 4px 16px 10px;
+      display: flex; gap: 6px; overflow-x: auto;
+      scrollbar-width: none;
     }
-    .cloud-drawer-tabs button {
+    .mc-tabs-wrap::-webkit-scrollbar { display: none; }
+    .mc-tab {
       flex: 0 0 auto;
-      border: 1px solid var(--mc-border);
-      background: var(--mc-card);
-      color: var(--mc-ink);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      border: none; border-radius: 20px;
+      background: rgba(0,0,0,0.06);
+      color: var(--ink); font-size: 13px; font-weight: 500;
+      padding: 7px 14px; cursor: pointer;
+      transition: background .18s, color .18s;
+      font-family: var(--font);
+      white-space: nowrap;
     }
-    .cloud-drawer-tabs button.is-active {
-      border-color: var(--mc-neon);
-      box-shadow: 0 0 12px var(--mc-neon-dim);
-      background: rgba(232, 255, 58, 0.15);
+    .mc-tab.is-active { background: var(--accent); color: #fff; }
+    .mc-tab-add {
+      border: 1px dashed var(--sep);
+      background: transparent; color: var(--dim);
     }
 
-    .cloud-gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding: 0 20px 120px;
-    }
-    .cloud-list-section { width: 100%; }
-    .cloud-list-head {
-      margin: 0 0 10px;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--mc-dim);
-    }
-    .cloud-list-grid {
+    /* ── Gallery ── */
+    .mc-gallery {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      gap: 12px;
+      padding: 0 16px 100px;
     }
-    .cloud-drawer-tabs button.cloud-tab-add {
-      border-style: dashed;
-      opacity: 0.95;
+    .mc-section { grid-column: 1/-1; }
+    .mc-section-head {
+      font-size: 11px; font-weight: 600; color: var(--dim);
+      text-transform: uppercase; letter-spacing: .06em;
+      padding: 8px 4px 6px;
     }
-    .cloud-doc-card {
-      background: var(--mc-card);
+    .mc-doc-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    .mc-empty {
+      grid-column: 1/-1; text-align: center;
+      padding: 48px 20px; color: var(--dim); font-size: 14px;
+    }
+
+    /* ── Doc card ── */
+    .mc-doc-card {
+      background: var(--card);
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid var(--mc-border);
-      position: relative;
+      border: 0.5px solid rgba(0,0,0,0.07);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.2s;
-    }
-    .cloud-doc-card:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(10, 10, 10, 0.08); }
-    .cloud-doc-card.is-pending {
-      cursor: progress;
-    }
-    .cloud-doc-card .doc-added-at {
-      padding: 8px 12px 0;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--mc-dim);
-      letter-spacing: 0.02em;
-      line-height: 1.3;
-    }
-    .cloud-doc-card .doc-thumb-wrap {
-      aspect-ratio: 4/3;
-      background: #eee;
+      transition: transform .15s, box-shadow .2s;
       position: relative;
-      overflow: hidden;
     }
-    .cloud-doc-card .doc-thumb {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block;
+    .mc-doc-card:active { transform: scale(.97); }
+    .mc-doc-card:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(0,0,0,0.1); }
+    .mc-doc-card.is-pending { cursor: progress; }
+    .mc-doc-card .doc-added-at {
+      padding: 8px 10px 0; font-size: 10px; font-weight: 500;
+      color: var(--dim); line-height: 1.3;
     }
-    .cloud-doc-card .doc-thumb-blur {
-      filter: blur(14px);
-      transform: scale(1.08);
+    .mc-doc-card .doc-thumb-wrap {
+      aspect-ratio: 4/3; background: rgba(0,0,0,0.04); position: relative; overflow: hidden;
     }
-    .cloud-doc-card .pending-pulse {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.35);
+    .mc-doc-card .doc-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mc-doc-card .doc-thumb-blur { filter: blur(14px); transform: scale(1.08); }
+    .mc-doc-card .doc-thumb-pdf-lbl {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: var(--dim); letter-spacing: .05em;
     }
-    .cloud-doc-card .pending-pulse span {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: 2px solid var(--mc-neon);
-      border-top-color: transparent;
-      animation: mcSpin 0.85s linear infinite;
-      box-shadow: 0 0 16px var(--mc-neon-dim);
+    .mc-doc-card .pending-pulse {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.5);
+    }
+    .mc-doc-card .pending-pulse span {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 2.5px solid var(--accent); border-top-color: transparent;
+      animation: mcSpin .75s linear infinite;
     }
     @keyframes mcSpin { to { transform: rotate(360deg); } }
-    .cloud-doc-card .doc-info {
-      padding: 10px 12px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+    .mc-doc-card .doc-info {
+      padding: 8px 10px 10px;
+      display: flex; align-items: center; justify-content: space-between; gap: 6px;
     }
-    .cloud-doc-card .doc-type {
-      font-size: 10px; font-weight: 700; color: var(--mc-ink); text-transform: uppercase; letter-spacing: 0.06em;
+    .mc-doc-card .doc-type {
+      font-size: 11px; font-weight: 600; color: var(--ink);
+      text-transform: uppercase; letter-spacing: .04em;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-    .cloud-doc-card .doc-verify {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 2px solid var(--mc-border);
+    .mc-doc-card .doc-verify {
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1.5px solid var(--sep);
       display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      background: var(--mc-card);
+      cursor: pointer; flex-shrink: 0; background: var(--card);
+      transition: background .15s, border-color .15s;
     }
-    .cloud-doc-card .doc-verify.verified { background: #1a1a1a; border-color: #1a1a1a; }
-    .cloud-doc-card .doc-verify.verified svg { stroke: var(--mc-neon); }
-    .cloud-doc-card .doc-verify svg { width: 14px; height: 14px; stroke: var(--mc-dim); }
-    .cloud-doc-card .doc-add-list {
-      flex-shrink: 0;
-      border: 1px solid var(--mc-border);
-      background: var(--mc-card);
-      border-radius: 8px;
-      padding: 4px 8px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      color: var(--mc-ink);
+    .mc-doc-card .doc-verify.verified { background: var(--accent); border-color: var(--accent); }
+    .mc-doc-card .doc-verify.verified svg { stroke: var(--yellow); }
+    .mc-doc-card .doc-verify svg { width: 13px; height: 13px; stroke: var(--dim); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .mc-doc-card .doc-add-list {
+      flex-shrink: 0; border: 1px solid var(--sep);
+      background: var(--card); border-radius: 8px;
+      padding: 3px 8px; font-size: 11px; font-weight: 600;
+      cursor: pointer; color: var(--ink); font-family: var(--font);
     }
-    .cloud-doc-card .doc-add-list:active { opacity: 0.85; }
-    .cloud-empty { text-align: center; padding: 32px 20px; color: var(--mc-dim); font-size: 14px; width: 100%; }
+    .mc-doc-card .doc-add-list:active { opacity: .8; }
 
-    /* Modal / glassmorphism + neon pulse */
+    /* ── Modal ── */
     .mc-modal-ov {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(10, 10, 10, 0.35);
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: center;
       padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s;
+      opacity: 0; pointer-events: none;
+      transition: opacity .22s;
     }
     .mc-modal-ov.is-open { opacity: 1; pointer-events: auto; }
     .mc-modal-panel {
       width: min(520px, 100%);
       max-height: min(90vh, 720px);
       border-radius: 22px;
-      background: var(--mc-glass);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 0 0 1px rgba(232, 255, 58, 0.25), 0 24px 80px rgba(10, 10, 10, 0.2);
-      animation: mcNeonPulse 2.4s ease-in-out infinite;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      background: rgba(255,255,255,0.92);
+      border: 0.5px solid rgba(255,255,255,0.8);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden; display: flex; flex-direction: column;
     }
-    @keyframes mcNeonPulse {
-      0%, 100% { box-shadow: 0 0 0 1px rgba(232, 255, 58, 0.2), 0 24px 80px rgba(10, 10, 10, 0.2); }
-      50% { box-shadow: 0 0 0 2px rgba(232, 255, 58, 0.45), 0 28px 90px rgba(10, 10, 10, 0.18); }
+    .mc-modal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 0.5px solid var(--sep);
     }
-    .mc-modal-head { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--mc-border); }
-    .mc-modal-head span { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+    .mc-modal-head span { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
     .mc-modal-close {
-      width: 36px; height: 36px; border: none; border-radius: 12px;
-      background: rgba(10, 10, 10, 0.06); cursor: pointer; font-size: 20px; line-height: 1;
+      width: 32px; height: 32px; border: none; border-radius: 50%;
+      background: rgba(0,0,0,0.07); cursor: pointer;
+      font-size: 18px; line-height: 1; font-family: var(--font);
+      display: flex; align-items: center; justify-content: center;
     }
-    .mc-modal-body { flex: 1; overflow: auto; padding: 12px; }
+    .mc-modal-close:active { background: rgba(0,0,0,0.14); }
+    .mc-modal-body { flex: 1; overflow: auto; padding: 14px; }
     .mc-modal-body img.mc-doc-preview {
-      display: block;
-      max-width: 100%;
-      width: auto;
-      max-height: min(85vh, 680px);
-      margin: 0 auto;
-      object-fit: contain;
-      border-radius: 12px;
+      display: block; max-width: 100%; width: auto;
+      max-height: min(85vh, 680px); margin: 0 auto;
+      object-fit: contain; border-radius: 12px;
     }
-    .mc-pdf-hint {
-      font-size: 13px;
-      line-height: 1.45;
-      color: var(--mc-ink);
-      margin: 0 0 14px;
-    }
+    .mc-pdf-hint { font-size: 13px; line-height: 1.45; color: var(--ink); margin: 0 0 14px; }
     .mc-pdf-open-btn {
-      display: inline-block;
-      padding: 12px 18px;
-      background: #0a0a0a;
-      color: var(--mc-neon);
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 14px;
-      text-decoration: none;
-      border: 1px solid rgba(225, 255, 0, 0.35);
-    }
-    .mc-pdf-open-btn:hover { opacity: 0.92; }
-    .cloud-doc-card .doc-thumb-pdf-lbl {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--mc-dim);
-      letter-spacing: 0.06em;
-    }
-
-    .cloud-upload-preview {
-      margin: 0 20px 16px;
-      display: none;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: flex-start;
-    }
-    .cloud-upload-preview.is-visible { display: flex; }
-    .cloud-upload-preview figure {
-      margin: 0;
-      width: min(100%, 280px);
-      max-width: 100%;
-    }
-    .cloud-upload-preview figcaption {
-      font-size: 10px;
-      color: var(--mc-dim);
-      margin-top: 4px;
-      line-height: 1.2;
-      word-break: break-all;
-      max-height: 2.4em;
-      overflow: hidden;
-    }
-    .cloud-upload-preview img {
-      width: 100%;
-      max-width: 280px;
-      height: auto;
-      aspect-ratio: 4 / 3;
-      object-fit: contain;
-      border-radius: 12px;
-      border: 2px solid var(--mc-neon-dim);
-      display: block;
-      background: #eee;
-    }
-    .cloud-upload-preview .upload-prev-pdf {
-      width: 100%;
-      max-width: 280px;
-      aspect-ratio: 4 / 3;
-      height: auto;
-      min-height: 72px;
-      border-radius: 12px;
-      border: 2px dashed var(--mc-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mc-dim);
-      background: var(--mc-card);
+      display: inline-block; padding: 12px 18px;
+      background: var(--accent); color: var(--yellow);
+      border-radius: 12px; font-weight: 700; font-size: 14px;
+      text-decoration: none; border: none;
     }
   </style>
 </head>
-<body class="mlb-page">
-  <div class="app cloud-page">
-    <header class="mlb-head">
-      <button type="button" class="mlb-back" onclick="window.location.href='mulberry.html'" aria-label="Înapoi">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <div style="flex:1;min-width:0;">
-        <h1 class="mlb-h1">Mulberry Cloud</h1>
-        <p class="mlb-muted" style="margin:6px 0 0;font-size:12px;">Încărcare rapidă · grid · SoftScore după RCA/ITP</p>
-      </div>
-    </header>
+<body>
 
-    <div class="cloud-neon-zone" id="upload-zone">
-      <div class="upload-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      </div>
-      <label class="neon-label" for="file-input">Trage fișierul aici sau apasă pentru a alege</label>
-      <p class="neon-hint">Fără reîncărcare · încărcare prin FormData · acceptă imagini și PDF</p>
-      <input type="file" id="file-input" accept="image/*,.pdf" multiple>
-      <div class="cloud-doc-type" onclick="event.stopPropagation()">
-        <label><input type="radio" name="doc-type" value="ITP" checked> ITP</label>
-        <label><input type="radio" name="doc-type" value="RCA"> RCA</label>
-        <label><input type="radio" name="doc-type" value="Talon"> Talon</label>
-        <label><input type="radio" name="doc-type" value="Service"> Service</label>
-        <label><input type="radio" name="doc-type" value="RaportAI"> Raport AI</label>
-        <label><input type="radio" name="doc-type" value="Fotografie"> Fotografie</label>
-        <label><input type="radio" name="doc-type" value="Altele"> Altele</label>
-      </div>
+  <!-- Topbar -->
+  <header class="mc-topbar">
+    <button class="mc-back" onclick="window.location.href='mulberry_app.html'" aria-label="Înapoi">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div>
+      <div class="mc-topbar-title">Mulberry Cloud</div>
+      <div class="mc-topbar-sub">Documentele tale · încărcare rapidă</div>
     </div>
+  </header>
 
-    <div class="cloud-upload-preview" id="cloud-upload-preview" aria-live="polite"></div>
-
-    <div class="cloud-drawer-tabs" id="drawer-tabs" role="tablist" aria-label="Categorii Cloud">
-      <button type="button" class="is-active" data-cat="all">Toate</button>
-      <button type="button" data-cat="vehicle_docs">Documente mașină</button>
-      <button type="button" data-cat="service_history">Istoric service</button>
-      <button type="button" data-cat="ai_reports">Rapoarte AI</button>
-      <button type="button" data-cat="photos">Fotografii</button>
-      <button type="button" class="cloud-tab-add" id="btn-new-cloud-list" title="Creează o listă personală (salvat local)">+ Listă</button>
+  <!-- Upload zone -->
+  <div class="mc-upload-zone" id="upload-zone">
+    <div class="mc-upload-ico">
+      <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
     </div>
-    <div class="cloud-drawer-tabs" id="drawer-user-list-tabs" role="tablist" aria-label="Listele tale" style="padding-top:0;"></div>
-    <div class="cloud-gallery" id="cloud-gallery"></div>
+    <label class="mc-upload-lbl" for="file-input">Trage sau apasă pentru a încărca</label>
+    <p class="mc-upload-hint">Imagini și PDF · fără reîncărcare pagină</p>
+    <input type="file" id="file-input" accept="image/*,.pdf" multiple>
+    <div class="mc-doc-types" onclick="event.stopPropagation()">
+      <label><input type="radio" name="doc-type" value="ITP" checked>ITP</label>
+      <label><input type="radio" name="doc-type" value="RCA">RCA</label>
+      <label><input type="radio" name="doc-type" value="Talon">Talon</label>
+      <label><input type="radio" name="doc-type" value="Service">Service</label>
+      <label><input type="radio" name="doc-type" value="RaportAI">Raport AI</label>
+      <label><input type="radio" name="doc-type" value="Fotografie">Foto</label>
+      <label><input type="radio" name="doc-type" value="Altele">Altele</label>
+    </div>
   </div>
 
+  <div class="mc-upload-prev" id="cloud-upload-preview" aria-live="polite"></div>
+
+  <!-- Category tabs -->
+  <div class="mc-tabs-wrap" id="drawer-tabs" role="tablist">
+    <button type="button" class="mc-tab is-active" data-cat="all">Toate</button>
+    <button type="button" class="mc-tab" data-cat="vehicle_docs">Documente</button>
+    <button type="button" class="mc-tab" data-cat="service_history">Service</button>
+    <button type="button" class="mc-tab" data-cat="ai_reports">Rapoarte AI</button>
+    <button type="button" class="mc-tab" data-cat="photos">Fotografii</button>
+    <button type="button" class="mc-tab mc-tab-add" id="btn-new-cloud-list">+ Listă</button>
+  </div>
+  <div class="mc-tabs-wrap" id="drawer-user-list-tabs" role="tablist" style="padding-top:0"></div>
+
+  <!-- Gallery -->
+  <div class="mc-gallery" id="cloud-gallery"></div>
+
+  <!-- Modal -->
   <div class="mc-modal-ov" id="mc-modal" aria-hidden="true">
     <div class="mc-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mc-modal-title">
       <div class="mc-modal-head">
@@ -427,490 +372,282 @@
       }
 
       function createUserList(vin, name) {
+        var id = 'ul_' + Date.now();
         var lists = listsForVin(vin);
-        var id = 'ul_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
-        lists.push({
-          id: id,
-          name: (name || '').trim() || 'Listă',
-          createdAt: new Date().toISOString(),
-          docIds: []
-        });
+        lists.push({ id: id, name: name, docIds: [] });
         saveListsForVin(vin, lists);
         syncUserListTabs();
         return id;
       }
 
-      function addDocToUserList(vin, listId, docId) {
-        if (docId == null || String(docId).indexOf('temp-') === 0) return;
-        var n = typeof docId === 'number' ? docId : parseInt(docId, 10);
-        if (isNaN(n)) return;
-        var lists = listsForVin(vin);
-        for (var i = 0; i < lists.length; i++) {
-          if (lists[i].id !== listId) continue;
-          var ids = lists[i].docIds || [];
-          if (ids.indexOf(n) === -1) ids.push(n);
-          lists[i].docIds = ids;
-          saveListsForVin(vin, lists);
-          if (activeCat === 'user:' + listId) renderGallery(_cacheDocs);
-          return;
-        }
-      }
-
-      function promptAddDocToList(doc) {
+      function addDocToList(listId, docId) {
         var vin = getVin();
-        if (!vin) return;
         var lists = listsForVin(vin);
-        if (!lists.length) {
-          var nm = window.prompt('Nume pentru prima ta listă (imaginile rămân pe server; lista e salvată în browser):');
-          if (!nm) return;
-          var nid = createUserList(vin, nm);
-          addDocToUserList(vin, nid, doc.id);
-          alert('Adăugat în „' + (nm.trim() || 'Listă') + '”. Alege tab-ul listei de mai jos.');
-          return;
-        }
-        var lines = lists.map(function (L, idx) {
-          return (idx + 1) + '. ' + L.name + ' (' + (L.docIds || []).length + ' fișiere)';
-        }).join('\n');
-        var pick = window.prompt('Introdu numărul listei:\n\n' + lines);
-        var idx = parseInt(pick, 10) - 1;
-        if (idx < 0 || idx >= lists.length) return;
-        addDocToUserList(vin, lists[idx].id, doc.id);
-        alert('Adăugat în „' + lists[idx].name + '”.');
-      }
-
-      function syncUserListTabs() {
-        var host = document.getElementById('drawer-user-list-tabs');
-        if (!host) return;
-        var vin = getVin();
-        host.innerHTML = '';
-        if (!vin) return;
-        var lists = listsForVin(vin);
-        lists.forEach(function (L) {
-          var b = document.createElement('button');
-          b.type = 'button';
-          b.setAttribute('data-user-list', L.id);
-          b.textContent = L.name;
-          host.appendChild(b);
-        });
-        if (activeCat.indexOf('user:') === 0) {
-          var lid = activeCat.slice(5);
-          host.querySelectorAll('button').forEach(function (b) {
-            b.classList.toggle('is-active', b.getAttribute('data-user-list') === lid);
-          });
-        }
+        var lst = lists.find(function (l) { return l.id === listId; });
+        if (!lst) return;
+        if (!Array.isArray(lst.docIds)) lst.docIds = [];
+        if (lst.docIds.indexOf(docId) < 0) lst.docIds.push(docId);
+        saveListsForVin(vin, lists);
       }
 
       function setMainTabsActive(cat) {
-        var bar = document.getElementById('drawer-tabs');
-        var ubar = document.getElementById('drawer-user-list-tabs');
-        if (bar) {
-          bar.querySelectorAll('button[data-cat]').forEach(function (b) {
-            b.classList.toggle('is-active', b.getAttribute('data-cat') === cat);
-          });
-        }
-        if (ubar) ubar.querySelectorAll('button').forEach(function (b) { b.classList.remove('is-active'); });
+        document.querySelectorAll('#drawer-tabs button[data-cat]').forEach(function (b) {
+          b.classList.toggle('is-active', b.getAttribute('data-cat') === cat);
+        });
+        document.querySelectorAll('#drawer-user-list-tabs button[data-user-list]').forEach(function (b) {
+          b.classList.remove('is-active');
+        });
       }
 
       function setUserListTabsActive(listId) {
-        var bar = document.getElementById('drawer-tabs');
-        var ubar = document.getElementById('drawer-user-list-tabs');
-        if (bar) bar.querySelectorAll('button[data-cat]').forEach(function (b) { b.classList.remove('is-active'); });
-        if (ubar) {
-          ubar.querySelectorAll('button').forEach(function (b) {
-            b.classList.toggle('is-active', b.getAttribute('data-user-list') === listId);
-          });
-        }
+        document.querySelectorAll('#drawer-tabs button[data-cat]').forEach(function (b) {
+          b.classList.remove('is-active');
+        });
+        document.querySelectorAll('#drawer-user-list-tabs button[data-user-list]').forEach(function (b) {
+          b.classList.toggle('is-active', b.getAttribute('data-user-list') === listId);
+        });
+      }
+
+      function syncUserListTabs() {
+        var vin = getVin();
+        var bar = document.getElementById('drawer-user-list-tabs');
+        if (!bar) return;
+        bar.innerHTML = '';
+        if (!vin) return;
+        var lists = listsForVin(vin);
+        lists.forEach(function (lst) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'mc-tab';
+          btn.setAttribute('data-user-list', lst.id);
+          btn.textContent = lst.name;
+          bar.appendChild(btn);
+        });
       }
 
       function categoryLabel(cat) {
-        if (cat === 'vehicle_docs') return 'Documente mașină';
-        if (cat === 'service_history') return 'Istoric service';
-        if (cat === 'ai_reports') return 'Rapoarte AI';
-        if (cat === 'photos') return 'Fotografii';
-        if (cat === 'misc') return 'Altele';
-        return 'Altele';
+        var m = { vehicle_docs: 'Documente mașină', service_history: 'Istoric service', ai_reports: 'Rapoarte AI', photos: 'Fotografii', other: 'Altele' };
+        return m[cat] || cat;
       }
 
       function categoryForUploadType(t) {
+        if (['ITP', 'RCA', 'Talon'].indexOf(t) >= 0) return 'vehicle_docs';
         if (t === 'Service') return 'service_history';
         if (t === 'RaportAI') return 'ai_reports';
         if (t === 'Fotografie') return 'photos';
-        if (t === 'Altele') return 'misc';
-        return 'vehicle_docs';
+        return 'other';
       }
 
-      function formatUploadedAt(doc) {
-        if (doc._pending) return 'Se încarcă…';
-        var raw = doc.uploaded_at || doc._uploadedAtClient;
-        if (!raw) return 'Dată necunoscută';
-        var d = new Date(raw);
-        if (isNaN(d.getTime())) return String(raw).replace('T', ' ').slice(0, 16);
-        return d.toLocaleString('ro-RO', { dateStyle: 'medium', timeStyle: 'short' });
-      }
-
-      function docSortKey(d) {
-        var raw = d.uploaded_at || d._uploadedAtClient;
-        if (!raw) return 0;
-        var t = new Date(raw).getTime();
-        return isNaN(t) ? 0 : t;
-      }
-
-      function sortDocsByDateDesc(arr) {
-        arr.sort(function (a, b) { return docSortKey(b) - docSortKey(a); });
-      }
-
-      function filterDocumentsForView(documents) {
-        if (activeCat.indexOf('user:') === 0) {
-          var lid = activeCat.slice(5);
-          var vin = getVin();
-          var L = listsForVin(vin).filter(function (x) { return x.id === lid; })[0];
-          var ids = L && L.docIds ? L.docIds : [];
-          return ids
-            .map(function (id) {
-              return documents.filter(function (d) { return !d._pending && d.id === id; })[0];
-            })
-            .filter(Boolean);
-        }
-        return documents.filter(function (d) {
-          if (activeCat === 'all') return true;
-          return (d.category || '') === activeCat;
-        });
+      function formatDate(raw) {
+        if (!raw) return '';
+        try {
+          var d = new Date(raw);
+          return d.toLocaleDateString('ro-RO', { day: '2-digit', month: 'short', year: 'numeric' });
+        } catch (e) { return raw; }
       }
 
       function absoluteDocUrl(doc) {
         var u = doc.url || '';
-        if (u.indexOf('http') === 0) return u;
-        return apiBase + u;
-      }
-
-      function cloudFilenameBase(name) {
-        var s = name || '';
-        var i = s.lastIndexOf('/');
-        return i >= 0 ? s.slice(i + 1) : s;
-      }
-
-      function cloudFilenameExt(name) {
-        var base = cloudFilenameBase(name);
-        var m = base.match(/\.([a-z0-9]+)$/i);
-        return m ? m[1].toLowerCase() : '';
-      }
-
-      function cloudDocIsPdf(doc) {
-        return cloudFilenameExt(doc.filename || '') === 'pdf';
-      }
-
-      function cloudDocIsRasterImage(doc) {
-        if (doc._localPreview) return true;
-        var e = cloudFilenameExt(doc.filename || '');
-        return /^(jpe?g|png|webp|gif)$/i.test(e);
+        if (!u) return '';
+        if (u.startsWith('http')) return u;
+        return apiBase + (u.startsWith('/') ? u : '/' + u);
       }
 
       function openModal(doc) {
-        var ov = document.getElementById('mc-modal');
         var body = document.getElementById('mc-modal-body');
         var title = document.getElementById('mc-modal-title');
-        if (!ov || !body) return;
-        title.textContent = (doc.type || 'Doc') + ' · ' + categoryLabel(doc.category || '');
+        var ov = document.getElementById('mc-modal');
         body.innerHTML = '';
-        var url = absoluteDocUrl(doc);
-        var localPreview = doc._localPreview || '';
-
-        if (cloudDocIsPdf(doc) && !localPreview) {
+        title.textContent = doc.type || 'Document';
+        var url = doc.fullUrl || doc.url || '';
+        var isPdf = /\.pdf(\?|$)/i.test(url) || (doc.filename && /\.pdf$/i.test(doc.filename)) || doc.content_type === 'application/pdf';
+        if (url && !isPdf) {
+          var img = document.createElement('img');
+          img.className = 'mc-doc-preview';
+          img.src = url;
+          img.alt = doc.type || '';
+          body.appendChild(img);
+        } else if (isPdf && url) {
           var hint = document.createElement('p');
           hint.className = 'mc-pdf-hint';
-          hint.textContent =
-            'Fișier PDF: încadrarea în pagină (iframe) poate arăta strâmb pe telefon. Folosește deschiderea în tab nou — același fișier, fără conversie din imagine.';
+          hint.textContent = 'PDF-ul nu poate fi afișat direct. Apasă butonul de mai jos pentru a-l deschide.';
           body.appendChild(hint);
           var a = document.createElement('a');
           a.href = url;
           a.target = '_blank';
           a.rel = 'noopener';
           a.className = 'mc-pdf-open-btn';
-          a.textContent = 'Deschide PDF în tab nou';
+          a.textContent = 'Deschide PDF →';
           body.appendChild(a);
-          ov.classList.add('is-open');
-          ov.setAttribute('aria-hidden', 'false');
-          return;
+        } else {
+          body.textContent = 'Fișier indisponibil.';
         }
-
-        var img = document.createElement('img');
-        img.className = 'mc-doc-preview';
-        img.src = localPreview || url;
-        img.alt = doc.type || '';
-        img.decoding = 'async';
-        img.onload = function () {
-          img.style.opacity = '1';
-        };
-        img.style.opacity = localPreview ? '1' : '0.96';
-        img.onerror = function () {
-          if (localPreview && img.src === localPreview) {
-            body.innerHTML = '';
-            var fail = document.createElement('p');
-            fail.className = 'mc-pdf-hint';
-            fail.textContent = 'Nu s-a putut afișa previzualizarea locală.';
-            body.appendChild(fail);
-            ov.classList.add('is-open');
-            return;
-          }
-          var auth = getBearerHeaders();
-          if (auth && url && img.src.indexOf('blob:') !== 0) {
-            fetch(url, { headers: auth })
-              .then(function (r) { return r.ok ? r.blob() : Promise.reject(); })
-              .then(function (blob) {
-                if (!blob || blob.type.indexOf('image') !== 0) throw new Error('not image');
-                var u = URL.createObjectURL(blob);
-                img.onerror = function () {
-                  try { URL.revokeObjectURL(u); } catch (e) {}
-                  body.innerHTML = '';
-                  var p = document.createElement('p');
-                  p.className = 'mc-pdf-hint';
-                  p.textContent = 'Previzualizarea a eșuat. Deschide fișierul:';
-                  body.appendChild(p);
-                  var a2 = document.createElement('a');
-                  a2.href = url;
-                  a2.target = '_blank';
-                  a2.rel = 'noopener';
-                  a2.className = 'mc-pdf-open-btn';
-                  a2.textContent = 'Deschide fișierul';
-                  body.appendChild(a2);
-                };
-                img.src = u;
-              })
-              .catch(function () {
-                body.innerHTML = '';
-                var fail = document.createElement('p');
-                fail.className = 'mc-pdf-hint';
-                fail.textContent =
-                  'Previzualizarea ca imagine a eșuat. Deschide fișierul direct (PDF sau format nesuportat în browser):';
-                body.appendChild(fail);
-                var a2 = document.createElement('a');
-                a2.href = url;
-                a2.target = '_blank';
-                a2.rel = 'noopener';
-                a2.className = 'mc-pdf-open-btn';
-                a2.textContent = 'Deschide fișierul';
-                body.appendChild(a2);
-              });
-            return;
-          }
-          body.innerHTML = '';
-          var fail = document.createElement('p');
-          fail.className = 'mc-pdf-hint';
-          fail.textContent =
-            'Previzualizarea ca imagine a eșuat. Deschide fișierul direct (poate fi PDF sau alt format):';
-          body.appendChild(fail);
-          var a2 = document.createElement('a');
-          a2.href = url;
-          a2.target = '_blank';
-          a2.rel = 'noopener';
-          a2.className = 'mc-pdf-open-btn';
-          a2.textContent = 'Deschide fișierul';
-          body.appendChild(a2);
-        };
-        body.appendChild(img);
         ov.classList.add('is-open');
         ov.setAttribute('aria-hidden', 'false');
       }
 
       function closeModal() {
         var ov = document.getElementById('mc-modal');
-        if (ov) {
-          ov.classList.remove('is-open');
-          ov.setAttribute('aria-hidden', 'true');
-        }
-      }
-
-      function placeholderSvg() {
-        var s = document.createElement('div');
-        s.className = 'doc-placeholder';
-        s.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>';
-        return s;
+        ov.classList.remove('is-open');
+        ov.setAttribute('aria-hidden', 'true');
+        document.getElementById('mc-modal-body').innerHTML = '';
       }
 
       function buildDocCard(doc) {
         var card = document.createElement('div');
-        card.className = 'cloud-doc-card' + (doc._pending ? ' is-pending' : '');
-        card.dataset.docId = doc.id != null ? String(doc.id) : '';
+        card.className = 'mc-doc-card' + (doc._pending ? ' is-pending' : '');
 
         var dateEl = document.createElement('div');
         dateEl.className = 'doc-added-at';
-        dateEl.textContent = 'Adăugat: ' + formatUploadedAt(doc);
+        var raw = doc.uploaded_at || doc._uploadedAtClient;
+        dateEl.textContent = formatDate(raw);
         card.appendChild(dateEl);
 
-        var wrap = document.createElement('div');
-        wrap.className = 'doc-thumb-wrap';
+        var thumbWrap = document.createElement('div');
+        thumbWrap.className = 'doc-thumb-wrap';
 
-        var isImg = cloudDocIsRasterImage(doc);
-        var isPdf = cloudDocIsPdf(doc);
-        var thumb;
-        if (isImg) {
-          thumb = document.createElement('img');
-          thumb.className = 'doc-thumb' + (doc._pending ? ' doc-thumb-blur' : '');
-          thumb.src = doc._localPreview || absoluteDocUrl(doc);
-          thumb.alt = doc.type || '';
-          thumb.onerror = function () {
-            thumb.style.display = 'none';
-            wrap.appendChild(placeholderSvg());
-          };
-        } else {
-          thumb = document.createElement('div');
-          thumb.className = 'doc-thumb';
-          thumb.style.display = 'flex';
-          thumb.style.alignItems = 'center';
-          thumb.style.justifyContent = 'center';
-          thumb.style.flexDirection = 'column';
-          thumb.style.gap = '8px';
-          if (isPdf) {
-            var pl = document.createElement('span');
-            pl.className = 'doc-thumb-pdf-lbl';
-            pl.textContent = 'PDF';
-            thumb.appendChild(pl);
-          }
-          thumb.appendChild(placeholderSvg());
-        }
-        wrap.appendChild(thumb);
+        var url = doc.fullUrl || doc.url || '';
+        var isPdf = /\.pdf(\?|$)/i.test(url) || (doc.filename && /\.pdf$/i.test(doc.filename)) || doc.content_type === 'application/pdf';
 
         if (doc._pending) {
-          var pul = document.createElement('div');
-          pul.className = 'pending-pulse';
-          pul.innerHTML = '<span></span>';
-          wrap.appendChild(pul);
+          var pulse = document.createElement('div');
+          pulse.className = 'pending-pulse';
+          var spinner = document.createElement('span');
+          pulse.appendChild(spinner);
+          if (doc._localPreview) {
+            var img = document.createElement('img');
+            img.className = 'doc-thumb doc-thumb-blur';
+            img.src = doc._localPreview;
+            thumbWrap.appendChild(img);
+          }
+          thumbWrap.appendChild(pulse);
+        } else if (isPdf) {
+          var lbl = document.createElement('div');
+          lbl.className = 'doc-thumb-pdf-lbl';
+          lbl.textContent = 'PDF';
+          thumbWrap.appendChild(lbl);
+        } else if (url) {
+          var auth = getBearerHeaders();
+          var fetchUrl = url;
+          if (auth) {
+            fetch(fetchUrl, { headers: auth })
+              .then(function (r) { return r.ok ? r.blob() : null; })
+              .then(function (blob) {
+                if (!blob) return;
+                var img = document.createElement('img');
+                img.className = 'doc-thumb';
+                img.src = URL.createObjectURL(blob);
+                img.onload = function () { try { URL.revokeObjectURL(this.src); } catch (e) {} };
+                thumbWrap.appendChild(img);
+              });
+          } else {
+            var img2 = document.createElement('img');
+            img2.className = 'doc-thumb';
+            img2.src = fetchUrl;
+            thumbWrap.appendChild(img2);
+          }
         }
-        card.appendChild(wrap);
+
+        card.appendChild(thumbWrap);
 
         var info = document.createElement('div');
         info.className = 'doc-info';
-        var typeSpan = document.createElement('span');
-        typeSpan.className = 'doc-type';
-        typeSpan.textContent = doc.type || 'Doc';
-        info.appendChild(typeSpan);
+
+        var typeEl = document.createElement('div');
+        typeEl.className = 'doc-type';
+        typeEl.textContent = doc.type || 'Doc';
+        info.appendChild(typeEl);
+
         if (!doc._pending) {
-          var vin = getVin();
-          var addListBtn = document.createElement('button');
-          addListBtn.type = 'button';
-          addListBtn.className = 'doc-add-list';
-          addListBtn.textContent = 'În listă';
-          addListBtn.title = 'Adaugă într-o listă personală (browser)';
-          addListBtn.onclick = function (ev) {
-            ev.stopPropagation();
-            promptAddDocToList(doc);
-          };
-          info.appendChild(addListBtn);
-          var verifyBtn = document.createElement('button');
-          verifyBtn.className = 'doc-verify' + (doc.verified ? ' verified' : '');
-          verifyBtn.type = 'button';
-          verifyBtn.title = doc.verified ? 'Verificat' : 'Confirmă';
-          verifyBtn.innerHTML = doc.verified
-            ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>'
-            : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>';
-          verifyBtn.onclick = function (ev) {
-            ev.stopPropagation();
-            if (doc.verified) return;
+          var verBtn = document.createElement('button');
+          verBtn.type = 'button';
+          verBtn.className = 'doc-verify' + (doc.verified ? ' verified' : '');
+          verBtn.setAttribute('aria-label', doc.verified ? 'Verificat' : 'Verifică');
+          verBtn.title = doc.verified ? 'Verificat' : 'Marchează ca verificat';
+          verBtn.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
+          verBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var auth = getBearerHeaders();
+            if (!auth) { alert('Autentifică-te pentru a verifica.'); return; }
             fetch(apiBase + '/cloud/verify', {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ vin: vin, doc_id: doc.id })
-            }).then(function (r) { if (r.ok) loadDocs(); });
-          };
-          info.appendChild(verifyBtn);
+              headers: Object.assign({ 'Content-Type': 'application/json' }, auth),
+              body: JSON.stringify({ doc_id: doc.id, verified: !doc.verified })
+            }).then(function (r) {
+              if (r.ok) { doc.verified = !doc.verified; verBtn.className = 'doc-verify' + (doc.verified ? ' verified' : ''); }
+            }).catch(function () {});
+          });
+          info.appendChild(verBtn);
         }
+
         card.appendChild(info);
 
-        card.addEventListener('click', function () {
-          if (doc._pending && !doc._localPreview && !cloudDocIsRasterImage(doc)) return;
-          openModal(doc);
-        });
+        if (!doc._pending) {
+          card.addEventListener('click', function () { openModal(doc); });
+        }
+
         return card;
       }
 
-      function renderUploadPreview(files) {
-        var host = document.getElementById('cloud-upload-preview');
-        if (!host) return;
-        host.innerHTML = '';
-        if (!files || !files.length) {
-          host.classList.remove('is-visible');
-          return;
+      function sortDocsByDateDesc(arr) {
+        arr.sort(function (a, b) {
+          var ta = new Date(a.uploaded_at || a._uploadedAtClient || 0).getTime();
+          var tb = new Date(b.uploaded_at || b._uploadedAtClient || 0).getTime();
+          return tb - ta;
+        });
+      }
+
+      function filterDocs(docs, cat) {
+        if (!cat || cat === 'all') return docs.slice();
+        if (cat.startsWith('user:')) {
+          var listId = cat.slice(5);
+          var vin = getVin();
+          var lists = listsForVin(vin);
+          var lst = lists.find(function (l) { return l.id === listId; });
+          var ids = lst && Array.isArray(lst.docIds) ? lst.docIds : [];
+          return docs.filter(function (d) { return ids.indexOf(d.id) >= 0; });
         }
-        host.classList.add('is-visible');
-        Array.from(files).forEach(function (file) {
-          var fig = document.createElement('figure');
-          var cap = document.createElement('figcaption');
-          cap.textContent = file.name || 'Fișier';
-          fig.appendChild(cap);
-          if (file.type && file.type.indexOf('image') === 0) {
-            var im = document.createElement('img');
-            im.alt = '';
-            im.src = URL.createObjectURL(file);
-            fig.insertBefore(im, cap);
-          } else {
-            var pdf = document.createElement('div');
-            pdf.className = 'upload-prev-pdf';
-            pdf.textContent = 'PDF';
-            fig.insertBefore(pdf, cap);
-          }
-          host.appendChild(fig);
-        });
+        return docs.filter(function (d) { return d.category === cat; });
       }
 
-      function clearUploadPreview() {
-        var host = document.getElementById('cloud-upload-preview');
-        if (!host) return;
-        host.querySelectorAll('img[src^="blob:"]').forEach(function (im) {
-          try { URL.revokeObjectURL(im.src); } catch (e) {}
-        });
-        host.innerHTML = '';
-        host.classList.remove('is-visible');
-      }
-
-      function renderGallery(documents) {
+      function renderGallery(docs) {
         var gallery = document.getElementById('cloud-gallery');
-        if (!gallery) return;
         gallery.innerHTML = '';
-
-        var filtered = filterDocumentsForView(documents);
-
+        var filtered = filterDocs(docs, activeCat);
         if (!filtered.length) {
           var empty = document.createElement('div');
-          empty.className = 'cloud-empty';
-          empty.id = 'cloud-empty';
-          empty.textContent =
-            activeCat.indexOf('user:') === 0
-              ? 'Lista e goală. Apasă „În listă” pe un document sau adaugă fișiere.'
-              : 'Nu ai documente în această categorie.';
+          empty.className = 'mc-empty';
+          empty.textContent = 'Niciun document în această categorie.';
           gallery.appendChild(empty);
           return;
         }
-
         if (activeCat === 'all') {
-          var order = ['vehicle_docs', 'service_history', 'ai_reports', 'photos', 'misc'];
           var byCat = {};
           filtered.forEach(function (d) {
-            var c = d.category || 'misc';
+            var c = d.category || 'other';
             if (!byCat[c]) byCat[c] = [];
             byCat[c].push(d);
           });
-          order.forEach(function (cat) {
+          Object.keys(byCat).forEach(function (cat) {
             var arr = byCat[cat];
-            if (!arr || !arr.length) return;
-            sortDocsByDateDesc(arr);
-            var sec = document.createElement('section');
-            sec.className = 'cloud-list-section';
-            var h = document.createElement('h3');
-            h.className = 'cloud-list-head';
+            var sec = document.createElement('div');
+            sec.className = 'mc-section';
+            var h = document.createElement('div');
+            h.className = 'mc-section-head';
             h.textContent = categoryLabel(cat);
             sec.appendChild(h);
             var grid = document.createElement('div');
-            grid.className = 'cloud-list-grid';
+            grid.className = 'mc-doc-grid';
             arr.forEach(function (doc) { grid.appendChild(buildDocCard(doc)); });
             sec.appendChild(grid);
             gallery.appendChild(sec);
           });
         } else {
           sortDocsByDateDesc(filtered);
-          var grid = document.createElement('div');
-          grid.className = 'cloud-list-grid';
-          filtered.forEach(function (doc) { grid.appendChild(buildDocCard(doc)); });
-          gallery.appendChild(grid);
+          var grid2 = document.createElement('div');
+          grid2.className = 'mc-doc-grid';
+          filtered.forEach(function (doc) { grid2.appendChild(buildDocCard(doc)); });
+          gallery.appendChild(grid2);
         }
       }
 
@@ -954,7 +691,7 @@
           return;
         }
         if (!auth) {
-          alert('Autentifică-te (JWT în localStorage) pentru upload v2 și listă personalizată.');
+          alert('Autentifică-te pentru a încărca documente.');
           finishBatchSlot();
           return;
         }
@@ -994,9 +731,39 @@
           .catch(function () {
             if (localUrl) try { URL.revokeObjectURL(localUrl); } catch (e2) {}
             loadDocs();
-            alert('Upload eșuat. Verifică token-ul, VIN-ul și serverul.');
+            alert('Upload eșuat. Verifică autentificarea, VIN-ul și serverul.');
           })
           .finally(finishBatchSlot);
+      }
+
+      function clearUploadPreview() {
+        var host = document.getElementById('cloud-upload-preview');
+        if (host) { host.innerHTML = ''; host.classList.remove('is-visible'); }
+      }
+
+      function renderUploadPreview(files) {
+        var host = document.getElementById('cloud-upload-preview');
+        if (!host) return;
+        host.innerHTML = '';
+        files.forEach(function (file) {
+          var fig = document.createElement('figure');
+          if (file.type && file.type.indexOf('image') === 0) {
+            var img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            img.onload = function () { try { URL.revokeObjectURL(this.src); } catch (e) {} };
+            fig.appendChild(img);
+          } else {
+            var pdf = document.createElement('div');
+            pdf.className = 'upload-prev-pdf';
+            pdf.textContent = 'PDF';
+            fig.appendChild(pdf);
+          }
+          var cap = document.createElement('figcaption');
+          cap.textContent = file.name;
+          fig.appendChild(cap);
+          host.appendChild(fig);
+        });
+        if (files.length) host.classList.add('is-visible');
       }
 
       var _uploadPreviewBatchGen = 0;
@@ -1034,7 +801,7 @@
         var files = e.dataTransfer && e.dataTransfer.files;
         if (files && files.length) processSelectedFiles(files);
       });
-      zone.querySelector('label.neon-label').addEventListener('click', function (e) { e.stopPropagation(); });
+      zone.querySelector('label.mc-upload-lbl').addEventListener('click', function (e) { e.stopPropagation(); });
       zone.addEventListener('click', function () { document.getElementById('file-input').click(); });
 
       document.getElementById('drawer-tabs').addEventListener('click', function (ev) {
@@ -1062,10 +829,7 @@
           ev.preventDefault();
           ev.stopPropagation();
           var vin = getVin();
-          if (!vin) {
-            alert('Salvează VIN în profil.');
-            return;
-          }
+          if (!vin) { alert('Salvează VIN în profil.'); return; }
           var nm = window.prompt('Nume listă nouă (salvată în acest browser):');
           if (!nm || !String(nm).trim()) return;
           var nid = createUserList(vin, nm);
