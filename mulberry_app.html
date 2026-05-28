@@ -62,6 +62,10 @@ a{color:inherit;text-decoration:none}
 .al-logo{display:flex;align-items:center;gap:11px;margin-bottom:auto}
 .al-wordmark{height:36px;width:auto;display:block}
 .sb-wordmark{height:28px;width:auto;display:block}
+.al-logo-center{flex:1;display:flex;align-items:center;justify-content:center}
+.al-logo-full{height:48px;width:auto;filter:invert(1);opacity:.95}
+.af-brand-logo{margin-bottom:28px}
+.af-login-logo{height:30px;width:auto;mix-blend-mode:screen;opacity:.95}
 .al-hero{padding:60px 0 40px;position:relative;z-index:1}
 .al-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(236,255,84,.12);border:1px solid rgba(236,255,84,.22);color:var(--yellow);font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:22px;text-transform:uppercase;letter-spacing:.08em}
 .al-tag-dot{width:6px;height:6px;border-radius:50%;background:var(--yellow)}
@@ -848,32 +852,19 @@ a{color:inherit;text-decoration:none}
 <div id="auth-screen">
 
   <div class="auth-left">
-    <div class="al-logo">
-      <img src="/mulberry-wordmark.svg" alt="Mulberry" class="al-wordmark">
-    </div>
-    <div class="al-hero">
-      <div class="al-h1">Radical clarity.<br>Absolute certainty.</div>
-      <div class="al-sub">We eliminate the friction of automotive maintenance by providing drivers and partners with a clean, intuitive, and guaranteed digital experience.</div>
-      <div class="al-features">
-        <div class="al-feat">
-          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
-          Identitate digitală verificată
-        </div>
-        <div class="al-feat">
-          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
-          YellowCard — asigurare + ITP + istoric
-        </div>
-        <div class="al-feat">
-          <div class="al-feat-ico"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          MulberryAI — analiză predictivă
-        </div>
-      </div>
+    <div class="al-logo-center">
+      <img src="/mulberry-logo.jpeg" alt="Mulberry" class="al-logo-full">
     </div>
     <div class="al-foot">© 2025 Mulberry Technologies SRL · Toate drepturile rezervate</div>
   </div>
 
   <div class="auth-right">
     <div class="auth-form-panel">
+
+      <!-- Brand logo -->
+      <div class="af-brand-logo">
+        <img src="/mulberry-logo-dark.png" alt="Mulberry" class="af-login-logo">
+      </div>
 
       <!-- Step indicator -->
       <div class="af-step-indicator">
