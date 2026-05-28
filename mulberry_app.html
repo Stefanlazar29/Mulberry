@@ -1874,18 +1874,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Auto-login la reload dacă există token valid
+// Auto-login la reload dacă există sesiune Supabase activă
 document.addEventListener('DOMContentLoaded', async () => {
-  const token = (typeof window.api !== 'undefined' && window.api.getToken)
-    ? window.api.getToken()
-    : localStorage.getItem('mulberry_session') || '';
-  if (token) {
-    try {
-      await window.api.me();
+  try {
+    const { data: { session } } = await sb.auth.getSession();
+    if (session?.user) {
+      currentUser = {
+        email: session.user.email,
+        name:  session.user.user_metadata?.full_name || null,
+        avatar: session.user.user_metadata?.avatar_url || null
+      };
       enterApp();
-    } catch(e) {
-      // token expirat sau invalid — rămâne la login
     }
+  } catch(e) {
+    // sesiune lipsă sau expirată — rămâne pe login
   }
 });
 
