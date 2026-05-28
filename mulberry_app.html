@@ -1618,7 +1618,13 @@ function loadSession() {
   try { const r = localStorage.getItem('mlbr_s'); if(r){ currentUser=JSON.parse(r); return currentUser; } } catch(e){}
   return null;
 }
-function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; }
+function clearSession() { localStorage.removeItem('mlbr_s'); currentUser = null; sb.auth.signOut(); }
+
+// Restore session on reload
+document.addEventListener('DOMContentLoaded', function() {
+  const s = loadSession();
+  if (s) { currentUser = s; enterApp(); }
+});
 
 let _tt;
 function toast(msg, type) {
@@ -1732,7 +1738,11 @@ async function afVerifyOTP() {
   if (token.length !== 6) return afShowAlert('af-alert-2', 'Introdu toate cele 6 cifre.');
   const { data, error } = await sb.auth.verifyOtp({ email: afCurrentEmail, token, type: 'email' });
   if (error) return afShowAlert('af-alert-2', 'Cod incorect sau expirat. Încearcă din nou.');
-  if (data?.session) { currentUser = { email: afCurrentEmail }; enterApp(); } else { afGoToStep(3); }
+  if (data?.session) {
+    const u = data.session.user;
+    saveSession({ email: u.email, name: u.user_metadata?.full_name || null, avatar: u.user_metadata?.avatar_url || null });
+    enterApp();
+  } else { afGoToStep(3); }
 }
 
 async function afResendOTP() {
@@ -1860,30 +1870,13 @@ setTimeout(() => {
   }
 }, 500);
 
-// Supabase auth — reload (INITIAL_SESSION) + Google OAuth (SIGNED_IN)
-let _sessionRestored = false;
+// Supabase auth — doar Google OAuth
 sb.auth.onAuthStateChange(async (event, session) => {
-  // Reload: sesiune existentă → intră direct în app fără re-login
-  if (event === 'INITIAL_SESSION' && session?.user && !_sessionRestored) {
-    _sessionRestored = true;
-    currentUser = {
-      email:  session.user.email,
-      name:   session.user.user_metadata?.full_name || null,
-      avatar: session.user.user_metadata?.avatar_url || null
-    };
-    enterApp();
-    return;
-  }
-  // Google OAuth nou
   if (event === 'SIGNED_IN' && session && sessionStorage.getItem('mlbr_oauth')) {
-    _sessionRestored = true;
     sessionStorage.removeItem('mlbr_oauth');
     const user  = session.user;
-    currentUser = {
-      email:  user.email,
-      name:   user.user_metadata?.full_name || null,
-      avatar: user.user_metadata?.avatar_url || null
-    };
+    const d = { email: user.email, name: user.user_metadata?.full_name || null, avatar: user.user_metadata?.avatar_url || null };
+    saveSession(d);
     const isNew = (Date.now() - new Date(user.created_at).getTime()) < 30000;
     if (isNew) { afGoToStep(3); } else { enterApp(); }
   }
