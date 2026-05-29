@@ -310,8 +310,11 @@ a{color:inherit;text-decoration:none}
 .gm-input-disclaimer{text-align:center;font-size:10.5px;color:rgba(0,0,0,.26);font-family:'Inter',sans-serif;margin-top:9px}
 @media(max-width:768px){.gm-overlay{top:var(--th);left:0;border-radius:0}.gm-big-greeting{font-size:28px}.gm-model-badge{display:none}}
 .panel{display:none}
-.panel.active{display:block;animation:fadeUp .24s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.panel.active{display:block;animation:fadeUp .2s ease}
+/* Fiecare panel = frame independent: scroll propriu, nu continuare din panel anterior */
+.panel.active:not(#panel-dashboard){overflow-y:auto;-webkit-overflow-scrolling:touch}
+#panel-dashboard{overflow:hidden}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .panel.panel-iframe.active{display:flex;flex-direction:column;height:100%;padding:0;animation:fadeUp .2s ease}
 .pif-header{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#fff;border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0;min-height:50px}
 .pif-back{background:none;border:none;cursor:pointer;font-size:1.5rem;line-height:1;padding:2px 10px 2px 0;color:#8B5CF6;font-weight:500}
@@ -438,8 +441,11 @@ a{color:inherit;text-decoration:none}
   .tb-mobile-brand{display:block}
   .tb-avatar-btn{display:flex!important}
   .tb-avatar{background:#1c1c1e!important;color:#fff!important;border:none!important}
-  .content{grid-column:1;grid-row:2;padding:0;border-radius:20px 20px 0 0;overflow:hidden;background:#F5F5F7}
-  .panel{padding:16px 14px calc(var(--bh) + 16px)}
+  .content{grid-column:1;grid-row:2;padding:0;border-radius:20px 20px 0 0;overflow:hidden;background:#F5F5F7;display:flex;flex-direction:column}
+  /* Fiecare panel = frame complet, scroll intern propriu */
+  .panel.active{height:100%;box-sizing:border-box}
+  .panel.active:not(#panel-dashboard){padding:16px 14px calc(var(--bh) + 16px);overflow-y:auto;-webkit-overflow-scrolling:touch}
+  #panel-dashboard.active{overflow:hidden;padding:0}
   .g4{grid-template-columns:repeat(2,1fr);gap:10px}.g2{grid-template-columns:1fr}
   .bnav{display:block}.toast{bottom:calc(var(--bh) + 10px)}.ph-title{font-size:20px}.mkt-grid{grid-template-columns:1fr}
   /* dashboard mobile tweaks */
@@ -2123,7 +2129,16 @@ function goPanel(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+name)?.classList.add('active');
   const contentEl = document.querySelector('.content');
-  if (contentEl) { contentEl.scrollTop = 0; contentEl.classList.toggle('dash-active', name === 'dashboard'); }
+  if (contentEl) {
+    /* toggle dash-active FIRST — abia după ce overflow-ul e corect, resetăm scroll-ul instant */
+    contentEl.classList.toggle('dash-active', name === 'dashboard');
+    contentEl.style.scrollBehavior = 'auto';
+    contentEl.scrollTop = 0;
+    contentEl.style.scrollBehavior = '';
+    /* reset și panel-ul activ (mobil: panelele au overflow-y:auto propriu) */
+    const activePanel = document.getElementById('panel-' + name);
+    if (activePanel) { activePanel.style.scrollBehavior = 'auto'; activePanel.scrollTop = 0; activePanel.style.scrollBehavior = ''; }
+  }
   if (PANEL_IFRAMES[name]) {
     const [src, iframeId] = PANEL_IFRAMES[name];
     const fr = document.getElementById(iframeId);
