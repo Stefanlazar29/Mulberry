@@ -423,17 +423,25 @@ a{color:inherit;text-decoration:none}
   #app-shell{grid-template-columns:1fr;grid-template-rows:var(--th) 1fr}
   .sidebar{position:fixed;top:0;left:0;bottom:0;width:285px;transform:translateX(-100%);grid-row:unset;grid-column:unset;transition:transform .28s cubic-bezier(.4,0,.2,1),box-shadow .28s}
   .sidebar.open{transform:translateX(0);box-shadow:8px 0 60px rgba(0,0,0,.6)}
-  .topbar{grid-column:1;grid-row:1;padding:0 14px;background:#0d0d0e;border-bottom:1px solid rgba(255,255,255,.08)}
+  .topbar{grid-column:1;grid-row:1;padding:0 14px;background:#fff;border-bottom:1px solid rgba(0,0,0,.07)}
   .tb-logo-btn{display:none}
   .tb-ai-bar{display:none}
   .tb-profile{display:none}
-  .tb-hamburger{display:flex;background:rgba(255,255,255,.08);border-radius:10px}
-  .tb-hamburger:active{background:rgba(255,255,255,.15)}
+  .tb-hamburger{display:flex;background:transparent;border-radius:10px;width:auto;padding:6px 8px;gap:8px}
+  .tb-hamburger img{width:28px;height:28px;border-radius:8px}
+  .tb-hamburger:active{background:rgba(0,0,0,.06)}
+  .tb-mobile-brand{display:block}
   .tb-avatar-btn{display:flex!important}
-  .content{grid-column:1;grid-row:2;padding:0;border-radius:20px 20px 0 0;overflow:hidden;background:#f0f0ee}
+  .tb-avatar{background:#1c1c1e!important;color:#fff!important;border:none!important}
+  .content{grid-column:1;grid-row:2;padding:0;border-radius:20px 20px 0 0;overflow:hidden;background:#F5F5F7}
   .panel{padding:16px 14px calc(var(--bh) + 16px)}
   .g4{grid-template-columns:repeat(2,1fr);gap:10px}.g2{grid-template-columns:1fr}
   .bnav{display:block}.toast{bottom:calc(var(--bh) + 10px)}.ph-title{font-size:20px}.mkt-grid{grid-template-columns:1fr}
+  /* dashboard mobile tweaks */
+  .nd-gr-sub{display:none!important}
+  .nd-hello{font-size:26px!important;font-weight:700!important;letter-spacing:-.5px!important}
+  .nd-feat-card{background:#fff!important;border:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 14px rgba(0,0,0,.07)!important}
+  .nd-status-card{background:#fff!important;border:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 2px 14px rgba(0,0,0,.07)!important}
 }
 @media(max-width:400px){.g4{grid-template-columns:1fr 1fr}.sc-val{font-size:28px}.ph-title{font-size:18px}.content{padding:12px 10px calc(var(--bh) + 12px)}}
 
@@ -709,7 +717,7 @@ a{color:inherit;text-decoration:none}
 }
 .nd-ycard-wm{position:absolute;right:-12px;bottom:-28px;font-size:130px;font-weight:900;color:rgba(0,0,0,.06);font-family:var(--font-head);line-height:1;pointer-events:none;user-select:none;letter-spacing:-4px;z-index:0}
 .nd-ycard-yellow > *:not(.nd-ycard-wm){position:relative;z-index:3}
-.nd-ycard-brand-logo{height:30px;width:auto;opacity:.88}
+.nd-ycard-brand-logo{height:22px;width:auto;opacity:.88}
 .nd-ycard-trust{background:#7C3AED}
 .nd-ycard-add{background:#F5F5F5;border:1.5px dashed rgba(0,0,0,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px}
 .nd-ycard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:22px}
@@ -790,6 +798,20 @@ a{color:inherit;text-decoration:none}
 .bn-item svg{stroke:#1c1c1e!important;width:24px!important;height:24px!important}
 .bn-center-logo{background:#1c1c1e!important;border-radius:50%!important;width:46px!important;height:46px!important;padding:0!important;flex:0 0 46px!important}
 .bn-center-logo img{filter:invert(1);width:26px;height:26px;border-radius:50%}
+
+/* mobile topbar brand text */
+.tb-mobile-brand{display:none;font-size:17px;font-weight:800;color:#111;font-family:var(--font-head);letter-spacing:-.4px}
+
+/* YellowCard logo in dark circle */
+.nd-ycard-logo-circle{width:40px;height:40px;border-radius:50%;background:#1A1A1A;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.nd-ycard-logo-circle img{width:24px;height:24px;object-fit:contain;filter:invert(1);opacity:.92}
+
+/* empty vehicle slot cards */
+.nd-ycard-slot{background:#F2F2F7;border:1.5px dashed rgba(0,0,0,.10)!important;box-shadow:none!important}
+.nd-ycard-slot-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:130px;gap:8px;padding:20px 0}
+.nd-ycard-slot-ico{width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.055);display:flex;align-items:center;justify-content:center}
+.nd-ycard-slot-lbl{font-size:13px;font-weight:600;color:#888;letter-spacing:-.1px}
+.nd-ycard-slot-sub{font-size:11px;color:#bbb;font-weight:400}
 
 /* ── Desktop layout ── */
 @media(min-width:769px){
@@ -1068,6 +1090,7 @@ a{color:inherit;text-decoration:none}
     <!-- Mobile hamburger -->
     <button class="tb-hamburger" onclick="toggleSidebar()" aria-label="Meniu">
       <img src="/favicon.png" alt="Mulberry">
+      <span class="tb-mobile-brand">Mulberry</span>
     </button>
     <!-- Desktop logo → opens sidebar -->
     <button class="tb-logo-btn" onclick="toggleSidebar()" aria-label="Meniu Mulberry">
@@ -1126,7 +1149,9 @@ a{color:inherit;text-decoration:none}
                   <div class="nd-ycard-wm">M</div>
                   <div class="nd-ycard-top">
                     <span class="nd-ycard-badge">Yellowcard</span>
-                    <img src="/Mulberry.png" class="nd-ycard-brand-logo" alt="Mulberry" onerror="this.src='/favicon.png';this.style.filter='brightness(0)'">
+                    <div class="nd-ycard-logo-circle">
+                      <img src="/Mulberry.png" class="nd-ycard-brand-logo" alt="Mulberry" onerror="this.src='/favicon.png';this.style.filter='invert(1)'">
+                    </div>
                   </div>
                   <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
                   <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
@@ -1135,22 +1160,32 @@ a{color:inherit;text-decoration:none}
                   </div>
                 </div>
 
-                <div class="nd-ycard nd-ycard-trust" id="nd-trust-card" style="display:none">
-                  <div class="nd-ycard-top">
-                    <span class="nd-ycard-badge-trust">MulberryTrust</span>
+                <div class="nd-ycard nd-ycard-slot" id="nd-trust-card" onclick="goPanel('addvehicle')">
+                  <div class="nd-ycard-slot-inner">
+                    <div class="nd-ycard-slot-ico">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="7" width="14" height="9" rx="2"/>
+                        <path d="M16 10h3l2 2.5V16h-5"/>
+                        <circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/>
+                      </svg>
+                    </div>
+                    <div class="nd-ycard-slot-lbl">Vehicul 2</div>
+                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
                   </div>
-                  <div class="nd-ycard-vin-trust" id="nd-trust-vin">VIN: —</div>
-                  <div class="nd-ycard-plate-trust" id="nd-trust-plate">— ——</div>
-                  <div class="nd-ycard-chev">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                  </div>
+                  <span id="nd-trust-vin" style="display:none"></span>
+                  <span id="nd-trust-plate" style="display:none"></span>
                 </div>
 
-                <div class="nd-ycard nd-ycard-add" id="nd-add-card" onclick="goPanel('addvehicle')">
-                  <div class="nd-ycard-add-icon">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#555" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <div class="nd-ycard nd-ycard-slot" id="nd-add-card" onclick="goPanel('addvehicle')">
+                  <div class="nd-ycard-slot-inner">
+                    <div class="nd-ycard-slot-ico">
+                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="2" stroke-linecap="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                      </svg>
+                    </div>
+                    <div class="nd-ycard-slot-lbl">Vehicul 3</div>
+                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
                   </div>
-                  <div class="nd-ycard-add-lbl">Adaugă vehicul</div>
                 </div>
 
               </div>
@@ -1159,7 +1194,7 @@ a{color:inherit;text-decoration:none}
             <!-- Dots (mobile only) -->
             <div class="nd-dots">
               <div class="nd-dot active" id="nd-dot-0"></div>
-              <div class="nd-dot" id="nd-dot-1" style="display:none"></div>
+              <div class="nd-dot" id="nd-dot-1"></div>
               <div class="nd-dot" id="nd-dot-2"></div>
             </div>
 
