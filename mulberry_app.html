@@ -59,12 +59,11 @@ a{color:inherit;text-decoration:none}
 }
 .auth-left::before{content:'';position:absolute;top:-120px;right:-120px;width:400px;height:400px;background:radial-gradient(circle,rgba(236,255,84,.07) 0%,transparent 70%);pointer-events:none}
 .auth-left::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(236,255,84,.04) 0%,transparent 70%);pointer-events:none}
-.al-back-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-family:var(--font);font-size:13px;font-weight:600;padding:8px 14px;border-radius:20px;cursor:pointer;transition:all .15s;margin-bottom:32px;align-self:flex-start}
+.al-back-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);font-family:var(--font);font-size:13px;font-weight:600;padding:8px 14px;border-radius:20px;cursor:pointer;transition:all .15s;align-self:flex-start}
 .al-back-btn:hover{background:rgba(255,255,255,.18);color:#fff}
 .al-back-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;flex-shrink:0}
 .al-logo{display:flex;align-items:center;gap:11px;margin-bottom:auto}
-.al-logo-mark{width:36px;height:36px;border-radius:10px;background:#000;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.4)}
-.al-logo-title{font-size:18px;font-weight:800;color:#fff;letter-spacing:-.3px;font-family:var(--font-head)}
+.al-wordmark{height:40px;width:auto;display:block}
 .al-wordmark{height:36px;width:auto;display:block}
 .sb-wordmark{height:28px;width:auto;display:block}
 .al-logo-center{flex:1;display:flex;align-items:center;justify-content:center}
@@ -891,18 +890,9 @@ a{color:inherit;text-decoration:none}
 <div id="auth-screen">
 
   <div class="auth-left">
-    <!-- Back button -->
-    <button class="al-back-btn" onclick="history.back()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-      Înapoi
-    </button>
-
-    <!-- Logo + brand name -->
+    <!-- Logo wordmark (yellow icon + Mulberry text) -->
     <div class="al-logo">
-      <div class="al-logo-mark">
-        <img src="/logo-dark.svg" alt="Mulberry" style="width:22px;height:22px;display:block;filter:invert(1)">
-      </div>
-      <span class="al-logo-title">Mulberry</span>
+      <img src="/logo.svg" alt="Mulberry" class="al-wordmark">
     </div>
 
     <!-- Hero -->
@@ -934,9 +924,15 @@ a{color:inherit;text-decoration:none}
   <div class="auth-right">
     <div class="auth-form-panel">
 
-      <!-- Brand logo -->
+      <!-- Back button -->
+      <button class="al-back-btn" onclick="history.back()" style="margin-bottom:24px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Înapoi
+      </button>
+
+      <!-- Brand logo — versiunea hero (galben pe negru) -->
       <div class="af-brand-logo">
-        <img src="/logo-dark.svg" alt="Mulberry" class="af-login-logo">
+        <img src="/logo.svg" alt="Mulberry" style="height:36px;width:auto;display:block">
       </div>
 
       <!-- Step indicator -->
