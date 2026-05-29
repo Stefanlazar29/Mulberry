@@ -312,6 +312,11 @@ a{color:inherit;text-decoration:none}
 .panel{display:none}
 .panel.active{display:block;animation:fadeUp .24s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.panel.panel-iframe.active{display:flex;flex-direction:column;height:100%;padding:0;animation:fadeUp .2s ease}
+.pif-header{display:flex;align-items:center;gap:10px;padding:10px 18px;background:#fff;border-bottom:1px solid rgba(0,0,0,.07);flex-shrink:0;min-height:50px}
+.pif-back{background:none;border:none;cursor:pointer;font-size:1.5rem;line-height:1;padding:2px 10px 2px 0;color:#8B5CF6;font-weight:500}
+.pif-title{font-weight:600;font-size:.95rem;color:var(--black)}
+.pif-frame{flex:1;border:none;width:100%;display:block}
 
 .ph{margin-bottom:24px}
 .ph-eyebrow{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--wine);margin-bottom:8px;display:flex;align-items:center;gap:7px}
@@ -1059,18 +1064,18 @@ a{color:inherit;text-decoration:none}
     <div class="sb-sep" style="margin-top:10px"></div>
     <div class="sb-label">Servicii</div>
 
-    <a class="nav-item" href="/mulberry_cloud.html">
+    <button class="nav-item" data-p="cloud" onclick="goPanel('cloud')">
       <span class="ni-icon" style="background:rgba(139,92,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/><path d="M12 12v4M9.5 14.5L12 12l2.5 2.5"/></svg></span>
       MulberryCloud
-    </a>
-    <a class="nav-item" href="/mulberry_menu.html">
+    </button>
+    <button class="nav-item" data-p="hub" onclick="goPanel('hub')">
       <span class="ni-icon" style="background:rgba(59,130,246,.22)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M19.07 4.93l-1.77 1.77M6.7 17.3l-1.77 1.77"/></svg></span>
       MulberryHUB
-    </a>
-    <a class="nav-item" href="/mulberry_qdata.html">
+    </button>
+    <button class="nav-item" data-p="drive" onclick="goPanel('drive')">
       <span class="ni-icon" style="background:rgba(236,255,84,.12)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ECFF54" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l2-4h12l2 4"/><rect x="2" y="10.5" width="20" height="8" rx="2.5"/><circle cx="6.5" cy="19.5" r="2"/><circle cx="17.5" cy="19.5" r="2"/></svg></span>
       MulberryDrive
-    </a>
+    </button>
     <button class="nav-item" data-p="analytics" style="opacity:0.32;filter:blur(0.6px);pointer-events:none;cursor:default" tabindex="-1">
       <span class="ni-icon" style="background:rgba(181,243,51,.15)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#b5f333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 12 7 12 10 4 14 20 17 12 22 12"/></svg></span>
       Analytics
@@ -1281,7 +1286,7 @@ a{color:inherit;text-decoration:none}
                 </div>
                 <span class="nd-icon-lbl">Mulberry<br>EXO</span>
               </button>
-              <button class="nd-icon-btn" onclick="location.href='/mulberry_cloud.html'">
+              <button class="nd-icon-btn" onclick="goPanel('cloud')">
                 <div class="nd-icon-circle">
                   <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
                     <path d="M11 24Q6 24 6 19Q6 14 11 14Q10 8 17 8Q24 8 23 14Q27 14 27 19Q27 24 23 24Z" fill="rgba(255,255,255,0.88)"/>
@@ -1308,7 +1313,7 @@ a{color:inherit;text-decoration:none}
             </div>
 
             <!-- MulberryHUB -->
-            <div class="nd-feat-card" onclick="location.href='/mulberry_menu.html'">
+            <div class="nd-feat-card" onclick="goPanel('hub')">
               <div class="nd-feat-ico">
                 <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
                   <rect x="8" y="5" width="16" height="22" rx="2.5" fill="rgba(255,255,255,0.72)"/>
@@ -1596,6 +1601,33 @@ a{color:inherit;text-decoration:none}
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- CLOUD PANEL -->
+    <div class="panel panel-iframe" id="panel-cloud">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryCloud</span>
+      </div>
+      <iframe class="pif-frame" id="pif-cloud" src="" title="MulberryCloud"></iframe>
+    </div>
+
+    <!-- HUB PANEL -->
+    <div class="panel panel-iframe" id="panel-hub">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryHUB</span>
+      </div>
+      <iframe class="pif-frame" id="pif-hub" src="" title="MulberryHUB"></iframe>
+    </div>
+
+    <!-- DRIVE PANEL -->
+    <div class="panel panel-iframe" id="panel-drive">
+      <div class="pif-header">
+        <button class="pif-back" onclick="goPanel('dashboard')" aria-label="Înapoi">‹</button>
+        <span class="pif-title">MulberryDrive</span>
+      </div>
+      <iframe class="pif-frame" id="pif-drive" src="" title="MulberryDrive"></iframe>
     </div>
 
   </main>
@@ -2076,13 +2108,27 @@ const PANEL_META = {
   yellowcard:  ['YellowCard',  () => 'Identitatea digitală a vehiculului tău'],
   marketplace: ['Marketplace', () => 'Servicii auto verificate Mulberry'],
   analytics:   ['Analytics',   () => 'Metrici și rapoarte financiare'],
-  settings:    ['Setări',      () => 'Configurare cont și aplicație']
+  settings:    ['Setări',      () => 'Configurare cont și aplicație'],
+  cloud:       ['MulberryCloud', () => 'Documente și fișiere vehicul'],
+  hub:         ['MulberryHUB',   () => 'Istoric și servicii'],
+  drive:       ['MulberryDrive', () => 'Date și diagnosticare vehicul'],
+};
+const PANEL_IFRAMES = {
+  cloud: ['/mulberry_cloud.html', 'pif-cloud'],
+  hub:   ['/mulberry_menu.html',  'pif-hub'],
+  drive: ['/mulberry_qdata.html', 'pif-drive'],
 };
 
 function goPanel(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+name)?.classList.add('active');
-  document.querySelector('.content')?.classList.toggle('dash-active', name === 'dashboard');
+  const contentEl = document.querySelector('.content');
+  if (contentEl) { contentEl.scrollTop = 0; contentEl.classList.toggle('dash-active', name === 'dashboard'); }
+  if (PANEL_IFRAMES[name]) {
+    const [src, iframeId] = PANEL_IFRAMES[name];
+    const fr = document.getElementById(iframeId);
+    if (fr && !fr.src.endsWith(src) && !fr.src.includes(src.replace('/', ''))) fr.src = src;
+  }
   if (name === 'analytics') {
     const gl = document.getElementById('gd-greeting-lbl');
     if (gl) gl.textContent = greeting();
