@@ -824,10 +824,120 @@ a{color:inherit;text-decoration:none}
 .nd-ycard-slot-lbl{font-size:13px;font-weight:600;color:#888;letter-spacing:-.1px}
 .nd-ycard-slot-sub{font-size:11px;color:#bbb;font-weight:400}
 
+/* ════════════════════════════════════════════════
+   GRID TEMPLATES CSS — extras din Grids/
+════════════════════════════════════════════════ */
+
+/* ── dashboard_grid.html — Bento Grid ── */
+.page-header{display:flex;align-items:flex-end;justify-content:space-between}
+.page-greeting{font-size:12px;font-weight:500;color:rgba(0,0,0,.38);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.page-title{font-size:28px;font-weight:800;letter-spacing:-.6px;line-height:1}
+.page-meta{font-size:12px;font-weight:500;color:rgba(0,0,0,.38)}
+
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.bento .span-2{grid-column:span 2}
+.bento .span-3{grid-column:span 3}
+.bento .row-2{grid-row:span 2}
+
+/* YellowCard bento */
+.card-yellow{grid-column:span 2;height:260px;background:#D4FF00;border-radius:32px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:inset 0 0 20px rgba(212,255,0,.2),0 8px 32px rgba(212,255,0,.15)}
+.card-yellow::before{content:'M';position:absolute;right:-12px;bottom:-24px;font-size:140px;font-weight:900;color:rgba(0,0,0,.06);line-height:1;letter-spacing:-6px;pointer-events:none}
+.yc-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:rgba(0,0,0,.1);padding:4px 10px;border-radius:20px;color:rgba(0,0,0,.55);width:fit-content}
+.yc-badge-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.5)}
+.yc-plate{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1}
+.yc-model{font-size:13px;font-weight:600;color:rgba(0,0,0,.5);margin-top:3px}
+.yc-footer{display:flex;align-items:center;justify-content:space-between}
+.yc-vin{font-size:10px;font-weight:700;color:rgba(0,0,0,.38);font-family:'Courier New',monospace;letter-spacing:.06em}
+
+/* Action cards */
+.card-action{height:188px;background:#111111;border-radius:28px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;border:1px solid rgba(255,255,255,.06);transition:transform .15s,background .15s;position:relative;overflow:hidden}
+.card-action:hover{transform:translateY(-2px);background:#1a1a1a}
+.card-action::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .2s}
+.card-action:hover::before{opacity:1}
+.ca-go::before{background:linear-gradient(135deg,rgba(52,199,89,.1) 0%,transparent 65%)}
+.ca-id::before{background:linear-gradient(135deg,rgba(212,255,0,.1) 0%,transparent 65%)}
+.ca-exo::before{background:linear-gradient(135deg,rgba(255,149,0,.1) 0%,transparent 65%)}
+.ca-cloud::before{background:linear-gradient(135deg,rgba(0,122,255,.1) 0%,transparent 65%)}
+.ca-icon{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+.ca-icon svg{width:20px;height:20px;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ca-label{font-size:13px;font-weight:700;color:rgba(255,255,255,.85)}
+.ca-sub{font-size:11px;font-weight:500;color:rgba(255,255,255,.3);margin-top:2px}
+
+/* Status card */
+.card-status{grid-column:span 2;background:#ffffff;border-radius:24px;border:1px solid rgba(0,0,0,.07);padding:18px 22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.status-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(0,0,0,.22)}
+.status-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.spill{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:7px 12px;border-radius:20px}
+.spill-dot{width:7px;height:7px;border-radius:50%}
+.spill.ok{background:rgba(52,199,89,.1);color:#1a7a35}
+.spill.ok .spill-dot{background:#34C759}
+.spill.warn{background:rgba(255,149,0,.1);color:#9a5800}
+.spill.warn .spill-dot{background:#FF9500}
+.status-rows{display:flex;flex-direction:column}
+.status-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.07);font-size:13px}
+.status-row:last-child{border-bottom:none}
+.sr-lbl{font-weight:500;color:rgba(0,0,0,.55)}
+.sr-val{font-weight:700}
+
+/* Wide glassmorphism cards */
+.card-wide{grid-column:span 3;height:188px;background:rgba(255,255,255,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:32px;border:1px solid rgba(255,255,255,.9);padding:22px 24px;display:flex;align-items:center;gap:18px;box-shadow:0 4px 24px rgba(0,0,0,.05);position:relative;overflow:hidden}
+.card-wide::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent)}
+.cw-icon{width:52px;height:52px;border-radius:14px;background:#0a0a0a;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cw-icon svg{width:22px;height:22px;stroke:#D4FF00;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cw-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.cw-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.22)}
+.cw-title{font-size:17px;font-weight:800;letter-spacing:-.3px;color:#0a0a0a}
+.cw-sub{font-size:12.5px;font-weight:500;color:rgba(0,0,0,.38)}
+.cw-input{flex:1;display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.07);border-radius:12px;padding:10px 14px;font-size:13px;color:rgba(0,0,0,.38);cursor:text}
+.cw-input svg{width:15px;height:15px;stroke:rgba(0,0,0,.22);stroke-width:1.8;fill:none;flex-shrink:0;stroke-linecap:round;stroke-linejoin:round}
+.cw-btn{width:36px;height:36px;border-radius:10px;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:opacity .15s}
+.cw-btn svg{width:15px;height:15px;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cw-btn:hover{opacity:.8}
+
+/* Activity card */
+.card-activity{background:#ffffff;border-radius:32px;border:1px solid rgba(0,0,0,.07);padding:22px 20px;display:flex;flex-direction:column;gap:14px;grid-row:span 2;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.bento .act-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(0,0,0,.22)}
+.bento .act-list{display:flex;flex-direction:column}
+.bento .act-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(0,0,0,.07);animation:slideInBento .3s ease both}
+.bento .act-row:last-child{border-bottom:none}
+.bento .act-row:nth-child(1){animation-delay:.04s}.bento .act-row:nth-child(2){animation-delay:.08s}
+.bento .act-row:nth-child(3){animation-delay:.12s}.bento .act-row:nth-child(4){animation-delay:.16s}
+.bento .act-row:nth-child(5){animation-delay:.20s}
+@keyframes slideInBento{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.bento .act-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bento .act-ico svg{width:15px;height:15px;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.bento .act-main{flex:1;min-width:0}
+.bento .act-name{font-size:13px;font-weight:600}
+.bento .act-meta{font-size:11px;color:rgba(0,0,0,.22);font-weight:500;margin-top:1px}
+.bento .act-arr svg{width:13px;height:13px;stroke:rgba(0,0,0,.22);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+/* Small metric cards */
+.card-metric{height:200px;background:#ffffff;border-radius:24px;border:1px solid rgba(0,0,0,.07);padding:20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.04);position:relative;overflow:hidden}
+.cm-green{background:linear-gradient(135deg,rgba(52,199,89,.07) 0%,#ffffff 55%)}
+.cm-lime{background:linear-gradient(135deg,rgba(212,255,0,.10) 0%,#ffffff 55%)}
+.cm-orange{background:linear-gradient(135deg,rgba(255,149,0,.08) 0%,#ffffff 55%)}
+.cm-blue{background:linear-gradient(135deg,rgba(0,122,255,.07) 0%,#ffffff 55%)}
+.cm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(0,0,0,.22)}
+.cm-val{font-size:36px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.cm-unit{font-size:16px;font-weight:600;color:rgba(0,0,0,.38);margin-left:2px}
+.cm-footer{display:flex;align-items:center;justify-content:space-between}
+.cm-sub{font-size:11.5px;font-weight:500;color:rgba(0,0,0,.38)}
+.tag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:20px}
+.tag-green{background:rgba(52,199,89,.12);color:#1a7a35}
+.tag-orange{background:rgba(255,149,0,.12);color:#9a5800}
+.tag-blue{background:rgba(0,122,255,.12);color:#004dcc}
+.tag-red{background:rgba(255,59,48,.1);color:#c0241b}
+
+/* ── analytics_grid.html — gd-r2 grid ── */
+.gd-r2{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+@media(max-width:900px){.gd-r2{grid-template-columns:1fr}}
+@media(max-width:1200px) and (min-width:901px){.gd-r2{grid-template-columns:1fr 1fr}}
+
 /* ── Desktop layout ── */
 @media(min-width:769px){
   /* padding intern per panel (înlocuiește .content padding) */
   .panel.active:not(#panel-dashboard):not(.panel-iframe):not(#panel-analytics){padding:28px 32px}
+  #panel-dashboard.active{padding:var(--pad);overflow-y:auto}
   #panel-analytics{padding:0;margin:0;min-height:100%}
   #panel-dashboard{height:100%;display:flex;flex-direction:column}
   .nd-wrap{
@@ -877,6 +987,92 @@ a{color:inherit;text-decoration:none}
   .nd-icon-circle{width:50px;height:50px}
   .nd-icon-lbl{font-size:10px}
 }
+
+/* ════════════════════════════════════════════════
+   BENTO GRID SYSTEM — MulberryFAST Dashboard
+════════════════════════════════════════════════ */
+:root{--lime:#D4FF00;--card-dark:#111111;--r-lg:32px;--r-md:28px;--r-sm:24px;--gap:24px;--pad:32px}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--gap)}
+.span-2{grid-column:span 2}.span-3{grid-column:span 3}.row-2{grid-row:span 2}
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--gap)}
+.page-greeting{font-size:12px;font-weight:500;color:var(--dim3);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.page-title{font-size:28px;font-weight:800;letter-spacing:-.6px;line-height:1}
+.page-meta{font-size:12px;font-weight:500;color:var(--dim3)}
+.card-yellow{grid-column:span 2;height:260px;background:var(--lime);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;box-shadow:inset 0 0 20px rgba(212,255,0,.2),0 8px 32px rgba(212,255,0,.15)}
+.card-yellow::before{content:'M';position:absolute;right:-12px;bottom:-24px;font-size:140px;font-weight:900;color:rgba(0,0,0,.06);line-height:1;letter-spacing:-6px;pointer-events:none}
+.yc-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:rgba(0,0,0,.1);padding:4px 10px;border-radius:20px;color:rgba(0,0,0,.55);width:fit-content}
+.yc-badge-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.5)}
+.yc-plate{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1}
+.yc-model{font-size:13px;font-weight:600;color:rgba(0,0,0,.5);margin-top:3px}
+.yc-footer{display:flex;align-items:center;justify-content:space-between}
+.yc-vin{font-size:10px;font-weight:700;color:rgba(0,0,0,.38);font-family:'Courier New',monospace;letter-spacing:.06em}
+.yc-verify{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:700;color:rgba(0,0,0,.45)}
+.yc-verify svg{width:12px;height:12px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.card-action{height:188px;background:var(--card-dark);border-radius:var(--r-md);padding:20px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;border:1px solid rgba(255,255,255,.06);transition:transform .15s,background .15s;position:relative;overflow:hidden}
+.card-action:hover{transform:translateY(-2px);background:#1a1a1a}
+.card-action::before{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .2s}
+.card-action:hover::before{opacity:1}
+.ca-go::before{background:linear-gradient(135deg,rgba(52,199,89,.1) 0%,transparent 65%)}
+.ca-id::before{background:linear-gradient(135deg,rgba(212,255,0,.1) 0%,transparent 65%)}
+.ca-exo::before{background:linear-gradient(135deg,rgba(255,149,0,.1) 0%,transparent 65%)}
+.ca-cloud::before{background:linear-gradient(135deg,rgba(0,122,255,.1) 0%,transparent 65%)}
+.ca-icon{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+.ca-icon svg{width:20px;height:20px;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ca-label{font-size:13px;font-weight:700;color:rgba(255,255,255,.85)}
+.ca-sub{font-size:11px;font-weight:500;color:rgba(255,255,255,.3);margin-top:2px}
+.card-status{grid-column:span 2;background:#fff;border-radius:var(--r-sm);border:1px solid rgba(0,0,0,.07);padding:18px 22px;display:flex;flex-direction:column;gap:12px;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.status-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(0,0,0,.22)}
+.status-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.spill{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:7px 12px;border-radius:20px}
+.spill-dot{width:7px;height:7px;border-radius:50%}
+.spill.ok{background:rgba(52,199,89,.1);color:#1a7a35}.spill.ok .spill-dot{background:#34C759}
+.spill.warn{background:rgba(255,149,0,.1);color:#9a5800}.spill.warn .spill-dot{background:#FF9500}
+.status-rows{display:flex;flex-direction:column}
+.status-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.07);font-size:13px}
+.status-row:last-child{border-bottom:none}
+.sr-lbl{font-weight:500;color:rgba(0,0,0,.55)}.sr-val{font-weight:700}
+.card-wide{grid-column:span 3;height:188px;background:rgba(255,255,255,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:var(--r-lg);border:1px solid rgba(255,255,255,.9);padding:22px 24px;display:flex;align-items:center;gap:18px;box-shadow:0 4px 24px rgba(0,0,0,.05);position:relative;overflow:hidden}
+.card-wide::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent)}
+.cw-icon{width:52px;height:52px;border-radius:14px;background:#0a0a0a;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cw-icon svg{width:22px;height:22px;stroke:var(--lime);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cw-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.cw-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(0,0,0,.22)}
+.cw-title{font-size:17px;font-weight:800;letter-spacing:-.3px;color:#0a0a0a}
+.cw-sub{font-size:12.5px;font-weight:500;color:rgba(0,0,0,.38)}
+.cw-input{flex:1;display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.07);border-radius:12px;padding:10px 14px;font-size:13px;color:rgba(0,0,0,.38);cursor:text}
+.cw-input svg{width:15px;height:15px;stroke:rgba(0,0,0,.22);stroke-width:1.8;fill:none;flex-shrink:0;stroke-linecap:round;stroke-linejoin:round}
+.cw-btn{width:36px;height:36px;border-radius:10px;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:opacity .15s}
+.cw-btn:hover{opacity:.8}
+.cw-btn svg{width:15px;height:15px;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.card-activity{background:#fff;border-radius:var(--r-lg);border:1px solid rgba(0,0,0,.07);padding:22px 20px;display:flex;flex-direction:column;gap:14px;grid-row:span 2;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.act-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(0,0,0,.22)}
+.act-list{display:flex;flex-direction:column}
+.bento-act-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(0,0,0,.07);animation:bentoSlideIn .3s ease both}
+.bento-act-row:last-child{border-bottom:none}
+.bento-act-row:nth-child(1){animation-delay:.04s}.bento-act-row:nth-child(2){animation-delay:.08s}
+.bento-act-row:nth-child(3){animation-delay:.12s}.bento-act-row:nth-child(4){animation-delay:.16s}
+.bento-act-row:nth-child(5){animation-delay:.20s}
+@keyframes bentoSlideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.bento-act-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.bento-act-ico svg{width:15px;height:15px;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.bento-act-main{flex:1;min-width:0}
+.bento-act-name{font-size:13px;font-weight:600}
+.bento-act-meta{font-size:11px;color:rgba(0,0,0,.22);font-weight:500;margin-top:1px}
+.bento-act-arr svg{width:13px;height:13px;stroke:rgba(0,0,0,.22);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.card-metric{height:200px;background:#fff;border-radius:var(--r-sm);border:1px solid rgba(0,0,0,.07);padding:20px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 2px 12px rgba(0,0,0,.04);position:relative;overflow:hidden}
+.cm-green{background:linear-gradient(135deg,rgba(52,199,89,.07) 0%,#fff 55%)}
+.cm-lime{background:linear-gradient(135deg,rgba(212,255,0,.1) 0%,#fff 55%)}
+.cm-orange{background:linear-gradient(135deg,rgba(255,149,0,.08) 0%,#fff 55%)}
+.cm-blue{background:linear-gradient(135deg,rgba(0,122,255,.07) 0%,#fff 55%)}
+.cm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(0,0,0,.22)}
+.cm-val{font-size:36px;font-weight:800;letter-spacing:-1.5px;line-height:1}
+.cm-unit{font-size:16px;font-weight:600;color:rgba(0,0,0,.38);margin-left:2px}
+.cm-footer{display:flex;align-items:center;justify-content:space-between}
+.cm-sub{font-size:11.5px;font-weight:500;color:rgba(0,0,0,.38)}
+.btag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:20px}
+.btag-green{background:rgba(52,199,89,.12);color:#1a7a35}
+.btag-orange{background:rgba(255,149,0,.12);color:#9a5800}
+.btag-blue{background:rgba(0,122,255,.12);color:#004dcc}
 
   </style>
 </head>
@@ -1132,240 +1328,167 @@ a{color:inherit;text-decoration:none}
 
     <!-- DASHBOARD -->
     <div class="panel active" id="panel-dashboard">
-      <div class="nd-wrap">
-
-        <!-- Greeting: compact row above YellowCard -->
-        <div class="nd-greet-card">
-          <div class="nd-greet-top">
+      <div class="page-header">
             <div>
-              <div class="nd-gr-sub" style="display:flex;align-items:center;gap:5px">
-                <img src="/favicon.png" style="height:13px;width:auto;opacity:.55" alt="">
-                <span id="gd-greeting-lbl">Bună ziua,</span>
+              <div class="page-greeting">
+                <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 2.5"/></svg>
+                Bună seara, Ștefan
               </div>
-              <div class="nd-hello">Hello, <span id="gd-main-title">there</span></div>
+              <div class="page-title">MulberryFAST</div>
             </div>
-            <div class="nd-greet-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
+            <div class="page-meta">29 Mai 2026 · 19:10</div>
           </div>
-        </div>
-
-        <div class="nd-two-col">
-
-          <!-- LEFT: yellowcard + pills + status -->
-          <div class="nd-col-left">
-
-            <!-- Carousel (mobile swipe / desktop = single card) -->
-            <div class="nd-carousel-wrap">
-              <div class="nd-carousel-track" id="nd-car-track">
-
-                <div class="nd-ycard nd-ycard-yellow" onclick="goPanel('yellowcard')">
-                  <div class="nd-ycard-wm">M</div>
-                  <div class="nd-ycard-top">
-                    <span class="nd-ycard-badge">Yellowcard</span>
-                    <div class="nd-ycard-logo-circle">
-                      <img src="/Mulberry.png" class="nd-ycard-brand-logo" alt="Mulberry" onerror="this.src='/favicon.png';this.style.filter='invert(1)'">
-                    </div>
-                  </div>
-                  <div class="nd-ycard-vin" id="nd-ycard-vin">VIN: —</div>
-                  <div class="nd-ycard-plate" id="nd-ycard-plate">— ——</div>
-                  <div class="nd-ycard-chev">
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="rgba(0,0,0,0.28)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-                  </div>
+      
+          <div class="bento">
+      
+            <!-- ① YELLOWCARD 2col 260px -->
+            <div class="card-yellow span-2">
+              <div class="yc-badge">
+                <div class="yc-badge-dot"></div>
+                Yellowcard · MLBR
+              </div>
+              <div>
+                <div class="yc-plate">B – – – MLB</div>
+                <div class="yc-model">Volkswagen Golf · 2021</div>
+              </div>
+              <div class="yc-footer">
+                <div class="yc-vin">VIN: WA0ZZ8K9DA1</div>
+                <div class="yc-verify">
+                  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                  100% verified
                 </div>
-
-                <div class="nd-ycard nd-ycard-slot" id="nd-trust-card" onclick="goPanel('addvehicle')">
-                  <div class="nd-ycard-slot-inner">
-                    <div class="nd-ycard-slot-ico">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="7" width="14" height="9" rx="2"/>
-                        <path d="M16 10h3l2 2.5V16h-5"/>
-                        <circle cx="6.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/>
-                      </svg>
-                    </div>
-                    <div class="nd-ycard-slot-lbl">Vehicul 2</div>
-                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
-                  </div>
-                  <span id="nd-trust-vin" style="display:none"></span>
-                  <span id="nd-trust-plate" style="display:none"></span>
-                </div>
-
-                <div class="nd-ycard nd-ycard-slot" id="nd-add-card" onclick="goPanel('addvehicle')">
-                  <div class="nd-ycard-slot-inner">
-                    <div class="nd-ycard-slot-ico">
-                      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="rgba(0,0,0,0.22)" stroke-width="2" stroke-linecap="round">
-                        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-                      </svg>
-                    </div>
-                    <div class="nd-ycard-slot-lbl">Vehicul 3</div>
-                    <div class="nd-ycard-slot-sub">Adaugă un vehicul</div>
-                  </div>
-                </div>
-
               </div>
             </div>
-
-            <!-- Dots (mobile only) -->
-            <div class="nd-dots">
-              <div class="nd-dot active" id="nd-dot-0"></div>
-              <div class="nd-dot" id="nd-dot-1"></div>
-              <div class="nd-dot" id="nd-dot-2"></div>
+      
+            <!-- ② ACTION: MulberryGO -->
+            <div class="card-action ca-go" onclick="goPanel('marketplace')">
+              <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#34C759"><path d="M3 10.5L12 3l9 7.5"/><rect x="5" y="10.5" width="14" height="10.5" rx="2"/><rect x="9.5" y="15" width="5" height="6" rx="1.5"/></svg></div>
+              <div><div class="ca-label">Mulberry GO</div><div class="ca-sub">Servicii auto</div></div>
             </div>
-
-            <!-- Status pills (desktop only) -->
-            <div class="nd-pills">
-              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>ITP Valid</div>
-              <div class="nd-pill nd-pill-ok"><div class="nd-pdot"></div>RCA Valid</div>
-              <div class="nd-pill nd-pill-warn"><div class="nd-pdot"></div>Revizie 32 zile</div>
+      
+            <!-- ③ ACTION: MulberryID -->
+            <div class="card-action ca-id" onclick="goPanel('yellowcard')">
+              <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#D4FF00"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg></div>
+              <div><div class="ca-label">Mulberry ID</div><div class="ca-sub">Identitate digitală</div></div>
             </div>
-
-            <!-- Status card -->
-            <div class="nd-status-card">
-              <div class="nd-status-title">STARE VEHICUL</div>
-              <div class="nd-status-row"><span class="nd-status-lbl">ITP</span><span id="nd-itp-val" style="color:#1DB87A;font-weight:600">—</span></div>
-              <div class="nd-status-row"><span class="nd-status-lbl">RCA</span><span id="nd-rca-val" style="color:#1DB87A;font-weight:600">—</span></div>
-              <div class="nd-status-row"><span class="nd-status-lbl">Revizie</span><span id="nd-rev-val" style="color:#F59E0B;font-weight:600">—</span></div>
-            </div>
-
-            <!-- MulberryFamily -->
-            <div class="nd-family-banner" id="nd-family-banner" onclick="showFamilyUpsell()">
-              <div class="nd-family-ico">
-                <svg viewBox="0 0 28 28" width="20" height="20" fill="none">
-                  <circle cx="10" cy="9" r="3.5" stroke="rgba(255,255,255,0.9)" stroke-width="1.6"/>
-                  <path d="M4 22Q4 17 10 17Q16 17 16 22" stroke="rgba(255,255,255,0.9)" stroke-width="1.6" stroke-linecap="round"/>
-                  <circle cx="19" cy="10" r="2.5" stroke="rgba(255,255,255,0.55)" stroke-width="1.4"/>
-                  <path d="M16 22Q16 18.5 19 18.5Q22 18.5 22 22" stroke="rgba(255,255,255,0.55)" stroke-width="1.4" stroke-linecap="round"/>
-                </svg>
+      
+            <!-- ④ STATUS 2col -->
+            <div class="card-status">
+              <div class="status-label">Stare vehicul</div>
+              <div class="status-pills">
+                <div class="spill ok"><div class="spill-dot"></div>ITP Valid</div>
+                <div class="spill ok"><div class="spill-dot"></div>RCA Valid</div>
+                <div class="spill warn"><div class="spill-dot"></div>Revizie 32 zile</div>
               </div>
-              <div style="flex:1">
-                <div class="nd-family-title">MulberryFamily</div>
-                <div class="nd-family-sub">Până la 3 vehicule · 3€/lună</div>
-              </div>
-              <div class="nd-family-btn">Activează</div>
-            </div>
-
-          </div><!-- /col-left -->
-
-          <!-- RIGHT: actions + features -->
-          <div class="nd-col-right">
-
-            <!-- Sort bar -->
-            <div class="nd-sortbar">
-              <div class="nd-sort-item">
-                <svg viewBox="0 0 18 14" width="15" height="13" fill="none"><rect x="0" y="0" width="18" height="2.5" rx="1.25" fill="#999"/><rect x="2" y="5.5" width="14" height="2.5" rx="1.25" fill="#999"/><rect x="4" y="11" width="10" height="2.5" rx="1.25" fill="#999"/></svg>
-                Sort by
-              </div>
-              <div class="nd-sort-item">
-                MulberryFAST
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <div class="status-rows">
+                <div class="status-row"><span class="sr-lbl">ITP</span><span class="sr-val" style="color:var(--green)">—</span></div>
+                <div class="status-row"><span class="sr-lbl">RCA</span><span class="sr-val" style="color:var(--green)">—</span></div>
+                <div class="status-row"><span class="sr-lbl">Revizie</span><span class="sr-val" style="color:var(--orange)">—</span></div>
               </div>
             </div>
-
-            <!-- Icon grid — bold filled icons -->
-            <div class="nd-icons-row">
-              <button class="nd-icon-btn" onclick="goPanel('marketplace')">
-                <div class="nd-icon-circle">
-                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-                    <rect x="2" y="9" width="18" height="13" rx="2.5" fill="rgba(255,255,255,0.9)"/>
-                    <path d="M20 13h5l3 3.5V22h-8V13z" fill="rgba(255,255,255,0.72)"/>
-                    <circle cx="8" cy="24.5" r="3.5" fill="rgba(255,255,255,0.9)"/>
-                    <circle cx="23" cy="24.5" r="3.5" fill="rgba(255,255,255,0.72)"/>
-                  </svg>
+      
+            <!-- ⑤ ACTION: EXO -->
+            <div class="card-action ca-exo">
+              <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#FF9500"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg></div>
+              <div><div class="ca-label">Mulberry EXO</div><div class="ca-sub">Istoric tehnic</div></div>
+            </div>
+      
+            <!-- ⑥ ACTION: Cloud -->
+            <div class="card-action ca-cloud" onclick="goPanel('cloud')">
+              <div class="ca-icon"><svg viewBox="0 0 24 24" style="stroke:#007AFF"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/><path d="M12 12v4M9.5 14.5L12 12l2.5 2.5"/></svg></div>
+              <div><div class="ca-label">Mulberry Cloud</div><div class="ca-sub">Documente</div></div>
+            </div>
+      
+            <!-- ⑦ MULBERRY AI wide 3col glassmorphism -->
+            <div class="card-wide">
+              <div class="cw-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg>
+              </div>
+              <div class="cw-body">
+                <div class="cw-label">MulberryAI</div>
+                <div class="cw-input">
+                  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  Întreabă despre vehicul, ITP, asigurare...
                 </div>
-                <span class="nd-icon-lbl">Mulberry<br>GO</span>
-              </button>
-              <button class="nd-icon-btn" onclick="goPanel('yellowcard')">
-                <div class="nd-icon-circle">
-                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-                    <rect x="4" y="4" width="10" height="10" rx="2" fill="rgba(255,255,255,0.9)"/>
-                    <rect x="18" y="4" width="10" height="10" rx="2" fill="rgba(255,255,255,0.72)"/>
-                    <rect x="4" y="18" width="10" height="10" rx="2" fill="rgba(255,255,255,0.72)"/>
-                    <rect x="18" y="18" width="10" height="10" rx="2" fill="rgba(255,255,255,0.5)"/>
-                  </svg>
-                </div>
-                <span class="nd-icon-lbl">Mulberry<br>ID</span>
-              </button>
-              <button class="nd-icon-btn" onclick="goPanel('analytics')">
-                <div class="nd-icon-circle">
-                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-                    <path d="M16 4C11 4 8 8.5 8 12.5V21L5 24H27L24 21V12.5C24 8.5 21 4 16 4Z" fill="rgba(255,255,255,0.88)"/>
-                    <rect x="13" y="24" width="6" height="3" rx="1.5" fill="rgba(255,255,255,0.6)"/>
-                    <circle cx="23" cy="7" r="4" fill="#E1FF00"/>
-                  </svg>
-                </div>
-                <span class="nd-icon-lbl">Mulberry<br>EXO</span>
-              </button>
-              <button class="nd-icon-btn" onclick="goPanel('cloud')">
-                <div class="nd-icon-circle">
-                  <svg viewBox="0 0 32 32" width="24" height="24" fill="none">
-                    <path d="M11 24Q6 24 6 19Q6 14 11 14Q10 8 17 8Q24 8 23 14Q27 14 27 19Q27 24 23 24Z" fill="rgba(255,255,255,0.88)"/>
-                    <path d="M17 12L17 21M14 15.5L17 12L20 15.5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </div>
-                <span class="nd-icon-lbl">Mulberry<br>Cloud</span>
+              </div>
+              <button class="cw-btn" style="background:var(--black)">
+                <svg viewBox="0 0 24 24" style="stroke:var(--lime)"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none" style="fill:var(--lime);opacity:.7"/></svg>
               </button>
             </div>
-
-            <!-- MulberryAI -->
-            <div class="nd-feat-card" onclick="openGeminiModal()">
-              <div class="nd-feat-ico">
-                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-                  <circle cx="16" cy="16" r="4.5" fill="rgba(255,255,255,0.95)"/>
-                  <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="rgba(255,255,255,0.6)" stroke-width="2.4" stroke-linecap="round"/>
-                  <path d="M7.8 7.8l2.8 2.8M21.4 21.4l2.8 2.8M7.8 24.2l2.8-2.8M21.4 10.6l2.8-2.8" stroke="rgba(255,255,255,0.32)" stroke-width="1.8" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="nd-feat-content">
-                <div class="nd-feat-title">MulberryAI</div>
-                <div class="nd-feat-search" id="nd-ai-hint">Întreabă orice...</div>
+      
+            <!-- ⑧ ACTIVITY 1col × 2 rows cu animatie staggered -->
+            <div class="card-activity row-2">
+              <div class="act-title">Activitate recentă</div>
+              <div class="act-list">
+                <div class="nd-act-row">
+                  <div class="nd-act-ic" style="background:rgba(52,199,89,.1)"><svg viewBox="0 0 24 24" stroke="#34C759"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div>
+                  <div class="nd-act-main"><div class="nd-act-name">Schimb ulei programat</div><div class="nd-act-sub">Ieri · MulberryGO</div></div>
+                  <div class="nd-act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </div>
+                <div class="nd-act-row">
+                  <div class="nd-act-ic" style="background:rgba(0,122,255,.1)"><svg viewBox="0 0 24 24" stroke="#007AFF"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                  <div class="nd-act-main"><div class="nd-act-name">RCA reînnoit</div><div class="nd-act-sub">Acum 3 zile · YellowCard</div></div>
+                  <div class="nd-act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </div>
+                <div class="nd-act-row">
+                  <div class="nd-act-ic" style="background:rgba(212,255,0,.12)"><svg viewBox="0 0 24 24" stroke="#7a9200"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+                  <div class="nd-act-main"><div class="nd-act-name">ITP verificat</div><div class="nd-act-sub">Săptămâna trecută</div></div>
+                  <div class="nd-act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </div>
+                <div class="nd-act-row">
+                  <div class="nd-act-ic" style="background:rgba(255,149,0,.1)"><svg viewBox="0 0 24 24" stroke="#FF9500"><path d="M16.5 16H8a4.5 4.5 0 010-9 5 5 0 019.5 1H18a3.5 3.5 0 010 7h-1.5z"/></svg></div>
+                  <div class="nd-act-main"><div class="nd-act-name">Document Cloud</div><div class="nd-act-sub">Acum 2 săpt.</div></div>
+                  <div class="nd-act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </div>
+                <div class="nd-act-row">
+                  <div class="nd-act-ic" style="background:rgba(0,0,0,.05)"><svg viewBox="0 0 24 24" stroke="rgba(0,0,0,.35)"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+                  <div class="nd-act-main"><div class="nd-act-name">Profil actualizat</div><div class="nd-act-sub">Acum 3 săpt.</div></div>
+                  <div class="nd-act-arr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+                </div>
               </div>
             </div>
-
-            <!-- MulberryHUB -->
-            <div class="nd-feat-card" onclick="goPanel('hub')">
-              <div class="nd-feat-ico">
-                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-                  <rect x="8" y="5" width="16" height="22" rx="2.5" fill="rgba(255,255,255,0.72)"/>
-                  <line x1="12" y1="12" x2="20" y2="12" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="12" y1="17" x2="20" y2="17" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
-                  <line x1="12" y1="22" x2="16" y2="22" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
-                </svg>
+      
+            <!-- ⑨ MULBERRYHUB wide 3col glassmorphism -->
+            <div class="card-wide">
+              <div class="cw-icon" style="background:#1c1c1c">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
               </div>
-              <div class="nd-feat-content">
-                <div class="nd-feat-title">MulberryHUB</div>
-                <div class="nd-feat-sub" id="nd-hub-sub">History · PDF</div>
+              <div class="cw-body">
+                <div class="cw-label">MulberryHUB</div>
+                <div class="cw-title">History · PDF</div>
+                <div class="cw-sub">Documente tehnice, rapoarte, istoric intervenții</div>
               </div>
+              <button class="cw-btn" style="background:#f0f0ee; border:1px solid rgba(0,0,0,.08)">
+                <svg viewBox="0 0 24 24" style="stroke:#0a0a0a"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
             </div>
-
-            <!-- Activity (desktop only) -->
-            <div class="nd-activity-card">
-              <div class="nd-act-title">ACTIVITATE RECENTĂ</div>
-              <div class="nd-act-row">
-                <div class="nd-act-ic">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-                </div>
-                <div style="flex:1"><div class="nd-act-name">Schimb ulei programat</div><div class="nd-act-sub">Ieri · MulberryGO</div></div>
-                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              </div>
-              <div class="nd-act-row">
-                <div class="nd-act-ic">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                </div>
-                <div style="flex:1"><div class="nd-act-name">RCA reînnoit</div><div class="nd-act-sub">Acum 3 zile · YellowCard</div></div>
-                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              </div>
-              <div class="nd-act-row">
-                <div class="nd-act-ic">
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <div style="flex:1"><div class="nd-act-name">ITP verificat</div><div class="nd-act-sub">Săptămâna trecută</div></div>
-                <svg class="nd-act-arr" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-              </div>
+      
+            <!-- ⑩ SMALL DATA CARDS 4×1col — soft gradients -->
+            <div class="card-metric cm-green">
+              <div class="cm-label">SoftScore</div>
+              <div class="cm-val">76<span class="cm-unit">%</span></div>
+              <div class="cm-footer"><div class="cm-sub">Vehicul în stare bună</div><span class="btag btag-green">+4</span></div>
             </div>
-
-          </div><!-- /col-right -->
-
-        </div><!-- /two-col -->
-
-      </div>
+      
+            <div class="card-metric cm-lime">
+              <div class="cm-label">ITP</div>
+              <div class="cm-val" style="font-size:22px;letter-spacing:-.3px">Nov 2026</div>
+              <div class="cm-footer"><div class="cm-sub">Valabil 6 luni</div><span class="btag btag-green">OK</span></div>
+            </div>
+      
+            <div class="card-metric cm-orange">
+              <div class="cm-label">Revizie</div>
+              <div class="cm-val">32<span class="cm-unit">zile</span></div>
+              <div class="cm-footer"><div class="cm-sub">15 Iunie 2026</div><span class="btag btag-orange">Curând</span></div>
+            </div>
+      
+            <div class="card-metric cm-blue">
+              <div class="cm-label">Kilometri</div>
+              <div class="cm-val">42<span class="cm-unit">k</span></div>
+              <div class="cm-footer"><div class="cm-sub">+4k față de luna trecută</div><span class="btag btag-blue">+4k</span></div>
+            </div>
+      
+          </div><!-- /bento -->
 
     </div>
 
