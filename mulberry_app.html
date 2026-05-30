@@ -63,7 +63,7 @@ a{color:inherit;text-decoration:none}
 .al-back-btn:hover{background:rgba(255,255,255,.18);color:#fff}
 .al-back-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:2.2;fill:none;flex-shrink:0}
 .al-logo{display:flex;align-items:center;gap:11px;margin-bottom:auto}
-.al-wordmark{height:40px;width:auto;display:block}
+.al-wordmark{height:56px;width:auto;display:block}
 .al-wordmark{height:36px;width:auto;display:block}
 .sb-wordmark{height:28px;width:auto;display:block}
 .al-logo-center{flex:1;display:flex;align-items:center;justify-content:center}
@@ -897,7 +897,6 @@ a{color:inherit;text-decoration:none}
 
     <!-- Hero -->
     <div class="al-hero">
-      <div class="al-tag"><div class="al-tag-dot"></div>Platform auto digital</div>
       <h1 class="al-h1">Radical clarity.<br><em>Absolute certainty.</em></h1>
       <p class="al-sub">We eliminate the friction of automotive maintenance by providing drivers and partners with a clean, intuitive, and guaranteed digital experience.</p>
     </div>
@@ -924,15 +923,17 @@ a{color:inherit;text-decoration:none}
   <div class="auth-right">
     <div class="auth-form-panel">
 
-      <!-- Back button -->
-      <button class="al-back-btn" onclick="history.back()" style="margin-bottom:24px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Înapoi
-      </button>
+      <!-- Back button — dreapta -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:24px">
+        <button class="al-back-btn" onclick="history.back()">
+          Înapoi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
 
       <!-- Brand logo — versiunea hero (galben pe negru) -->
       <div class="af-brand-logo">
-        <img src="/mulberry-logo.png" alt="Mulberry" style="height:36px;width:auto;display:block">
+        <img src="/mulberry-logo.png" alt="Mulberry" style="height:46px;width:auto;display:block">
       </div>
 
       <!-- Step indicator -->
