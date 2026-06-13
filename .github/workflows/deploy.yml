@@ -8,7 +8,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Copy frontend files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 46.225.100.151
+          username: stefan
+          key: ${{ secrets.HETZNER_SSH_KEY }}
+          port: 443
+          # fisierele frontend din root + assets + js/
+          source: "*.html,*.png,*.svg,*.jpg,*.ico,js/**"
+          target: "/home/stefan/mulberry/frontend/"
+          overwrite: true
+
+      - name: Run server deploy script
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 46.225.100.151
