@@ -3065,3 +3065,93 @@ a.apple-row.mulberry-lib-row--profile {
 .mlb-link-dark:active {
   transform: scale(0.99);
 }
+
+/* ── Mulberry full-screen sync loader (login / profil) ── */
+#loader-wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.45s ease;
+}
+#loader-wrapper.hidden {
+  display: none;
+  pointer-events: none;
+}
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+  padding: 24px;
+}
+.mulberry-loader-rings {
+  position: relative;
+  width: 104px;
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mulberry-ring-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(204, 255, 0, 0.12);
+  border-top-color: var(--neon, #ccff00);
+  border-right-color: rgba(204, 255, 0, 0.38);
+  animation: mulberryRingSpin 1.15s linear infinite;
+}
+.mulberry-circle {
+  width: 76px;
+  height: 76px;
+  border: 3px solid var(--neon, #ccff00);
+  border-radius: 50%;
+  box-shadow: 0 0 32px rgba(204, 255, 0, 0.22);
+  animation: mulberryPulse 1.5s infinite ease-in-out;
+}
+@keyframes mulberryRingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes mulberryPulse {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.55;
+    filter: blur(1.5px);
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(0.82);
+    opacity: 0.55;
+    filter: blur(1.5px);
+  }
+}
+.mulberry-loader-caption {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 280px;
+  line-height: 1.45;
+}
+@media (prefers-reduced-motion: reduce) {
+  .mulberry-ring-outer,
+  .mulberry-circle {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

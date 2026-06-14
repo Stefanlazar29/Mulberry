@@ -587,26 +587,16 @@ nav {
 }
 
 /* ── PARTNERS CTA ────────────────────────────────── */
-.partners {
-  background: url('/partners-bg.jpg') center/cover no-repeat;
-  padding: 80px 32px;
-  position: relative;
-}
-.partners::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,.45);
-  pointer-events: none;
-}
-.partners-inner { max-width: var(--max); margin: 0 auto; position: relative; z-index: 1; }
+.partners { background: var(--gray); padding: 80px 32px; }
+.partners-inner { max-width: var(--max); margin: 0 auto; }
 .partners-card {
-  background: rgba(255,255,255,.10); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255,255,255,.18); border-radius: 16px;
+  background: rgba(255,255,255,.75); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,.88); border-radius: 16px;
   padding: 48px 52px; display: flex; align-items: center; justify-content: space-between; gap: 40px;
-  box-shadow: 0 8px 40px rgba(0,0,0,.3);
+  box-shadow: 0 8px 40px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.9);
 }
-.pc-ttl { font-family: var(--font-head); font-size: 20px; font-weight: 700; letter-spacing: -.2px; margin-bottom: 8px; color: #fff; }
-.pc-sub { font-size: 14px; font-weight: 400; color: rgba(255,255,255,.72); max-width: 440px; line-height: 1.6; }
+.pc-ttl { font-family: var(--font-head); font-size: 20px; font-weight: 700; letter-spacing: -.2px; margin-bottom: 8px; }
+.pc-sub { font-size: 14px; font-weight: 400; color: var(--muted); max-width: 440px; line-height: 1.6; }
 
 /* ── FOOTER ──────────────────────────────────────── */
 footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; }
@@ -678,7 +668,7 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
     <div class="nav-links">
       <a href="#" data-i18n="nav_about">About</a>
       <a href="#" data-i18n="nav_marketplace">Marketplace</a>
-      <a href="/mulberry_partners.html" data-i18n="nav_partners">Partners</a>
+      <a href="#" data-i18n="nav_partners">Partners</a>
     </div>
     <div class="nav-actions">
       <button class="nav-biz-btn" id="biz-toggle" aria-expanded="false">
@@ -691,7 +681,7 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
         <button class="nav-lang-btn" data-lang="ro">RO</button>
       </div>
       <a class="nav-signin" href="/mulberry_app.html" data-i18n="nav_login">Log in</a>
-      <a class="nav-signup" href="/mulberry_partners.html">Partners →</a>
+      <a class="nav-signup" href="/mulberry_app.html" data-i18n="nav_cta">Get started →</a>
     </div>
   </div>
 </nav>
@@ -1040,7 +1030,7 @@ footer { background: var(--navy); color: var(--white); padding: 64px 32px 40px; 
         <div class="pc-ttl">Are you an insurer or workshop?</div>
         <p class="pc-sub">Your clients are already on Mulberry. Connect to verified drivers and let accurate data do the selling — no cold calls, no paperwork.</p>
       </div>
-      <a class="btn-yellow" href="/mulberry_partners.html" style="flex-shrink:0">Become a partner →</a>
+      <a class="btn-navy" href="/mulberry_app.html" style="flex-shrink:0">Become a partner →</a>
     </div>
   </div>
 </section>
