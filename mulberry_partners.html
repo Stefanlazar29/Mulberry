@@ -687,6 +687,7 @@ function se(errId,inId){document.getElementById(errId).classList.add('show');doc
 function he(errId,inId){document.getElementById(errId).classList.remove('show');document.getElementById(inId).classList.remove('err')}
 
 if(new URLSearchParams(window.location.search).get('signup')==='service') openModal('signup');
+if(new URLSearchParams(window.location.search).get('login')==='1') openModal('login');
 </script>
 </body>
 </html>

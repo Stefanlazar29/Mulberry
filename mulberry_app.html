@@ -1018,25 +1018,7 @@ a{color:inherit;text-decoration:none}
   overflow-y:auto!important;overflow-x:hidden!important
 }
 .mf-wrap{min-height:100%;padding-bottom:calc(var(--bh,72px) + 20px)}
-.mf-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px;gap:8px}
-.mf-tbl{display:flex;align-items:center;gap:7px;flex-shrink:0}
-.mf-toggle{display:flex;align-items:center;background:rgba(255,255,255,.9);border-radius:100px;padding:3px;gap:2px;border:.5px solid rgba(0,0,0,.08)}
-.mf-tog{width:27px;height:20px;border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;color:#666;transition:background .15s,color .15s}
-.mf-tog.on{background:#111;color:#E1FF00}
-.mf-set-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#333;cursor:pointer}
-.mf-notif{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#222;flex:1;min-width:0;max-width:260px;overflow:hidden}
-.mf-ntxt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
-.mf-ndot{width:6px;height:6px;border-radius:50%;background:#ff4444;flex-shrink:0}
-.mf-ntime{color:#999;font-size:10px;flex-shrink:0;white-space:nowrap}
-.mf-nclose{color:#aaa;font-size:13px;cursor:pointer;flex-shrink:0;line-height:1}
-.mf-tbr{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.mf-navpills{display:flex;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:3px;gap:2px}
-.mf-np{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:500;color:#555;cursor:pointer;white-space:nowrap}
-.mf-np.on{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-.mf-srch{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#444;flex-shrink:0}
-.mf-avatar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);font-size:12px;font-weight:700;color:#333;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;overflow:hidden}
-.mf-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.mf-greet{padding:2px 18px 10px;font-size:12px;color:rgba(0,0,0,.5);font-weight:500;display:flex;align-items:baseline;gap:5px}
+.mf-greet{padding:18px 18px 10px;font-size:12px;color:rgba(0,0,0,.5);font-weight:500;display:flex;align-items:baseline;gap:5px}
 .mf-greet-name{font-size:19px;font-weight:700;color:#111;letter-spacing:-.3px}
 .mf-grid{padding:0 16px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .mf-card{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:14px;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 12px rgba(0,0,0,.06),0 0 0 .5px rgba(0,0,0,.04);-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
@@ -1070,9 +1052,7 @@ a{color:inherit;text-decoration:none}
 @media(min-width:769px){
   #panel-dashboard.active{overflow-y:auto!important;height:100%!important;display:block!important}
   .mf-grid{grid-template-columns:repeat(3,1fr);gap:14px;padding:0 22px}
-  .mf-topbar{padding:18px 24px 12px}
-  .mf-greet{padding:2px 24px 12px}
-  .mf-notif{max-width:340px}
+  .mf-greet{padding:24px 24px 12px}
   .mf-wrap{padding-bottom:28px}
 }
 
@@ -1119,8 +1099,8 @@ a{color:inherit;text-decoration:none}
       <div class="al-landing-title">Bine ai venit la Mulberry</div>
       <div class="al-landing-copy">Digitalizează-ți vehiculul, urmărește starea asigurării și accesează toate serviciile Mulberry dintr-un singur loc.</div>
       <div class="al-landing-actions">
-        <button class="btn-primary" onclick="showAuth()">Intră în cont</button>
-        <button class="btn-ghost" onclick="openSignup()">Cont nou</button>
+        <button class="btn-primary" onclick="showLoginScreen()">Intră în cont</button>
+        <button class="btn-ghost" onclick="showAuth()">Cont nou</button>
       </div>
       <div class="al-landing-foot">Dacă ai deja cont, apasă „Intră în cont” pentru a continua cu email.</div>
     </div>
@@ -1147,17 +1127,35 @@ a{color:inherit;text-decoration:none}
         <div class="af-dot" id="af-dot-3"></div>
       </div>
 
-      <!-- STEP 1: Vehicul -->
+      <!-- STEP 1: Email -->
       <div class="af-step active" id="af-step-1">
-        <div class="af-title">Vehiculul tău</div>
-        <div class="af-sub">Număr de înmatriculare și model</div>
+        <div class="af-title">Hai să te cunoaștem</div>
+        <div class="af-sub">Adresa ta de email</div>
         <div id="af-alert-1" class="af-alert error"></div>
+        <div class="field"><label>Email</label><input type="email" id="af-email" placeholder="email@exemplu.com" autocomplete="email"></div>
+        <button class="btn-primary" id="af-step1-btn" onclick="afEmailNext()" style="margin-top:14px">Continuă →</button>
+      </div>
+
+      <!-- STEP 2: Plate -->
+      <div class="af-step" id="af-step-2">
+        <div class="af-title">Vehiculul tău</div>
+        <div class="af-sub">Număr de înmatriculare</div>
+        <div id="af-alert-2" class="af-alert error"></div>
         <div class="field">
           <label>Număr înmatriculare</label>
           <input type="text" id="af-plate" placeholder="ex: B 123 ABC"
             style="text-transform:uppercase;font-family:var(--mono);letter-spacing:1px"
             oninput="this.value=this.value.toUpperCase()">
         </div>
+        <button class="btn-primary" onclick="afPlateNext()" style="margin-top:14px">Continuă →</button>
+        <button class="btn-ghost" style="margin-top:0" onclick="afGoToStep(1)">← Înapoi</button>
+      </div>
+
+      <!-- STEP 3: Model + An -->
+      <div class="af-step" id="af-step-3">
+        <div class="af-title">Modelul vehiculului</div>
+        <div class="af-sub">Ultimul pas — model și an fabricație</div>
+        <div id="af-alert-3" class="af-alert error"></div>
         <div style="display:grid;grid-template-columns:1fr 90px;gap:10px">
           <div class="field" style="margin-bottom:0">
             <label>Model vehicul</label>
@@ -1168,37 +1166,58 @@ a{color:inherit;text-decoration:none}
             <input type="text" id="af-year" placeholder="19__ / 20__" maxlength="4" inputmode="numeric">
           </div>
         </div>
-        <button class="btn-primary" onclick="afStep1Next()" style="margin-top:14px">Continuă →</button>
+        <button class="btn-primary" onclick="afRegisterFinish()" style="margin-top:14px">Creează cont →</button>
+        <button class="btn-ghost" style="margin-top:0" onclick="afGoToStep(2)">← Înapoi</button>
       </div>
 
-      <!-- STEP 2: Date personale -->
-      <div class="af-step" id="af-step-2">
-        <div class="af-title">Datele tale</div>
-        <div class="af-sub">Nume, prenume și email</div>
-        <div id="af-alert-2" class="af-alert error"></div>
-        <div class="field"><label>Prenume</label><input type="text" id="af-fname" placeholder="Stefan" autocomplete="given-name"></div>
-        <div class="field"><label>Nume</label><input type="text" id="af-lname" placeholder="Lazar" autocomplete="family-name"></div>
-        <div class="field"><label>Email</label><input type="email" id="af-email" placeholder="email@exemplu.com" autocomplete="email"></div>
-        <button class="btn-primary" onclick="afStep2Next()">Trimite cod →</button>
-        <button class="btn-ghost" style="margin-top:0" onclick="afGoToStep(1)">← Înapoi</button>
+    </div>
+
+    <div class="auth-form-panel hidden" id="auth-login-panel">
+
+      <!-- Back button — dreapta -->
+      <div style="display:flex;justify-content:flex-end;margin-bottom:24px">
+        <button class="al-back-btn" onclick="showLanding()">
+          Înapoi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
 
-      <!-- STEP 3: OTP -->
-      <div class="af-step" id="af-step-3">
+      <div class="af-brand-logo" style="display:flex;align-items:center;justify-content:center;">
+        <img src="/mulberry-brand.png" alt="Mulberry" style="height:48px;width:auto;display:block">
+      </div>
+
+      <div class="af-step-indicator">
+        <div class="af-dot active" id="al-dot-1"></div>
+        <div class="af-dot" id="al-dot-2"></div>
+      </div>
+
+      <!-- LOGIN STEP 1: Email + Parolă -->
+      <div class="af-step active" id="al-step-1">
+        <div class="af-title">Bun venit înapoi</div>
+        <div class="af-sub">Intră în contul tău Mulberry</div>
+        <div id="al-alert-1" class="af-alert error"></div>
+        <div class="field"><label>Email</label><input type="email" id="al-email" placeholder="email@exemplu.com" autocomplete="email"></div>
+        <div class="field"><label>Parolă</label><input type="password" id="al-pass" placeholder="Parola ta" autocomplete="current-password"></div>
+        <button class="btn-primary" onclick="alStep1Next()" style="margin-top:14px">Continuă →</button>
+        <button class="btn-ghost" style="margin-top:0" onclick="showAuth()">Nu ai cont? Înregistrează-te</button>
+      </div>
+
+      <!-- LOGIN STEP 2: OTP -->
+      <div class="af-step" id="al-step-2">
         <div class="af-title">Verifică emailul</div>
-        <div class="af-sub">Cod de 6 cifre la <strong id="af-email-display"></strong></div>
-        <div id="af-alert-3" class="af-alert error"></div>
+        <div class="af-sub">Cod de 6 cifre la <strong id="al-email-display"></strong></div>
+        <div id="al-alert-2" class="af-alert error"></div>
         <div class="otp-inputs">
-          <input type="text" class="otp-digit" maxlength="1" id="af-otp-0" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" id="af-otp-1" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" id="af-otp-2" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" id="af-otp-3" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" id="af-otp-4" inputmode="numeric">
-          <input type="text" class="otp-digit" maxlength="1" id="af-otp-5" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="al-otp-0" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="al-otp-1" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="al-otp-2" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="al-otp-3" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="al-otp-4" inputmode="numeric">
+          <input type="text" class="otp-digit" maxlength="1" id="al-otp-5" inputmode="numeric">
         </div>
-        <button class="btn-primary" onclick="afVerifyOTP()">Verifică codul →</button>
-        <div class="af-resend">Nu ai primit codul? <button class="af-resend-btn" id="af-resend-btn" onclick="afResendOTP()">Retrimite</button><span id="af-resend-timer"></span></div>
-        <div style="margin-top:1rem"><button class="btn-ghost" onclick="afGoToStep(2)">← Înapoi</button></div>
+        <button class="btn-primary" onclick="alVerifyOTP()">Verifică codul →</button>
+        <div class="af-resend">Nu ai primit codul? <button class="af-resend-btn" id="al-resend-btn" onclick="alResendOTP()">Retrimite</button><span id="al-resend-timer"></span></div>
+        <div style="margin-top:1rem"><button class="btn-ghost" onclick="alGoToStep(1)">← Înapoi</button></div>
       </div>
 
     </div>
@@ -1316,39 +1335,6 @@ a{color:inherit;text-decoration:none}
 
       <div class="mf-wrap">
 
-        <!-- topbar -->
-        <div class="mf-topbar">
-          <div class="mf-tbl">
-            <div class="mf-toggle">
-              <div class="mf-tog on">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-              </div>
-              <div class="mf-tog">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-              </div>
-            </div>
-            <div class="mf-set-pill" onclick="goPanel('settings')">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>
-              Settings
-            </div>
-          </div>
-          <div class="mf-notif">
-            <div class="mf-ndot"></div>
-            <span class="mf-ntxt">EXO — revizie ulei scadentă</span>
-            <span class="mf-ntime">−2.400 km</span>
-            <span class="mf-nclose" onclick="this.parentElement.style.display='none'">×</span>
-          </div>
-          <div class="mf-tbr">
-            <div class="mf-navpills">
-              <div class="mf-np on">MulberryFAST</div>
-            </div>
-            <div class="mf-srch">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            </div>
-            <div class="mf-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
-          </div>
-        </div>
-
         <!-- greeting -->
         <div class="mf-greet">
           <span id="gd-greeting-lbl">Bună ziua,</span>
@@ -1383,7 +1369,7 @@ a{color:inherit;text-decoration:none}
               </div>
             </div>
             <div class="mf-cbot">
-              <div class="mf-csub">BMW M3 · G80 · 2022</div>
+              <div class="mf-csub" id="nd-ycard-model">BMW M3 · G80 · 2022</div>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" opacity=".3"><polyline points="6 9 12 15 18 9"/></svg>
             </div>
           </div>
@@ -1470,21 +1456,24 @@ a{color:inherit;text-decoration:none}
             </div>
           </div>
 
-          <!-- MULBERRY ID -->
-          <div class="mf-card" onclick="goPanel('yellowcard')">
+          <!-- MULBERRY TRUST -->
+          <div class="mf-card" onclick="goPanel('trust')">
             <div class="mf-ctop">
               <div style="display:flex;align-items:center;gap:8px">
-                <div class="mf-ico" style="background:#78350f">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fcd34d" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+                <div class="mf-ico" style="background:#3b0764">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                 </div>
-                <div class="mf-tag">MulberryID</div>
+                <div class="mf-tag">MulberryTrust</div>
               </div>
-              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <div style="width:5px;height:5px;border-radius:50%;background:#a78bfa"></div>
+                <span style="font-size:10px;color:#999;font-weight:600">Feed</span>
+              </div>
             </div>
-            <div class="mf-cname">YCR Identity</div>
-            <div class="mf-csub">HMAC-SHA256 · QR semnat</div>
+            <div class="mf-cname">Comunitate auto</div>
+            <div class="mf-csub">Experts · Sfaturi · Oferte</div>
             <div class="mf-cbot">
-              <div class="mf-badge mf-info"><span class="mf-bdot"></span>ID verificat</div>
+              <div class="mf-badge" style="background:rgba(124,58,237,.09);color:#7c3aed;border-color:rgba(124,58,237,.15)"><span class="mf-bdot"></span>Trust</div>
             </div>
           </div>
 
@@ -1819,6 +1808,35 @@ a{color:inherit;text-decoration:none}
       </div>
     </div>
 
+    <!-- TRUST -->
+    <div class="panel" id="panel-trust">
+      <div class="ph">
+        <div class="ph-eyebrow">Comunitate</div>
+        <div class="ph-title">MulberryTrust</div>
+        <div class="ph-sub">Experți verificați, sfaturi reale și oferte exclusive de la service-uri partenere.</div>
+      </div>
+      <div class="mkt-grid">
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="oc-name">Experți verificați</div>
+          <div class="oc-desc">Mecanici și consultanți auto validați de comunitatea Mulberry — răspund la întrebări reale.</div>
+          <div class="oc-footer"><span class="oc-badge">Verificat</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg></div>
+          <div class="oc-name">Sfaturi din comunitate</div>
+          <div class="oc-desc">Recomandări de mentenanță și experiențe reale de la alți șoferi Mulberry.</div>
+          <div class="oc-footer"><span class="oc-badge">Nou</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg></div>
+          <div class="oc-name">Oferte exclusive</div>
+          <div class="oc-desc">Reduceri de la service-uri partenere, disponibile doar pentru utilizatorii Mulberry.</div>
+          <div class="oc-footer"><span class="oc-badge">Beta</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+      </div>
+    </div>
+
     <!-- SETTINGS -->
     <div class="panel" id="panel-settings">
       <div class="ph">
@@ -2110,9 +2128,6 @@ const sb = supabase.createClient(SB_URL, SB_ANON);
 // Curăță URL-ul după OAuth redirect — nu mai face signOut preventiv (distrugea sesiunile OTP)
 
 
-let afCurrentEmail = '';
-let afResendInterval = null;
-
 function afGoToStep(n) {
   document.querySelectorAll('.af-step').forEach(s => s.classList.remove('active'));
   document.getElementById(`af-step-${n}`).classList.add('active');
@@ -2128,51 +2143,62 @@ function afSwitchTab(btn) {
   btn.classList.add('active');
 }
 
-async function afStep1Next() {
-  const plate = (document.getElementById('af-plate').value || '').trim();
-  const model = (document.getElementById('af-model').value || '').trim();
-  const year  = (document.getElementById('af-year').value || '').trim();
-  if (!plate || plate.length < 4) return afShowAlert('af-alert-1', 'Introdu un număr de înmatriculare valid.');
-  if (!model || model.length < 2) return afShowAlert('af-alert-1', 'Introdu modelul vehiculului.');
-  if (!year || !/^(19|20)\d{2}$/.test(year)) return afShowAlert('af-alert-1', 'Anul trebuie să fie exact 4 cifre și să înceapă cu 19 sau 20 (ex: 2019).');
-  const btn = document.querySelector('#af-step-1 .btn-primary');
+let afRegEmail = '';
+
+async function afEmailNext() {
+  const email = (document.getElementById('af-email').value || '').trim();
+  if (!email || !/\S+@\S+\.\S+/.test(email)) return afShowAlert('af-alert-1', 'Introdu un email valid.');
+
+  const btn = document.getElementById('af-step1-btn');
   if (btn) { btn.disabled = true; btn.textContent = 'Se verifică...'; }
-  try {
-    const r = await fetch(API + '/cars/check-plate?plate=' + encodeURIComponent(plate));
-    const d = await r.json();
-    if (!d.available) {
-      afShowAlert('af-alert-1', 'Numărul de înmatriculare ' + plate + ' este deja înregistrat în Mulberry.');
-      return;
-    }
-  } catch(e) {
-    // dacă API-ul nu răspunde, continuăm — verificarea se face și la /cars/sync
-  } finally {
-    if (btn) { btn.disabled = false; btn.textContent = 'Continuă →'; }
+  // Existing-account probe: Supabase nu creează un user nou (shouldCreateUser:false) —
+  // dacă NU dă eroare, emailul are deja cont și recomandăm login în loc de înregistrare.
+  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
+  if (btn) { btn.disabled = false; btn.textContent = 'Continuă →'; }
+
+  if (!error) {
+    const el = document.getElementById('af-alert-1');
+    el.innerHTML = 'Acest email are deja un cont Mulberry. <a onclick="showLoginScreen()" style="color:inherit;text-decoration:underline;cursor:pointer;font-weight:600">Intră în cont</a>';
+    el.classList.add('active');
+    return;
   }
+
+  afRegEmail = email;
   afGoToStep(2);
 }
 
-async function afStep2Next() {
-  const fname = (document.getElementById('af-fname').value || '').trim();
-  const lname = (document.getElementById('af-lname').value || '').trim();
-  const email = (document.getElementById('af-email').value || '').trim();
-  if (!fname) return afShowAlert('af-alert-2', 'Introdu prenumele.');
-  if (!lname) return afShowAlert('af-alert-2', 'Introdu numele.');
-  if (!email || !email.includes('@')) return afShowAlert('af-alert-2', 'Email invalid.');
-  afCurrentEmail = email;
-  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: true } });
-  if (error) return afShowAlert('af-alert-2', 'Eroare: ' + error.message);
-  document.getElementById('af-email-display').textContent = email;
+function afPlateNext() {
+  const plate = (document.getElementById('af-plate').value || '').trim().toUpperCase();
+  if (!plate || plate.length < 4) return afShowAlert('af-alert-2', 'Introdu un număr de înmatriculare valid.');
+  document.getElementById('af-plate').value = plate;
   afGoToStep(3);
-  afSetupOTP();
-  afStartResendTimer();
+}
+
+function afRegisterFinish() {
+  const plate = (document.getElementById('af-plate').value || '').trim().toUpperCase();
+  const model = (document.getElementById('af-model').value || '').trim();
+  const year  = (document.getElementById('af-year').value || '').trim();
+  if (!model || model.length < 2) return afShowAlert('af-alert-3', 'Introdu modelul vehiculului.');
+  if (!year || !/^(19|20)\d{2}$/.test(year)) return afShowAlert('af-alert-3', 'Anul trebuie să fie exact 4 cifre și să înceapă cu 19 sau 20 (ex: 2019).');
+
+  try { localStorage.setItem('mlbr_vehicle', JSON.stringify({ plate, model, year })); } catch(e) {}
+  saveSession({ email: afRegEmail, name: null, avatar: null });
+
+  const plEl = document.getElementById('nd-ycard-plate'); if (plEl) plEl.textContent = plate;
+  const moEl = document.getElementById('nd-ycard-model'); if (moEl) moEl.textContent = model + (year ? ' · ' + year : '');
+
+  toast('Cont creat!', '');
+  enterApp();
 }
 
 function showAuth() {
   document.getElementById('auth-landing-card')?.classList.add('hidden');
+  document.getElementById('auth-login-panel')?.classList.add('hidden');
   document.getElementById('auth-form-panel')?.classList.remove('hidden');
   afGoToStep(1);
-  document.getElementById('af-plate')?.focus();
+  const al1 = document.getElementById('af-alert-1');
+  if (al1) { al1.classList.remove('active'); al1.innerHTML = ''; }
+  document.getElementById('af-email')?.focus();
 }
 
 function openSignup() {
@@ -2181,13 +2207,104 @@ function openSignup() {
 
 function showLanding() {
   document.getElementById('auth-form-panel')?.classList.add('hidden');
+  document.getElementById('auth-login-panel')?.classList.add('hidden');
   document.getElementById('auth-landing-card')?.classList.remove('hidden');
   afGoToStep(1);
+  alGoToStep(1);
   const firstTab = document.querySelector('.af-tab');
   if (firstTab) {
     document.querySelectorAll('.af-tab').forEach(b => b.classList.remove('active'));
     firstTab.classList.add('active');
   }
+}
+
+/* ── LOGIN (email + parolă + OTP) ───────────────────── */
+let alCurrentEmail = '';
+let alResendInterval = null;
+
+function showLoginScreen() {
+  document.getElementById('auth-landing-card')?.classList.add('hidden');
+  document.getElementById('auth-form-panel')?.classList.add('hidden');
+  document.getElementById('auth-login-panel')?.classList.remove('hidden');
+  alGoToStep(1);
+  document.getElementById('al-email')?.focus();
+}
+
+function alGoToStep(n) {
+  document.querySelectorAll('#auth-login-panel .af-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`al-step-${n}`).classList.add('active');
+  document.querySelectorAll('#auth-login-panel .af-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i + 1 < n) d.classList.add('done');
+    else if (i + 1 === n) d.classList.add('active');
+  });
+}
+
+async function alStep1Next() {
+  const email = (document.getElementById('al-email').value || '').trim();
+  const pass  = document.getElementById('al-pass').value;
+  if (!email || !email.includes('@')) return afShowAlert('al-alert-1', 'Email invalid.');
+  if (!pass) return afShowAlert('al-alert-1', 'Introdu parola.');
+  const btn = document.querySelector('#al-step-1 .btn-primary');
+  if (btn) { btn.disabled = true; btn.textContent = 'Se verifică...'; }
+  const { error: passError } = await sb.auth.signInWithPassword({ email, password: pass });
+  if (passError) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Continuă →'; }
+    return afShowAlert('al-alert-1', 'Email sau parolă incorectă.');
+  }
+  alCurrentEmail = email;
+  const { error: otpError } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
+  if (btn) { btn.disabled = false; btn.textContent = 'Continuă →'; }
+  if (otpError) return afShowAlert('al-alert-1', 'Eroare la trimiterea codului: ' + otpError.message);
+  document.getElementById('al-email-display').textContent = email;
+  alGoToStep(2);
+  alSetupOTP();
+  alStartResendTimer();
+}
+
+async function alVerifyOTP() {
+  const token = Array.from({length:6}, (_, i) => document.getElementById(`al-otp-${i}`).value).join('');
+  if (token.length !== 6) return afShowAlert('al-alert-2', 'Introdu toate cele 6 cifre.');
+  const { data, error } = await sb.auth.verifyOtp({ email: alCurrentEmail, token, type: 'email' });
+  if (error) return afShowAlert('al-alert-2', 'Cod incorect sau expirat.');
+  if (data?.session) {
+    const u = data.session.user;
+    saveSession({ email: u.email, name: u.user_metadata?.full_name || null, avatar: u.user_metadata?.avatar_url || null });
+    enterApp();
+  } else {
+    afShowAlert('al-alert-2', 'Verificare eșuată. Încearcă din nou.');
+  }
+}
+
+async function alResendOTP() {
+  await sb.auth.signInWithOtp({ email: alCurrentEmail, options: { shouldCreateUser: false } });
+  alStartResendTimer();
+}
+
+function alStartResendTimer() {
+  let s = 60;
+  const btn = document.getElementById('al-resend-btn');
+  const timer = document.getElementById('al-resend-timer');
+  btn.disabled = true;
+  if (alResendInterval) clearInterval(alResendInterval);
+  alResendInterval = setInterval(() => {
+    s--;
+    timer.textContent = ` (${s}s)`;
+    if (s <= 0) { clearInterval(alResendInterval); btn.disabled = false; timer.textContent = ''; }
+  }, 1000);
+}
+
+function alSetupOTP() {
+  for (let i = 0; i < 6; i++) {
+    const inp = document.getElementById(`al-otp-${i}`);
+    inp.value = '';
+    inp.oninput = e => {
+      if (e.target.value.length > 1) e.target.value = e.target.value.slice(-1);
+      if (e.target.value && i < 5) document.getElementById(`al-otp-${i+1}`).focus();
+    };
+    inp.onkeydown = e => { if (e.key === 'Backspace' && !e.target.value && i > 0) document.getElementById(`al-otp-${i-1}`).focus(); };
+  }
+  document.getElementById('al-otp-0').focus();
 }
 
 async function afSignInWithGoogle() {
@@ -2200,73 +2317,6 @@ async function afSignInWithGoogle() {
     }
   });
   if (error) { sessionStorage.removeItem('mlbr_oauth'); afShowAlert('af-alert-1', error.message); }
-}
-
-async function afSendOTP() {
-  const email = (document.getElementById('af-email').value || '').trim();
-  if (!email || !email.includes('@')) return afShowAlert('af-alert-1', 'Introdu un email valid.');
-  afCurrentEmail = email;
-  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
-  if (error) return afShowAlert('af-alert-1', 'Emailul nu este înregistrat. Folosește „Cont nou” pentru a te înregistra.');
-  document.getElementById('af-email-display').textContent = email;
-  afGoToStep(2);
-  afSetupOTP();
-  afStartResendTimer();
-}
-
-async function afVerifyOTP() {
-  const token = Array.from({length:6}, (_, i) => document.getElementById(`af-otp-${i}`).value).join('');
-  if (token.length !== 6) return afShowAlert('af-alert-3', 'Introdu toate cele 6 cifre.');
-  const { data, error } = await sb.auth.verifyOtp({ email: afCurrentEmail, token, type: 'email' });
-  if (error) return afShowAlert('af-alert-3', 'Cod incorect sau expirat.');
-  if (data?.session) {
-    const u = data.session.user;
-    const fname = (document.getElementById('af-fname')?.value || '').trim();
-    const lname = (document.getElementById('af-lname')?.value || '').trim();
-    const fullName = [fname, lname].filter(Boolean).join(' ') || null;
-    const plate = (document.getElementById('af-plate')?.value || '').trim().toUpperCase();
-    const model = (document.getElementById('af-model')?.value || '').trim();
-    const year  = (document.getElementById('af-year')?.value || '').trim();
-    saveSession({ email: u.email, name: fullName, avatar: null });
-    if (plate) {
-      try { const v = JSON.parse(localStorage.getItem('mlbr_vehicle')||'{}'); v.plate=plate; v.model=model; v.year=year; localStorage.setItem('mlbr_vehicle', JSON.stringify(v)); } catch(e2){}
-      const plEl = document.getElementById('nd-ycard-plate'); if (plEl) plEl.textContent = plate;
-    }
-    enterApp();
-  } else {
-    afShowAlert('af-alert-3', 'Verificare eșuată. Încearcă din nou.');
-  }
-}
-
-async function afResendOTP() {
-  await sb.auth.signInWithOtp({ email: afCurrentEmail, options: { shouldCreateUser: true } });
-  afStartResendTimer();
-}
-
-function afStartResendTimer() {
-  let s = 60;
-  const btn = document.getElementById('af-resend-btn');
-  const timer = document.getElementById('af-resend-timer');
-  btn.disabled = true;
-  if (afResendInterval) clearInterval(afResendInterval);
-  afResendInterval = setInterval(() => {
-    s--;
-    timer.textContent = ` (${s}s)`;
-    if (s <= 0) { clearInterval(afResendInterval); btn.disabled = false; timer.textContent = ''; }
-  }, 1000);
-}
-
-function afSetupOTP() {
-  for (let i = 0; i < 6; i++) {
-    const inp = document.getElementById(`af-otp-${i}`);
-    inp.value = '';
-    inp.oninput = e => {
-      if (e.target.value.length > 1) e.target.value = e.target.value.slice(-1);
-      if (e.target.value && i < 5) document.getElementById(`af-otp-${i+1}`).focus();
-    };
-    inp.onkeydown = e => { if (e.key === 'Backspace' && !e.target.value && i > 0) document.getElementById(`af-otp-${i-1}`).focus(); };
-  }
-  document.getElementById('af-otp-0').focus();
 }
 
 async function afHandleUpload(event) {
@@ -2517,6 +2567,7 @@ const PANEL_META = {
   cloud:       ['MulberryCloud', () => 'Documente și fișiere vehicul'],
   hub:         ['MulberryHUB',   () => 'Istoric și servicii'],
   drive:       ['MulberryDrive', () => 'Date și diagnosticare vehicul'],
+  trust:       ['MulberryTrust', () => 'Comunitate auto verificată'],
 };
 const PANEL_IFRAMES = {
   cloud: ['/mulberry_cloud.html', 'pif-cloud'],
