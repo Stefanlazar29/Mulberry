@@ -1018,25 +1018,7 @@ a{color:inherit;text-decoration:none}
   overflow-y:auto!important;overflow-x:hidden!important
 }
 .mf-wrap{min-height:100%;padding-bottom:calc(var(--bh,72px) + 20px)}
-.mf-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 10px;gap:8px}
-.mf-tbl{display:flex;align-items:center;gap:7px;flex-shrink:0}
-.mf-toggle{display:flex;align-items:center;background:rgba(255,255,255,.9);border-radius:100px;padding:3px;gap:2px;border:.5px solid rgba(0,0,0,.08)}
-.mf-tog{width:27px;height:20px;border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:10px;cursor:pointer;color:#666;transition:background .15s,color .15s}
-.mf-tog.on{background:#111;color:#E1FF00}
-.mf-set-pill{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#333;cursor:pointer}
-.mf-notif{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.92);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:5px 11px;font-size:11px;font-weight:500;color:#222;flex:1;min-width:0;max-width:260px;overflow:hidden}
-.mf-ntxt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
-.mf-ndot{width:6px;height:6px;border-radius:50%;background:#ff4444;flex-shrink:0}
-.mf-ntime{color:#999;font-size:10px;flex-shrink:0;white-space:nowrap}
-.mf-nclose{color:#aaa;font-size:13px;cursor:pointer;flex-shrink:0;line-height:1}
-.mf-tbr{display:flex;align-items:center;gap:6px;flex-shrink:0}
-.mf-navpills{display:flex;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.07);border-radius:100px;padding:3px;gap:2px}
-.mf-np{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:500;color:#555;cursor:pointer;white-space:nowrap}
-.mf-np.on{background:#fff;color:#111;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-.mf-srch{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.75);border:.5px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#444;flex-shrink:0}
-.mf-avatar{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.85);border:.5px solid rgba(0,0,0,.1);font-size:12px;font-weight:700;color:#333;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;overflow:hidden}
-.mf-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
-.mf-greet{padding:2px 18px 10px;font-size:12px;color:rgba(0,0,0,.5);font-weight:500;display:flex;align-items:baseline;gap:5px}
+.mf-greet{padding:18px 18px 10px;font-size:12px;color:rgba(0,0,0,.5);font-weight:500;display:flex;align-items:baseline;gap:5px}
 .mf-greet-name{font-size:19px;font-weight:700;color:#111;letter-spacing:-.3px}
 .mf-grid{padding:0 16px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .mf-card{background:rgba(255,255,255,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.95);border-radius:20px;padding:14px;min-height:128px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;transition:transform .15s,box-shadow .15s;box-shadow:0 2px 12px rgba(0,0,0,.06),0 0 0 .5px rgba(0,0,0,.04);-webkit-tap-highlight-color:transparent;position:relative;overflow:hidden}
@@ -1070,9 +1052,7 @@ a{color:inherit;text-decoration:none}
 @media(min-width:769px){
   #panel-dashboard.active{overflow-y:auto!important;height:100%!important;display:block!important}
   .mf-grid{grid-template-columns:repeat(3,1fr);gap:14px;padding:0 22px}
-  .mf-topbar{padding:18px 24px 12px}
-  .mf-greet{padding:2px 24px 12px}
-  .mf-notif{max-width:340px}
+  .mf-greet{padding:24px 24px 12px}
   .mf-wrap{padding-bottom:28px}
 }
 
@@ -1354,39 +1334,6 @@ a{color:inherit;text-decoration:none}
       <div id="nd-family-banner" style="display:none" onclick="showFamilyUpsell()"></div>
 
       <div class="mf-wrap">
-
-        <!-- topbar -->
-        <div class="mf-topbar">
-          <div class="mf-tbl">
-            <div class="mf-toggle">
-              <div class="mf-tog on">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-              </div>
-              <div class="mf-tog">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-              </div>
-            </div>
-            <div class="mf-set-pill" onclick="goPanel('settings')">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M2 12h2M20 12h2M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41"/></svg>
-              Settings
-            </div>
-          </div>
-          <div class="mf-notif">
-            <div class="mf-ndot"></div>
-            <span class="mf-ntxt">EXO — revizie ulei scadentă</span>
-            <span class="mf-ntime">−2.400 km</span>
-            <span class="mf-nclose" onclick="this.parentElement.style.display='none'">×</span>
-          </div>
-          <div class="mf-tbr">
-            <div class="mf-navpills">
-              <div class="mf-np on">MulberryFAST</div>
-            </div>
-            <div class="mf-srch">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-            </div>
-            <div class="mf-avatar" id="gd-hdr-av" onclick="goPanel('settings')">M</div>
-          </div>
-        </div>
 
         <!-- greeting -->
         <div class="mf-greet">
