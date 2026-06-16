@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mulberry — Autentificare</title>
+<link rel="icon" type="image/png" href="/favicon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--yellow:#E1FF00;--green:#00c76a;--font:'Inter',sans-serif}
+html,body{height:100%;font-family:var(--font);-webkit-font-smoothing:antialiased}
+body{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;
+  background:radial-gradient(ellipse at top right,#00c76a 0%,#006633 40%,#003d1f 100%);
+}
+
+/* BACK */
+.back-btn{
+  position:fixed;top:20px;left:20px;
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;color:#fff;
+  cursor:pointer;transition:all .15s;text-decoration:none;font-family:var(--font)
+}
+.back-btn:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.35)}
+.back-btn svg{width:14px;height:14px;stroke:currentColor}
+
+/* LOGO */
+.logo{display:flex;align-items:center;justify-content:center;margin-bottom:20px;text-decoration:none;opacity:.95;transition:opacity .15s}
+.logo:hover{opacity:1}
+
+/* CARD */
+.card{width:100%;max-width:500px;background:#fff;border-radius:28px;padding:40px 44px;box-shadow:0 32px 80px rgba(0,0,0,.22)}
+
+/* CARD LOGO */
+.card-logo{display:flex;justify-content:center;margin-bottom:28px}
+.card-logo img{height:55px;width:auto;object-fit:contain}
+
+/* TABS */
+.tabs{display:flex;gap:0;background:#f3f4f6;border-radius:12px;padding:3px;margin-bottom:28px}
+.tab{flex:1;padding:9px;text-align:center;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;color:#888;transition:all .2s;border:none;background:none;font-family:var(--font)}
+.tab.active{background:#fff;color:#111;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+
+/* PANELS */
+.panel{display:none}
+.panel.active{display:block}
+
+/* TITLE */
+.card-title{font-size:20px;font-weight:800;color:#111;margin-bottom:6px;letter-spacing:-.3px}
+.card-sub{font-size:13px;color:#888;margin-bottom:24px;line-height:1.5}
+
+/* FIELDS */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.field input,.field select{
+  width:100%;background:#f9fafb;border:1.5px solid #e5e7eb;
+  border-radius:10px;padding:11px 14px;font-size:14px;
+  color:#111;font-family:var(--font);outline:none;transition:border-color .15s;
+  -webkit-appearance:none;appearance:none;
+}
+.field input:focus,.field select:focus{border-color:var(--green)}
+.field input.err{border-color:#ef4444}
+.field-err{font-size:11px;color:#ef4444;margin-top:4px;display:none}
+.field-err.show{display:block}
+.field-row{display:grid;grid-template-columns:1fr 80px;gap:10px}
+
+/* PASSWORD TOGGLE */
+.pass-wrap{position:relative}
+.pass-wrap input{padding-right:42px}
+.pass-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#aaa;padding:4px;display:flex;align-items:center}
+.pass-toggle:hover{color:#555}
+.pass-toggle svg{width:18px;height:18px}
+
+/* PLATE INPUT */
+.plate-input{font-family:'Courier New',monospace!important;letter-spacing:.08em;text-transform:uppercase;font-weight:700!important}
+
+/* BUTTONS */
+.btn{width:100%;padding:13px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);border:none;transition:all .15s;margin-top:4px}
+.btn-yellow{background:var(--yellow);color:#1a1a00;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-yellow:hover{background:#d4ee00}
+.btn-outline{background:#fff;color:#111;border:1.5px solid #e5e7eb;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-outline:hover{border-color:#aaa;background:#f9fafb}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:#00e077}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* OR */
+.or{display:flex;align-items:center;gap:12px;margin:16px 0}
+.or-line{flex:1;height:1px;background:#e5e7eb}
+.or span{font-size:13px;color:#bbb}
+
+/* LEGAL */
+.legal{text-align:center;font-size:11.5px;color:#aaa;line-height:1.6;margin-top:16px}
+.legal a{color:#555;font-weight:600;text-decoration:none}
+.legal a:hover{color:#111}
+
+/* FORGOT */
+.forgot{text-align:right;margin-top:-8px;margin-bottom:14px}
+.forgot a{font-size:12px;color:#aaa;cursor:pointer;text-decoration:none;transition:color .15s}
+.forgot a:hover{color:#111}
+
+/* STEPS */
+.steps{display:flex;align-items:center;gap:0;margin-bottom:24px}
+.sdot{width:24px;height:24px;border-radius:50%;border:2px solid #e5e7eb;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#bbb;transition:all .3s;background:#fff;flex-shrink:0}
+.sdot.done{background:var(--green);border-color:var(--green);color:#fff}
+.sdot.active{border-color:var(--green);color:var(--green)}
+.sline{flex:1;height:2px;background:#e5e7eb;max-width:48px;transition:background .3s}
+.sline.done{background:var(--green)}
+
+/* PROGRESS */
+.progress{height:3px;background:#e5e7eb;border-radius:2px;margin-bottom:22px;overflow:hidden}
+.pfill{height:100%;background:var(--green);border-radius:2px;transition:width .4s ease}
+
+/* SUCCESS */
+.success{text-align:center;padding:8px 0}
+.success-ico{font-size:52px;margin-bottom:16px;line-height:1}
+.success-title{font-size:20px;font-weight:800;color:#111;margin-bottom:8px}
+.success-sub{font-size:13px;color:#888;line-height:1.7;margin-bottom:24px}
+.success-sub strong{color:#111}
+
+/* SPINNER */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(0,0,0,.15);border-top-color:#1a1a00;border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0}
+
+@media(max-width:560px){
+  .card{padding:28px 24px;border-radius:22px}
+  body{padding:16px}
+  .back-btn{top:12px;left:12px}
+}
+</style>
+</head>
+<body>
+
+<a href="mulberry_login.html" class="back-btn">
+  <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  Înapoi
+</a>
+
+<a href="mulberry_login.html" class="logo">
+  <svg width="140" height="36" viewBox="0 0 340 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="8" width="64" height="64" rx="16" fill="#fff"/>
+    <path d="M32 16 A16 16 0 0 1 48 32 L44 32 A12 12 0 0 0 20 32 L16 32 A16 16 0 0 1 32 16Z" fill="#00c76a"/>
+    <rect x="22" y="48" width="20" height="5" rx="2.5" fill="#00c76a"/>
+    <rect x="26" y="42" width="12" height="5" rx="2.5" fill="#00c76a"/>
+    <text x="80" y="52" font-family="'Inter',sans-serif" font-size="36" font-weight="800" fill="#ffffff" letter-spacing="-1">Mulberry</text>
+  </svg>
+</a>
+
+<div class="card">
+
+  <!-- LOGO IN CARD -->
+  <div class="card-logo">
+    <img src="mulberry-logo-auth.png" alt="Mulberry"/>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="switchTab('login')">Login</button>
+    <button class="tab" onclick="switchTab('register')">Înregistrare</button>
+  </div>
+
+  <!-- ═══ LOGIN ═══ -->
+  <div class="panel active" id="panel-login">
+
+    <div class="panel active" id="l1">
+      <div class="card-title">Bun venit înapoi</div>
+      <div class="card-sub">Intră în contul tău Mulberry.</div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="l-email" placeholder="email@exemplu.com" autocomplete="email"/>
+        <div class="field-err" id="l-email-err">Email invalid.</div>
+      </div>
+      <div class="field">
+        <label>Parolă</label>
+        <div class="pass-wrap">
+          <input type="password" id="l-pass" placeholder="Parola ta" autocomplete="current-password"/>
+          <button class="pass-toggle" type="button" onclick="togglePass('l-pass',this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="field-err" id="l-pass-err">Parola este obligatorie.</div>
+      </div>
+      <div class="forgot"><a onclick="showLogin('l-forgot')">Ai uitat parola?</a></div>
+      <button class="btn btn-yellow" onclick="doLogin()">→ &nbsp;Login</button>
+      <div class="legal" style="margin-top:14px">
+        Nu ai cont? <a onclick="switchTab('register')" style="cursor:pointer">Înregistrează-te gratuit</a>
+      </div>
+    </div>
+
+    <!-- OTP -->
+    <div class="panel" id="l2">
+      <div class="card-title">Verificare cod</div>
+      <div class="card-sub">Am trimis un cod la <strong id="l-email-show" style="color:#111"></strong></div>
+      <div style="display:flex;gap:8px;justify-content:center;margin:4px 0 18px">
+        <input class="otp" maxlength="1" id="otp0" oninput="otpNext(0,1)" onkeydown="otpBack(event,0,null)" style="width:46px;height:54px;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;font-size:22px;font-weight:700;color:#111;font-family:var(--font);outline:none"/>
+        <input class="otp" maxlength="1" id="otp1" oninput="otpNext(1,2)" onkeydown="otpBack(event,1,0)" style="width:46px;height:54px;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;font-size:22px;font-weight:700;color:#111;font-family:var(--font);outline:none"/>
+        <input class="otp" maxlength="1" id="otp2" oninput="otpNext(2,3)" onkeydown="otpBack(event,2,1)" style="width:46px;height:54px;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;font-size:22px;font-weight:700;color:#111;font-family:var(--font);outline:none"/>
+        <input class="otp" maxlength="1" id="otp3" oninput="otpNext(3,4)" onkeydown="otpBack(event,3,2)" style="width:46px;height:54px;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;font-size:22px;font-weight:700;color:#111;font-family:var(--font);outline:none"/>
+        <input class="otp" maxlength="1" id="otp4" oninput="otpNext(4,5)" onkeydown="otpBack(event,4,3)" style="width:46px;height:54px;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;font-size:22px;font-weight:700;color:#111;font-family:var(--font);outline:none"/>
+        <input class="otp" maxlength="1" id="otp5" oninput="otpNext(5,null)" onkeydown="otpBack(event,5,4)" style="width:46px;height:54px;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;font-size:22px;font-weight:700;color:#111;font-family:var(--font);outline:none"/>
+      </div>
+      <div class="field-err" id="otp-err" style="text-align:center;margin-bottom:10px"></div>
+      <button class="btn btn-green" onclick="verifyOtp()">Verifică codul</button>
+      <button class="btn btn-outline" onclick="resendOtp()" style="margin-top:8px">Retrimite codul</button>
+      <div style="text-align:center;margin-top:12px">
+        <a onclick="showLogin('l1')" style="font-size:12px;color:#aaa;cursor:pointer">← Înapoi</a>
+      </div>
+    </div>
+
+    <!-- FORGOT -->
+    <div class="panel" id="l-forgot">
+      <div class="card-title">Resetare parolă</div>
+      <div class="card-sub">Îți trimitem un link de resetare pe email.</div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="l-frg-email" placeholder="email@exemplu.com"/>
+      </div>
+      <button class="btn btn-green" onclick="sendReset()">Trimite link de resetare</button>
+      <div style="text-align:center;margin-top:12px">
+        <a onclick="showLogin('l1')" style="font-size:12px;color:#aaa;cursor:pointer">← Înapoi la login</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══ REGISTER ═══ -->
+  <div class="panel" id="panel-register">
+
+    <div class="progress"><div class="pfill" id="r-prog" style="width:33%"></div></div>
+    <div class="steps">
+      <div class="sdot active" id="rd1">1</div>
+      <div class="sline" id="rl1"></div>
+      <div class="sdot" id="rd2">2</div>
+      <div class="sline" id="rl2"></div>
+      <div class="sdot" id="rd3">3</div>
+    </div>
+
+    <!-- STEP 1: Vehicul -->
+    <div class="panel active" id="r1">
+      <div class="card-title">Vehiculul tău</div>
+      <div class="card-sub">Adaugă datele mașinii pentru YellowCard gratuit.</div>
+      <div class="field">
+        <label>Număr înmatriculare</label>
+        <input type="text" id="r-plate" placeholder="B 123 ABC" class="plate-input" maxlength="9" oninput="this.value=this.value.toUpperCase()"/>
+        <div class="field-err" id="r-plate-err">Introdu numărul de înmatriculare.</div>
+      </div>
+      <div class="field-row">
+        <div class="field" style="margin:0">
+          <label>Model vehicul</label>
+          <input type="text" id="r-model" placeholder="ex: Dacia Logan"/>
+          <div class="field-err" id="r-model-err">Introdu modelul.</div>
+        </div>
+        <div class="field" style="margin:0">
+          <label>An</label>
+          <input type="text" id="r-year" placeholder="2020" maxlength="4" inputmode="numeric"/>
+          <div class="field-err" id="r-year-err">An invalid.</div>
+        </div>
+      </div>
+      <button class="btn btn-yellow" style="margin-top:18px" onclick="rStep1()">Continuă →</button>
+    </div>
+
+    <!-- STEP 2: Date personale -->
+    <div class="panel" id="r2">
+      <div class="card-title">Datele tale</div>
+      <div class="card-sub">Cum să te numim în aplicație.</div>
+      <div class="field-row" style="margin-bottom:14px">
+        <div class="field" style="margin:0">
+          <label>Prenume</label>
+          <input type="text" id="r-fname" placeholder="Ion" autocomplete="given-name"/>
+          <div class="field-err" id="r-fname-err">Obligatoriu.</div>
+        </div>
+        <div class="field" style="margin:0">
+          <label>Nume</label>
+          <input type="text" id="r-lname" placeholder="Pop" autocomplete="family-name"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input type="email" id="r-email" placeholder="email@exemplu.com" autocomplete="email"/>
+        <div class="field-err" id="r-email-err">Email invalid.</div>
+      </div>
+      <div class="field">
+        <label>Parolă</label>
+        <div class="pass-wrap">
+          <input type="password" id="r-pass" placeholder="Minim 8 caractere"/>
+          <button class="pass-toggle" type="button" onclick="togglePass('r-pass',this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="field-err" id="r-pass-err">Minim 8 caractere.</div>
+      </div>
+      <div class="field">
+        <label>Confirmă parola</label>
+        <div class="pass-wrap">
+          <input type="password" id="r-pass2" placeholder="Repetă parola"/>
+          <button class="pass-toggle" type="button" onclick="togglePass('r-pass2',this)">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <div class="field-err" id="r-pass2-err">Parolele nu coincid.</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <button class="btn btn-outline" onclick="rBack(1)" style="margin:0">← Înapoi</button>
+        <button class="btn btn-yellow" onclick="rStep2()" style="margin:0">Continuă →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Confirmare -->
+    <div class="panel" id="r3">
+      <div class="card-title">Aproape gata!</div>
+      <div class="card-sub">Verifică datele și creează contul tău gratuit.</div>
+      <div style="background:#f9fafb;border-radius:12px;padding:14px;margin-bottom:18px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;color:#888">Vehicul</span>
+          <span style="font-size:13px;font-weight:600;color:#111;font-family:'Courier New',monospace" id="r-sum-plate"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;color:#888">Model</span>
+          <span style="font-size:13px;font-weight:600;color:#111" id="r-sum-model"></span>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:12px;color:#888">An</span>
+          <span style="font-size:13px;font-weight:600;color:#111" id="r-sum-year"></span>
+        </div>
+        <div style="height:1px;background:#e5e7eb;margin:8px 0"></div>
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:12px;color:#888">Email</span>
+          <span style="font-size:13px;font-weight:600;color:#111" id="r-sum-email"></span>
+        </div>
+      </div>
+      <button class="btn btn-yellow" id="btn-register" onclick="rSubmit()">
+        → &nbsp;Creează cont gratuit
+      </button>
+      <div style="display:flex;justify-content:center;margin-top:10px">
+        <a onclick="rBack(2)" style="font-size:12px;color:#aaa;cursor:pointer">← Modifică datele</a>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="panel" id="r-ok">
+      <div class="success">
+        <div class="success-ico">✅</div>
+        <div class="success-title">Cont creat!</div>
+        <div class="success-sub">
+          Am trimis un email de confirmare la<br>
+          <strong id="r-ok-email"></strong><br><br>
+          Verifică inbox-ul pentru a activa contul.
+        </div>
+        <button class="btn btn-green" onclick="window.location.href='mulberry_app.html'">Mergi la MulberryFAST →</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="legal">
+    Continuând, ești de acord cu <a href="#">Termenii de utilizare</a> și <a href="#">Politica de confidențialitate</a>. Date stocate în România.
+  </div>
+
+</div>
+
+<script>
+const API = window.location.hostname === 'mulberry.autos'
+  ? 'https://mulberry.autos/api'
+  : 'http://localhost:8000';
+
+const RD = {plate:'',model:'',year:'',fname:'',lname:'',email:'',pass:''};
+
+// ── TABS ──
+function switchTab(t){
+  ['login','register'].forEach(x=>{
+    document.getElementById('panel-'+x).classList.toggle('active',x===t);
+    document.querySelectorAll('.tab')[x==='login'?0:1].classList.toggle('active',x===t);
+  });
+}
+
+// ── LOGIN ──
+function showLogin(id){
+  document.getElementById('panel-login').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+async function doLogin(){
+  const email = document.getElementById('l-email').value.trim();
+  const pass  = document.getElementById('l-pass').value;
+  let ok=true;
+  if(!/\S+@\S+\.\S+/.test(email)){se('l-email-err','l-email');ok=false;}else he('l-email-err','l-email');
+  if(!pass){se('l-pass-err','l-pass');ok=false;}else he('l-pass-err','l-pass');
+  if(!ok)return;
+  const btn=document.querySelector('#l1 .btn-yellow');
+  btn.innerHTML='<span class="spin"></span> Se verifică...';btn.disabled=true;
+  try{
+    const r=await fetch(API+'/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({identifier:email,password:pass})});
+    const d=await r.json();
+    if(r.ok && d.access_token){
+      localStorage.setItem('mlbr_token',d.access_token);
+      window.location.href='mulberry_app.html';
+    } else {
+      btn.innerHTML='→ &nbsp;Login';btn.disabled=false;
+      alert(d.detail||'Email sau parolă incorectă.');
+    }
+  }catch(e){
+    btn.innerHTML='→ &nbsp;Login';btn.disabled=false;
+    document.getElementById('l-email-show').textContent=email;
+    showLogin('l2');
+    setTimeout(()=>document.getElementById('otp0').focus(),100);
+  }
+}
+
+function otpNext(i,next){if(next!==null&&document.getElementById('otp'+i).value)document.getElementById('otp'+next).focus();}
+function otpBack(e,i,prev){if(e.key==='Backspace'&&!document.getElementById('otp'+i).value&&prev!==null)document.getElementById('otp'+prev).focus();}
+
+function verifyOtp(){
+  const code=[0,1,2,3,4,5].map(i=>document.getElementById('otp'+i).value).join('');
+  if(code.length<6){const el=document.getElementById('otp-err');el.textContent='Introdu toate cele 6 cifre.';el.style.display='block';return;}
+  window.location.href='mulberry_app.html';
+}
+
+function resendOtp(){
+  const el=document.getElementById('otp-err');
+  el.style.color='green';el.textContent='Cod retrimis!';el.style.display='block';
+  setTimeout(()=>{el.style.display='none';el.style.color='#ef4444';},3000);
+}
+
+function sendReset(){
+  const e=document.getElementById('l-frg-email').value.trim();
+  if(!/\S+@\S+\.\S+/.test(e)){alert('Email invalid.');return;}
+  alert('Link trimis la '+e);showLogin('l1');
+}
+
+// ── REGISTER ──
+function rSetStep(s){
+  [1,2,3].forEach(i=>{
+    document.getElementById('rd'+i).className='sdot'+(i<s?' done':i===s?' active':'');
+    if(i<3)document.getElementById('rl'+i).className='sline'+(i<s?' done':'');
+  });
+  document.getElementById('r-prog').style.width=(s/3*100)+'%';
+}
+
+function rStep1(){
+  const plate=document.getElementById('r-plate').value.trim();
+  const model=document.getElementById('r-model').value.trim();
+  const year=document.getElementById('r-year').value.trim();
+  let ok=true;
+  if(!plate){se('r-plate-err','r-plate');ok=false;}else he('r-plate-err','r-plate');
+  if(!model){se('r-model-err','r-model');ok=false;}else he('r-model-err','r-model');
+  if(year && (isNaN(year)||year<1900||year>2030)){se('r-year-err','r-year');ok=false;}else he('r-year-err','r-year');
+  if(!ok)return;
+  RD.plate=plate;RD.model=model;RD.year=year;
+  showReg('r2');rSetStep(2);
+}
+
+function rStep2(){
+  const fname=document.getElementById('r-fname').value.trim();
+  const email=document.getElementById('r-email').value.trim();
+  const pass=document.getElementById('r-pass').value;
+  const pass2=document.getElementById('r-pass2').value;
+  let ok=true;
+  if(!fname){se('r-fname-err','r-fname');ok=false;}else he('r-fname-err','r-fname');
+  if(!/\S+@\S+\.\S+/.test(email)){se('r-email-err','r-email');ok=false;}else he('r-email-err','r-email');
+  if(pass.length<8){se('r-pass-err','r-pass');ok=false;}else he('r-pass-err','r-pass');
+  if(pass!==pass2){se('r-pass2-err','r-pass2');ok=false;}else he('r-pass2-err','r-pass2');
+  if(!ok)return;
+  RD.fname=fname;RD.lname=document.getElementById('r-lname').value.trim();
+  RD.email=email;RD.pass=pass;
+  document.getElementById('r-sum-plate').textContent=RD.plate;
+  document.getElementById('r-sum-model').textContent=RD.model+(RD.year?' · '+RD.year:'');
+  document.getElementById('r-sum-year').textContent=RD.year||'—';
+  document.getElementById('r-sum-email').textContent=RD.email;
+  showReg('r3');rSetStep(3);
+}
+
+function rBack(from){showReg('r'+from);rSetStep(from);}
+
+async function rSubmit(){
+  const btn=document.getElementById('btn-register');
+  btn.innerHTML='<span class="spin"></span> Se creează contul...';btn.disabled=true;
+  try{
+    const r=await fetch(API+'/auth/signup',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        name:RD.fname+' '+RD.lname,
+        email:RD.email,
+        password:RD.pass,
+        plate:RD.plate,
+        model:RD.model,
+        year:RD.year
+      })
+    });
+    const d=await r.json();
+    if(r.ok){
+      document.getElementById('r-ok-email').textContent=RD.email;
+      showReg('r-ok');
+      document.getElementById('r-prog').style.width='100%';
+      [1,2,3].forEach(i=>document.getElementById('rd'+i).className='sdot done');
+      document.getElementById('rl1').className='sline done';
+      document.getElementById('rl2').className='sline done';
+      document.getElementById('tabs').style.display='none';
+    } else {
+      btn.innerHTML='→ &nbsp;Creează cont gratuit';btn.disabled=false;
+      alert(d.detail||'Eroare la înregistrare. Încearcă din nou.');
+    }
+  }catch(e){
+    btn.innerHTML='→ &nbsp;Creează cont gratuit';btn.disabled=false;
+    alert('Eroare de conexiune. Verifică internetul.');
+  }
+}
+
+function showReg(id){
+  document.getElementById('panel-register').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// ── UTILS ──
+function se(errId,inId){document.getElementById(errId).classList.add('show');if(document.getElementById(inId))document.getElementById(inId).classList.add('err');}
+function he(errId,inId){document.getElementById(errId).classList.remove('show');if(document.getElementById(inId))document.getElementById(inId).classList.remove('err');}
+
+function togglePass(id,btn){
+  const inp=document.getElementById(id);
+  const show=inp.type==='password';
+  inp.type=show?'text':'password';
+  btn.innerHTML=show
+    ?'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+    :'<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+}
+
+// ── MODE AUTO-SWITCH (din URL: ?mode=login sau ?mode=register) ──
+(function(){
+  const mode = new URLSearchParams(window.location.search).get('mode');
+  if(mode === 'register') switchTab('register');
+  // mode=login e default, nu e nevoie de switch
+})();
+</script>
+</body>
+</html>
