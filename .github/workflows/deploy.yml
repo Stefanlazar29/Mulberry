@@ -11,19 +11,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Copy frontend files to server
+      - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
         with:
           host: 46.225.100.151
           username: stefan
           key: ${{ secrets.HETZNER_SSH_KEY }}
           port: 443
-          # fisierele frontend din root + assets + js/
-          source: "*.html,*.png,*.svg,*.jpg,*.ico,js/**"
-          target: "/home/stefan/mulberry/frontend/"
+          source: "*.html,*.css,*.png,*.svg,*.jpg,*.ico,js/**,css/**"
+          target: "/home/stefan/mulberry/"
           overwrite: true
 
-      - name: Run server deploy script
+      - name: Deploy to container
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: 46.225.100.151
@@ -31,5 +30,9 @@ jobs:
           key: ${{ secrets.HETZNER_SSH_KEY }}
           port: 443
           script: |
-            /home/stefan/mulberry/deploy.sh
+            for f in ~/mulberry/*.html ~/mulberry/*.css ~/mulberry/*.png ~/mulberry/*.svg ~/mulberry/*.jpg ~/mulberry/*.ico; do
+              [ -f "$f" ] && docker cp "$f" mulberry-api-1:/app/
+            done
+            docker cp ~/mulberry/js/ mulberry-api-1:/app/js/ 2>/dev/null || true
+            docker cp ~/mulberry/css/ mulberry-api-1:/app/css/ 2>/dev/null || true
             echo "Deploy OK - $(date)"
