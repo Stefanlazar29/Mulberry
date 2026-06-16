@@ -1470,21 +1470,24 @@ a{color:inherit;text-decoration:none}
             </div>
           </div>
 
-          <!-- MULBERRY ID -->
-          <div class="mf-card" onclick="goPanel('yellowcard')">
+          <!-- MULBERRY TRUST -->
+          <div class="mf-card" onclick="goPanel('trust')">
             <div class="mf-ctop">
               <div style="display:flex;align-items:center;gap:8px">
-                <div class="mf-ico" style="background:#78350f">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fcd34d" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+                <div class="mf-ico" style="background:#3b0764">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
                 </div>
-                <div class="mf-tag">MulberryID</div>
+                <div class="mf-tag">MulberryTrust</div>
               </div>
-              <div style="color:#ccc;font-size:15px;cursor:pointer">···</div>
+              <div style="display:flex;align-items:center;gap:4px">
+                <div style="width:5px;height:5px;border-radius:50%;background:#a78bfa"></div>
+                <span style="font-size:10px;color:#999;font-weight:600">Feed</span>
+              </div>
             </div>
-            <div class="mf-cname">YCR Identity</div>
-            <div class="mf-csub">HMAC-SHA256 · QR semnat</div>
+            <div class="mf-cname">Comunitate auto</div>
+            <div class="mf-csub">Experts · Sfaturi · Oferte</div>
             <div class="mf-cbot">
-              <div class="mf-badge mf-info"><span class="mf-bdot"></span>ID verificat</div>
+              <div class="mf-badge" style="background:rgba(124,58,237,.09);color:#7c3aed;border-color:rgba(124,58,237,.15)"><span class="mf-bdot"></span>Trust</div>
             </div>
           </div>
 
@@ -1815,6 +1818,35 @@ a{color:inherit;text-decoration:none}
           <div class="oc-name">MulberryAI</div>
           <div class="oc-desc">Analiză predictivă pentru mașina ta. Alerte înainte de defecțiuni, optimizare costuri.</div>
           <div class="oc-footer"><span class="oc-badge">AI</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRUST -->
+    <div class="panel" id="panel-trust">
+      <div class="ph">
+        <div class="ph-eyebrow">Comunitate</div>
+        <div class="ph-title">MulberryTrust</div>
+        <div class="ph-sub">Experți verificați, sfaturi reale și oferte exclusive de la service-uri partenere.</div>
+      </div>
+      <div class="mkt-grid">
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="oc-name">Experți verificați</div>
+          <div class="oc-desc">Mecanici și consultanți auto validați de comunitatea Mulberry — răspund la întrebări reale.</div>
+          <div class="oc-footer"><span class="oc-badge">Verificat</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></svg></div>
+          <div class="oc-name">Sfaturi din comunitate</div>
+          <div class="oc-desc">Recomandări de mentenanță și experiențe reale de la alți șoferi Mulberry.</div>
+          <div class="oc-footer"><span class="oc-badge">Nou</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
+        </div>
+        <div class="offer-card">
+          <div class="oc-ico"><svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg></div>
+          <div class="oc-name">Oferte exclusive</div>
+          <div class="oc-desc">Reduceri de la service-uri partenere, disponibile doar pentru utilizatorii Mulberry.</div>
+          <div class="oc-footer"><span class="oc-badge">Beta</span><span class="oc-arr"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></div>
         </div>
       </div>
     </div>
@@ -2517,6 +2549,7 @@ const PANEL_META = {
   cloud:       ['MulberryCloud', () => 'Documente și fișiere vehicul'],
   hub:         ['MulberryHUB',   () => 'Istoric și servicii'],
   drive:       ['MulberryDrive', () => 'Date și diagnosticare vehicul'],
+  trust:       ['MulberryTrust', () => 'Comunitate auto verificată'],
 };
 const PANEL_IFRAMES = {
   cloud: ['/mulberry_cloud.html', 'pif-cloud'],

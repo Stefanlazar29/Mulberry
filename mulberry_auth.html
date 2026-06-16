@@ -6,6 +6,7 @@
 <title>Mulberry — Autentificare</title>
 <link rel="icon" type="image/png" href="/favicon.png"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--yellow:#E1FF00;--green:#00c76a;--font:'Inter',sans-serif}
@@ -163,32 +164,29 @@ body{
   <!-- ═══ LOGIN ═══ -->
   <div class="panel active" id="panel-login">
 
+    <div class="progress"><div class="pfill" id="l-prog" style="width:50%"></div></div>
+    <div class="steps">
+      <div class="sdot active" id="ld1">1</div>
+      <div class="sline" id="ll1"></div>
+      <div class="sdot" id="ld2">2</div>
+    </div>
+
+    <!-- STEP 1: Email -->
     <div class="panel active" id="l1">
       <div class="card-title">Bun venit înapoi</div>
-      <div class="card-sub">Intră în contul tău Mulberry.</div>
+      <div class="card-sub">Intră în contul tău Mulberry cu un cod trimis pe email.</div>
       <div class="field">
         <label>Email</label>
         <input type="email" id="l-email" placeholder="email@exemplu.com" autocomplete="email"/>
         <div class="field-err" id="l-email-err">Email invalid.</div>
       </div>
-      <div class="field">
-        <label>Parolă</label>
-        <div class="pass-wrap">
-          <input type="password" id="l-pass" placeholder="Parola ta" autocomplete="current-password"/>
-          <button class="pass-toggle" type="button" onclick="togglePass('l-pass',this)">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          </button>
-        </div>
-        <div class="field-err" id="l-pass-err">Parola este obligatorie.</div>
-      </div>
-      <div class="forgot"><a onclick="showLogin('l-forgot')">Ai uitat parola?</a></div>
-      <button class="btn btn-yellow" onclick="doLogin()">→ &nbsp;Login</button>
+      <button class="btn btn-yellow" id="btn-login-send" onclick="lSendOtp()">→ &nbsp;Trimite cod</button>
       <div class="legal" style="margin-top:14px">
         Nu ai cont? <a onclick="switchTab('register')" style="cursor:pointer">Înregistrează-te gratuit</a>
       </div>
     </div>
 
-    <!-- OTP -->
+    <!-- STEP 2: OTP -->
     <div class="panel" id="l2">
       <div class="card-title">Verificare cod</div>
       <div class="card-sub">Am trimis un cod la <strong id="l-email-show" style="color:#111"></strong></div>
@@ -201,24 +199,10 @@ body{
         <input class="otp" maxlength="1" id="otp5" oninput="otpNext(5,null)" onkeydown="otpBack(event,5,4)" style="width:46px;height:54px;background:#f9fafb;border:1.5px solid #e5e7eb;border-radius:10px;text-align:center;font-size:22px;font-weight:700;color:#111;font-family:var(--font);outline:none"/>
       </div>
       <div class="field-err" id="otp-err" style="text-align:center;margin-bottom:10px"></div>
-      <button class="btn btn-green" onclick="verifyOtp()">Verifică codul</button>
-      <button class="btn btn-outline" onclick="resendOtp()" style="margin-top:8px">Retrimite codul</button>
+      <button class="btn btn-green" id="btn-login-verify" onclick="lVerifyOtp()">Verifică codul</button>
+      <button class="btn btn-outline" id="btn-login-resend" onclick="lResendOtp()" style="margin-top:8px">Retrimite codul</button>
       <div style="text-align:center;margin-top:12px">
-        <a onclick="showLogin('l1')" style="font-size:12px;color:#aaa;cursor:pointer">← Înapoi</a>
-      </div>
-    </div>
-
-    <!-- FORGOT -->
-    <div class="panel" id="l-forgot">
-      <div class="card-title">Resetare parolă</div>
-      <div class="card-sub">Îți trimitem un link de resetare pe email.</div>
-      <div class="field">
-        <label>Email</label>
-        <input type="email" id="l-frg-email" placeholder="email@exemplu.com"/>
-      </div>
-      <button class="btn btn-green" onclick="sendReset()">Trimite link de resetare</button>
-      <div style="text-align:center;margin-top:12px">
-        <a onclick="showLogin('l1')" style="font-size:12px;color:#aaa;cursor:pointer">← Înapoi la login</a>
+        <a onclick="lBackToEmail()" style="font-size:12px;color:#aaa;cursor:pointer">← Înapoi</a>
       </div>
     </div>
 
@@ -364,7 +348,13 @@ const API = window.location.hostname === 'mulberry.autos'
   ? 'https://mulberry.autos/api'
   : 'http://localhost:8000';
 
+const SB_URL  = 'https://yvpjfmjxunoxmfljixwo.supabase.co';
+const SB_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl2cGpmbWp4dW5veG1mbGppeHdvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0MTE3MjgsImV4cCI6MjA5MTk4NzcyOH0.Kwlk5DwjC5TUrGAwuUMV4xDHRDsy1wFRUMHOZIZL1yo';
+const sb = supabase.createClient(SB_URL, SB_ANON);
+
 const RD = {plate:'',model:'',year:'',fname:'',lname:'',email:'',pass:''};
+let lCurrentEmail = '';
+let lResendInterval = null;
 
 // ── TABS ──
 function switchTab(t){
@@ -374,59 +364,76 @@ function switchTab(t){
   });
 }
 
-// ── LOGIN ──
+// ── LOGIN (OTP) ──
 function showLogin(id){
   document.getElementById('panel-login').querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-async function doLogin(){
+function lSetStep(s){
+  document.getElementById('ld1').className = 'sdot' + (s > 1 ? ' done' : ' active');
+  document.getElementById('ld2').className = 'sdot' + (s === 2 ? ' active' : '');
+  document.getElementById('ll1').className = 'sline' + (s > 1 ? ' done' : '');
+  document.getElementById('l-prog').style.width = (s/2*100) + '%';
+}
+
+async function lSendOtp(){
   const email = document.getElementById('l-email').value.trim();
-  const pass  = document.getElementById('l-pass').value;
-  let ok=true;
-  if(!/\S+@\S+\.\S+/.test(email)){se('l-email-err','l-email');ok=false;}else he('l-email-err','l-email');
-  if(!pass){se('l-pass-err','l-pass');ok=false;}else he('l-pass-err','l-pass');
-  if(!ok)return;
-  const btn=document.querySelector('#l1 .btn-yellow');
-  btn.innerHTML='<span class="spin"></span> Se verifică...';btn.disabled=true;
-  try{
-    const r=await fetch(API+'/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({identifier:email,password:pass})});
-    const d=await r.json();
-    if(r.ok && d.access_token){
-      localStorage.setItem('mlbr_token',d.access_token);
-      window.location.href='mulberry_app.html';
-    } else {
-      btn.innerHTML='→ &nbsp;Login';btn.disabled=false;
-      alert(d.detail||'Email sau parolă incorectă.');
-    }
-  }catch(e){
-    btn.innerHTML='→ &nbsp;Login';btn.disabled=false;
-    document.getElementById('l-email-show').textContent=email;
-    showLogin('l2');
-    setTimeout(()=>document.getElementById('otp0').focus(),100);
-  }
+  if(!/\S+@\S+\.\S+/.test(email)){se('l-email-err','l-email');return;}
+  he('l-email-err','l-email');
+  const btn = document.getElementById('btn-login-send');
+  btn.innerHTML = '<span class="spin"></span> Se trimite...'; btn.disabled = true;
+  const { error } = await sb.auth.signInWithOtp({ email, options: { shouldCreateUser: false } });
+  btn.innerHTML = '→ &nbsp;Trimite cod'; btn.disabled = false;
+  if(error){ alert('Emailul nu este înregistrat. Folosește „Înregistrare” pentru a-ți crea un cont.'); return; }
+  lCurrentEmail = email;
+  document.getElementById('l-email-show').textContent = email;
+  showLogin('l2'); lSetStep(2);
+  lStartResendTimer();
+  setTimeout(()=>document.getElementById('otp0').focus(),100);
+}
+
+function lBackToEmail(){
+  showLogin('l1'); lSetStep(1);
+}
+
+async function lVerifyOtp(){
+  const code = [0,1,2,3,4,5].map(i=>document.getElementById('otp'+i).value).join('');
+  const el = document.getElementById('otp-err');
+  if(code.length < 6){ el.style.color='#ef4444'; el.textContent='Introdu toate cele 6 cifre.'; el.style.display='block'; return; }
+  const btn = document.getElementById('btn-login-verify');
+  btn.innerHTML = '<span class="spin"></span> Se verifică...'; btn.disabled = true;
+  const { data, error } = await sb.auth.verifyOtp({ email: lCurrentEmail, token: code, type: 'email' });
+  btn.innerHTML = 'Verifică codul'; btn.disabled = false;
+  if(error || !data?.session){ el.style.color='#ef4444'; el.textContent='Cod incorect sau expirat.'; el.style.display='block'; return; }
+  const u = data.session.user;
+  localStorage.setItem('mulberry_session', JSON.stringify({ email: u.email, name: u.user_metadata?.full_name || null, avatar: u.user_metadata?.avatar_url || null }));
+  window.location.href='mulberry_app.html';
+}
+
+async function lResendOtp(){
+  await sb.auth.signInWithOtp({ email: lCurrentEmail, options: { shouldCreateUser: false } });
+  const el = document.getElementById('otp-err');
+  el.style.color='green'; el.textContent='Cod retrimis!'; el.style.display='block';
+  setTimeout(()=>{el.style.display='none';el.style.color='#ef4444';},3000);
+  lStartResendTimer();
+}
+
+function lStartResendTimer(){
+  let s = 60;
+  const btn = document.getElementById('btn-login-resend');
+  btn.disabled = true;
+  const label = () => btn.textContent = `Retrimite codul (${s}s)`;
+  label();
+  if(lResendInterval) clearInterval(lResendInterval);
+  lResendInterval = setInterval(() => {
+    s--; label();
+    if(s <= 0){ clearInterval(lResendInterval); btn.disabled = false; btn.textContent = 'Retrimite codul'; }
+  }, 1000);
 }
 
 function otpNext(i,next){if(next!==null&&document.getElementById('otp'+i).value)document.getElementById('otp'+next).focus();}
 function otpBack(e,i,prev){if(e.key==='Backspace'&&!document.getElementById('otp'+i).value&&prev!==null)document.getElementById('otp'+prev).focus();}
-
-function verifyOtp(){
-  const code=[0,1,2,3,4,5].map(i=>document.getElementById('otp'+i).value).join('');
-  if(code.length<6){const el=document.getElementById('otp-err');el.textContent='Introdu toate cele 6 cifre.';el.style.display='block';return;}
-  window.location.href='mulberry_app.html';
-}
-
-function resendOtp(){
-  const el=document.getElementById('otp-err');
-  el.style.color='green';el.textContent='Cod retrimis!';el.style.display='block';
-  setTimeout(()=>{el.style.display='none';el.style.color='#ef4444';},3000);
-}
-
-function sendReset(){
-  const e=document.getElementById('l-frg-email').value.trim();
-  if(!/\S+@\S+\.\S+/.test(e)){alert('Email invalid.');return;}
-  alert('Link trimis la '+e);showLogin('l1');
-}
 
 // ── REGISTER ──
 function rSetStep(s){
