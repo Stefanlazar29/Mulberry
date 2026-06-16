@@ -35,4 +35,5 @@ jobs:
             done
             docker cp ~/mulberry/js/ mulberry-api-1:/app/js/ 2>/dev/null || true
             docker cp ~/mulberry/css/ mulberry-api-1:/app/css/ 2>/dev/null || true
+            docker exec mulberry-nginx-1 nginx -s reload
             echo "Deploy OK - $(date)"
